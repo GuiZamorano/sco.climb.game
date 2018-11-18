@@ -1,0 +1,31 @@
+<div class="notifications" layout="row">
+  <div layout="column" flex>
+    <div class="loading" ng-if="loading" layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-circular md-mode="indeterminate" class="progress-notif"></md-progress-circular>
+    </div>
+    <div class="loading" ng-if="notifications.length==0 && !loading" layout="row" layout-sm="column" layout-align="space-around">
+      {{'notif_empty'|translate}}
+    </div>
+    <md-content id="notifications-list" ng-if="notifications.length>0">
+      <md-card md-theme="default" ng-repeat="notif in notifications" ng-class="{'unread': notif.timestamp > lastcheck}">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-header">{{notif.timestamp | date:'dd MMMM yyyy, HH:mm'}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p class="md-title" ng-if="notif.key">{{'notif_' + notif.key | translate:notif.data}}</p>
+          <p class="md-title" ng-if="notif.badge">{{'notif_badge' | translate:'{badge: "' + notif.badge + '"}'}}</p>
+        </md-card-content>
+      </md-card>
+    </md-content>
+  </div>
+  <div layout="column" layout-padding flex="5" layout-align="end center" class="controls">
+    <md-button class="md-icon-button" ng-click="scroll('up')">
+      <md-icon class="icon-arrow_up"></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="scroll('down')">
+      <md-icon class="icon-arrow_down"></md-icon>
+    </md-button>
+  </div>
+</div>

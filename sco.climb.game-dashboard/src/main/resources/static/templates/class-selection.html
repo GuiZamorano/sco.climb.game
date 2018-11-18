@@ -1,0 +1,33 @@
+<div class="login-view">
+  <div layout="row" layout-align="center center" layout-fill>
+    <div layout="column" flex="50">
+      <!--<div class="climb-image">-->
+      <img src="img/CLIMB_logo.png">
+      <!--</div>-->
+    </div>
+    <div layout="column" flex="50">
+      <md-content layout="vertical" flex id="content">
+        <div layout="row" class="login-view" layout-align="center center" layout-fill>
+          <div layout="column" layout-padding>
+            <label class="login-label">{{'login_select_classes' | translate}}</label>
+            <md-content class="login-view">
+              <md-radio-group ng-model="data.selectedClass">
+                <md-radio-button ng-repeat="class in formClasses" ng-value="class">{{class.label}}</md-radio-button>
+              </md-radio-group>
+              <!--
+              <md-select ng-model="selectedClass" placeholder="Classes" class="md-no-underline">
+                <md-option ng-repeat="class in formClasses" ng-value="class">{{class.value}}</md-option>
+              </md-select>
+              -->
+              <div layout="row" layout-align="center center">
+                <div layout="column">
+                  <md-button class="md-raised button-login" flex="50" flex-sm="100" ng-click="login()">{{'login_enter' | translate}}</md-button>
+                </div>
+              </div>
+            </md-content>
+          </div>
+        </div>
+      </md-content>
+    </div>
+  </div>
+</div>

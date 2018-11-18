@@ -1,0 +1,779 @@
+/* Styles go here */
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  /*  color: orangered;*/
+}
+
+.fill-height {
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+}
+
+.fill-height>div {
+  min-height: 100%;
+  display: flex;
+}
+
+md-sidenav {
+  overflow: visible;
+}
+
+.side-menu,
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+.side-menu .md-button.active {
+  color: deeppink;
+}
+
+.side-menu .menu-toggle-list a.md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+}
+
+.side-menu .menu-toggle-list .md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+}
+
+.side-menu>li {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.md-button-toggle .md-toggle-icon.toggled {
+  transform: rotateZ(180deg);
+  -webkit-transform: rotateZ(180deg);
+}
+
+.side-menu .md-button-toggle .md-toggle-icon {
+  background-size: 100% auto;
+  display: inline-block;
+  margin: auto 0 auto auto;
+  width: 15px;
+  color: darkgray;
+  transition: transform .3s ease-in-out;
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+}
+
+.menu-toggle-list.ng-hide {
+  max-height: 0;
+}
+
+.side-menu .md-button {
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+.menu-toggle-list {
+  background: #fff;
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -webkit-transition-property: max-height;
+  -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-transition-property: max-height;
+  transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  transition-property: max-height;
+}
+
+.menu-selected {
+  background-color: #4153a0;
+}
+
+.menu-selected md-icon {
+  background-color: #4153a0;
+}
+
+.side-menu menu-toggle span {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+
+/*login*/
+
+.login-view {
+  height: 100%;
+  background-color: #4153a0;
+}
+
+.climb-image {
+  display: block;
+  margin: auto;
+  width: 40%;
+}
+
+.button-login {
+  background-color: #f39512 !important;
+  color: white!important;
+}
+
+.login-label {
+  color: white;
+}
+
+.login-view div md-input-container label {
+  color: white!important;
+}
+
+.login-view div md-input-container input {
+  border-bottom: 2px solid white;
+  color: white!important;
+}
+
+.login-view md-radio-group md-radio-button div .md-off {
+  border-color: white!important;
+}
+
+.login-view md-radio-group md-radio-button div span {
+  color: white!important;
+}
+
+
+/*general*/
+
+.full-page {
+  height: 100%;
+}
+
+.menu-colors {
+  color: white;
+  background-color: #F39C12;
+  z-index: 99999;
+}
+
+.menu-colors .md-button:hover {
+  background-color: transparent !important;
+}
+
+.bar-colors {
+  color: white !important;
+  background-color: #4153a0;
+}
+
+.menu-header img {
+  height: 50px;
+}
+
+.bar-logo img {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  height: 50px;
+}
+
+
+/*map*/
+
+.angular-leaflet-map {
+  z-index: 0;
+}
+
+.map-resources {
+  position: absolute;
+  bottom: 0px;
+  height: 100px;
+  width: 100%;
+  /*  opacity: 0.5;
+  */
+  background-color: white;
+}
+
+.map-balloon {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.gallery-arrow {
+  color: #F39C12;
+  font-size: 60px;
+}
+
+.leg-image {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  /*
+  margin-left: 20px;margin-right: 20px;
+*/
+}
+
+.leg-name {
+  font-size: 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.leaflet-container {
+  height: 100% !important;
+}
+
+.map-gallery {
+  height: 80px;
+  width: 80px;
+  margin: 6px;
+}
+
+.map-gallery-question {
+  height: 80px;
+  width: 80px;
+  margin: 6px;
+  padding-bottom: 19px;
+}
+
+.gallery-bar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  height: 140px;
+  /*  width: 1024px;*/
+  width: 100%;
+  background-color: white;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: scroll;
+  z-index: 999;
+}
+
+.gallery-left {
+  position: fixed;
+  left: 0px;
+  width: 40px !important;
+  height: 140px !important;
+  background-color: white;
+  margin: 0px;
+}
+
+.gallery-right {
+  position: fixed;
+  right: 0px;
+  width: 40px !important;
+  height: 140px !important;
+  background-color: white;
+  margin: 0px;
+}
+
+.md-button.gallery-button.md-default-theme:not([disabled]):hover,
+.md-button:not([disabled]):hover {
+  background-color: white;
+}
+
+.selectedImageMarker {
+  border: 3px solid #4152a0;
+}
+
+.pic-container {
+  width: 1500px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+
+/*calendar*/
+
+.scroll-control {
+  /*  z-index: 999;*/
+}
+
+.week-button {
+  color: #F39C12;
+  font-size: 30px;
+}
+
+.cal-sub-bar {
+  height: 100px;
+}
+
+.menu-cal {
+  height: 36px;
+  width: 36px;
+}
+
+.menu-cal svg {
+  fill: white;
+}
+
+.cal-name {
+  display: inline-block;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.cal-arrow {
+  padding: 10px;
+}
+
+.cal-arrow-notif {
+  color: white;
+  width: 100%;
+  background-color: #F39C12;
+  margin: 5px 0px 5px 5px
+}
+
+.cal-arrow-challenge {
+  color: white;
+  text-align: right;
+  width: 100%;
+  background-color: #F39C12;
+  margin: 5px 5px 5px 0px
+}
+
+.cal-arrow-max {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 45px 0 45px 50px;
+  margin: 5px 5px 5px 0px;
+  border-color: transparent transparent transparent #f39d12;
+}
+
+.cal-arrow-min {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 45px 50px 45px 0;
+  margin: 5px 0px 5px 5px;
+  border-color: transparent #f39d12 transparent transparent;
+}
+
+.cal-fab {
+  position: fixed;
+  bottom: 50px;
+  right: 16px;
+}
+
+.cal-menu-col {
+  background-color: #F39C12 !important;
+}
+
+.cal-foot-friend-col {
+  background-color: #ef5350 !important;
+}
+
+.cal-foot-adult-col {
+  background-color: #ffee58 !important;
+}
+
+.cal-bus-col {
+  background-color: #66bb6a !important;
+}
+
+.cal-car-square-col {
+  background-color: #1565c0 !important;
+}
+
+.cal-car-school-col {
+  background-color: #bdbdbd!important;
+}
+
+.cal-away-col {
+  background-color: #f2f2f2 !important;
+}
+
+.cal-pedibus-col {
+  background-color: #ffee58 !important;
+}
+
+.calendar-tooltip {
+  left: -5px;
+}
+
+.cal-total {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin-left: 0px;
+  margin-right: 16px;
+  padding-left: 0px;
+  border-color: #4153a0;
+  background-color: white;
+  border-style: solid;
+  border-width: 2px 0px 0px 0px;
+}
+
+.cal-listbabies {
+  padding: 0px!important;
+}
+
+.state-row {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.days-row {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.weather-row {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.weather-icon {
+  line-height: 50px;
+  font-size: 22px;
+}
+
+.wheater-button {
+  padding: 0px!important;
+}
+
+.single-weather {
+  width: 100%!important;
+}
+
+.cal-baby {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.cal-baby-cell {
+  height: 100%;
+  margin: 1px 1px 1px 1px;
+}
+
+.cal-header {
+  background-color: #f2f2f2;
+}
+
+.cal-header-future {
+  opacity: 0.5;
+}
+
+.body-app {
+  overflow: hidden;
+}
+
+.baby-list {
+  height: 400px;
+  overflow: auto;
+  margin-right: 5px;
+}
+
+md-dialog {
+  max-width: 500px;
+  padding: 20px;
+}
+
+.send-dialog-delete {
+  color: white;
+  background-color: #bdbdbd;
+  display: table;
+  margin: 0 auto;
+}
+
+.send-dialog-confirm {
+  color: white;
+  background-color: #F39C12;
+  display: table;
+  margin: 0 auto;
+}
+
+.cal-interactive-button {
+  color: #F39C12;
+}
+
+.first-row-button {
+  height: 30px!important;
+}
+
+.cal-today-first {
+  border-color: #4153a0;
+  border-style: solid;
+  border-width: 2px 2px 0px 2px;
+}
+
+.cal-today-middle {
+  border-color: #4153a0;
+  border-style: solid;
+  border-width: 0px 2px 0px 2px;
+}
+
+.cal-future-middle {
+  /*  opacity: 0.5;*/
+  background-color: #f2f2f2;
+}
+
+.cal-button-scroll {
+  color: white;
+  background-color: #F39C12;
+}
+
+.cal-dialog-title {
+  color: #4153a0;
+  text-align: center;
+  font-size: 24px;
+  margin: 10px;
+}
+
+.cal-dialog-text {
+  text-align: justify;
+  font-size: 18px;
+  margin: 10px;
+}
+
+
+/* Stats */
+
+.stats {
+  height: 695px;
+}
+
+.stats .title-progress {
+  text-align: center;
+}
+
+.stats md-progress-linear .md-container,
+.stats md-progress-linear .md-container .md-bar {
+  height: 40px;
+}
+
+.stats md-progress-linear .md-container {
+  background-color: #bdbdbd;
+}
+
+.stats md-progress-linear .md-container .md-bar {
+  height: 40px;
+  background-color: #f39c12;
+}
+
+.stats .legenda {
+  text-align: right;
+}
+
+.stats .legenda .icon {
+  font-size: 25px;
+}
+
+.stats .table {
+  padding: 0;
+}
+
+.stats .table,
+.stats .table>.layout-column {
+  border: 1px solid #bdbdbd;
+}
+
+.stats .table .header {
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.stats .table .scroller .md-button {
+  margin: 0;
+  width: 49%;
+}
+
+.stats .table md-content {
+  overflow: auto;
+}
+
+.stats .table .icon {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.stats .table i {
+  text-align: center;
+  padding: 3px 0;
+}
+
+.stats .table .header {
+  height: 66px;
+  padding: 5px;
+  text-align: center;
+}
+
+.stats .table .content {
+  height: 420px;
+}
+
+.stats .table .mode-zeroImpact_solo .header {
+  background-color: #ef5350;
+}
+
+.stats .table .mode-zeroImpact_wAdult .header {
+  background-color: #ffee58;
+}
+
+.stats .table .mode-bus .header {
+  background-color: #66bb6a;
+}
+
+.stats .table .mode-pandr .header {
+  background-color: #1565c0;
+}
+
+.stats .table .bonus .header {
+  background-color: #29b6f6;
+}
+
+.stats .table .mode-zeroImpact_solo .content {
+  color: #ef5350;
+}
+
+.stats .table .mode-zeroImpact_wAdult .content {
+  color: #ffee58;
+}
+
+.stats .table .mode-bus .content {
+  color: #66bb6a;
+}
+
+.stats .table .mode-pandr .content {
+  color: #1565c0;
+}
+
+.stats .table .bonus .content {
+  color: #29b6f6;
+}
+
+
+/* Excursions */
+
+.excursions {
+  height: 695px;
+  overflow: hidden;
+}
+
+.excursions .form-column {
+  border-right: 1px solid #bdbdbd;
+}
+
+.excursions .form-column form md-radio-button {
+  text-align: center;
+}
+
+.excursions .form-column form md-radio-button i {
+  font-size: 40px;
+  color: #f39512;
+}
+
+.excursions .form-column form md-radio-button .md-container {
+  display: none;
+}
+
+.excursions .form-column form md-radio-button .md-label {
+  margin: 0;
+}
+
+.excursions .form-column .md-button.md-raised {
+  background-color: #f39512;
+  color: #ffffff;
+}
+
+.excursions #excursions-list {
+  overflow: auto;
+}
+
+.excursions md-card .card-media {
+  text-align: right;
+  color: #4153a0;
+}
+
+.excursions md-card .card-media .meteo {
+  font-size: 50px;
+}
+
+.excursions .controls .md-button md-icon {
+  color: white;
+  background-color: #F39C12;
+}
+
+
+/* Notifications */
+
+.notifications {
+  height: 695px;
+}
+
+.notifications #notifications-list {
+  overflow: auto;
+}
+
+.notifications #notifications-list md-card.unread {
+  border: 1px solid #F39C12;
+}
+
+.notifications .controls .md-button md-icon {
+  color: white;
+  background-color: #F39C12;
+}
+
+.notifications .progress-notif svg path {
+  stroke: #4153a0;
+}
+
+.notifications .loading {
+  margin-top: 100px;
+}
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .days-row {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin-right: 37px;
+  }
+  .weather-row {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin-right: 37px;
+  }
+  .state-row {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 37px;
+  }
+  .gallery-bar {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 160px;
+    /*  width: 1024px;*/
+    width: 100%;
+    background-color: white;
+    margin: 0 auto;
+    white-space: nowrap;
+    overflow: scroll;
+  }
+}

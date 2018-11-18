@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="climbGame">
+
+<head>
+  <!--<script data-require="lodash.js@3.5.0" data-semver="3.5.0" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.js"></script>-->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:500,700" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="http://cdn.rawgit.com/angular/bower-material/v0.10.0/angular-material.css" />
+  <link data-require="font-awesome@4.3.0" data-semver="4.3.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="fonts/climbFont.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  
+<script th:inline="javascript">
+/*<![CDATA[*/
+var token = [[${token}]];
+var conf_username = [[${gname}]];
+var conf_api = [[${api}]];
+/*]]>*/
+</script>
+
+</head>
+
+<body class="body-app">
+  <div>
+    <div ui-view=""></div>
+  </div>
+  <script data-require="angular.js@~1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular.js"></script>
+  <script data-require="angular-animate@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular-animate.js"></script>
+  <script data-require="angular-aria@1.4.0" data-semver="1.4.0" src="https://code.angularjs.org/1.4.0/angular-aria.js"></script>
+  <script src="http://cdn.rawgit.com/angular/bower-material/v0.10.0/angular-material.js"></script>
+  <script data-require="ui-router@0.2.12" data-semver="0.2.15" src="//rawgit.com/angular-ui/ui-router/0.2.15/release/angular-ui-router.js"></script>
+  <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+  <script src="http://tombatossals.github.io/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+
+
+  <!--my scripts-->
+  <script src="js/app.js"></script>
+
+  <script src="js/controllers/homeCtrl.js"></script>
+  <script src="js/controllers/mapCtrl.js"></script>
+  <script src="js/controllers/calendarCtrl.js"></script>
+  <script src="js/controllers/loginCtrl.js"></script>
+  <script src="js/services/mapSrv.js"></script>
+  <script src="js/services/confSrv.js"></script>
+  <script src="js/services/dataSrv.js"></script>
+  <script src="js/services/loginSrv.js"></script>
+  <script src="js/services/calSrv.js"></script>
+
+</body>
+
+</html>

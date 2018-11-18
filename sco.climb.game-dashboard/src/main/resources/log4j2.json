@@ -1,0 +1,53 @@
+{
+  "configuration": {
+    "name": "Default",
+    "appenders": {
+      "Console": {
+        "name": "Console-Appender",
+        "target": "SYSTEM_OUT",
+        "PatternLayout": {
+          "pattern": "%d %p [%c] - %m%n"
+        }
+      },
+			"RollingFile": {
+			  "name": "RollingFile-Appender",
+			  "fileName": "/home/dev/logs/climb/gamedashboard.log",
+			  "filePattern": "/home/dev/logs/climb/gamedashboard.log.%d{yyyy-MM-dd-hh-mm}",
+			  "PatternLayout": {
+			    "pattern": "%d{MM-dd@HH:mm:ss} %-5p [%c] - %m%n"
+			  },
+			  "Policies": {
+			    "SizeBasedTriggeringPolicy": {
+			      "size": "5MB"
+			    }
+			  },
+			  "DefaultRolloverStrategy": {
+			    "max": "25"
+			  }
+			}    
+		},
+    "loggers": {
+      "logger": {
+        "name": "guru.springframework.blog.log4j2json",
+        "level": "debug",
+        "appender-ref": [
+					{
+          	"ref": "Console-Appender", "level":"info"
+        	},
+        	{
+          	"ref": "RollingFile-Appender", "level":"info"
+        	}
+        ]
+      },
+      "root": {
+        "level": "info",
+        "appender-ref": [{"ref": "Console-Appender"}, {"ref": "RollingFile-Appender"}]
+      }
+    }
+  }
+}
+
+
+
+
+. . .

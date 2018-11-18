@@ -1,0 +1,37 @@
+<div class="login-view">
+  <div layout="row" layout-align="center center" layout-fill>
+    <div layout="column" flex="50">
+      <!--      <div class="climb-image">-->
+      <img src="img/CLIMB_logo.png">
+      <!--      </div>-->
+    </div>
+    <div layout="column" flex="50">
+      <md-content layout="vertical" flex id="content">
+        <div layout="row" class="login-view" layout-align="center center" layout-fill>
+          <div layout="column" layout-padding>
+            <md-content class="login-view" md-theme="docs-dark">
+              <div layout="row" layout-align="center center">
+                <md-input-container>
+                  <label class="login-label">{{'login_user'|translate}}</label>
+                  <input ng-model="user.username">
+                </md-input-container>
+              </div>
+              <div layout="row" layout-align="center center">
+                <md-input-container>
+                  <label class="login-label">{{'login_password'|translate}}</label>
+                  <input ng-model="user.password" type="password">
+                </md-input-container>
+              </div>
+              <div layout="row" layout-align="center center">
+                <div layout="column">
+                  <md-button class="md-raised button-login" flex="50" flex-sm="100" ng-click="login()">{{'login_enter'|translate}}</md-button>
+                </div>
+              </div>
+
+            </md-content>
+          </div>
+        </div>
+      </md-content>
+    </div>
+  </div>
+</div>

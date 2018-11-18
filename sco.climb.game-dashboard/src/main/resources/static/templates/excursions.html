@@ -1,0 +1,121 @@
+<div class="excursions" layout="row" layout-padding>
+  <div layout="column" flex="33" class="form-column">
+    <h1 class="md-title">{{'excursions_new' | translate}}</h1>
+    <form novalidate name="excursionForm">
+      <!-- Name -->
+      <md-input-container class="md-block">
+        <label>{{'excursion_form_name_placeholder' | translate}}</label>
+        <input name="name" type="text" ng-model="newExcursion.name" required />
+        <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+        <div ng-messages="excursionForm.name.$error" ng-if="!showHints && excursionForm.name.$touched">
+          <div ng-message="required">{{'excursion_form_name_error_required' | translate}}</div>
+          <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+        </div>
+      </md-input-container>
+      <!-- Date -->
+      <md-input-container class="md-block">
+        <label>{{'excursion_form_date_placeholder' | translate}}</label>
+        <md-datepicker name="date" ng-model="newExcursion.date" md-max-date="now" md-hide-icons="triangle" md-open-on-focus required></md-datepicker>
+        <!--<md-datepicker ng-model="newExcursion.date" md-hide-icons="all" md-is-open="datepickerisOpen" md-open-on-focus></md-datepicker>
+          <md-button class="md-primary md-raised" ng-click="datepickerisOpen = true">Open</md-button>-->
+        <div ng-messages="excursionForm.date.$error" ng-if="!showHints && excursionForm.date.$touched">
+          <div ng-message="required">{{'excursion_form_date_error_required' | translate}}</div>
+          <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+        </div>
+      </md-input-container>
+      <div layout="row">
+        <!-- Numero bambini -->
+        <md-input-container class="md-block">
+          <!--md-no-float-->
+          <label>{{'excursion_form_children_placeholder' | translate}}</label>
+          <input name="children" type="number" max="1000" name="children" ng-model="newExcursion.children" required />
+          <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+          <div ng-messages="excursionForm.children.$error" ng-if="!showHints && excursionForm.children.$touched">
+            <div ng-message="required">{{'excursion_form_children_error_required' | translate}}</div>
+            <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+          </div>
+        </md-input-container>
+        <!-- Distanza -->
+        <md-input-container class="md-block">
+          <!--md-no-float-->
+          <label>{{'excursion_form_distance_placeholder' | translate}}</label>
+          <input name="distance" type="number" name="children" ng-model="newExcursion.distance" required />
+          <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+          <div ng-messages="excursionForm.distance.$error" ng-if="!showHints && excursionForm.distance.$touched">
+            <div ng-message="required">{{'excursion_form_distance_error_required' | translate}}</div>
+            <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+          </div>
+        </md-input-container>
+      </div>
+      <!--
+        <md-input-container md-no-float class="md-block">
+          <label>{{'excursion_form_weather' | translate}}</label>
+          <md-button class="md-icon-button"><i layout="column" flex="25" class="icon-sun_outline"></i></md-button>
+          <md-button class="md-icon-button"><i layout="column" flex="25" class="icon-cloudy_outline"></i></md-button>
+          <md-button class="md-icon-button"><i layout="column" flex="25" class="icon-rain_outline"></i></md-button>
+          <md-button class="md-icon-button"><i layout="column" flex="25" class="icon-snow_outline"></i></md-button>
+          <!- <div class="hint" ng-if="showHints">This is a hint</div> ->
+          <div ng-messages="excursionForm.distance.$error" ng-if="!showHints">
+            <div ng-message="required">{{'excursion_form_distance_error_required' | translate}}</div>
+            <!- <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div> ->
+          </div>
+        </md-input-container>
+        -->
+      <label>{{'excursion_form_weather' | translate}}</label>
+      <md-radio-group ng-model="newExcursion.meteo" layout-padding>
+        <div layout="row">
+          <md-radio-button flex="25" value="sunny" class="md-primary">
+            <i ng-class="{'icon-sun_outline': newExcursion.meteo !== 'sunny', 'icon-sun': newExcursion.meteo === 'sunny'}"></i>
+          </md-radio-button>
+          <md-radio-button flex="25" value="cloudy" class="md-primary">
+            <i ng-class="{'icon-cloudy_outline': newExcursion.meteo !== 'cloudy', 'icon-cloudy': newExcursion.meteo === 'cloudy'}"></i>
+          </md-radio-button>
+          <md-radio-button flex="25" value="rain" class="md-primary">
+            <i ng-class="{'icon-rain_outline': newExcursion.meteo !== 'rain', 'icon-rain': newExcursion.meteo === 'rain'}"></i>
+          </md-radio-button>
+          <md-radio-button flex="25" value="snow" class="md-primary">
+            <i ng-class="{'icon-snow_outline': newExcursion.meteo !== 'snow', 'icon-snow': newExcursion.meteo === 'snow'}"></i>
+          </md-radio-button>
+        </div>
+      </md-radio-group>
+    </form>
+    <md-button class="md-raised" ng-click="createExcursion(excursionForm)">
+      {{'excursion_form_send' | translate}}
+    </md-button>
+  </div>
+  <div layout="column" flex>
+    <h1 class="md-title">{{'excursions_history' | translate}}</h1>
+    <md-content id="excursions-list">
+      <div layout="row" layout-wrap>
+        <div flex="50" ng-repeat="ex in excursions">
+          <md-card md-theme="default">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{ex.name}}</span>
+                <span class="md-subhead">{{ex.day | date:'dd MMMM yyyy'}}</span>
+              </md-card-title-text>
+              <md-card-title-media>
+                <div class="md-media-sm card-media">
+                  <i class="meteo" ng-class="{'icon-sun': ex.meteo === 'sunny', 'icon-cloudy': ex.meteo === 'cloudy', 'icon-rain': ex.meteo === 'rain', 'icon-snow': ex.meteo === 'snow'}"></i>
+                </div>
+              </md-card-title-media>
+            </md-card-title>
+            <md-card-content>
+              <p class="md-subhead">{{(ex.distance / 1000) % 1 !== 0 ? ((ex.distance / 1000) | number:1) : ((ex.distance / 1000) | number:0)}}
+                {{'excursion_distance' | translate}}</p>
+              <p class="md-subhead">{{'excursion_children' | translate:'{children: ' + ex.children + '}'}}</p>
+            </md-card-content>
+          </md-card>
+        </div>
+      </div>
+    </md-content>
+  </div>
+  <div layout="column" flex="5" layout-align="end center" class="controls">
+    <md-button class="md-icon-button" ng-click="scroll('up')">
+      <md-icon class="icon-arrow_up"></md-icon>
+    </md-button>
+    <md-button class="md-icon-button" ng-click="scroll('down')">
+      <md-icon class="icon-arrow_down"></md-icon>
+    </md-button>
+  </div>
+</div>

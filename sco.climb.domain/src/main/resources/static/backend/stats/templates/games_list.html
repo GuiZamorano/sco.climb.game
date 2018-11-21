@@ -1,0 +1,20 @@
+<h2 class="md-padding">{{institute.name}} - {{school.name}}</h2>
+<div ng-show="!showStats()">
+    <md-input-container class="md-icon-float md-block search-container">
+        <label>{{'search' | translate}}</label>
+        <md-icon>search</md-icon>
+        <input ng-model="searchFilter" type="text" input-clear="black">
+    </md-input-container>
+    <md-list class="games-list">
+        <md-list-item class="md-3-line" ng-repeat="game in games | filter:searchFilter" ng-click="openGame($event, game)">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{game.gameName}}</h3>
+                <p>{{game.from | date:'dd/MM/yyyy'}} - {{game.to | date:'dd/MM/yyyy'}}</p>
+                <p>{{'classes' | translate}}: {{game.classRooms}}</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
+<div ng-view flex layout="column" ng-show="showStats()">
+    <ui-view name="content"></ui-view>
+</div>

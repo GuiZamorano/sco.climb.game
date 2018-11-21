@@ -1,0 +1,21 @@
+<fieldset class="row" style="min-height:300px" ng-disabled="!PermissionsService.permissionEnabledEditSchool()">
+    <div class="col-lg-12 center field">
+        <a class="btn btn-info btn-margin" ui-sref="root.school.line({idLine: ''})">Crea nuova</a>
+    </div>
+    <div class="col-lg-12">
+        <ul ng-model="currentSchool.lines" class="list-group list-categories">
+            <li class="list-group-item" ng-repeat="line in currentSchool.lines">
+                <div class="row v-center">
+                    <div class="col-md-10">
+                        <h5>{{$index + 1}}. {{line.name}}</h5>
+                        <h5>Inizio: {{line.from | date : 'dd/MM/yyyy'}} - Fine: {{line.to | date : 'dd/MM/yyyy'}}</h5>
+                    </div>
+                    <div class="col-md-2 right">
+                        <a ui-sref="root.school.line({idLine: line.objectId})" class="btn btn-icon btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a ng-click="remove(line)" class="btn btn-icon btn-danger" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</fieldset>

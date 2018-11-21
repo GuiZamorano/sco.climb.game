@@ -1,0 +1,40 @@
+<md-content layout-padding>
+    <form name="user_edit" ng-disabled="saving">
+        <md-input-container class="md-icon-float md-block">
+            <label>{{'user_creation_name' | translate}}</label>
+            <md-icon>person</md-icon>
+            <input ng-model="user.name" type="text" required>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+            <label>{{'user_creation_surname' | translate}}</label>
+            <md-icon>person</md-icon>
+            <input ng-model="user.surname" type="text" required>
+        </md-input-container>
+    
+        <md-input-container class="md-icon-float md-block">
+            <label>{{'user_creation_cf' | translate}}</label>
+            <md-icon>person</md-icon>
+            <input ng-model="user.cf" type="text">
+        </md-input-container>
+    
+        <md-input-container class="md-block">
+            <label>{{'user_creation_email' | translate}}</label>
+            <md-icon>email</md-icon>
+            <input ng-model="user.email" type="email" ng-disabled="!newUser">
+        </md-input-container>
+    </form>
+    <md-card md-theme-watch flex-gt-xs="30" ng-show="user.roles.length == 0">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"><md-icon>perm_identity</md-icon> {{'user_creation_assign_role_title' | translate}}</span>
+            <span class="md-subhead">{{'user_creation_assign_role_description' | translate}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+            <a ui-sref="home.user-role-edit({userEmail:user.email})"><md-button class="md-primary">{{'user_creation_assign_role_action' | translate}}</md-button></a>
+        </md-card-actions>
+      </md-card>
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="saving">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+</md-content>

@@ -1,0 +1,35 @@
+<div class="row v-center" ng-init="num = $index; tmpTitle = leg.externalUrls[num].name; tmpUrl = leg.externalUrls[num].link; tmpType = leg.externalUrls[num].type;">
+    <div class="col-md-10">
+        <div class="row">
+            <!-- Media name -->
+            <div class="col-lg-12 field add-media">
+                <div class="add-media-label">
+                    <p><b>Titolo:</b></p>
+                </div>
+                <input class="form-control" type="text" ng-model="tmpTitle" />
+            </div>
+            <!-- Media link -->
+            <div class="col-lg-12 field add-media">
+                <div class="add-media-label">
+                    <p><b>URL:</b></p>
+                </div>
+                <input class="form-control" type="text" ng-model="tmpUrl" />
+            </div>
+            <div class="col-lg-12 field add-media" style="margin-bottom: 0;">
+                <div class="add-media-label">
+                    <p><b>Tipologia:</b></p>
+                </div>
+		            <select class="form-control" ng-model="tmpType">
+		                <option value="image">Immagine</option>
+		                <option value="video">Video</option>
+		                <option value="link">Collegamento a pagina web</option>
+		                <option value="file">File</option>
+		            </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 right">
+        <a class="btn btn-save btn-icon" ng-click="updateLink(num, tmpTitle, tmpUrl, tmpType); $parent.$parent.editMode = !$parent.$parent.editMode" role="button"><i class="fa fa-check" aria-hidden="true"></i></a>
+        <a class="btn btn-icon btn-danger" ng-click="$parent.$parent.editMode = !$parent.$parent.editMode" role="button"><i class="fa fa-times" aria-hidden="true"></i></a>
+    </div>
+</div>

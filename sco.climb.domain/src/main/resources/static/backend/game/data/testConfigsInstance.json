@@ -1,0 +1,17 @@
+[
+    {
+        "pedibusGameId": "4eef5b82-2877-4b27-93e5-5dc978171577",
+        "configDetailId": 1,
+        "active": true
+    },
+    {
+        "pedibusGameId": "689360c3-0a7b-40a1-9c74-818e8919c8f9",
+        "configDetailId": 2,
+        "active": false
+    },
+    {
+        "pedibusGameId": "375df9ec-77b1-4699-861e-5e189c667caf",
+        "configDetailId": null,
+        "active": false
+    }
+]

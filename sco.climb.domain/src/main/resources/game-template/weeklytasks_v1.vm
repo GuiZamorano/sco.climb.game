@@ -1,0 +1,119 @@
+#[[
+package eu.trentorise.game.model
+
+import eu.trentorise.game.notification.MessageNotification;
+import eu.trentorise.game.model.PointConcept;
+import eu.trentorise.game.model.PointConcept.PeriodInstance;
+import eu.trentorise.game.task.Classification;
+
+import java.lang.Math;
+import java.util.HashMap;
+
+import eu.trentorise.game.core.Utility;
+
+global Utility utils;
+
+global Double const_record_percent_class;
+global Double const_record_percent_school;
+global Double const_weekly_nominal_distance;
+global String const_school_name;
+global Integer const_number_of_teams;
+
+function Double findPeriodicMax(PointConcept pc, String pName) {
+// finds the maximum value in the history of a Periodic Point Concept
+// for a given period name
+	Double ret = 0.0;
+	PeriodInstance pi = pc.getPeriodCurrentInstance(pName);
+	int i = pi.getIndex();
+	while (i >= 0) {
+		pi = pc.getPeriodInstance(pName, i--);
+		Double s = pi.getScore();
+		if(s > ret)
+			ret = pi.getScore();
+	}
+	
+	return ret;
+}
+
+rule "R-weekly-record-distance"
+// checks if a team has reached its new WEEKLY record for a given counter
+// In that case, awards a bonus and sends out a MessageNotification
+// Can apply to CLASSES only
+when
+	Classification(name == 'team classification weekly', $counter : scoreType, position <= const_number_of_teams) //only first "const_number_of_teams" (SCHOOL + classes)
+	$pc : PointConcept(name == (String) $counter )
+	Player($teamId : id, team == true, $teamId != const_school_name) // only works with classes
+	Game( $gameId: id)
+	$id : InputData()
+	$bd : PointConcept(name == "bonus_distance")
+	$td : PointConcept(name == "total_distance")
+then
+	utils.log("apply \'R-check-record-distance\'");
+	Double current = $pc.getPeriodCurrentScore("weekly");
+	Double max = findPeriodicMax($pc,"weekly");
+	if (current.equals(max)) {
+		MessageNotification mn = new MessageNotification($gameId,$teamId, 'WeeklyRecordClass');
+		mn.addData("_score_type_", $counter);
+		mn.addData("_record_", current);
+		insert(mn);
+		// assign bonus
+		Double bonus = 0.0;
+		if ($pc.getName().equals("total_distance")) {
+			bonus = Math.ceil(const_record_percent_class * (current - $bd.getPeriodCurrentScore("weekly")));
+		} else {
+			bonus = Math.ceil(const_record_percent_class * current);
+		}
+		$bd.setScore($bd.getScore() + bonus);
+		$td.setScore($td.getScore() + bonus);
+		$id.getData().put("counter", $counter);
+		$id.getData().put("bonus", bonus);
+		update($bd);
+		update($td);
+		insert(new UpdateTeams());
+	}
+end
+
+rule "R-weekly-record-propagation"
+when
+	Member( $counter : inputData["counter"] != null, $bonus : inputData["bonus"] != null)
+	$pc : PointConcept(name == (String)$counter)
+	Player($teamId : id, team == true) // only works with teams
+	$bd : PointConcept(name == "bonus_distance")
+	$td : PointConcept(name == "total_distance")
+then
+	utils.log("apply \'R-weekly-record-propagation\'");
+	$bd.setScore($bd.getScore() + (Double)$bonus);
+	$td.setScore($td.getScore() + (Double)$bonus);
+	update($bd);
+	update($td);
+	insert(new UpdateTeams());
+end
+
+
+rule "R-weekly-over-nominal-distance"
+// checks if the SCHOOL has reached a  WEEKLY TOTAL distance 
+// that exceeds a certain constant, i.e., const_weekly_nominal_distance 
+// In that case, awards a bonus and sends out a MessageNotification
+when
+	Classification(name == 'team classification weekly', position <= const_number_of_teams) //only first "const_number_of_teams" (SCHOOL + classes)
+	$tot_dist : PointConcept(name == "total_distance")
+	Player($teamId : id, team == true, $teamId == const_school_name) // only applies to school
+	Game( $gameId: id)
+	$bonus_dist : PointConcept(name == "bonus_distance")
+then
+	Double current = $tot_dist.getPeriodCurrentScore("weekly");
+	if (current > const_weekly_nominal_distance) {
+		utils.log("apply \'R-weekly-over-nominal-distance\'");
+		MessageNotification mn = new MessageNotification($gameId,$teamId, 'WeeklyPerformanceSchool');
+		 mn.addData("_score_type_", "total_distance");
+		 mn.addData("_performance_", current);
+		 insert(mn);
+		 // assign bonus
+		Double bonus = Math.ceil(current * const_record_percent_school);
+		$bonus_dist.setScore($bonus_dist.getScore() + bonus);
+		$tot_dist.setScore($tot_dist.getScore() + bonus);
+		update($bonus_dist);
+		update($tot_dist);
+	}
+end
+]]#

@@ -1,0 +1,52 @@
+#[[
+package eu.trentorise.game.model
+
+import eu.trentorise.game.core.Utility;
+global Utility utils;
+
+global Double const_pedibus_multiplier;
+
+rule "pedibus update"
+when // here we need to understand better how InputData will be structured
+    Action(id == "PedibusKidTrip")
+    InputData( $distance : data["meters-distance"] != null)
+    $tot_dist : PointConcept(name == "total_distance")
+    $pedibus_dist : PointConcept(name == "pedibus_distance")
+    $tot_trips : PointConcept(name == "total_trips")
+    $pedibus_trips : PointConcept(name == "pedibus_trips")
+    Player($playerId: id)
+then
+	utils.log("apply \'pedibus update\' of meters " + $distance); 
+	$pedibus_dist.setScore($pedibus_dist.getScore() + (Double)$distance * const_pedibus_multiplier); 
+    $tot_dist.setScore($tot_dist.getScore() + (Double)$distance * const_pedibus_multiplier); 
+    $pedibus_trips.setScore($pedibus_trips.getScore() + 1d); 
+    $tot_trips.setScore($tot_trips.getScore() + 1d);
+    update($pedibus_dist);
+    update($pedibus_trips);
+    update($tot_dist);
+    update($tot_trips);
+    insert(new UpdateTeams());
+end
+
+
+rule "pedibus update propagation"
+when
+    Member($distance : inputData["meters-distance"] != null)
+    Player($playerId : id, team == true)
+    $tot_dist : PointConcept(name == "total_distance")
+    $pedibus_dist : PointConcept(name == "pedibus_distance")
+    $tot_trips : PointConcept(name == "total_trips")
+    $pedibus_trips : PointConcept(name == "pedibus_trips")
+then
+    utils.log("apply \'pedibus update propagation\' of meters " + (Double)$distance * const_pedibus_multiplier);
+    $pedibus_dist.setScore($pedibus_dist.getScore() + (Double)$distance * const_pedibus_multiplier); 
+    $tot_dist.setScore($tot_dist.getScore() + (Double)$distance * const_pedibus_multiplier); 
+    $pedibus_trips.setScore($pedibus_trips.getScore() + 1d); 
+    $tot_trips.setScore($tot_trips.getScore() + 1d);
+    update($pedibus_dist);
+    update($pedibus_trips);
+    update($tot_dist);
+    update($tot_trips);
+    insert(new UpdateTeams());
+end
+]]#

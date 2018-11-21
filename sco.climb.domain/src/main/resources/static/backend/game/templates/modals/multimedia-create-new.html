@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-body">
+        <p><b>Aggiungi un nuovo elemento multimediale</b></p>
+        <div class="add-media field">
+            <p><b>Tipologia:</b></p>
+            <select class="form-control" ng-model="newMedia.type">
+                <option value="image">Immagine</option>
+                <option value="video">Video</option>
+                <option value="link">Collegamento a pagina web</option>
+                <option value="file">File</option>
+            </select>
+        </div>
+        <div class="add-media field">
+            <p><b>Titolo:</b></p>
+            <input class="form-control" type="text" ng-model="newMedia.name" />
+        </div>
+        <div class="add-media field">
+            <p><b>URL:</b> <span class="required-sign">*</span></p>
+            <input type="url" class="form-control" ng-model="newMedia.link" required/>
+        </div>
+
+        <!-- Upload pic on imgur -->
+        <div ng-show="(newMedia.type == 'image') || (newMedia.type == 'file')">
+            <div class="field add-media">
+                <p>oppure scegli e carica un file. I file saranno ad accesso pubblico; devono essere privi di copyright e rispettare...:<p> 
+                <p>{{file.filename ? file.filename : 'Nessun file selezionato'}}</p>
+                <span class="btn btn-info btn-file btn-margin">
+                Scegli file <input type="file" id="upload-content-file" base-sixty-four-input ng-model="file" />
+                </span>
+                <a ng-disabled="!file" ng-click="uploadFile()" class="btn btn-info">Carica</a>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>

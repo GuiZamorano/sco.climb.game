@@ -1,0 +1,19 @@
+<div layout="row" class="credits-banner">
+  <a href="http://www.smartcommunitylab.it" class="credit-banner"><img src="../game-dashboard/img/credits/logo_sco_fbk.png"></a>
+  <a href="http://www.comune.trento.it" class="credit-banner"><img src="../game-dashboard/img/credits/logo_comune_TN.png"></a>
+  <a href="http://www.smartcommunitylab.it/climb/" class="credit-banner"><img src="../game-dashboard/img/credits/logo_climb.png"></a>
+  <a href="http://www.comune.trento.it/Aree-tematiche/Smart-city" class="credit-banner"><img src="../game-dashboard/img/credits/logo_smart_city.png"></a>
+</div>
+<md-toolbar class="desktop bar-colors">
+  <div class="md-toolbar-tools bar-colors">
+    <h2 class="header-custom">
+      <span style="margin-right:4px;">{{gamePublicTitle}}:</span><span class="game-description" ng-bind-html="gamePublicDescription"></span>      
+    </h2>
+  </div>
+</md-toolbar>
+<main layout="row" flex>
+    <md-content flex>
+      <ui-view name="content"></ui-view>
+    </md-content>
+</main>
+  

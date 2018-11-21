@@ -1,0 +1,202 @@
+/* Styles go here */
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  /*  color: orangered;*/
+}
+
+.fill-height {
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+}
+
+.fill-height>div {
+  min-height: 100%;
+  display: flex;
+}
+
+md-sidenav {
+  overflow: visible;
+}
+
+.side-menu,
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+
+.side-menu .md-button.active {
+  color: deeppink;
+}
+
+.side-menu .menu-toggle-list a.md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+}
+
+.side-menu .menu-toggle-list .md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+}
+
+.side-menu>li {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.md-button-toggle .md-toggle-icon.toggled {
+  transform: rotateZ(180deg);
+  -webkit-transform: rotateZ(180deg);
+}
+
+.side-menu .md-button-toggle .md-toggle-icon {
+  background-size: 100% auto;
+  display: inline-block;
+  margin: auto 0 auto auto;
+  width: 15px;
+  color: darkgray;
+  transition: transform .3s ease-in-out;
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+}
+
+.menu-toggle-list.ng-hide {
+  max-height: 0;
+}
+
+.side-menu .md-button {
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+.menu-toggle-list {
+  background: #fff;
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -webkit-transition-property: max-height;
+  -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-transition-property: max-height;
+  transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  transition-property: max-height;
+}
+
+.menu-selected {
+  background-color: #4153a0;
+}
+
+.menu-selected md-icon {
+  background-color: #4153a0;
+}
+
+.side-menu menu-toggle span {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+
+/*login*/
+
+.login-view {
+  height: 100%;
+  background-color: #4153a0;
+}
+
+.climb-image {
+  display: block;
+  margin: auto;
+  width: 40%;
+}
+
+.button-login {
+  background-color: #f39512 !important;
+  color: white!important;
+}
+
+.login-label {
+  color: white;
+}
+
+.login-view div md-input-container label {
+  color: white!important;
+}
+
+.login-view div md-input-container input {
+  border-bottom: 2px solid white;
+  color: white!important;
+}
+
+.login-view md-radio-group md-radio-button div .md-off {
+  border-color: white!important;
+}
+
+.login-view md-radio-group md-radio-button div span {
+  color: white!important;
+}
+
+
+/*general*/
+
+.full-page {
+  height: 100%;
+}
+
+.menu-colors {
+  color: white;
+  background-color: #F39C12;
+  z-index: 99999;
+}
+
+.menu-colors .md-button:hover {
+  background-color: transparent !important;
+}
+
+.bar-colors {
+  color: white !important;
+  background-color: #4153a0;
+}
+
+.menu-header img {
+  height: 50px;
+}
+
+.bar-logo img {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  height: 50px;
+}
+
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  height: 80%;
+  margin: 16px;
+  opacity: 0.6;
+}
+.title-no-margin {
+  margin-bottom: 0px;
+}
+.search-container {
+  margin-left: 16px;
+  margin-bottom: 0px;
+  max-width: 400px;
+}

@@ -1,0 +1,62 @@
+#set( $H = '#' )
+#[[
+# insert your constants to use in game rules
+# 
+# SAMPLE USAGE 
+# 
+# constants file
+# var_name = var_value
+# 
+#
+# usage in rule
+# global VALUE_TYPE var_name;
+#
+# supported VALUE_TYPE
+# Integer (i.e. var=1)
+# Double  (i.e. var=2.3)
+# String  (i.e. var=park)
+# java.util.ArrayList (i.e var=park,street,bikestation)
+]]#
+$H for zero impact trips taken autonomously
+const_zi_solo_bonus=$params.const_zi_solo_bonus#[[.0]]#  
+
+$H bonus for reaching leg (school)
+const_leg_bonus=0.0
+
+$H bonus for beating weekly record (as percent)
+const_record_percent_class=0.10
+const_record_percent_school=0.05
+
+$H multiplier for pedibus trips
+const_pedibus_multiplier=1.0 
+
+$H name of the school team/player
+const_school_name=$params.const_school_name
+
+$H total number of teams (SCHOOL + classes), used in weeklytasks
+const_number_of_teams=$params.const_number_of_teams 
+
+$H bonus for NoCarDayClass
+const_NoCarDayClass_bonus=$params.const_NoCarDayClass_bonus#[[.0]]#
+
+$H bonus for ZeroImpactDayClass
+const_ZeroImpactDayClass_bonus=$params.const_ZeroImpactDayClass_bonus#[[.0]]#
+
+$H nominal weekly distance estimated for whole school
+const_weekly_nominal_distance=$params.const_weekly_nominal_distance#[[.0]]#
+
+$H "almost" distance from next leg (in meters, used in notifications)
+const_almost_reached_next_leg=$params.const_almost_reached_next_leg#[[.0]]#
+
+$H name of the badge collection for journey stops
+badge_collection_name=LegsCollection
+
+$H name of the destination
+final_destination=$params.final_destination
+
+$H constants representing distances to legs 
+#foreach($leg in $legList)
+$Utils.getNormalizeLegName($leg.name)#[[_distance]]#=$leg.score#[[.0]]#
+#end
+
+const_day_millis=86400000l

@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-8 header-path-category">
+        <h4>SCEGLI IL GIOCO DA CLONARE</h4>
+    </div>
+</div>
+
+<div class="row" ng-disabled="!PermissionsService.permissionEnabledEditGame()">
+    <div class="col-md-12 right">
+        <a ng-click="back()" class="btn btn-danger" role="button">Indietro</a>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <ul style="text-align: justify;">
+            <li class="list-group-item" ng-repeat="game in allGames">
+                <div class="row v-center">
+                    <div class="col-md-10">
+                        <h4>{{game.gameName}}</h4>
+                        <h5 ng-bind-html="game.gameDescription"></h5>
+                        <h5>Inizio: {{game.from | date : 'dd/MM/yyyy'}} - Fine: {{game.to | date : 'dd/MM/yyyy'}}</h5>
+                        <h5>Punteggio finale: {{game.finalScore}} - {{game.finalScore / 1000}} Km</h5>
+                        <h5>Numero tappe: {{game.legs}}</h5> 
+                        <h5>Tappa iniziale: {{game.firstLeg}}</h5> 
+                        <h5>Tappa finale: {{game.finalLeg}}</h5>
+                    </div>
+                    <div class="col-md-2 right">
+                        <a ng-click="clone(game)" class="btn btn-icon btn-primary" role="button" ng-disabled="!PermissionsService.permissionEnabledEditGame()"><i class="fa fa-clone" aria-hidden="true" uib-tooltip="CLONE"></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </div>

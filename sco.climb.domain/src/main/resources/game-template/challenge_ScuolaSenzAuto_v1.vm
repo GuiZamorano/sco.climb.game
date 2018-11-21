@@ -1,0 +1,107 @@
+#[[
+package eu.trentorise.game.model
+
+import java.util.ArrayList;
+import eu.trentorise.game.core.Utility;
+
+global Utility utils;
+global String badge_collection_name;
+global String const_school_name;
+
+rule 'ch-ScuolaSenzAuto-class-check'
+salience -1000
+lock-on-active
+when
+	$challenge : ChallengeConcept( modelName == "ScuolaSenzAuto", isCompleted() != true,
+		$vp : fields["VirtualPrize"], $won : fields["prizeWon"])
+	Player($teamId : id, team == true, $teamId != const_school_name, $class_size : totalMembers)
+	Game( $gameId: id)
+	PointConcept(name == "participation_count", $today : getPeriodCurrentScore("daily"),
+		((Double)$today).intValue() == ((Integer)$class_size).intValue() )
+	$ct : PointConcept(name == "car_trips")
+then
+	utils.log("apply \'ch-ScuolaSenzAuto-class-check\'");	
+	Double carTrips = $ct.getPeriodCurrentScore("daily");
+	if (carTrips == 0d) {
+		utils.log("Challenge ScuolaSenzAuto HAS BEEN WON by CLASS: " + $teamId);
+		MessageNotification mn = new MessageNotification($gameId,$teamId,"ChallengeWon");
+		mn.addData("_VirtualPrize_", $vp);
+		insert(mn);
+		$challenge.getFields().put("prizeWon", (Boolean) true);
+		update($challenge);
+	}
+end
+
+rule 'ch-ScuolaSenzAuto-school-check'
+salience -1000
+when
+	$challenge : ChallengeConcept( modelName == "ScuolaSenzAuto", isCompleted() != true,
+		$vp : fields["VirtualPrize"], $won : fields["prizeWon"] == false)
+	Player($teamId : id, team == true, $teamId == const_school_name, $school_size : totalMembers)
+	Game( $gameId: id)
+	PointConcept(name == "no_car_classes", $today : getPeriodCurrentScore("daily"),
+		((Double)$today).intValue() == ((Integer)$school_size).intValue() )
+	$ct : PointConcept(name == "car_trips")
+then
+	utils.log("apply \'ch-ScuolaSenzAuto-class-check\' " + $today + " vs. " + $school_size);	
+	Double carTrips = $ct.getPeriodCurrentScore("daily");
+	if (carTrips == 0d) {
+		utils.log("Challenge ScuolaSenzAuto HAS BEEN WON by SCHOOL: " + $teamId);
+		MessageNotification mn = new MessageNotification($gameId,$teamId,"ChallengeWon");
+		mn.addData("_VirtualPrize_", $vp);
+		insert(mn);
+		$challenge.getFields().put("prizeWon", (Boolean) true);
+		update($challenge);
+	}
+end
+
+rule 'ch-ScuolaSenzAuto-award'
+salience -5000
+when
+	$challenge : ChallengeConcept( modelName == "ScuolaSenzAuto", isCompleted() != true,
+		$leg : fields["legName"], $vp : fields["VirtualPrize"], $pw : fields["prizeWon"]== true,
+		$bonusPointType : fields["bonusPointType"], $bonusScore : fields["bonusScore"] )
+	Player($teamId : id, team == true)
+    $id : InputData()
+    BadgeCollectionConcept( name == badge_collection_name, 
+    	badgeEarned contains (String)$leg || $leg == null )
+	$pc : PointConcept(name == (String) $bonusPointType)
+	$tot_dist : PointConcept(name == "total_distance")
+then
+	utils.log("apply \'ch-ScuolaSenzAuto-award \' ");
+    $pc.setScore($pc.getScore() +  (Double)$bonusScore);
+	update($pc);
+	if (! ((String)$bonusPointType).equals("total_distance")) {
+		$tot_dist.setScore($tot_dist.getScore() +  (Double)$bonusScore);
+		update($tot_dist);
+	}
+	$challenge.completed();
+    update($challenge);
+	// if this is a CLASS, propagate bonus to SCHOOL
+	if (! $teamId.equals(const_school_name)) {
+		$id.getData().put("bonusScore", $bonusScore);
+		$id.getData().put("bonusPointType", $bonusPointType);
+		insert(new UpdateTeams("Ch-ScuolaSenzAuto"));
+	}
+end
+
+
+rule "ch-ScuolaSenzAuto-propagation"
+// propgagates rewards from challenge
+when
+	Member( $bonusPointType : inputData["bonusPointType"], $bonusScore : inputData["bonusScore"])
+	Propagation(action == "Ch-ScuolaSenzAuto")
+	$pc : PointConcept(name == (String)$bonusPointType)
+	$tot_dist : PointConcept(name == "total_distance")
+	Player($playerId : id, team == true) 
+then
+	utils.log("apply \'ch-ScuolaSenzAuto-propagation\'");
+	$pc.setScore($pc.getScore() + (Double)$bonusScore);
+	update($pc);
+	if (! ((String)$bonusPointType).equals("total_distance")) {
+		$tot_dist.setScore($tot_dist.getScore() +  (Double)$bonusScore);
+		update($tot_dist);
+	}
+	insert(new UpdateTeams("Ch-ScuolaSenzAuto"));
+end
+]]#

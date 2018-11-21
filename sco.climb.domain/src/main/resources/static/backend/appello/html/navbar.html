@@ -1,0 +1,30 @@
+
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#navBar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="console">CLIMB Console</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navBar">
+			<ul class="nav navbar-nav">
+				<li class="dropdown" data-ng-class="{'active':selectedMenu == 'report'}">
+					<a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Report <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li id="menu-report-appello" data-ng-class="{'active':selectedTab == 'menu-report-appello'}"
+							data-ng-click="selectedTab = 'menu-report-appello'"><a href="report-appello.html">Appello</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{profile.ownerId}}</a></li>
+        <li><a href="#" data-ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+     	</ul>
+		</div>
+	</div>
+</nav>

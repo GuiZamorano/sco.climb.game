@@ -1,0 +1,21 @@
+<fieldset class="row" style="min-height:300px" ng-disabled="!PermissionsService.permissionEnabledEditSchool()">
+    <div class="col-lg-12 center field">
+        <a class="btn btn-info btn-margin" data-ui-sref="root.school.volunteer({idVolunteer: ''})">Crea nuovo</a>
+    </div>
+    <div class="col-lg-12 search-container">
+        <label class="search-label">Cerca: <input ng-model="searchText"></label>
+        <ul class="list-group list-categories">
+            <li class="list-group-item" data-ng-repeat="volunteer in currentSchool.volunteers | filter:searchText">
+                <div class="row v-center">
+                    <div class="col-md-10">
+                        <h5>{{$index + 1}}. {{volunteer.name}}</h5>
+                    </div>
+                    <div class="col-md-2 right">
+                        <a data-ui-sref="root.school.volunteer({idVolunteer: volunteer.objectId})" class="btn btn-icon btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a data-ng-click="remove(volunteer)" class="btn btn-icon btn-danger" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</fieldset>

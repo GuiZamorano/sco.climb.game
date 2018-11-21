@@ -1,0 +1,29 @@
+<div ng-include="'templates/dataset-selection.html'"></div>
+
+<div ng-if="$parent.selectedOwner && $parent.selectedInstitute && $parent.selectedSchool">
+    <div class="col-lg-12 buttons-tab">
+        <a href="#/game/{{selectedOwner}}/{{selectedInstitute.objectId}}/{{selectedSchool.objectId}}//info" class="btn btn-info" ng-disabled="!PermissionsService.permissionEnabledEditGame()">Crea nuovo</a>
+        <a href="#/game/{{selectedOwner}}/{{selectedInstitute.objectId}}/{{selectedSchool.objectId}}//gameclone" class="btn btn-info" ng-disabled="!PermissionsService.permissionEnabledEditGame()">Clona gioco</a>
+    </div>
+
+    <div class="col-md-10 col-md-offset-1 search-container">
+        <label class="search-label">Cerca: <input ng-model="searchText"></label>
+        <ul class="list-group list-categories">
+            <li class="list-group-item" ng-repeat="game in games | filter:searchText">
+                <div class="row v-center">
+                    <div class="col-md-8">
+                        <h5>{{game.gameName}}</h5>
+                        <h5>Inizio: {{game.from | date : 'dd/MM/yyyy'}} - Fine: {{game.to | date : 'dd/MM/yyyy'}}</h5>
+                    </div>
+                    <div class="col-md-4 right">
+                        <a href="#/game/{{selectedOwner}}/{{selectedInstitute.objectId}}/{{selectedSchool.objectId}}/{{game.objectId}}/gameconfig"  class="btn btn-icon btn-primary" role="button" ng-disabled="gamesConfigs[game.objectId].active"><i class="fa fa-cogs" aria-hidden="true" uib-tooltip="CONF TEMPLATE"></i></a>
+                        <a class="btn btn-icon btn-primary" ng-click="initGameOnServer(game)" ng-disabled="!PermissionsService.permissionEnabledEditGame()"><i class="fa fa-gamepad" aria-hidden="true" uib-tooltip="DEPLOY"></i></a>
+                        <a href="#/game/{{selectedOwner}}/{{selectedInstitute.objectId}}/{{selectedSchool.objectId}}/{{game.objectId}}/info" class="btn btn-icon btn-primary" role="button" ng-click="$parent.$parent.$parent.gamesModified = true"><i class="fa fa-pencil" aria-hidden="true" uib-tooltip="EDIT"></i></a>
+                        <a ng-click="reset(game)" class="btn btn-icon btn-danger" role="button" ng-disabled="!PermissionsService.permissionEnabledEditGame()"><i class="fa fa-eraser" aria-hidden="true" uib-tooltip="RESET"></i></a>
+                        <a ng-click="delete(game)" class="btn btn-icon btn-danger" role="button" ng-disabled="!PermissionsService.permissionEnabledEditGame()"><i class="fa fa-trash" aria-hidden="true" uib-tooltip="DELETE"></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

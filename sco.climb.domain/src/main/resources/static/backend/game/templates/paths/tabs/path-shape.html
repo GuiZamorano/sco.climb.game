@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-lg-6 left">
+        <p><b>Numero tappe:</b> {{legs.length}}</p>
+        <p><b>Lunghezza percorso:</b> {{computeLength()}} km</p>
+    </div>
+    <div class="col-lg-6 right field">
+        <a class="btn btn-info" ng-click="toggleMarkers()">{{toggle ? 'Nascondi' : 'Vedi'}} tappe</a>
+    </div>
+    <div class="col-lg-12 field">
+        <div data-ng-init="initMap()" id="map"></div>
+    </div>
+</div>

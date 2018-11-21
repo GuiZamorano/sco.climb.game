@@ -1,0 +1,21 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8 header-path-category">
+            <h4 ng-if="isNewIstitute()">CREA NUOVO ISTITUTO</h4>
+            <h4 ng-if="!isNewIstitute()">MODIFICA ISTITUTO: {{getInstituteName()}}</h4>
+            <p>I campi contrassegnati col simbolo <span class="required-sign">*</span> sono obbligatori</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Menu tab -->
+        <div class="col-md-2 tabs-menu">
+            <a ng-class="{'active-tab':selectedTab == 'info'}" ui-sref="root.institute.info">DETTAGLI</a>
+        </div>
+
+        <!-- Tabs container -->
+        <div class="col-md-10 tabs-container">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

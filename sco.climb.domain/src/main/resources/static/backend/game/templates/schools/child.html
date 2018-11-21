@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-8 header-path-category">
+        <h4 ng-show="isNewChild()">CREA NUOVO SCOLARO</h4>
+        <h4 ng-hide="isNewChild()">MODIFICA SCOLARO: {{getChildName(selectedChild)}}</h4>
+        <p>I campi contrassegnati col simbolo <span class="required-sign">*</span> sono obbligatori</p>
+    </div>
+
+    <div class="col-md-4 right">
+        <a ng-click="save()" class="btn btn-save btn-margin" role="button">Salva scolaro</a>
+        <a ng-click="back()" class="btn btn-danger" role="button">Annulla</a>
+    </div>
+
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Nome:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.name" ng-required="true"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Cognome:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.surname" ng-required="true"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Codice Fiscale:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.cf" ng-required="true"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Classe:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.classRoom" ng-required="true"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Genitore:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.parentName"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Telefono:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.phone"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Dispositivo WSN:</b></p>
+        <input class="form-control" type="text" ng-model="selectedChild.wsnId"/>
+    </div>
+    
+    <div class="col-lg-6">
+        <input type="checkbox" ng-model="selectedChild.activeForPedibus"/>&nbsp;<b>Pedibus</b>
+    </div>
+
+    <div class="col-lg-6">
+        <input type="checkbox" ng-model="selectedChild.activeForGame"/>&nbsp;<b>Game</b>        
+    </div>
+</div>

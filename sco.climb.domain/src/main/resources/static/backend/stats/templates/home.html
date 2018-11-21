@@ -1,0 +1,96 @@
+<md-toolbar layout="row" class="desktop bar-colors">
+  <div class="md-toolbar-tools bar-colors">
+    <md-button class="md-icon-button" aria-label="{{'action_back' | translate}}" ng-hide="hideBack" ng-click="goBack()">
+      <md-icon>arrow_back</md-icon>
+    </md-button>
+    <a ng-click="backToHome()"><img class="bar-logo" src="img/logo_header.png"></img></a>
+    <h2 flex md-truncate><span>Stats Console - {{title | translate}}</span>
+    </h2>
+    
+    <md-button ng-click="backToDomainSelection()">
+        {{'change_school' | translate}}
+    </md-button>
+    <md-menu md-position-mode="target-right target">
+        <md-button aria-label="Profile" class="md-icon-button" ng-click="$mdMenu.open($event)">
+            <md-icon>account_circle</md-icon>
+        </md-button>
+        <md-menu-content width="4" layout-padding>
+            <span class="md-headline">{{myProfile.name}} {{myProfile.surname}}</span>
+            <span class="md-subhead">{{myProfile.email}}</span>
+            <md-menu-item>
+                <md-button ng-click="logout()">
+                    <div layout="row" flex>
+                        <md-icon md-menu-align-target>lock</md-icon>
+                        <p flex>{{'menu_logout' | translate}}</p>
+                    </div>
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>  
+<main flex layout="column" layout-align="center">
+    <div layout="row" layout-align="center" ng-show="showSelection()" class="md-padding">
+        <div layout="column" flex="30">
+            <md-card md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><md-icon>domain</md-icon> {{'domain_select' | translate}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="domain in myProfile.ownerIds" ng-click="changeDomain(domain)">
+                            <div class="md-list-item-text" layout="column">
+                                <h4>{{domain}}</h4>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div layout="column" flex="30">
+            <md-card md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><md-icon>account_balance</md-icon> {{'institute_select' | translate}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="institute in institutes" ng-click="changeInstitute(institute)">
+                            <div class="md-list-item-text" layout="column">
+                                <h4>{{institute.name}}</h4>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div layout="column" flex="30">
+            <md-card md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><md-icon>school</md-icon> {{'school_select' | translate}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-1-line" ng-repeat="school in schools" ng-click="changeSchool(school)">
+                            <div class="md-list-item-text" layout="column">
+                                <h4>{{school.name}}</h4>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        
+        
+        
+    </div>
+    
+    <div ng-view flex layout="column">
+        <ui-view name="content"></ui-view>
+    </div>
+</main>

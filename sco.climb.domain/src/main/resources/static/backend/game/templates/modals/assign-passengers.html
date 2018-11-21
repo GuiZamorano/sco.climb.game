@@ -1,0 +1,23 @@
+<div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-5">
+				<label for="multipleSelect">Scolari</label><br> 
+				<select name="multipleSelect" id="multipleSelect" 
+				ng-options="item as getChildName(item) for item in children track by item.objectId"
+				ng-model="data.childrenSelected" multiple size="10" />
+			</div>
+			<div class="col-md-2">
+				<a class="handle btn-icon btn-standard" ng-click="moveToStop()"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				<br/>
+				<a class="handle btn-icon btn-standard" ng-click="moveFromStop()"><i class="glyphicon glyphicon-chevron-left"></i></a>
+			</div>
+			<div class="col-md-5 right">
+				<label for="multipleSelect">Alla fermata ({{passengers.length}})</label><br> 
+				<select name="stopList" id="stopList" 
+				ng-options="item as getChildName(item) for item in passengers track by item.objectId"
+				ng-model="data.stopSelected" multiple size="10" />
+			</div>
+		</div>
+	</div>
+</div>

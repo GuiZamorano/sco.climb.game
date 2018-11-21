@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'climb';
+  src:  url('climb.eot?1uwokf');
+  src:  url('climb.eot?1uwokf#iefix') format('embedded-opentype'),
+    url('climb.ttf?1uwokf') format('truetype'),
+    url('climb.woff?1uwokf') format('woff'),
+    url('climb.svg?1uwokf#climb') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'climb' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow_down:before {
+  content: "\e900";
+}
+.icon-arrow_left:before {
+  content: "\e901";
+}
+.icon-arrow_right:before {
+  content: "\e902";
+}
+.icon-arrow_up:before {
+  content: "\e903";
+}
+.icon-calendar:before {
+  content: "\e904";
+}
+.icon-close:before {
+  content: "\e905";
+}
+.icon-cloudy_outline:before {
+  content: "\e906";
+}
+.icon-cloudy:before {
+  content: "\e907";
+}
+.icon-colours:before {
+  content: "\e908";
+}
+.icon-delete:before {
+  content: "\e909";
+}
+.icon-edit:before {
+  content: "\e90a";
+}
+.icon-foot:before {
+  content: "\e90b";
+}
+.icon-home:before {
+  content: "\e90c";
+}
+.icon-menu:before {
+  content: "\e90d";
+}
+.icon-notifications:before {
+  content: "\e90e";
+}
+.icon-path:before {
+  content: "\e90f";
+}
+.icon-radio_btn_empty:before {
+  content: "\e910";
+}
+.icon-radio_btn_full:before {
+  content: "\e911";
+}
+.icon-rain_outline:before {
+  content: "\e912";
+}
+.icon-rain:before {
+  content: "\e913";
+}
+.icon-snow_outline:before {
+  content: "\e914";
+}
+.icon-snow:before {
+  content: "\e915";
+}
+.icon-star:before {
+  content: "\e916";
+}
+.icon-statistics:before {
+  content: "\e917";
+}
+.icon-sun_outline:before {
+  content: "\e918";
+}
+.icon-sun:before {
+  content: "\e919";
+}
+.icon-trip:before {
+  content: "\e91a";
+}
+

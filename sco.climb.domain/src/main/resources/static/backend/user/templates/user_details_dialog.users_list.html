@@ -1,0 +1,44 @@
+<md-dialog>
+    <form ng-cloak>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{currentUser.surname}} {{currentUser.name}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon aria-label="{{'close' | translate}}">close</md-icon>
+            </md-button>
+        </div>
+        </md-toolbar>
+    
+        <md-dialog-content>
+            <md-list>
+                <md-list-item class="md-1-line">
+                    <div class="md-list-item-text" layout="column">
+                        {{'user_detail_owner_ids' | translate}}: {{currentUser.ownerIds}}
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line">
+                    <div class="md-list-item-text" layout="column">
+                        {{'user_detail_roles' | translate}}: {{currentUser.roles}}
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line">
+                    <div class="md-list-item-text" layout="column">
+                        {{'user_creation_email' | translate}}: {{currentUser.email}}
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line">
+                    <div class="md-list-item-text" layout="column">
+                        {{'user_creation_cf' | translate}}: {{currentUser.cf}}
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+    
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                {{'close' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

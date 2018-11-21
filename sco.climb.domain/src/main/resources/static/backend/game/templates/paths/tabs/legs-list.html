@@ -1,0 +1,28 @@
+<fieldset class="row" style="min-height:300px" ng-disabled="!PermissionsService.permissionEnabledShowLegs()">
+    <fieldset class="col-lg-12 center field" ng-disabled="!PermissionsService.permissionEnabledEditPath()">
+        <a class="btn btn-info btn-margin" ui-sref="root.path.leg({idLeg: ''})">Crea nuova</a>
+        <a class="btn" ng-class="{'btn-success': enableOrder, 'btn-info': !enableOrder}" ng-click="saveOrder()">{{enableOrder ? 'Conferma ordine' : 'Riordina tappe'}}</a>
+    </fieldset>
+    <div class="col-lg-12">
+        <ul ui-sortable="sortableOptions" ng-model="legs" class="list-group list-categories">
+            <li class="list-group-item" ng-repeat="leg in legs">
+                <div class="row v-center">
+                    <div class="col-md-2">
+                        <img class="path-img" ng-src="{{leg.imageUrl}}" alt="{{leg.name}}">
+                    </div>
+                    <div class="col-md-8">
+                        <h5>{{$index + 1}}. {{leg.name}}</h5>
+                        <h5>Posizione: Lat. {{leg.geocoding[1].toFixed(5)}}, Long. {{leg.geocoding[0].toFixed(5)}}</h5>
+                        <h5>Punteggio: {{leg.score}}</h5>
+                        <h5>Elementi multimediali: {{leg.externalUrls.length}}</h5>
+                    </div>
+                    <div class="col-md-2 right">
+                        <a ng-hide="enableOrder" ui-sref="root.path.leg({idLeg: leg.objectId})" class="btn btn-icon btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a ng-hide="enableOrder" ng-click="remove(leg)" class="btn btn-icon btn-danger" role="button" ng-disabled="(!PermissionsService.permissionEnabledEditLegs()) || ($parent.selectedGame.deployed)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <a ng-show="enableOrder" class="handle btn-icon btn-reorder"><i class="glyphicon glyphicon-align-justify"></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</fieldset>

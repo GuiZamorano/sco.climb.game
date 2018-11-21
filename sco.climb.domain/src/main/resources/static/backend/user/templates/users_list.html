@@ -1,0 +1,51 @@
+<md-input-container class="md-icon-float md-block search-container">
+    <label>{{'search' | translate}}</label>
+    <md-icon>search</md-icon>
+    <input ng-model="searchFilter" type="text" input-clear="black">
+</md-input-container>
+<md-list class="users-list">
+    <md-list-item class="md-3-line" ng-repeat="user in users | filter:searchFilter" ng-click="toggleShowAuths(user)">
+      <div class="md-list-item-text" layout="column">
+        <h3>{{user.surname}} {{user.name}}</h3>
+        <p>{{user.email}}</p>
+        <p>{{'roles' | translate}}: {{user.roleNames}}</p>
+	      <div ng-show="getShowAuths(user)" layout="column">
+	      	<div class="flex" ng-repeat="(key, value) in user.roles | fromMap">
+			      <div layout="row">
+				      <div flex="5">
+					      <md-button class="md-icon-button md-primary" ng-disabled="!isAuthToDelete(user, key)" ng-click="deleteAuth($event, user, key)">
+		        			<md-icon>delete</md-icon>
+		      			</md-button>			      
+				      </div>
+				      <div flex="95">
+				        <h3>Autorizzazione</h3>
+				        <p ng-show="authTextMap[user.objectId][key]['loaded']">{{authTextMap[user.objectId][key]['data']}}</p>
+				        <p ng-show="!authTextMap[user.objectId][key]['loaded']">Attendere...</p>
+				      </div>
+			      </div>
+	      	</div>
+	      </div>
+      </div>
+      <md-button class="md-icon-button md-primary" ng-show="getShowAuths(user)" ng-click="toggleShowAuths(user)">
+        <md-icon>keyboard_arrow_up</md-icon>
+      </md-button>
+      <md-button class="md-icon-button md-primary" ng-show="!getShowAuths(user)" ng-click="toggleShowAuths(user)">
+        <md-icon>keyboard_arrow_down</md-icon>
+      </md-button>
+      <md-button class="md-icon-button md-primary" ui-sref="home.user-role-edit({userEmail:user.email})">
+        <md-icon>person_add</md-icon>
+      </md-button>
+      <md-button class="md-icon-button md-primary" ui-sref="home.user-edit({userEmail:user.email})">
+        <md-icon>mode_edit</md-icon>
+      </md-button>
+      <md-button class="md-icon-button md-primary" ng-show="!roleToShow" ng-click="deleteUser($event, user)">
+        <md-icon>delete</md-icon>
+      </md-button>
+      <!--<md-button class="md-icon-button md-primary" ng-show="roleToShow" ng-click="deleteRole($event, user, roleToShow)">
+        <md-icon>delete</md-icon>
+      </md-button>-->
+    </md-list-item>
+</md-list>
+<div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>

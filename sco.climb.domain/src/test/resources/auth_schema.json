@@ -1,0 +1,17 @@
+{
+	"name": "climb",
+	"nodes": [
+		{
+			"qname": "pedibus",
+			"params": [
+				"ownerId",
+				"instituteId",
+				"schoolId",
+				"routeId",
+				"gameId",
+				"resource"
+			],
+			"childrenQnames": []
+		}
+	]
+}

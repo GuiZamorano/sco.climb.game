@@ -1,0 +1,50 @@
+<div>
+	<div class="modal-body">
+		<div class="row">
+            <form novalidate style="text-align:center;margin-bottom:8px;">    
+                <input type="text" ng-model="$parent.searchtext" ng-change="resetResults()" />
+                <select ng-model="$parent.searchtype">
+                    <option value="all">Tutti</option>
+                    <option value="image">Immagini</option>
+                    <option value="video">Video</option>
+                    <option value="link">Link</option>
+                    <option value="file">File</option>
+                </select>
+                <label><input type="checkbox" ng-model="$parent.searchlocalschool"/> Solo da questa scuola</label>
+                <label>Ricerca nel raggio di </label>
+                <input type="number" min="0" max="999" placeholder="inserisci i Km" ng-model="$parent.searchdistance" />
+                <label> kilometri dalla tappa</label>                
+                <input type="submit" ng-click="searchOnContentRepository()" value="Cerca" class="btn btn-primary btn-sm" />
+            </form>
+        </div>
+        <div class="row"style="overflow: auto;height: 350px;" id="contentList">
+            <ul class="list-group">
+                <li class="list-group-item col-md-12 v-center" dir-paginate="content in contentResults | itemsPerPage:10">
+                    <input type="checkbox" ng-model="content.selectedToAdd" class="col-md-1 multimedia-add-checkbox" ng-change="updateTotalCounter(content.selectedToAdd)">
+                    <div class="col-md-11">
+                        <a href="{{content.link}}" target="_blank" ng-class='content.type == "video" && content.isYoutubeVideo ? "multimedia-yt-video" : ""' style="float:left;margin-right: 8px;margin-bottom: 8px;">
+                            <img class="search-multimedia-image" ng-src="{{content.referenceImg}}">
+                        </a>
+                        <div>
+                            <a href="{{content.link}}" target="_blank">
+                                <h4>{{content.info[0].name}}</h4>
+                            </a>
+                            <p>{{content.info[0].legName}}</p>
+                        </div>
+                    </div>
+                </li>                
+            </ul>
+            <div ng-show="noResults" style="text-align: center;">
+                Nessun risultato corrisponde alla tua ricerca.
+            </div>
+            <div style="width:100%;text-align:center;">
+                <dir-pagination-controls
+                    max-size="5"
+                    direction-links="true"
+                    boundary-links="true"
+                    on-page-change="changePage(newPageNumber, oldPageNumber)" >
+                </dir-pagination-controls>
+            </div>
+        </div>
+	</div>
+</div>

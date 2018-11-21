@@ -1,0 +1,91 @@
+#set( $H = '#' )
+package  eu.trentorise.game.model
+
+import java.util.ArrayList;
+
+import eu.trentorise.game.notification.BadgeNotification;
+import eu.trentorise.game.notification.MessageNotification;
+
+import eu.trentorise.game.core.Utility;
+
+global Utility utils;
+
+global String badge_collection_name;
+global String const_school_name;
+global String final_destination;
+global Double const_leg_bonus;
+global Double const_almost_reached_next_leg;
+
+
+// TRIP LEGS
+#foreach($leg in $legList)
+global Double $Utils.getNormalizeLegName($leg.name)#[[_distance]]#;
+#end
+
+//add leg badge rules
+//only for SCHOOL
+
+#foreach($leg in $legList)
+#if($leg.position > 0)
+rule "R-add-badge $leg.name"
+	salience -1000
+when 
+	PointConcept(name == 'total_distance', score >= $Utils.getNormalizeLegName($leg.name)#[[_distance]]#)
+	$bc : BadgeCollectionConcept(name == badge_collection_name, badgeEarned not contains '$leg.name') 
+	Game($gameId: id)
+	Player( $teamId : id, $teamId == const_school_name, team == true )
+then
+	utils.log("apply 'R-add-badge $leg.name'");
+	#[[$bc.getBadgeEarned().add]]#('$leg.name');
+	insert(new BadgeNotification($gameId, $teamId, $bc.getName(), '$leg.name'));
+	update( $bc );
+end
+#end
+
+#if(${almostReachedMap.get($leg.objectId)})
+rule "R-notify-almost $leg.name"
+    salience -2000
+when 
+    $bc : BadgeCollectionConcept(name == badge_collection_name, badgeEarned not contains '$leg.name') 
+    PointConcept(name == 'total_distance', 
+        score > $Utils.getNormalizeLegName($leg.name)#[[_distance]]# - const_almost_reached_next_leg && const_almost_reached_next_leg < $Utils.getNormalizeLegName($leg.name)#[[_distance]]#)
+    $cd: CustomData($almost : this["almost_reached_legs"] == null || !((ArrayList)$almost).contains("$leg.name")) 
+    Game( $gameId: id)
+    Player( $teamId : id, $teamId == const_school_name, team == true )
+then
+    utils.log("apply \'R-notify-almost $leg.name\'");
+    ArrayList hs = (ArrayList)$almost;
+    if (hs==null) { 
+        hs = new ArrayList();
+        $cd.put("almost_reached_legs", hs);
+    }
+    hs.add("$leg.name");
+    
+    MessageNotification message = new MessageNotification($gameId,$teamId, 'AlmostReachedLeg');
+    message.addData("_leg_", "$leg.name");
+    insert(message);
+end
+
+#end
+#end
+
+rule "R-GAME-END"
+//special END-OF-GAME MessageNotification for SCHOOL
+// minimal salience to guarantee the MessageNotification is the last seen
+salience -10000
+when
+	BadgeCollectionConcept(name == badge_collection_name, badgeEarned contains '$params.final_destination')
+#[[
+	Game($gameId: id)
+	Player( $teamId : id, $teamId == const_school_name, team == true )
+	$cd : CustomData()
+	$tot_dist : PointConcept(name == 'total_distance')
+then
+	utils.log("apply 'R-GAME-END'");
+	$cd.put("game_finished", new Boolean(true));
+	MessageNotification message = new MessageNotification($gameId, $teamId, 'GameFinished');
+	message.addData("_totalKm_", $tot_dist.getScore());
+  message.addData("_finalDestination_", final_destination);
+  insert(message);
+end
+]]#

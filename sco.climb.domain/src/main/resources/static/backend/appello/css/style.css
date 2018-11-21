@@ -1,0 +1,180 @@
+.google-map-container {
+    height: 750px;
+    width: 100%; 
+}
+
+.navbar-inverse {
+	background-color: #438699;
+	border-color: #438699;
+}
+
+.navbar-inverse .navbar-brand {
+	background-color: #438699;
+	color: white;
+}
+
+.navbar-inverse .navbar-brand:hover {
+	color: black;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color:white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+	color:black;
+}
+
+.navbar-inverse .navbar-nav>.active>a {
+	background-color: #438699;
+	color: black;
+}
+.navbar-inverse .navbar-nav>.active>a:hover {
+	background-color: #438699;
+	color: black;
+}
+
+.navbar-inverse .navbar-nav>.active>a:focus {
+	background-color: #438699;
+}
+
+.navbar-inverse .navbar-nav>.open>a {
+	background-color: #438699;
+	color: black;
+}
+
+.navbar-inverse .navbar-nav>.open>a:hover {
+	background-color: #438699;
+	color: black;
+}
+
+.navbar-inverse .navbar-nav>.open>a:focus {
+	background-color: #438699;
+}
+
+.dropdown-menu>.active>a {
+	background-color: #438699;
+}
+
+.ac-container .ac-menu {
+	z-index: 2150000000 !important;
+}
+
+.ui-autocomplete {
+	background-color: white;
+	width: 300px;
+	border: 1px solid lightgrey;
+	list-style-type: none;
+	padding-left: 0px;
+	z-index: 2150000000 !important;
+}
+
+.ui-menu-item.ui-state-focus {
+	background-color: lightgrey;
+}
+
+.list-title {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.list-create {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.row.list-search {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.row.list-row {
+	border-bottom: 1px solid lightgrey;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+.row.list-header {
+	text-transform: uppercase;
+	border-bottom-color: #438699;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	text-align: center;
+}
+
+.list-header h4 {
+	font-weight: bold;
+}
+
+.row.list-header-timetable {
+	text-transform: uppercase;
+	border-bottom-color: #F15A24;
+	border-bottom-style: solid;
+	border-bottom-width: 3px;
+	text-align: center;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.list-header-timetable h4 {
+	font-weight: bold;
+}
+
+.modal.modal-wide .modal-dialog {
+  width: 95%;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+#divTimetable {
+	overflow: scroll;
+}
+
+.typeahead.active {
+	background-color: lightgrey;
+}
+
+.color-picker {
+	display: inline-block;
+	width: 2em;
+	height: 1em;
+	vertical-align: middle;
+	border: black;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.modal-header.create {
+	background-color: #438699;
+	color: white;
+	font-weight: bold;
+}
+
+.modal-header.edit {
+	background-color: #337AB7;
+	color: white;
+	font-weight: bold;
+}
+
+.modal-header.view {
+	background-color: #5BC0DE;
+	color: white;
+	font-weight: bold;
+}
+
+.modal-header.timetable {
+	background-color: #F0AD4E;
+	color: white;
+	font-weight: bold;
+}
+
+.modal-footer {
+	text-align: left;
+}
+
+.ui-datepicker-trigger {
+	background-color: #438699;
+}

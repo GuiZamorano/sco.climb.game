@@ -1,0 +1,19 @@
+<md-nav-bar md-selected-nav-item="currentUsersListTab">
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'all'})" name="all-list-tab">{{'user_list_all' | translate}}</md-nav-item>
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'owner'})" name="owner-list-tab">{{'user_list_owner' | translate}}</md-nav-item>
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'school-owner'})" name="school-owner-list-tab">{{'user_list_school' | translate}}</md-nav-item>
+  <!-- <md-nav-item md-nav-sref="home.users-lists.list({role:'childrenedit'})" name="owner-list-tab">{{'user_list_childrenedit' | translate}}</md-nav-item> -->
+  <!-- <md-nav-item md-nav-sref="home.users-lists.list({role:'parent'})" name="parent-list-tab">{{'user_list_parent' | translate}}</md-nav-item> -->
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'teacher'})" name="teacher-list-tab">{{'user_list_teacher' | translate}}</md-nav-item>
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'game-editor'})" name="game-editor-list-tab">{{'user_list_editor' | translate}}</md-nav-item>
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'volunteer'})" name="volunteer-list-tab">{{'user_list_volunteer' | translate}}</md-nav-item>
+  <md-nav-item md-nav-sref="home.users-lists.list({role:'norole'})" name="norole-list-tab">{{'user_list_norole' | translate}}</md-nav-item>
+</md-nav-bar>
+<ui-view name="user-list" style="height: 100%;"></ui-view>
+<md-fab-speed-dial md-direction="up" class="md-fab-bottom-right">
+  <md-fab-trigger>
+    <md-button aria-label="{{'add' | translate}}" class="md-fab md-warn" ng-click="newUser()">
+      <md-icon>add</md-icon>
+    </md-button>
+  </md-fab-trigger>
+</md-fab-speed-dial>

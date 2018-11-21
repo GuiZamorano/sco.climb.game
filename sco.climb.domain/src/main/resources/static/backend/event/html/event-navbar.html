@@ -1,0 +1,36 @@
+
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#navBar">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="console">CLIMB Console</a>
+		</div>
+		<div class="collapse navbar-collapse" id="navBar">
+			<ul class="nav navbar-nav">
+				<li class="dropdown" data-ng-class="{'active':selectedMenu == 'ricerca'}">
+					<a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Ricerca <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li id="menu-search-table" data-ng-class="{'active':selectedTab == 'menu-search-table'}"
+							data-ng-click="selectedTab = 'menu-search-table'"><a href="event-search-table.html">Tabella</a>
+						</li>
+						<li id="menu-search-map" data-ng-class="{'active':selectedTab == 'menu-search-map'}"
+							data-ng-click="selectedTab = 'menu-search-map'"><a href="event-search-map.html">Mappa</a>
+						</li>
+						<li id="menu-check-nodes" data-ng-class="{'active':selectedTab == 'menu-check-nodes'}"
+							data-ng-click="selectedTab = 'menu-check-nodes'"><a href="event-check-nodes.html">Check</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{profile.name}} {{profile.surname}}</a></li>
+        <li><a href="#" data-ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+     	</ul>
+		</div>
+	</div>
+</nav>

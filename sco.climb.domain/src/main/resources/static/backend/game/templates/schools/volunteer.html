@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-8 header-path-category">
+        <h4 ng-show="isNewVolunteer()">CREA NUOVO VOLONTARIO</h4>
+        <h4 ng-hide="isNewVolunteer()">MODIFICA VOLONTARIO: {{selectedVolunteer.name}}</h4>
+        <p>I campi contrassegnati col simbolo <span class="required-sign">*</span> sono obbligatori</p>
+    </div>
+
+    <div class="col-md-4 right">
+        <a ng-click="save()" class="btn btn-save btn-margin" role="button">Salva volontario</a>
+        <a ng-click="back()" class="btn btn-danger" role="button">Annulla</a>
+    </div>
+
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Nome:</b></p>
+        <input class="form-control" type="text" ng-model="selectedVolunteer.name" ng-required="true"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Indirizzo:</b></p>
+        <input class="form-control" type="text" ng-model="selectedVolunteer.address"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Telefono:</b></p>
+        <input class="form-control" type="text" ng-model="selectedVolunteer.phone"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Codice Fiscale:</b></p>
+        <input class="form-control" type="text" ng-model="selectedVolunteer.cf"/>
+    </div>
+    
+    <div class="col-lg-12 field">
+        <p><b>Dispositivo WSN:</b></p>
+        <input class="form-control" type="text" ng-model="selectedVolunteer.wsnId"/>
+    </div>  
+</div>

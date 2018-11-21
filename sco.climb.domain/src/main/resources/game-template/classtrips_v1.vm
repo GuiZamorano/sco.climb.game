@@ -1,0 +1,65 @@
+#[[
+package eu.trentorise.game.model
+
+import eu.trentorise.game.core.Utility;
+
+global Utility utils;
+
+
+rule "class trip update"
+when
+    Action(id == "ClassWalkTrip")
+    Player($playerId : id, team == true) // this actions is valid only for classes/teams
+    InputData( $distance : data["class-distance"] != null, 
+    	$num : data["participants"]!= null, $meteo : data["meteo"] != null, $date : data["school-date"] != null )
+    $tot_dist : PointConcept(name == "total_distance")
+    $mode_dist : PointConcept(name == "zeroImpact_wAdult_distance")
+    $bonus_dist : PointConcept(name == "bonus_distance")
+    $trips : PointConcept(name == "group_trips")
+then
+	utils.log("apply class trip with " + $num + " participants");
+	Double meteoBonus = getMeteoBonus((String)$meteo);
+	if (meteoBonus > 0d) {
+		meteoBonus = meteoBonus * (Double)$num;
+		$bonus_dist.setScore($bonus_dist.getScore() + meteoBonus);
+	}
+	Double tripDistance = (Double)$num * (Double)$distance + meteoBonus;
+	$mode_dist.setScore($mode_dist.getScore() + tripDistance);
+	$trips.setScore($trips.getScore() + (Double)$num);
+	$tot_dist.setScore($tot_dist.getScore() + tripDistance);
+
+    update($mode_dist);
+    update($tot_dist);
+    update($bonus_dist);
+    update($trips);
+    insert(new UpdateTeams());	
+end
+
+rule "class trip propagation"
+when
+    Member( $distance : inputData["class-distance"] != null, 
+    	$num : inputData["participants"]!= null, $meteo : inputData["meteo"] != null, $date : inputData["school-date"] != null )
+    Player($playerId : id, team == true)
+    $tot_dist : PointConcept(name == "total_distance")
+    $mode_dist : PointConcept(name == "zeroImpact_wAdult_distance")
+    $bonus_dist : PointConcept(name == "bonus_distance")
+    $trips : PointConcept(name == "group_trips")
+then
+	utils.log("apply class trip with " + $num + " participants update propagation");
+Double meteoBonus = getMeteoBonus((String)$meteo);
+	if (meteoBonus > 0d) {
+		meteoBonus = meteoBonus * (Double)$num;
+		$bonus_dist.setScore($bonus_dist.getScore() + meteoBonus);
+	}	
+	Double tripDistance = (Double)$num * (Double)$distance + meteoBonus;
+	$mode_dist.setScore($mode_dist.getScore() + tripDistance);
+	$tot_dist.setScore($tot_dist.getScore() + tripDistance);
+	$trips.setScore($trips.getScore() + (Double)$num);
+
+    update($mode_dist);
+    update($tot_dist);
+    update($bonus_dist);
+    update($trips);
+    insert(new UpdateTeams());
+end
+]]#

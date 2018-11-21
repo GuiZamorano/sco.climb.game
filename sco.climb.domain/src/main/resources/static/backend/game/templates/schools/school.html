@@ -1,0 +1,53 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8 header-path-category">
+            <h4 ng-if="isNewSchool()">CREA NUOVA SCUOLA</h4>
+            <h4 ng-if="!isNewSchool()">MODIFICA SCUOLA: {{getSchoolName()}}</h4>
+            <p>I campi contrassegnati col simbolo <span class="required-sign">*</span> sono obbligatori</p>
+        </div>
+    </div>
+    
+    <fieldset class= "row" ng-disabled="!PermissionsService.permissionEnabledEditSchool()">
+    	<div class="col-md-12 import-panel">
+    		<div>Importazione dati scuola</div>
+            <input type="file" id="upload-file" name="file" style="display:inline-block;"/>
+            <label><input type="checkbox" ng-model="uploadFileOnlyChilds"/>Importa solo i bambini</label>
+    		
+    		<input type="button" ng-click="uploadFile(uploadFileOnlyChilds)" value="Importa" />
+        </div>
+        <div class="import-errors-list col-md-12" ng-show="importErrors">
+            Errori importazione:
+            <table class="table table-striped header-fixed">
+                <thead>
+                    <tr>
+                        <th>Foglio</th>
+                        <th>Riga</th>
+                        <th>Errore</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="error in importErrors">
+                        <td>{{error.sheet}}</td>
+                        <td>{{error.row}}</td>
+                        <td>{{error.error}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>        
+    </fieldset>
+
+    <div class="row">
+        <!-- Menu tab -->
+        <div class="col-md-2 tabs-menu">
+            <a ng-class="{'active-tab':selectedTab == 'info'}" ui-sref="root.school.info">DETTAGLI</a>
+            <a ng-class="{'active-tab':selectedTab == 'lines-list'}" ui-sref="root.school.lines-list">LINEE PEDIBUS</a>
+            <a ng-class="{'active-tab':selectedTab == 'children-list'}" ui-sref="root.school.children-list">SCOLARI</a>
+            <a ng-class="{'active-tab':selectedTab == 'volunteer-list'}" ui-sref="root.school.volunteer-list">VOLONTARI</a>
+        </div>
+
+        <!-- Tabs container -->
+        <div class="col-md-10 tabs-container">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

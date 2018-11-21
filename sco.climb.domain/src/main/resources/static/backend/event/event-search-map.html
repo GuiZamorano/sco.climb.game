@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CLIMB Console</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<script src="lib/jqueryui/external/jquery/jquery.js"></script>
+	<script src="lib/jqueryui/jquery-ui.min.js"></script>
+	<script src="lib/jqueryui/jquery-ui-datepicker-it.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-sanitize.min.js"></script>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmKVWmFzh2JHT7q1MLmQRQ7jC4AhkRBDs&v=3"></script>
+	<script src="lib/ng-map.min.js"></script>
+	<script src="lib/spin.min.js"></script>
+	<script src="lib/moment.min.js"></script>
+	<script src="lib/clipboard.min.js"></script>
+	<script src="lib/ngclipboard.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="lib/jqueryui/jquery-ui.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="lib/images/CLIMB_icona.png" type="image/x-icon" />
+</head>
+<body data-ng-app="search-table" data-ng-controller="userCtrl">
+	<div data-ng-include="'html/event-navbar.html'"></div>
+
+	<div class="container-fluid" id="spin">
+
+		<div class="list-title">
+			<h4>Ricerca EVENTI</h4>
+		</div>
+
+			<div id="error" class="alert alert-danger fade in" data-ng-show="error">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetError()">&times;</a>
+				{{errorMsg}}
+			</div>
+
+			<div id="ok" class="alert alert-success fade in" data-ng-show="ok">
+				<a href="#" class="close" data-hide="alert" aria-label="close"
+				data-ng-click="resetOk()">&times;</a>
+				{{okMsg}}
+			</div>
+
+			<div id="divForm" class="" role="dialog">
+	     	<p class="text-danger pull-right">I campi contrassegnati con il simbolo
+	     	<span class="glyphicon glyphicon-asterisk"></span> sono obbligatori</p>
+				<form role="form" name="newSearch">
+				  <div class="row form-group">
+				    <label class="col-md-1 control-label">Dominio:</label>
+				    <div class="col-md-2">
+					    <select id="owner" class="form-control" data-ng-model="selectedOwner" 
+					     data-ng-options="item for item in ownerList" data-ng-change="changeOwner()">
+	     				</select>
+				    </div>
+				    <span class="text-danger glyphicon glyphicon-asterisk"></span>
+				  </div>
+				  <div class="row form-group">
+				    <label class="col-md-1 control-label">Istituzione:</label>
+				    <div class="col-md-2">
+					    <select id="institute" class="form-control" data-ng-model="selectedInstitute" 
+					     data-ng-options="item.name for item in instituteList" data-ng-change="changeInstitute()">
+	     				</select>
+				    </div>
+				    <span class="text-danger glyphicon glyphicon-asterisk"></span>
+				  </div>
+				  <div class="row form-group">
+				    <label class="col-md-1 control-label">Scuola:</label>
+				    <div class="col-md-2">
+					    <select id="school" class="form-control" data-ng-model="selectedSchool" 
+					     data-ng-options="item.name for item in schoolList" data-ng-change="changeSchool()">
+	     				</select>
+				    </div>
+				    <span class="text-danger glyphicon glyphicon-asterisk"></span>
+				  </div>
+				  <div class="row form-group">
+				    <label class="col-md-1 control-label">Corsa Pedibus:</label>
+				    <div class="col-md-2">
+					    <select id="route" class="form-control" data-ng-model="selectedRoute" 
+					    data-ng-options="getRouteName(item) for item in routeList">
+	     				</select>
+				    </div>
+				    <span class="text-danger glyphicon glyphicon-asterisk"></span>
+				  </div>
+				  <div class="row form-group">
+				    <label class="col-md-1 control-label">Tipo Evento:</label>
+				    <div class="col-md-2">
+					    <select id="eventType" class="form-control" data-ng-model="fEventType"
+					    data-ng-options="item.value as item.name for item in eventTypeList">
+	     				</select>
+				    </div>
+				    <span class="text-danger glyphicon glyphicon-asterisk"></span>
+				  </div>
+					<div class="row form-group">
+						<label class="col-md-1 control-label">Dal giorno:</label>
+	        	<div class="col-md-2">
+	        		<input type="text" name="dateFrom" data-ng-model="fDateFrom" required datepicker data-showon="both"
+	        		data-dateformat="yy-mm-dd" placeholder="da" />
+	        		<span class="text-danger glyphicon glyphicon-asterisk"></span>
+	        	</div>
+        		<label class="col-md-1 control-label">Ora (HH:MM:SS):</label>
+        		<div class="col-md-1">
+        			<input type="text" name="hourFrom" data-ng-model="fHourFrom" placeholder="HH:MM:SS"
+        			data-ng-pattern="/^([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/">
+        			<span class="label label-warning" data-ng-show="!newSearch.hourFrom.$valid">Verifica il campo</span>
+        		</div>
+					</div>
+					<div class="row form-group">
+						<label class="col-md-1 control-label">Al giorno:</label>
+	        	<div class="col-md-2">
+	        		<input type="text" name="dateTo" data-ng-model="fDateTo" required datepicker data-showon="both"
+	        		data-dateformat="yy-mm-dd" placeholder="da" />
+	        		<span class="text-danger glyphicon glyphicon-asterisk"></span>
+	        	</div>
+        		<label class="col-md-1 control-label">Ora (HH:MM:SS):</label>
+        		<div class="col-md-1">
+        			<input type="text" name="hourTo" data-ng-model="fHourTo" placeholder="HH:MM:SS"
+        			data-ng-pattern="/^([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/">
+        			<span class="label label-warning" data-ng-show="!newSearch.hourTo.$valid">Verifica il campo</span>
+        		</div>
+					</div>
+				</form>
+	  		<button class="btn btn-primary" data-ng-click="searchItem()"
+	  			data-ng-disabled="incomplete">
+	  			<span class="glyphicon glyphicon-search"></span> Cerca
+	  		</button>
+			</div>
+
+		<hr />
+		
+		<div class="row list-search">
+			<div class="col-md-2">
+				<span class="glyphicon glyphicon-eye-open"></span>
+				<label control-label">Filtra:</label>
+				<input type="text" data-ng-model="search">
+			</div>
+			<label class="col-md-1 control-label">[{{getResponseSize()}}]</label>
+		</div>
+		
+		<hr />
+		
+		<div class="row">
+			<div class="col-md-12">
+				<div data-my-map class="google-map-container"></div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src = "js/services.js"></script>
+	<script src = "js/search-map.js"></script>
+
+	<script type='text/javascript'>
+	var opts = {
+		  lines: 11 // The number of lines to draw
+		, length: 21 // The length of each line
+		, width: 11 // The line thickness
+		, radius: 41 // The radius of the inner circle
+		, scale: 1 // Scales overall size of the spinner
+		, corners: 1 // Corner roundness (0..1)
+		, color: '#000' // #rgb or #rrggbb or array of colors
+		, opacity: 0.25 // Opacity of the lines
+		, rotate: 0 // The rotation offset
+		, direction: 1 // 1: clockwise, -1: counterclockwise
+		, speed: 1.1 // Rounds per second
+		, trail: 50 // Afterglow percentage
+		, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+		, zIndex: 2e9 // The z-index (defaults to 2000000000)
+		, className: 'spinner' // The CSS class to assign to the spinner
+		, top: '50%' // Top position relative to parent
+		, left: '50%' // Left position relative to parent
+		, shadow: false // Whether to render a shadow
+		, hwaccel: false // Whether to use hardware acceleration
+		, position: 'absolute' // Element positioning
+		}
+	var spinTarget = document.getElementById('spin')
+	var spinner = new Spinner(opts);
+	</script>
+</body>
+</html>

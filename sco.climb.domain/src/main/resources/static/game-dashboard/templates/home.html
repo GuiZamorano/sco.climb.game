@@ -1,0 +1,82 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2 menu-colors" md-component-id="leftMenu">
+  <md-toolbar layout="row">
+    <div class="md-toolbar-tools menu-colors">
+      <div class="menu-header">
+        <img src="./img/logo_header.png">
+      </div>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+        <md-tooltip>Close Side Panel</md-tooltip>
+        <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding class="menu-colors">
+    <md-list>
+      <md-list-item ng-click="go('home.class')" ng-class="{'menu-selected' : isCurrentState('home.class')}">
+        <md-icon class="material-icons menu-colors icon-calendar"></md-icon>
+        <p>{{'menu_class' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="go('home.map')" ng-class="{'menu-selected' : isCurrentState('home.map')}">
+        <md-icon class="material-icons menu-colors icon-path"></md-icon>
+        <p>{{'menu_map' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="go('home.excursions')" ng-class="{'menu-selected' : isCurrentState('home.excursions')}">
+        <md-icon class="material-icons menu-colors icon-trip"></md-icon>
+        <p>{{'menu_excursions' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="go('home.notifications')" ng-class="{'menu-selected' : isCurrentState('home.notifications')}">
+        <md-icon class="material-icons menu-colors icon-notifications"></md-icon>
+
+        <p>{{'menu_notifications' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="go('home.stats')" ng-class="{'menu-selected' : isCurrentState('home.stats')}">
+        <md-icon class="material-icons menu-colors">&#xE24B;</md-icon>
+        <p>{{'menu_stats' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="changeInstitute()" ng-show="showChangeOption('institute')">
+        <md-icon class="material-icons menu-colors">&#xE627;</md-icon>
+        <p>{{'menu_change_institute' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="changeSchool()" ng-show="showChangeOption('school')">
+        <md-icon class="material-icons menu-colors">&#xE627;</md-icon>
+        <p>{{'menu_change_school' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="changeGame()" ng-show="showChangeOption('game')">
+        <md-icon class="material-icons menu-colors">&#xE627;</md-icon>
+        <p>{{'menu_change_game' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="changeItinerary()" ng-show="showChangeOption('itinerary')">
+        <md-icon class="material-icons menu-colors">&#xE627;</md-icon>
+        <p>{{'menu_change_itinerary' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="changeClass()" ng-show="showChangeOption('class')">
+        <md-icon class="material-icons menu-colors">&#xE627;</md-icon>
+        <p>{{'menu_change_class' | translate}}</p>
+      </md-list-item>
+      <md-list-item ng-click="logout()">
+        <md-icon class="material-icons menu-colors">&#xE853;</md-icon>
+        <p>{{'menu_logout' | translate}}</p>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-sidenav>
+<md-toolbar class="desktop bar-colors">
+  <div class="md-toolbar-tools bar-colors">
+    <md-button class="md-icon-button bar-colors" aria-label="Side Panel" ng-click="openSideNavPanel()">
+      <md-tooltip>Menu</md-tooltip>
+      <md-icon class="material-icons bar-colors">&#xE5D2;</md-icon>
+    </md-button>
+    <md-button class="md-raised md-primary" aria-label="Language Button" ng-click="translatePage()"> Translate Page </md-button>
+    <h2> <span>{{title}}</span>
+    </h2>
+    <div class="bar-logo">
+      <img src="./img/logo_header.png">
+    </div>
+  </div>
+</md-toolbar>
+<main layout="row" flex>
+  <md-content flex>
+    <ui-view name="content"></ui-view>
+  </md-content>
+</main>

@@ -1,0 +1,108 @@
+#[[
+package eu.trentorise.game.model
+
+import eu.trentorise.game.notification.MessageNotification;
+import eu.trentorise.game.core.Utility;
+
+global Utility utils;
+global String const_school_name;
+global Double const_NoCarDayClass_bonus;
+global Double const_ZeroImpactDayClass_bonus;
+
+rule "Zero Impact and No Car Day Notification"
+// END-OF-DAY notification (and bonus)
+// in case  a CLASS comes to school with every child (except absent ones)
+// using zero-impact modes
+salience -1000
+when
+	Action(id == "PlayerCalendarTrip") //evaluate only when calendar data are sent
+	Game($gameId: id)
+	Player($teamId : id, $teamId != const_school_name, team == true, $class_size : totalMembers)
+	PointConcept(name == "car_trips", $car_today :getPeriodCurrentScore("daily"))
+	$part : PointConcept(name == "participation_count", $today : getPeriodCurrentScore("daily"),
+		((Double)$today).intValue() == ((Integer)$class_size).intValue() )
+	$absent: PointConcept(name == "absence_count")
+	$zst : PointConcept(name == "zeroImpact_solo_trips")
+	$zat : PointConcept(name == "zeroImpact_wAdult_trips")
+	$pt : PointConcept(name == "pedibus_trips")
+	$bonus_dist : PointConcept(name == "bonus_distance")
+	$tot_dist : PointConcept(name == "total_distance")
+	$id : InputData()
+then
+	if (((Double)$car_today).intValue() == 0) { // here we know that NO car trips happened today
+		MessageNotification message;
+		Double validTrips = $zst.getPeriodCurrentScore("daily") 
+			+ $zat.getPeriodCurrentScore("daily")
+			+ $pt.getPeriodCurrentScore("daily");
+		int present = ((Integer)$class_size).intValue() - $absent.getPeriodCurrentScore("daily").intValue();
+		if (validTrips == present) { // it is a ZERO IMPACT day for this class
+			utils.log("apply \' Zero Impact Day Notification \' to class: " + (String)$teamId);
+			message = new MessageNotification($gameId, $teamId, "ZeroImpactDayClass");	
+			$bonus_dist.setScore($bonus_dist.getScore() + const_ZeroImpactDayClass_bonus);
+			$tot_dist.setScore($tot_dist.getScore() + const_ZeroImpactDayClass_bonus);
+			message.addData("_bonus_", const_ZeroImpactDayClass_bonus);
+			$id.getData().put("bonusScore", const_ZeroImpactDayClass_bonus);
+			update($bonus_dist);
+			update($tot_dist);
+			insert(message);
+			insert(new UpdateTeams("ZeroImpactDay"));
+		} 
+		else { //it is only a NO CAR day for this class
+			utils.log("apply \'No Car Day Notification \' to class: " + (String)$teamId);
+			message = new MessageNotification($gameId, $teamId, "NoCarDayClass");
+			$bonus_dist.setScore($bonus_dist.getScore() +  const_NoCarDayClass_bonus);
+			$tot_dist.setScore($tot_dist.getScore() +  const_NoCarDayClass_bonus);
+			message.addData("_bonus_",  const_NoCarDayClass_bonus);
+			$id.getData().put("bonusScore", const_NoCarDayClass_bonus);
+			update($bonus_dist);
+			update($tot_dist);
+			insert(message);
+			insert(new UpdateTeams("NoCarDay"));
+		}
+	}
+end
+
+rule "Zero Impact Day propagation"
+// includes setting of counter of No-Car classs for the day
+salience -1000
+when
+	Propagation(action == "ZeroImpactDay")
+	Member($bonusScore : inputData["bonusScore"])
+	Player($teamId : id, team == true) // only works with teams
+	$ncc : PointConcept(name == "no_car_classes")
+	$bonus_dist : PointConcept(name == "bonus_distance")
+	$tot_dist : PointConcept(name == "total_distance")
+then
+	utils.log("apply \' Zero Impact Day propagation \' ");
+	$bonus_dist.setScore($bonus_dist.getScore() + (Double)$bonusScore);
+	$tot_dist.setScore($tot_dist.getScore() + (Double)$bonusScore);
+	update($bonus_dist);
+	update($tot_dist);
+	if (((String)$teamId).equals(const_school_name)) {
+		$ncc.setScore($ncc.getScore() +1d);
+		update($ncc);
+	}
+end
+
+rule "No Car Day propagation"
+// includes setting of counter of No-Car class for the day
+salience -1000
+when
+	Propagation(action == "NoCarDay")
+	Member($bonusScore : inputData["bonusScore"])
+	Player($teamId : id, team == true) // only works with teams
+	$ncc : PointConcept(name == "no_car_classes")
+	$bonus_dist : PointConcept(name == "bonus_distance")
+	$tot_dist : PointConcept(name == "total_distance")
+then
+	utils.log("apply \' No Car Day propagation \' ");
+	$bonus_dist.setScore($bonus_dist.getScore() + (Double)$bonusScore);
+	$tot_dist.setScore($tot_dist.getScore() + (Double)$bonusScore);
+	update($bonus_dist);
+	update($tot_dist);
+	if (((String)$teamId).equals(const_school_name)) {
+		$ncc.setScore($ncc.getScore() +1d);
+		update($ncc);
+	}
+end
+]]#

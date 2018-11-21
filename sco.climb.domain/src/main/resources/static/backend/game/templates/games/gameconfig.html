@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-8 header-path-category">
+        <h4>SCEGLI IL TEMPLATE DI CONFIGURAZIONE DEL GIOCO</h4>
+    </div>
+</div>
+
+<div class="row" ng-disabled="!PermissionsService.permissionEnabledEditGame()">
+    <div class="col-md-12 right">
+        <a ng-click="back()" class="btn btn-danger" role="button">Indietro</a>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <ul style="text-align: justify;">
+            <li class="list-group-item" ng-repeat="template in configs">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>{{template.name}}</h4>
+                    </div>
+                    <div class="col-md-2 right" ng-if="template.version">
+                        <h5>Versione: {{template.version}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6>{{template.description}}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 right">
+                        <a ng-click="setTemplate($index)" class="btn btn-success" role="button" ng-disabled="template.saved">Scegli</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </div>

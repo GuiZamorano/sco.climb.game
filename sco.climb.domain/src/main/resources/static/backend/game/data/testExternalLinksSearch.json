@@ -1,0 +1,40 @@
+[
+    {
+        "link": "https://i.imgur.com/wMsecHa.jpg",
+        "type": "image",
+        "info": [
+            {
+                "name": "Pinocchio",
+                "geocoding": [10.50, 40.00],
+                "tags":[]
+            }
+        ]
+    },
+    {
+        "link": "https://www.google.it/maps/uv?hl=it&pb=!1s0x132a7fd9d3bd2705:0xef9d88bdb8db7c7e!2m22!2m2!1i80!2i80!3m1!2i20!16m16!1b1!2m2!1m1!1e1!2m2!1m1!1e3!2m2!1m1!1e5!2m2!1m1!1e4!2m2!1m1!1e6!3m1!7e115!4shttps://picasaweb.google.com/lh/sredir?uname%3D100268025605026398910%26id%3D6458907811607513474%26target%3DPHOTO!5spescia+pinocchio+-+Cerca+con+Google&imagekey=!1e3!2s-6w4AQ4X-I_E/WaKmbxPciYI/AAAAAAAAAZk/HdRn_tlsBMEN81cshMYAtisfrBTgd3IRACLIBGAYYCw&sa=X&ved=0ahUKEwib78PmgsHXAhWCJlAKHdm-DD0QoioIgwEwDw",
+        "type": "link",
+        "info": [
+            {
+                "name": "La bottega di Geppetto",
+                "geocoding": [10.50, 40.00],
+                "tags":[]
+            },
+            {
+                "name": "La fabbrica di Geppetto",
+                "geocoding": [10.50, 40.00],
+                "tags":[]
+            }    
+        ]
+    },
+    {
+        "link": "https://www.youtube.com/watch?v=CwqeaV3PCHs",
+        "type": "video",
+        "info": [
+            {
+                "name": "La storia di Pinocchio",
+                "geocoding": [10.50, 40.00],
+                "tags":[]
+            }    
+        ]
+    }
+]

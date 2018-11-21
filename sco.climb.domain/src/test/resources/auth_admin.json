@@ -1,0 +1,55 @@
+{
+	"subject": {
+		"accountAttribute": {
+			"accountName": "climb",
+			"attributeName": "email",
+			"attributeValue": "smartcommunitytester@gmail.com"
+		},
+		"type": "user"
+	},
+	"entity": {
+		"accountAttribute": {
+			"accountName": "climb",
+			"attributeName": "email",
+			"attributeValue": "smartcommunitytester@gmail.com"
+		},
+		"type": "user"
+	},
+	"action": ["READ", "ADD", "UPDATE", "DELETE"],
+	"resource": {
+		"qnameRef": "pedibus",
+		"values": 
+		[
+			{
+				"qname": "pedibus",
+				"name": "ownerId",
+				"value": "*"
+			},
+			{
+				"qname": "pedibus",
+				"name": "instituteId",
+				"value": "*"
+			},
+			{
+				"qname": "pedibus",
+				"name": "schoolId",
+				"value": "*"
+			},
+			{
+				"qname": "pedibus",
+				"name": "routeId",
+				"value": "*"
+			},
+			{
+				"qname": "pedibus",
+				"name": "gameId",
+				"value": "*"
+			},
+			{
+				"qname": "pedibus",
+				"name": "resource",
+				"value": "*"
+			}
+		]
+	}
+}

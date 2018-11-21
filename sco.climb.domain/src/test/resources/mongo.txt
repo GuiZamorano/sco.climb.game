@@ -1,0 +1,7 @@
+db.getCollection('wsnEvent').createIndex( { eventType: 1 } )
+db.getCollection('wsnEvent').createIndex( { wsnNodeId: 1 } )
+db.getCollection('wsnEvent').createIndex( { timestamp: 1 } )
+
+db.getCollection('wsnEvent').find({"ownerId" : "MEANO" , "routeId" : "5187f1cf-a6f0-4e4a-a025-cb2fe52a1061" , "eventType" : { "$in" : [ 401 ]} , "wsnNodeId" : { "$in" : [ 1 ]} , 
+"$and" : [ { "timestamp" : { "$lte" : ISODate("2016-03-10T11:15:00.000Z")}} , { "timestamp" : { "$gte" : ISODate("2016-03-10T10:15:00.000Z")}}]})
+.sort({timestamp:1}).explain()

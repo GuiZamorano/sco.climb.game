@@ -1,0 +1,152 @@
+[
+    {
+        "id": "1",
+        "version": "1.0",
+        "name": "Senza pedibus",
+        "description": "La descr senza pedibus",
+        "params": {
+            "template": [
+            ],
+            "groups": [
+                {
+                    "groupname": "Impostazioni globali",
+                    "fields": [
+                        {
+                            "label": "Costante 1",
+                            "type": "text",
+                            "defaultValue": "helloWorld",
+                            "name": "placeholder1",
+                            "value": ""
+                        },
+                        {
+                            "label": "Costante 2",
+                            "type": "number",
+                            "defaultValue": "121",
+                            "name": "placeholder2",
+                            "value": ""
+                        }
+                    ]
+                },
+                {
+                    "groupname": "Impostazioni secondarie",
+                    "fields": [
+                        {
+                            "label": "Costante 3",
+                            "type": "number",
+                            "defaultValue": "989",
+                            "name": "placeholder3",
+                            "value": ""
+                        },
+                        {
+                            "label": "Costante 4",
+                            "type": "text",
+                            "defaultValue": "OP3T",
+                            "name": "placeholder2",
+                            "value": ""
+                        }
+                    ]
+                }        
+            ]
+        }
+    },
+    {
+        "id": "2",
+        "version": "1.0",
+        "name": "Con pedibus",
+        "description": "La descr con pedibus",
+        "params": {
+            "template": [
+            ],
+            "groups": [
+                {
+                    "groupname": "Impostazioni globali",
+                    "fields": [
+                        {
+                            "label": "Costante 1a",
+                            "type": "text",
+                            "defaultValue": "helloWorld",
+                            "name": "placeholder1",
+                            "value": ""
+                        },
+                        {
+                            "label": "Costante 2a",
+                            "type": "number",
+                            "defaultValue": "121",
+                            "name": "placeholder2",
+                            "value": ""
+                        }
+                    ]
+                },
+                {
+                    "groupname": "Impostazioni secondarie",
+                    "fields": [
+                        {
+                            "label": "Costante 3a",
+                            "type": "number",
+                            "defaultValue": "989",
+                            "name": "placeholder3",
+                            "value": ""
+                        },
+                        {
+                            "label": "Costante 4a",
+                            "type": "text",
+                            "defaultValue": "OP3T",
+                            "name": "placeholder2",
+                            "value": ""
+                        }
+                    ]
+                }        
+            ]
+        }
+    },
+    {
+        "id": "3",
+        "version": "1.0",
+        "name": "Senza auto",
+        "description": "La descr senza auto",
+        "params": {
+            "template": [
+            ],
+            "groups": [
+                {
+                    "groupname": "Impostazioni globali",
+                    "fields": [
+                        {
+                            "label": "Costante 1b",
+                            "type": "text",
+                            "defaultValue": "helloWorld",
+                            "name": "placeholder1",
+                            "value": ""
+                        },
+                        {
+                            "label": "Costante 2b",
+                            "type": "number",
+                            "defaultValue": "121",
+                            "name": "placeholder2",
+                            "value": ""
+                        }
+                    ]
+                },
+                {
+                    "groupname": "Impostazioni secondarie",
+                    "fields": [
+                        {
+                            "label": "Costante 3b",
+                            "type": "number",
+                            "defaultValue": "989",
+                            "name": "placeholder3",
+                            "value": ""
+                        },
+                        {
+                            "label": "Costante 4b",
+                            "type": "text",
+                            "defaultValue": "OP3T",
+                            "name": "placeholder2",
+                            "value": ""
+                        }
+                    ]
+                }        
+            ]
+        }
+    }    
+]

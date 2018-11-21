@@ -1,0 +1,65 @@
+<md-toolbar layout="row" class="desktop bar-colors">
+  <div class="md-toolbar-tools bar-colors">
+    <md-button class="md-icon-button" aria-label="{{'action_back' | translate}}" ng-show="$state.current.name != 'home.users-lists.list' && $state.current.name != 'home'" ng-click="goBack()">
+      <md-icon>arrow_back</md-icon>
+    </md-button>
+    <h2 flex md-truncate><span>Users Console - {{title | translate}}</span>
+    </h2>
+    
+    <div ng-show="$state.current.name == 'home.user-edit'">
+        <md-button class="md-icon-button" aria-label="{{'action_save' | translate}}" ng-click="saveUser()">
+            <md-icon>save</md-icon>
+        </md-button>
+    </div>
+    <div ng-show="$state.current.name == 'home.user-role-edit'">
+        <md-button class="md-icon-button" aria-label="{{'action_save' | translate}}" ng-click="saveUserRole()">
+            <md-icon>save</md-icon>
+        </md-button>
+    </div>
+    <div class="vertical-divider"></div>
+    <md-select ng-model="selectedDomain" class="md-no-underline" md-position-mode="target-right target">
+        <md-option ng-repeat="domain in myProfile.ownerIds" value="{{domain}}" ng-click="changeDomain(domain)">{{domain}}</md-option>
+    </md-select>
+    <md-menu md-position-mode="target-right target">
+        <md-button aria-label="Profile" class="md-icon-button" ng-click="$mdMenu.open($event)">
+            <md-icon>account_circle</md-icon>
+        </md-button>
+        <md-menu-content width="4" layout-padding>
+            <span class="md-headline">{{myProfile.name}} {{myProfile.surname}}</span>
+            <span class="md-subhead">{{myProfile.email}}</span>
+            <md-menu-item>
+                <md-button ng-click="logout()">
+                    <div layout="row" flex>
+                        <md-icon md-menu-align-target>lock</md-icon>
+                        <p flex>{{'menu_logout' | translate}}</p>
+                    </div>
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+  </div>
+</md-toolbar>  
+<main flex layout="column" layout-align="center">
+    <div layout="row" layout-align="center" ng-show="selectedDomain == 'selectDomain'">
+        <md-card md-theme-watch flex="40">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{'domain_select' | translate}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <md-list>
+                    <md-list-item class="md-1-line" ng-repeat="domain in myProfile.ownerIds" ng-click="changeDomain(domain)">
+                        <div class="md-list-item-text" layout="column">
+                            <h4>{{domain}}</h4>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+    </div>
+    
+  <div ng-view flex layout="column">
+      <ui-view name="content"></ui-view>
+  </div>
+</div>

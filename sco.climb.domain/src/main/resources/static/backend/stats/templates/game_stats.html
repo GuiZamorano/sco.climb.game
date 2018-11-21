@@ -1,0 +1,166 @@
+<md-content layout-padding>
+    <div class="md-padding" layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="30" layout="column">
+            <md-card md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><md-icon>info_outline</md-icon> {{game.gameName}}</span>
+                        <span class="md-subhead"><div ng-bind-html="game.gameDescription"></div></span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'from' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.from | date:'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'to' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.to | date:'dd/MM/yyyy'}}</div>
+                    </div>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'from_hour' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.fromHour}}</div>
+                    </div>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'to_hour' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.toHour}}</div>
+                    </div>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'classes' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.classRooms}}</div>
+                    </div>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'game_id' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.gameId}}</div>
+                    </div>
+                    <div class="game-detail-item">
+                        <div class="game-detail-item-title">{{'global_team' | translate}}:</div>
+                        <div class="game-detail-item-value">{{game.globalTeam}}</div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div flex-xs flex-gt-xs="70" layout="column">
+            <md-card md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline"><md-icon>show_chart</md-icon> {{'game_stats' | translate}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <div layout="row" layout-align="center" layout-margin>                        
+                        {{gameStats.progressPercentage}}%
+                    </div>
+                    <div layout="row" layout-align="start" layout-margin>                        
+                        <div>{{gameStats.gameScore}}</div>
+                        <md-progress-linear class="stats-progress-bar" md-mode="determinate" ng-value="gameStats.progressPercentage"></md-progress-linear>
+                        <div>{{gameStats.maxGameScore}}</div>
+                    </div>
+                    <div layout="row" layout-align="start" layout-margin>
+                        <div class="stats-pie-chart">
+                            <canvas class="chart chart-pie" chart-data="chartTravelTypeData" chart-labels="chartTravelTypeLabel" chart-options="chartTravelTypeOptions">
+                            </canvas> 
+                        </div>                   
+                    </div>
+                    <h3>{{'plays' | translate}}:</h3>
+                    <div layout="row">
+                        <div class="stats-plays-chart" flex="20">
+                            <canvas class="chart chart-bar" chart-data="chartNumberOfPlaysByTypeData" chart-labels="chartNumberOfPlaysByTypeLabels">
+                            </canvas>
+                        </div>
+                        <div flex="80" layout="row">
+                            <div flex flex="30" class="stats-path-plays">
+                                <div class="stats-path-plays-title"><md-icon>today</md-icon> {{'mode_calendar' | translate}}</div>
+                                <div class="stats-path-plays-number">{{gameStats.plays.calendar.number}}</div>
+                                <div class="stats-path-plays-last" ng-class="pathPlayInWarning(gameStats.plays.calendar.lastPlay)">
+                                    <md-icon class="stats-path-plays-warning">warning</md-icon>
+                                    <div ng-if="gameStats.plays.calendar.number > 0">
+                                        {{daysAgo(gameStats.plays.calendar.lastPlay)}} {{'days_ago' | translate}}
+                                    </div>
+                                    <div ng-if="gameStats.plays.calendar.number == 0">
+                                        {{'never' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div flex flex="30" class="stats-path-plays">
+                                <div class="stats-path-plays-title"><md-icon>card_travel</md-icon> {{'mode_trip' | translate}}</div>
+                                <div class="stats-path-plays-number">{{gameStats.plays.excursion.number}}</div>
+                                <div class="stats-path-plays-last" ng-class="pathPlayInWarning(gameStats.plays.excursion.lastPlay)">
+                                    <md-icon class="stats-path-plays-warning">warning</md-icon>
+                                    <div ng-if="gameStats.plays.excursion.number > 0">
+                                        {{daysAgo(gameStats.plays.excursion.lastPlay)}} {{'days_ago' | translate}}
+                                    </div>
+                                    <div ng-if="gameStats.plays.excursion.number == 0">
+                                        {{'never' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div flex flex="30" class="stats-path-plays">
+                                <div class="stats-path-plays-title"><md-icon>directions_walk</md-icon> {{'mode_pedibus' | translate}}</div>
+                                <div class="stats-path-plays-number">{{gameStats.plays.pedibus.number}}</div>
+                                <div class="stats-path-plays-last" ng-class="pathPlayInWarning(gameStats.plays.pedibus.lastPlay)">
+                                    <md-icon class="stats-path-plays-warning">warning</md-icon>
+                                    <div ng-if="gameStats.plays.pedibus.number > 0">
+                                        {{daysAgo(gameStats.plays.pedibus.lastPlay)}} {{'days_ago' | translate}}
+                                    </div>
+                                    <div ng-if="gameStats.plays.pedibus.number == 0">
+                                        {{'never' | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+    <h2 class="md-padding md-margin">{{'badges' | translate}}:</h2>
+    <div class="md-padding" layout="row">
+        <div layout="column" flex="30">
+            <div>
+                <canvas style="max-height:200px;max-width:400px;" class="chart chart-pie" chart-data="chartBadgesData" chart-labels="chartBadgesLabels" chart-options="chartBadgesOptions" chart-colors="chartBadgesColors">
+                </canvas> 
+            </div> 
+        </div>
+        <div layout="row" flex="70" layout-wrap>
+            <div flex="25" ng-repeat="badge in gameStats.challenges">
+                <md-card class="badge-card">
+                    <md-icon class="badge-icon" ng-class="badgeStatus(badge.status)">beenhere</md-icon>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{badge.name}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>                
+                        <div>{{badge.from | date:'dd/MM/yyyy'}} - {{badge.to | date:'dd/MM/yyyy'}}</div>
+                        <div>{{'status' | translate}}: {{badge.status}}</div>
+                        <div>{{'player' | translate}}: {{badge.player}}</div>
+                        <div>{{'virtualprize' | translate}}: {{badge.virtualPrize}}</div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </div>
+    <h2 class="md-padding md-margin">{{'paths' | translate}}:</h2>
+    <div class="md-padding" layout="row" ng-repeat="path in gameStats.itineraries">
+        <md-card md-theme-watch flex="100">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline"><md-icon>info_outline</md-icon> {{path.name}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>                
+                {{'reached_legs' | translate}}:
+                <md-chips class="static-chips" ng-model="path.reachedLegs" readonly="true">
+                </md-chips>                   
+                {{'not_reached_legs' | translate}}:         
+                <md-chips class="static-chips red-chips" ng-model="path.notReachedLegs" readonly="true">
+                </md-chips>                
+            </md-card-content>
+        </md-card>
+    </div>
+    
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="saving">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+</md-content>

@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-md-8 header-path-category">
+        <h4 ng-show="isNewLine()">CREA NUOVA LINEA</h4>
+        <h4 ng-hide="isNewLine()">MODIFICA LINEA: {{line.name}}</h4>
+        <p>I campi contrassegnati col simbolo <span class="required-sign">*</span> sono obbligatori</p>
+    </div>
+
+    <div class="col-md-4 right">
+        <a ng-click="save()" class="btn btn-save btn-margin" role="button">Salva linea</a>
+        <a ng-click="back()" class="btn btn-danger" role="button">Annulla</a>
+    </div>
+
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Nome:</b></p>
+        <input class="form-control" type="text" ng-model="line.name" ng-required="true"/>
+    </div>
+    
+    <div class="col-lg-6" style="margin-bottom: 20px;">
+        <p style="display: inline-block"><span class="required-sign">*</span> <b>Data di inizio:&emsp;</b></p>
+        <p class="input-group" style="display: inline-block">
+            <input style="width: 200px" class="form-control" type="text" uib-datepicker-popup="{{dateFormat}}" is-open="isCalendarOpen[0]"
+                   ng-model="startDate" min-date="minDate" ng-required="true" current-text="Oggi" clear-text="Azzera" close-text="Fatto"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="isCalendarOpen[0] = true"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+    </div>
+
+    <div class="col-lg-6" style="margin-bottom: 20px;">
+        <p style="display: inline-block"><span class="required-sign">*</span> <b>Data di fine:&emsp;</b></p>
+        <p class="input-group" style="display: inline-block">
+            <input style="width: 200px" class="form-control" type="text" uib-datepicker-popup="{{dateFormat}}" is-open="isCalendarOpen[1]"
+                   ng-model="endDate" min-date="minDate" ng-required="true" current-text="Oggi" clear-text="Azzera" close-text="Fatto"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="isCalendarOpen[1] = true"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+    </div>   
+</div>
+<div class="row">
+    <div class="col-lg-6" style="margin-bottom: 10px;">
+        <h5>FERMATE ({{line.stops.length}})</h5>
+    </div>
+    <div class="col-lg-6 right">
+        <a class="btn btn-info" ng-click="addStop()">Aggiungi fermata</a>
+        <a class="btn btn-info" ng-class="{'btn-success': enableOrder, 'btn-info': !enableOrder}" ng-click="saveOrder()">{{enableOrder ? 'Conferma ordine' : 'Riordina fermate'}}</a>
+    </div>
+
+    <div class="col-lg-12">
+        <ul ui-sortable="sortableOptions" ng-model="line.stops" class="list-group list-categories">
+            <li class="list-group-item" ng-repeat="stop in line.stops">
+                <div class="row v-center">
+                    <div class="col-md-2">
+                        <img class="path-img" src="https://maps.googleapis.com/maps/api/streetview?location={{stop.geocoding[1]}},{{stop.geocoding[0]}}&size=300x200&key=AIzaSyAK3ZwWR_fOefb6lGhSunp8zNdPbRgkdwA&fov=120" alt="{{stop.name}}">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row v-center">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-lg-1 text-right" style="padding: 4px 0 0 0"><p><b>{{$index+1}}.</b></p></div>
+                                    <!-- Stop name -->
+                                    <div class="col-lg-11 field add-media">
+                                        <div class="add-media-label">
+                                            <p><b>Titolo:</b></p>
+                                        </div>
+                                        <input class="form-control" type="text" ng-model="line.stops[$index].name" />
+                                    </div>
+                                    <!-- Stop coordinates -->
+                                    <div class="col-lg-11 col-lg-offset-1 field add-stop" style="margin-bottom: 0;">
+                                        <div class="add-media-label">
+                                            <p><b>Coordinate:</b></p>
+                                        </div>
+                                        <input class="form-control" type="text" ng-model="line.stops[$index].geocoding[1]" ng-blur="updatePath()" placeholder="Latitudine" />
+                                        <input class="form-control" type="text" ng-model="line.stops[$index].geocoding[0]" ng-blur="updatePath()" placeholder="Longitudine" />
+                                    </div>
+																    <div class="col-lg-11 col-lg-offset-1 field add-stop">
+																        <p><b>Ora di partenza:</b></p>
+																        <input class="form-control" type="text" placeholder="HH:MM" ng-model="line.stops[$index].departureTime" />
+																    </div>
+																    <div class="col-lg-11 col-lg-offset-1 field add-stop">
+																        <p><b>Distanza approssimata all'arrivo (in metri):</b></p>
+																        <input class="form-control" type="number" step="10" ng-model="line.stops[$index].distance" />
+																    </div>
+																    <div class="col-lg-3 col-lg-offset-1">
+																        <b>Partenza:</b>
+																        <input type="checkbox" ng-model="line.stops[$index].start" />
+																    </div>
+																    <div class="col-lg-3 col-lg-offset-1">
+																        <b>Destinazione:</b>
+																        <input type="checkbox" ng-model="line.stops[$index].destination" />
+																    </div>
+																    <div class="col-lg-3 col-lg-offset-1">
+																        <b>Scuola:</b>
+																        <input type="checkbox" ng-model="line.stops[$index].school" />
+																    </div>
+																    <div class="col-lg-6 col-lg-offset-1">
+																    	<b>Assegna passeggeri: </b>
+																    	<a class="handle btn-icon btn-standard" ng-click="assignPassengers($index)"><i class="glyphicon glyphicon-th-list"></i></a>
+																    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 right">
+                                <a ng-hide="enableOrder" ng-click="deleteStop($index)" class="btn btn-icon btn-danger" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a ng-show="enableOrder" class="handle btn-icon btn-reorder"><i class="glyphicon glyphicon-align-justify"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-lg-12">
+        <div id="map-line"></div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+
+<fieldset class="row" ng-disabled="!PermissionsService.permissionEnabledEditInstitute()">
+    <div class="col-md-12 right">
+        <a ng-click="save()" class="btn btn-save btn-margin" role="button">Salva info</a>
+        <a ng-click="back()" class="btn btn-danger" role="button">Annulla</a>
+    </div>
+
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Nome:</b></p>
+        <input class="form-control" type="text" ng-model="currentInstitute.name" ng-required="true"/>
+    </div>
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Indirizzo:</b></p>
+        <input class="form-control" type="text" ng-model="currentInstitute.address" ng-required="true"/>
+    </div>
+</fieldset>

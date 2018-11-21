@@ -1,0 +1,53 @@
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <span>Climb Console</span>
+    </div>
+    <ul class="nav navbar-nav">
+        <li role="presentation" ng-class="{'active':mainView == 'institute'}" ng-show="PermissionsService.permissionEnabledShowInstitutes()"><a ui-sref="root.institutes-list">Istituti</a></li>
+        <li role="presentation" ng-class="{'active':mainView == 'school'}" ng-show="PermissionsService.permissionEnabledShowSchools()"><a ui-sref="root.schools-list">Scuole</a></li>
+        <li role="presentation" ng-class="{'active':mainView == 'game'}" ng-show="PermissionsService.permissionEnabledShowGames()"><a ui-sref="root.games-list">Giochi</a></li>
+        <li role="presentation" ng-class="{'active':mainView == 'itinerary'}" ng-show="PermissionsService.permissionEnabledShowPaths()"><a ui-sref="root.paths-list">Percorsi</a></li>
+    </ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a style="width: 220px; text-align: right;"><i class="glyphicon glyphicon-user"></i>&ensp;{{profile.name + ' ' + profile.surname}}</a></li>
+            <li><a href="#" ng-click="logout()">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Errors section -->
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 main">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 alert alert-danger" role="alert" ng-if="errorTexts.length > 0">
+                <span ng-repeat="errorText in errorTexts">{{errorText}}<br /></span>
+            </div>
+            <div class="col-md-8 col-md-offset-2 alert alert-success alert-dismissible" role="alert" ng-if="successText">
+                <button type="button" class="close" ng-click="resetText()">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                {{successText}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 alert alert-danger" role="alert" ng-if="modelErrors">
+            {{modelErrors}}
+        </div>
+        <div class="col-md-8 col-md-offset-2 alert alert-success alert-dismissible" role="alert" ng-if="modelSuccessText">
+            {{modelSuccessText}}
+        </div>
+    </div>
+</div>
+<div>
+
+    <!-- Network problem alert. Used when some call to the server fail -->
+    <div class="alert alert-danger" ng-show="networkProblem.status">
+        <a class="close" aria-label="close" ng-click="networkProblem.status = false;">&times;</a>
+        <strong>Errore di rete!</strong> I dati mostrati possono essere incompleti. Prova a ricaricare la pagina.<br/>
+        <b>{{networkProblem.msg}}</b>
+    </div>
+    <!-- Main section -->
+    <div ui-view></div>
+</div>

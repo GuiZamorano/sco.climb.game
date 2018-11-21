@@ -1,0 +1,11 @@
+<div class="row v-center">
+    <div class="col-md-10">
+        <h5>Titolo: {{element.name}}</h5>
+        <h5>URL: <a href="{{element.link}}" target="_blank">{{element.link}}</a></h5>
+    </div>
+    <div class="col-md-2 right">
+        <a ng-hide="enableOrder" ng-click="$parent.$parent.editMode = !$parent.$parent.editMode" class="btn btn-icon btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>     <!-- devo mettere $parent.$parent perché ng-if e ng-include creano un nested scope ciascuno -->
+        <a ng-hide="enableOrder" ng-click="deleteLink(element)" class="btn btn-icon btn-danger" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        <a ng-show="enableOrder" class="handle btn-icon btn-reorder"><i class="glyphicon glyphicon-align-justify"></i></a>
+    </div>
+</div>

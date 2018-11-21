@@ -1,0 +1,39 @@
+<md-content flex="">
+  <div id="map-container">
+    <leaflet style="width: 100%; height: 700px;" center="center" markers="pathMarkers" paths="pathLine" layers="layers" id="map" defaults="defaults" event-broadcast="events"></leaflet>
+  </div>
+  <div class="map-footer" id="map-footer" ng-class="{'map-footer-demo': isDemoDisplayer}">
+    <div class="gallery-bar" id="gallery" drag-scroll="enabled" axis="x">
+      <div class="pic-container" id="pic-container">
+        <div>
+          <md-button class="md-button gallery-left gallery-button" aria-label="Left" ng-mousedown="scrollLeft()" ng-mouseup="resetTimerLeft()">
+            <!--        <md-button class="md-button gallery-left" aria-label="Left">-->
+            <i class="material-icons gallery-arrow">&#xE314;</i>
+          </md-button>
+          <div class="leg-image" ng-repeat="leg in  legs track by $index" ng-mousedown="mapGalleryDragging(true, $event)" ng-mouseup="mapGalleryDragging(false, $event, leg)" ng-init="scrollMap($index)">
+            <img class="map-gallery" ng-src="{{leg.imageUrl}}" ng-if="(leg.position < currentLeg.position) || endReached" ng-class="{'selectedImageMarker':getSelected($index)}">
+            <img class="map-gallery-question" ng-src="{{IMAGES_PREFIX_URL}}img/POI-not-reached.png" ng-if="leg.position >= currentLeg.position && !endReached">
+            <div class="leg-name" ng-if="((leg.position < currentLeg.position) || endReached) && !isDemoDisplayer">{{$index+1}}. {{leg.name}}</div>
+          </div>
+          <md-button class="md-button gallery-right gallery-button " aria-label="Right " ng-mousedown="scrollRight() " ng-mouseup="resetTimerRight() ">
+            <i class="material-icons gallery-arrow">&#xE315;</i>
+          </md-button>
+        </div>
+      </div>      
+    </div>
+    <div layout="row" class="demo-leg-display" ng-if="isDemoDisplayer">
+      <div flex="10" class="demo-leg-image">
+        <img ng-src="{{selectedLeg.imageUrl}}">
+      </div>
+      <div class="demo-leg-content" flex="90">
+        <div class="demo-leg-title"><span>Tappa n. {{selectedLeg.position+1}}: </span>{{selectedLeg.name}}</div>
+        <div class="demo-leg-description" ng-bind-html="sanitizeHtmlString(selectedLeg.description)"></div>
+      </div>
+    </div>
+    <div layout="row" layout-align="start" layout-padding class="path-percentage bar-colors" ng-if="isDemoDisplayer">
+      <div>{{floor(globalStatus.score/1000)}}</div>
+      <md-progress-linear md-mode="determinate" ng-value="globalStatus.score / (globalStatus.score + globalStatus.scoreToEnd) * 100"></md-progress-linear>
+      <div>{{floor((globalStatus.score + globalStatus.scoreToEnd)/1000)}}</div>
+    </div>
+  </div>  
+</md-content>

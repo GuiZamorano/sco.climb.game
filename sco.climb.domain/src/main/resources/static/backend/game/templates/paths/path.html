@@ -1,0 +1,24 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8 header-path-category">
+            <h4>{{isNewPath ? 'CREA NUOVO PERCORSO' : 'MODIFICA PERCORSO: ' + currentPath.name}}</h4>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <!-- Menu tab -->
+        <div class="col-md-2 tabs-menu">
+            <a ng-if="PermissionsService.permissionEnabledEditLegs()" 
+            ng-class="{'active-tab':selectedTab == 'info'}" ui-sref="root.path.info">INFO</a>
+            <a ng-class="{'active-tab':selectedTab == 'legs'}" ui-sref="root.path.legs">TAPPE</a>
+            <a ng-if="PermissionsService.permissionEnabledEditLegs()"
+            ng-class="{'active-tab':selectedTab == 'map'}" ui-sref="root.path.map">ITINERARIO</a>
+        </div>
+
+        <!-- Tabs container -->
+        <div class="col-md-10 tabs-container">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

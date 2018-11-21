@@ -1,0 +1,68 @@
+{
+	"name":"KindsGoGreen",
+	"description":"Modello regole gioco anno scolastico 2017/2018",
+	"version":"1.0",
+	"ruleFileTemplates": [
+		"constants_v1.vm",
+		"legsbadges_v1.vm",
+		"calendartrips_v1.vm",
+		"classtrips_v1.vm",
+		"challenge_ScuolaSenzAuto_v1.vm",
+		"pedibus_v1.vm",
+		"challenge_ViaggiGiornalieri_v1.vm",
+		"weeklytasks_v1.vm",
+		"classday_v1.vm"
+	],
+	"actions" : [ 
+  	"PedibusKidTrip", 
+    "CalendarDayFilled", 
+    "PlayerCalendarTrip", 
+    "ClassWalkTrip"
+  ],
+  "badgeCollections": ["LegsCollection"],
+  "challengeModels": {
+  	"ScuolaSenzAuto": [
+  		"bonusScore",
+  		"legName",
+  		"VirtualPrize",
+  		"bonusPointType",
+  		"prizeWon"
+  	],
+  	"ViaggiGiornalieri": [
+  		"bonusScore",
+  		"legName",
+  		"VirtualPrize",
+  		"_target_numTrips_",
+  		"bonusPointType",
+  		"prizeWon"
+  	]
+  },
+  "points": {
+  	"pedibus_distance": ["daily","weekly"],
+  	"zeroImpact_solo_distance": ["daily","weekly"],
+  	"no_car_classes": ["daily","weekly"],
+  	"bonus_distance": ["daily","weekly"],
+  	"car_distance": ["daily","weekly"],
+  	"car_trips": ["daily","weekly"],
+  	"pandr_distance": ["daily","weekly"],
+  	"zeroImpact_wAdult_trips": ["daily","weekly"],
+  	"bus_distance": ["daily","weekly"],
+  	"group_trips": ["daily","weekly"],
+  	"pandr_trips": ["daily","weekly"],
+  	"bus_trips": ["daily","weekly"],
+  	"zeroImpact_wAdult_distance": ["daily","weekly"],
+  	"zeroImpact_solo_trips": ["daily","weekly"],
+  	"total_trips": ["daily","weekly"],
+  	"participation_count": ["daily","weekly"],
+  	"pedibus_trips": ["daily","weekly"],
+  	"absence_count": ["daily","weekly"],
+  	"total_distance": ["daily","weekly"]
+  },
+  "tasks": {
+  	"team classification weekly": {
+  		"point":"total_distance",
+  		"period":"weekly",
+  		"type": "incremental" 
+  	}
+  }
+}

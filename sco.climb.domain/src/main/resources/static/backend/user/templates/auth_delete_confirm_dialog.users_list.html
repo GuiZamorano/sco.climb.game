@@ -1,0 +1,20 @@
+<md-dialog>
+    <form ng-cloak>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{'role_delete_dialog_title' | translate}} {{authText}}?</h2>
+        </div>
+        </md-toolbar>    
+        <md-dialog-content layout-padding>
+            {{'auth_delete_dialog_description' | translate}}
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                {{'no' | translate}}
+            </md-button>
+            <md-button class="md-warn" ng-click="delete()">
+                {{'auth_delete_dialog_action' | translate}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

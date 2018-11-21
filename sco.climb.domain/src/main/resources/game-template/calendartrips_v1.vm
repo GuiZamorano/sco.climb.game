@@ -1,0 +1,189 @@
+#set( $H = '#' )
+package eu.trentorise.game.model
+import eu.trentorise.game.core.Utility;
+
+global Double const_zi_solo_bonus;
+global Utility utils;
+
+// ****************************************** global functions 	
+function Double getDistanceByMode(String mode) {
+	//constants for mode distances
+	Double const_pandr_distance = $params.const_pandr_distance#[[.0]]#;
+	Double const_bus_distance = $params.const_bus_distance#[[.0]]#;
+	Double const_zeroimpact_distance = $params.const_zeroimpact_distance#[[.0]]#;
+	
+	Double ret = 0.0;
+	
+	if(mode.equals("bus"))
+		ret = const_bus_distance;
+	else if(mode.equals("pandr"))
+		ret = const_pandr_distance;
+	else if(mode.equals("zeroImpact_solo") || mode.equals("zeroImpact_wAdult"))
+		ret = const_zeroimpact_distance;
+	else // absent or car or pedibus
+		ret = 0.0;
+		
+	return ret;
+}
+
+function Double getMeteoBonus(String meteo) {
+	//constants for meteo bonuses
+	Double const_cloudy_bonus = $params.const_cloudy_bonus#[[.0]]#;
+	Double const_rain_bonus = $params.const_rain_bonus#[[.0]]#;
+	Double const_snow_bonus = $params.const_snow_bonus#[[.0]]#;
+	
+	Double ret = 0.0;
+	
+	if(meteo.equals("cloudy"))
+		ret = const_cloudy_bonus;
+	else if(meteo.equals("rain"))
+		ret = const_rain_bonus;
+	else if(meteo.equals("snow"))
+		ret = const_snow_bonus;
+	else // sunny
+		ret = 0.0;
+	
+	return ret;
+}
+
+#[[rule "participation update"
+when
+	Action(id == "PlayerCalendarTrip")
+    InputData( $mode : data["mode"] != null, $date : data["school-date"] != null)
+    $part : PointConcept(name == "participation_count")
+then
+	// here I make sure to set correctly  the flag for participation in the current day
+	if ($part.getPeriodCurrentScore("daily") == 0) {
+		utils.log("apply participation update");
+		$part.setScore($part.getScore() + 1d);
+		update($part);
+		insert(new UpdateTeams("participation"));
+	}
+end
+
+rule "participation update propagation"
+when
+	Member($mode : inputData["mode"] != null, inputData["school-date"] != null)
+	Propagation(action == "participation")
+    Player($playerId : id, team == true)
+    $part : PointConcept(name == "participation_count")
+then
+	utils.log("apply participation update propagation");
+	// here I make sure I update the participation count for the team in the current day
+	$part.setScore($part.getScore() + 1d);
+	update($part);
+    insert(new UpdateTeams("participation"));
+end
+
+rule "absence update"
+when
+	Action(id == "PlayerCalendarTrip")
+    InputData( $mode : data["mode"] != null, $mode == "absent", $date : data["school-date"] != null)
+    $absence : PointConcept(name == "absence_count")
+then
+	utils.log("apply absence update");
+	$absence.setScore($absence.getScore() + 1d);
+	update($absence)
+    insert(new UpdateTeams());
+end
+
+rule "trip absence update propagation"
+when
+	Member($mode : inputData["mode"] != null, $mode == "absent", inputData["school-date"] != null)
+    Player($playerId : id, team == true)
+    $absence : PointConcept(name == "absence_count")
+then
+	utils.log("apply absence update propagation");
+	$absence.setScore($absence.getScore() + 1d);
+	update($absence)
+    insert(new UpdateTeams());
+end
+
+rule "trip mode update"
+when 
+    Action(id == "PlayerCalendarTrip")
+    InputData( $mode : data["mode"] != null, $mode != "absent", $meteo : data["meteo"] != null, $date : data["school-date"] != null )
+    $tot_dist : PointConcept(name == "total_distance")
+    $tot_trips : PointConcept(name == "total_trips")
+    $mode_dist : PointConcept(name == (String)$mode + "_distance")
+    $mode_trips : PointConcept(name == (String)$mode + "_trips")
+    $bonus_dist : PointConcept(name == "bonus_distance")
+then
+	String myMode = (String)$mode;
+	String myMeteo = (String)$meteo;
+	Double meteoBonus = 0.0;
+	Double distance = 0.0;
+		
+	if (myMode.startsWith("zeroImpact") || myMode.equals("pedibus")) {
+		meteoBonus = getMeteoBonus(myMeteo);
+		if (meteoBonus > 0.0) {
+			utils.log("apply meteo Bonus for " + myMeteo + " weather");
+		}
+		if (myMode.equals("zeroImpact_solo")) {
+			utils.log("apply children independent mobility Bonus");
+			meteoBonus += const_zi_solo_bonus;
+		}
+		$bonus_dist.setScore($bonus_dist.getScore() + meteoBonus);
+	}
+	if (! myMode.equals("pedibus")) {
+		utils.log("apply " + myMode + " update");		
+		distance = getDistanceByMode(myMode);
+		$mode_dist.setScore($mode_dist.getScore() + distance);
+		$mode_trips.setScore($mode_trips.getScore() + 1d); 
+		$tot_trips.setScore($tot_trips.getScore() + 1d);
+	}
+	
+	Double totalUpdate = distance + meteoBonus;
+	$tot_dist.setScore($tot_dist.getScore() + totalUpdate);  
+    
+    update($bonus_dist);
+    update($mode_dist);
+    update($mode_trips);
+    update($tot_dist);
+    update($tot_trips);
+
+    insert(new UpdateTeams());
+end
+
+
+rule "trip mode update propagation"
+when
+    Member($mode : inputData["mode"] != null, $mode != "absent", $meteo : inputData["meteo"] != null, $date : inputData["school-date"] != null)
+    Player($playerId : id, team == true)
+    $tot_dist : PointConcept(name == "total_distance")
+    $tot_trips : PointConcept(name == "total_trips")
+    $mode_dist : PointConcept(name == (String)$mode + "_distance")
+    $mode_trips : PointConcept(name == (String)$mode + "_trips")
+    $bonus_dist : PointConcept(name == "bonus_distance")
+then
+  utils.log("apply trip mode update propagation");
+	String myMode = (String)$mode;
+	String myMeteo = (String)$meteo;
+	Double meteoBonus = 0.0;
+	Double distance = 0.0;
+	
+	if (myMode.startsWith("zeroImpact") || myMode.equals("pedibus")) {
+		meteoBonus = getMeteoBonus(myMeteo);
+		if (myMode.equals("zeroImpact_solo")) {
+			meteoBonus += const_zi_solo_bonus;
+		}
+		$bonus_dist.setScore($bonus_dist.getScore() + meteoBonus);
+	}
+	if (! myMode.equals("pedibus")) {
+		distance = getDistanceByMode(myMode);
+		$mode_dist.setScore($mode_dist.getScore() + distance);
+		$mode_trips.setScore($mode_trips.getScore() + 1d);
+		$tot_trips.setScore($tot_trips.getScore() + 1d);
+	}
+	
+	Double totalUpdate = distance + meteoBonus;
+	$tot_dist.setScore($tot_dist.getScore() + totalUpdate);
+    
+    update($bonus_dist);
+    update($mode_dist);
+    update($mode_trips);
+    update($tot_dist);
+    update($tot_trips);
+
+    insert(new UpdateTeams());
+end]]#

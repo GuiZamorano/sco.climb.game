@@ -1,0 +1,67 @@
+#[[
+package eu.trentorise.game.model
+import eu.trentorise.game.core.Utility;
+
+global Utility utils;
+global String badge_collection_name;
+global String const_school_name;
+
+// only applies to SCHOOL
+//Challenge Model: ViaggiGiornalieri
+//Fields: Integer _target_numTrips_, Double bonusScore, 
+//		  String bonusPointType, String VirtualPrize, Boolean prizeWon, String legName  
+//
+
+rule 'ch-ViaggiGiornalieri-check'
+salience -1000
+lock-on-active
+when
+   $challenge : ChallengeConcept( modelName == "ViaggiGiornalieri", isCompleted() != true,
+		$target: fields["_target_numTrips_"], $vp : fields["VirtualPrize"],
+		$won : fields["prizeWon"] == false) 
+	Player($teamId : id, team == true, $teamId == const_school_name) // only applies to SCHOOL
+	$zSolo : PointConcept(name == "zeroImpact_solo_trips" )
+	$zAdult : PointConcept(name == "zeroImpact_wAdult_trips" )
+	$pedibus : PointConcept(name == "pedibus_trips" )
+	Game( $gameId: id) 
+then
+	utils.log("apply \'ch-ViaggiGiornalieri-check\' with Prize: " + $vp);
+	Double todayTrips = $zSolo.getPeriodCurrentScore("daily") 
+		+ $zAdult.getPeriodCurrentScore("daily")
+		+ $pedibus.getPeriodCurrentScore("daily");
+        Integer todayTripsInt = todayTrips.intValue();
+	if (todayTripsInt.compareTo((Integer)$target) >= 0) {// challenge was won
+		utils.log("Challenge ViaggiGiornalieri HAS BEEN WON by: " + $teamId);
+		MessageNotification mn = new MessageNotification($gameId,$teamId,"ChallengeWon");
+		mn.addData("_VirtualPrize_", $vp);
+		insert(mn);
+		$challenge.getFields().put("prizeWon", (Boolean) true);
+		update($challenge); 
+	}
+end
+
+rule 'ch-ViaggiGiornalieri-award'
+salience -5000
+when
+	$challenge : ChallengeConcept( modelName == "ViaggiGiornalieri", isCompleted() != true,
+		$leg : fields["legName"], $vp : fields["VirtualPrize"], $pw : fields["prizeWon"]== true,
+		$bonusPointType : fields["bonusPointType"], $bonusScore : fields["bonusScore"] )
+	Player($teamId : id, team == true)
+    $id : InputData()
+    BadgeCollectionConcept( name == badge_collection_name, 
+    	badgeEarned contains (String)$leg || $leg == null )
+	$pc : PointConcept(name == (String) $bonusPointType)
+	$tot_dist : PointConcept(name == "total_distance")
+then
+	utils.log("apply \'ch-ViaggiGiornalieri-award \' ");
+    $pc.setScore($pc.getScore() +  (Double)$bonusScore);
+	update($pc);
+	if (! ((String)$bonusPointType).equals("total_distance")) {
+		$tot_dist.setScore($tot_dist.getScore() +  (Double)$bonusScore);
+		update($tot_dist);
+	}
+	$challenge.completed();
+    update($challenge);
+	
+end
+]]#

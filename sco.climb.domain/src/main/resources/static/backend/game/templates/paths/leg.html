@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-md-8 header-path-category">
+        <h4>{{leg.name ? 'MODIFICA TAPPA: ' + leg.name : 'CREA NUOVA TAPPA'}}</h4>
+        
+    </div>
+
+    <div class="col-md-4 right" ng-if="PermissionsService.permissionEnabledEditLegs()">
+        <a ng-click="saveLeg()" class="btn btn-save btn-margin" role="button" ng-disabled="$parent.selectedGame.deployed">Salva tappa</a>
+        <a ng-click="back()" class="btn btn-danger" role="button">Annulla</a>
+    </div>
+</div>
+<fieldset class="row" ng-hide="!PermissionsService.permissionEnabledEditLegs()">
+    <legend>Generale</legend>
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Nome:</b></p>
+        <input ng-class="{error: !leg.name}" class="form-control" type="text" ng-model="leg.name" />
+    </div>
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Descrizione:</b></p>
+        <text-angular ng-class="{error: !leg.description}" ng-model="leg.description"></text-angular>
+    </div>
+    <div class="col-lg-12 field">
+        <p><span class="required-sign">*</span> <b>Punteggio (metri):</b></p>
+        <input ng-class="{error: !leg.score}" class="form-control" type="number" min="0" ng-model="leg.score" />
+    </div>
+    <div class="col-lg-12 field">
+        <p><b>Punteggio tappa precedente (metri): {{previousLegScore}}</b></p>
+    </div>
+    <div class="col-lg-12 field">
+        <p><b>Badge:</b></p>
+        <input class="form-control" type="text" ng-model="leg.badgeId" />
+    </div>    
+    <div style="display: table; margin-bottom: 10px;">
+        <div class="col-lg-5 field" style="display: table-cell">
+            <p><b>Immagine in evidenza (URL):</b></p>
+            <input type="url" ng-model="leg.imageUrl" class="form-control" />
+        </div>
+
+        <div class="col-lg-7 field add-media" style="display: table-cell; margin-top: 15px;">
+            <p>oppure carica una immagine. I file saranno ad accesso pubblico; devono essere privi di copyright e rispettare...: {{img.filename ? img.filename : 'Nessun file selezionato'}}</p>
+            <span class="btn btn-info btn-file btn-margin">
+                Scegli file <input type="file" id="upload-featured-img" base-sixty-four-input ng-model="img" accept="image/*" />
+            </span>
+            <a ng-disabled="!img" ng-click="uploadFeaturedPic()" class="btn btn-info">Carica</a>
+        </div>
+    </div>
+    <div class="col-md-12 field" ng-if="leg.position > 0">
+        <p><b>Mezzo di arrivo:</b></p>
+        <select class="form-control" style="width: 200px" ng-model="leg.transport" ng-change="updateTravelType(leg.transport)">
+            <option value="foot">A piedi</option>
+            <option value="car">In macchina</option>
+            <option value="plane">Aereo</option>
+            <option value="boat">Nave/Traghetto</option>
+        </select>
+    </div>
+    <div class="col-md-12 field" ng-if="leg.position > 0">
+        <p><b>Icona da visualizzare:</b></p>
+        <div isteven-multi-select
+            input-model="viewIconsModels"
+            output-model="selectedIconToView"
+            button-label="icon name"
+            item-label="icon name"
+            tick-property="ticked"
+            selection-mode="single"
+            helper-elements=""
+            style="display:inline-block;"/>
+    </div>
+</fieldset>
+<fieldset class="row" ng-hide="!PermissionsService.permissionEnabledEditLegs()">
+    <legend>Geolocalizzazione</legend>
+    <div class="col-md-5">
+        <div class="row">            
+            <div class="col-lg-12 field">
+                <div class="coordinates-label">
+                    <p><span class="required-sign">*</span> <b>Latitudine:</b></p>
+                </div>
+                <input ng-blur="updateMarkerPosition()" ng-class="{error: !leg.coordinates.lat}" class="form-control coordinates-input" type="number" ng-model="leg.coordinates.lat" />
+            </div>
+            <div class="col-lg-12 field">
+                <div class="coordinates-label">
+                    <p><span class="required-sign">*</span> <b>Longitudine:</b></p>
+                </div>
+                <input ng-blur="updateMarkerPosition()" ng-class="{error: !leg.coordinates.lng}" class="form-control coordinates-input" type="number" ng-model="leg.coordinates.lng" />
+            </div>
+            <div class="col-lg-12 field">
+                <b>Distanza totale: </b>{{leg.totalDistance}}
+            </div>
+            <!-- <div class="col-lg-12 field" ng-show="leg.transport !== 'foot'" ng-init="distance = ''">
+                <div class="coordinates-label">
+                    <p><b>Lunghezza linea (km):</b></p>
+                </div>
+                <input id="airDistance" ng-blur="calculateNewMarkerPos(distance)" class="form-control coordinates-input" type="number" ng-model="distance"/>
+            </div> -->
+            <div class="col-lg-12">
+                <p class="hint">Suggerimento: trascina il segnaposto rosso o inserisci le coordinate geografiche in base decimale per impostare la posizione della tappa. Verrà calcolato l'itinerario a piedi con partenza dalla tappa precedente.<br>
+                Se la destinazione non è raggiungibile a piedi, seleziona un mezzo di arrivo adeguato.</p>
+                <!-- <p ng-if="leg.transport !== 'foot'" class="hint">In alternativa, puoi anche impostare la lunghezza in chilometri della linea retta nel campo di testo qui sopra.</p> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="col-lg-12 field">
+            <div class="geocode-hint">
+                <p><b>Cerca posizione:</b></p>
+            </div>
+            <input class="form-control geocode-hint-input" type="text" id="geocodeHintInput" />
+        </div>        
+        <div id="map-leg"></div>
+    </div>
+		<div class="col-lg-12">
+			<p>I campi contrassegnati col simbolo <span class="required-sign">*</span> sono obbligatori</p>
+		</div>
+</fieldset>
+<fieldset class="row leg-media" ng-disabled="!PermissionsService.permissionEnabledEditLegsMultimedia() || newLeg">
+    <legend>Contenuti multimediali</legend>
+    <div class="col-md-8">
+        <a class="btn btn-info" ng-click="createNewMultimediaElement()"><span class="glyphicon glyphicon-plus"></span> Crea nuovo</a>
+        <a class="btn btn-info" ng-click="searchMultimediaOnSearchEngines()"><span class="glyphicon glyphicon-search"></span> Cerca su motori di ricerca</a>
+        <a class="btn btn-info" ng-click="searchMultimediaOnRepository()"><span class="glyphicon glyphicon-search"></span> Cerca già utilizzati</a>
+    </div>
+    <div class="col-md-4 right">
+        <!-- <a ng-click="saveLegLinks()" class="btn btn-save btn-margin" role="button">Salva contenuti</a> -->
+        <!-- <a ng-click="back()" ng-if="!PermissionsService.permissionEnabledEditLegs()" class="btn btn-danger" role="button">Annulla</a> -->
+        <a class="btn btn-info btn-margin" ng-class="{'btn-success': enableOrder, 'btn-info': !enableOrder}" ng-click="saveOrder()">{{enableOrder ? 'Conferma ordine' : 'Riordina elementi'}}</a>
+    </div>
+
+    <!-- List of available media -->
+    <div class="col-md-12 media-type-title">
+        <div class="col-md-12">MULTIMEDIA ({{leg.externalUrls.length}})</div>
+    </div>
+    <div class="col-md-12">
+        <ul ui-sortable="sortableOptions" ng-model="leg.externalUrls" class="list-group list-categories">
+            <li class="list-group-item leg-multimedia-element" ng-repeat="element in leg.externalUrls">
+                <div class="row v-center">
+                    <a class="col-md-2" ng-class='element.type == "video" && element.youtubeThumbnail ? "multimedia-yt-video" : ""' ng-href="{{element.link}}" target="_blank">
+                        <img class="path-img" ng-if="element.type == 'image'" ng-src="{{element.link}}" alt="{{element.name}}">
+                        <img class="path-img" ng-if="element.type == 'video' && element.youtubeThumbnail" ng-src="{{element.youtubeThumbnail}}" alt="Video">
+                        <img class="path-img" ng-if="element.type == 'video' && !element.youtubeThumbnail" src="img/video.png" alt="Video">
+                        <img class="path-img" ng-if="element.type == 'link'" src="img/link.png" alt="Link">
+                        <img class="path-img" ng-if="element.type == 'file'" src="img/file.png" alt="Link">
+                    </a>
+                    <div class="col-md-10" ng-if="!editMode" ng-include="'templates/paths/media/show.html'">
+                    </div>
+                    <div class="col-md-10" ng-if="editMode" ng-include="'templates/paths/media/edit.html'">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</fieldset>

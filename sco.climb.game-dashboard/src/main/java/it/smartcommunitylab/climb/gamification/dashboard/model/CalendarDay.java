@@ -10,7 +10,7 @@ public class CalendarDay extends BaseObject {
 	private String gameId;
 	private Date day;
 	private String classRoom;
-	private String meteo;
+	private String weather;
 	private Map<String, String> modeMap = new HashMap<String, String>();
 	private boolean closed = false;
 	
@@ -26,11 +26,11 @@ public class CalendarDay extends BaseObject {
 	public void setDay(Date day) {
 		this.day = day;
 	}
-	public String getMeteo() {
-		return meteo;
+	public String getWeather() {
+		return weather;
 	}
-	public void setMeteo(String meteo) {
-		this.meteo = meteo;
+	public void setWeather(String weather) {
+		this.weather = weather;
 	}
 	public Map<String, String> getModeMap() {
 		return modeMap;

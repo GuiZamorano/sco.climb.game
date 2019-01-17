@@ -168,7 +168,7 @@ public class DashboardController {
 				Map<String, Object> data = Maps.newTreeMap();
 				data.put(paramMode, calendarDay.getModeMap().get(childId));
 				data.put(paramDate, System.currentTimeMillis());
-				data.put(paramMeteo, calendarDay.getMeteo());
+				data.put(paramMeteo, calendarDay.getWeather());
 				ed.setData(data);
 
 				//Add stats to transport mode. Values are currently big so it shows up on statistics page.

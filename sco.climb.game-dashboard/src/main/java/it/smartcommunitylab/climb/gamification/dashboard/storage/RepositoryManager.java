@@ -187,7 +187,7 @@ public class RepositoryManager {
 					}
 				}
 				Update update = new Update();
-				update.set("meteo", calendarDay.getMeteo());
+				update.set("meteo", calendarDay.getWeather());
 				update.set("modeMap", calendarDay.getModeMap());
 				update.set("closed", Boolean.TRUE);
 				update.set("lastUpdate", now);

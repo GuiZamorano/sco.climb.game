@@ -232,10 +232,10 @@ angular.module('climbGame.controllers.calendar', [])
             scope: $scope, // use parent scope in template
             preserveScope: true, // do not forget this if use parent scope
             template: '<md-dialog>' +
-              '  <div class="cal-dialog-title"> Dati incompleti  </div><md-divider></md-divider>' +
+              '  <div class="cal-dialog-title"> Incomplete data  </div><md-divider></md-divider>' +
               '  <div class="cal-dialog-text">{{"cal_data_missing"|translate}}</div>' +
               '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
-              '      Ho capito' +
+              '      OK' +
               '   </div> </md-button>' +
               '</div></md-dialog>',
             controller: function DialogController($scope, $mdDialog) {

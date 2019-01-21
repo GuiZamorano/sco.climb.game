@@ -71,8 +71,8 @@ public class DashboardController {
 	private String paramDate;	
 	
 	@Autowired
-	@Value("${param.meteo}")	
-	private String paramMeteo;
+	@Value("${param.weather}")
+	private String paramWeather;
 	
 	@Autowired
 	@Value("${param.mode}")	
@@ -168,7 +168,7 @@ public class DashboardController {
 				Map<String, Object> data = Maps.newTreeMap();
 				data.put(paramMode, calendarDay.getModeMap().get(childId));
 				data.put(paramDate, System.currentTimeMillis());
-				data.put(paramMeteo, calendarDay.getMeteo());
+				data.put(paramWeather, calendarDay.getWeather());
 				ed.setData(data);
 
 				//Add stats to transport mode. Values are currently big so it shows up on statistics page.
@@ -241,14 +241,14 @@ public class DashboardController {
 	@RequestMapping(value = "/api/excursion/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody void saveExcursion(@PathVariable String ownerId, 
 			@PathVariable String gameId, @PathVariable String classRoom,
-			@RequestParam String name, @RequestParam String meteo, @RequestParam Long date, 
+			@RequestParam String name, @RequestParam String weather, @RequestParam Long date,
 			@RequestParam Integer children, @RequestParam Double distance, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
 			throw new UnauthorizedException("Unauthorized Exception: token not valid");
 		}
 		Date day = new Date(date);
-		storage.saveExcursion(ownerId, gameId, classRoom, name, children, distance, day, meteo);
+		storage.saveExcursion(ownerId, gameId, classRoom, name, children, distance, day, weather);
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("saveExcursion[%s]: %s - %s - %s - %s", ownerId, gameId, classRoom, children, distance));
 		}
@@ -261,7 +261,7 @@ public class DashboardController {
 		data.put(paramParticipants, Double.valueOf(children.toString()));
 		data.put(paramClassDistance, distance);
 		data.put(paramDate, date);
-		data.put(paramMeteo, meteo);
+		data.put(paramWeather, weather);
 		ed.setData(data);
 		
 		try {

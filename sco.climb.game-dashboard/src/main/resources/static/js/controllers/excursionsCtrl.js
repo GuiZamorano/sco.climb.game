@@ -16,7 +16,7 @@ angular.module('climbGame.controllers.excursions', [])
         distance: 750,
         gameId: '588889c0e4b0464e16ac40a0',
         lastUpdate: 1486042491236,
-        meteo: 'cloudy',
+        weather: 'cloudy',
         name: 'test1',
         objectId: 'c219c822-35af-4e34-ad81-b39591dd36a2',
         ownerId: 'VELA'
@@ -50,7 +50,7 @@ angular.module('climbGame.controllers.excursions', [])
         date: null,
         children: null,
         distance: null,
-        meteo: 'sunny'
+        weather: 'sunny'
       }
 
       $scope.newExcursion = angular.copy(emptyExcursion)
@@ -66,10 +66,10 @@ angular.module('climbGame.controllers.excursions', [])
           date: $scope.newExcursion.date.getTime(),
           children: $scope.newExcursion.children,
           distance: $scope.newExcursion.distance * 1000,
-          meteo: $scope.newExcursion.meteo
+          weather: $scope.newExcursion.weather
         }
 
-        if (!params.name || !params.date || !params.children || !params.distance || !params.meteo) {
+        if (!params.name || !params.date || !params.children || !params.distance || !params.weather) {
           return
         }
         $mdDialog.show({

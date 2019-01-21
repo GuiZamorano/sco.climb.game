@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="39432cf9-b465-4fb9-b7f9-c7f6cb4c77cb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.context-model/sco.climb.context-model.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/sco.climb.domain.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/model/CalendarDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/model/CalendarDay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/model/Excursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/model/Excursion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/storage/RepositoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/java/it/smartcommunitylab/climb/domain/storage/RepositoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/game-template/calendartrips_v1.vm" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/game-template/calendartrips_v1.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/game-template/classtrips_v1.vm" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/game-template/classtrips_v1.vm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/backend/game/templates/games/tabs/params.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/backend/game/templates/games/tabs/params.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/i18n/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/i18n/es.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/calendarCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/calendarCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/excursionsCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/excursionsCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/services/dataSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/services/dataSrv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/templates/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/templates/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/templates/excursions.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/templates/excursions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/sco.climb.game-dashboard.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/Excursion.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/Excursion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/sco.climb.domain/target/" />
+    <ignored path="$PROJECT_DIR$/sco.climb.context-model/target/" />
+    <ignored path="$PROJECT_DIR$/sco.climb.game-dashboard/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1142957258">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.28" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="1" />
+          <entry key="json" value="1" />
+          <entry key="properties" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="1" />
+          <entry key="JSON" value="1" />
+          <entry key="Properties" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/ClimbDashboardApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="915">
+              <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>meteo</find>
+      <find>Meteo</find>
+      <find>ho capito</find>
+      <find>notific</find>
+      <find>Notificaciones</find>
+      <find>notificaciones</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>weather</replace>
+      <replace>Weather</replace>
+      <replace>OK</replace>
+      <replace>Notifications</replace>
+      <replace>No notifications</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/sco.climb.domain/src/main/resources/application.properties" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="lookForNested" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="1280" />
+    <option name="y" value="24" />
+    <option name="width" value="1280" />
+    <option name="height" value="1416" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+            </path>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="sco.climb.game-dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="sco.climb.game-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="sco.climb.game-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="sco.climb.game-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="sco.climb.game-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548055104929" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ClimbDashboardApp">
+    <configuration name="ClimbDashboardApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sco.climb.game-dashboard" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.smartcommunitylab.climb.gamification.dashboard.ClimbDashboardApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DomainEngineApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sco.climb.domain" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.smartcommunitylab.climb.domain.DomainEngineApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.DomainEngineApp" />
+      <item itemvalue="Spring Boot.ClimbDashboardApp" />
+    </list>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/BurgudyLabs/TimeSlot" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39432cf9-b465-4fb9-b7f9-c7f6cb4c77cb" name="Default Changelist" comment="" />
+      <created>1548035728251</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1548035728251</updated>
+      <workItem from="1548035729740" duration="1639000" />
+      <workItem from="1548053719668" duration="1382000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3021000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1280" y="24" width="1280" height="1416" extended-state="4" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25364667" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32919255" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32919255" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="SBT Console" order="7" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32919255" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" />
+      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/ClimbDashboardApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>climb</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

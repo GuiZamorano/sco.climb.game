@@ -8,7 +8,7 @@ public class Excursion extends BaseObject {
 	private String pedibusGameId;
 	private Date day;
 	private String classRoom;
-	private String meteo;
+	private String weather;
 	private Integer children;
 	private Double distance;
 	private String name;
@@ -19,11 +19,11 @@ public class Excursion extends BaseObject {
 	public void setDay(Date day) {
 		this.day = day;
 	}
-	public String getMeteo() {
-		return meteo;
+	public String getWeather() {
+		return weather;
 	}
-	public void setMeteo(String meteo) {
-		this.meteo = meteo;
+	public void setWeather(String weather) {
+		this.weather = weather;
 	}
 	public String getClassRoom() {
 		return classRoom;

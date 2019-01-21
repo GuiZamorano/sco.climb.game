@@ -163,7 +163,7 @@ angular.module('climbGame.controllers.calendar', [])
               $scope.confirmSend = function () {
                 if (!$scope.sendingData) {
                   $scope.sendingData = true
-                  $scope.todayData.meteo = $scope.selectedWeather
+                  $scope.todayData.weather = $scope.selectedWeather
                   $scope.todayData.day = $scope.week[dayIndex].setHours(0, 0, 0, 0);
                   var babiesMap = {}
                   for (var i = 0; i < $scope.todayData.babies.length; i++) {
@@ -188,7 +188,7 @@ angular.module('climbGame.controllers.calendar', [])
                           '  <div class="cal-dialog-title"> Dati cambiati </div><md-divider></md-divider>' +
                           '  <div class="cal-dialog-text">I dati presenti sono cambiati. </div>' +
                           '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialogChanged()" class=" send-dialog-delete">' +
-                          '      Ho capito' +
+                          '      OK' +
                           '   </div> </md-button>' +
                           '</div></md-dialog>',
                         controller: function DialogController($scope, $mdDialog) {
@@ -250,7 +250,7 @@ angular.module('climbGame.controllers.calendar', [])
               '  <div class="cal-dialog-title"> Dati incompleti  </div><md-divider></md-divider>' +
               '  <div class="cal-dialog-text">{{"cal_data_missing"|translate}}</div>' +
               '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
-              '      Ho capito' +
+              '      OK' +
               '   </div> </md-button>' +
               '</div></md-dialog>',
             controller: function DialogController($scope, $mdDialog) {
@@ -309,7 +309,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
 
       function dataAreComplete() {
-        // meteo and means must  be chosen
+        // weather and means must  be chosen
         if (!$scope.selectedWeather) {
           return false
         }
@@ -437,8 +437,8 @@ angular.module('climbGame.controllers.calendar', [])
                 }
                 $scope.weekData[i][calendar[k].modeMap[property]] = $scope.weekData[i][calendar[k].modeMap[property]] + 1
               }
-              if (calendar[k].meteo) {
-                $scope.weekData[i].meteo = calendar[k].meteo
+              if (calendar[k].weather) {
+                $scope.weekData[i].weather = calendar[k].weather
               }
               // if (calendar[i].closed) {
               $scope.weekData[i].closed = calendar[k].closed

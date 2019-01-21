@@ -783,7 +783,7 @@ public class RepositoryManager {
 					}
 				}
 				Update update = new Update();
-				update.set("meteo", calendarDay.getMeteo());
+				update.set("weather", calendarDay.getWeather());
 				update.set("modeMap", calendarDay.getModeMap());
 				update.set("closed", Boolean.TRUE);
 				update.set("lastUpdate", now);
@@ -980,7 +980,7 @@ public class RepositoryManager {
 
 	
 	public void saveExcursion(String ownerId, String pedibusGameId, String classRoom, 
-			String name, Integer children, Double distance, Date day, String meteo) {
+			String name, Integer children, Double distance, Date day, String weather) {
 		Excursion excursion = new Excursion();
 		Date now = new Date();
 		excursion.setOwnerId(ownerId);
@@ -992,7 +992,7 @@ public class RepositoryManager {
 		excursion.setClassRoom(classRoom);
 		excursion.setChildren(children);
 		excursion.setDistance(distance);
-		excursion.setMeteo(meteo);
+		excursion.setWeather(weather);
 		excursion.setName(name);
 		mongoTemplate.save(excursion);
 	}

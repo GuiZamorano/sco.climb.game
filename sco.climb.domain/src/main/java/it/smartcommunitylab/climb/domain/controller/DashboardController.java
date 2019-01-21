@@ -84,8 +84,8 @@ public class DashboardController extends AuthController {
 	private String paramDate;	
 	
 	@Autowired
-	@Value("${param.meteo}")	
-	private String paramMeteo;
+	@Value("${param.weather}")
+	private String paramWeather;
 	
 	@Autowired
 	@Value("${param.mode}")	
@@ -182,7 +182,7 @@ public class DashboardController extends AuthController {
 				Map<String, Object> data = Maps.newTreeMap();
 				data.put(paramMode, calendarDay.getModeMap().get(childId));
 				data.put(paramDate, System.currentTimeMillis());
-				data.put(paramMeteo, calendarDay.getMeteo());
+				data.put(paramWeather, calendarDay.getWeather());
 				ed.setData(data);
 				
 				try {
@@ -243,7 +243,7 @@ public class DashboardController extends AuthController {
 			@PathVariable String pedibusGameId, 
 			@PathVariable String classRoom,
 			@RequestParam String name, 
-			@RequestParam String meteo, 
+			@RequestParam String weather,
 			@RequestParam Long date, 
 			@RequestParam Integer children, 
 			@RequestParam Double distance, 
@@ -258,7 +258,7 @@ public class DashboardController extends AuthController {
 		}
 		Date day = new Date(date);
 		storage.saveExcursion(ownerId, pedibusGameId, classRoom, name, children, 
-				distance, day, meteo);
+				distance, day, weather);
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("saveExcursion[%s]: %s - %s - %s - %s", ownerId, 
 					pedibusGameId, classRoom, children, distance));
@@ -272,7 +272,7 @@ public class DashboardController extends AuthController {
 		data.put(paramParticipants, Double.valueOf(children.toString()));
 		data.put(paramClassDistance, distance);
 		data.put(paramDate, date);
-		data.put(paramMeteo, meteo);
+		data.put(paramWeather, weather);
 		ed.setData(data);
 		
 		try {

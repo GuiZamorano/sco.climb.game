@@ -62,19 +62,19 @@
         </md-input-container>
         -->
       <label>{{'excursion_form_weather' | translate}}</label>
-      <md-radio-group ng-model="newExcursion.meteo" layout-padding>
+      <md-radio-group ng-model="newExcursion.weather" layout-padding>
         <div layout="row">
           <md-radio-button flex="25" value="sunny" class="md-primary">
-            <i ng-class="{'icon-sun_outline': newExcursion.meteo !== 'sunny', 'icon-sun': newExcursion.meteo === 'sunny'}"></i>
+            <i ng-class="{'icon-sun_outline': newExcursion.weather !== 'sunny', 'icon-sun': newExcursion.weather === 'sunny'}"></i>
           </md-radio-button>
           <md-radio-button flex="25" value="cloudy" class="md-primary">
-            <i ng-class="{'icon-cloudy_outline': newExcursion.meteo !== 'cloudy', 'icon-cloudy': newExcursion.meteo === 'cloudy'}"></i>
+            <i ng-class="{'icon-cloudy_outline': newExcursion.weather !== 'cloudy', 'icon-cloudy': newExcursion.weather === 'cloudy'}"></i>
           </md-radio-button>
           <md-radio-button flex="25" value="rain" class="md-primary">
-            <i ng-class="{'icon-rain_outline': newExcursion.meteo !== 'rain', 'icon-rain': newExcursion.meteo === 'rain'}"></i>
+            <i ng-class="{'icon-rain_outline': newExcursion.weather !== 'rain', 'icon-rain': newExcursion.weather === 'rain'}"></i>
           </md-radio-button>
           <md-radio-button flex="25" value="snow" class="md-primary">
-            <i ng-class="{'icon-snow_outline': newExcursion.meteo !== 'snow', 'icon-snow': newExcursion.meteo === 'snow'}"></i>
+            <i ng-class="{'icon-snow_outline': newExcursion.weather !== 'snow', 'icon-snow': newExcursion.weather === 'snow'}"></i>
           </md-radio-button>
         </div>
       </md-radio-group>
@@ -96,7 +96,7 @@
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-sm card-media">
-                  <i class="meteo" ng-class="{'icon-sun': ex.meteo === 'sunny', 'icon-cloudy': ex.meteo === 'cloudy', 'icon-rain': ex.meteo === 'rain', 'icon-snow': ex.meteo === 'snow'}"></i>
+                  <i class="weather" ng-class="{'icon-sun': ex.weather === 'sunny', 'icon-cloudy': ex.weather === 'cloudy', 'icon-rain': ex.weather === 'rain', 'icon-snow': ex.weather === 'snow'}"></i>
                 </div>
               </md-card-title-media>
             </md-card-title>

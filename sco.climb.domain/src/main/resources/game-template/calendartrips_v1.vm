@@ -26,19 +26,19 @@ function Double getDistanceByMode(String mode) {
 	return ret;
 }
 
-function Double getMeteoBonus(String meteo) {
-	//constants for meteo bonuses
+function Double getWeatherBonus(String weather) {
+	//constants for weather bonuses
 	Double const_cloudy_bonus = $params.const_cloudy_bonus#[[.0]]#;
 	Double const_rain_bonus = $params.const_rain_bonus#[[.0]]#;
 	Double const_snow_bonus = $params.const_snow_bonus#[[.0]]#;
 	
 	Double ret = 0.0;
 	
-	if(meteo.equals("cloudy"))
+	if(weather.equals("cloudy"))
 		ret = const_cloudy_bonus;
-	else if(meteo.equals("rain"))
+	else if(weather.equals("rain"))
 		ret = const_rain_bonus;
-	else if(meteo.equals("snow"))
+	else if(weather.equals("snow"))
 		ret = const_snow_bonus;
 	else // sunny
 		ret = 0.0;
@@ -102,7 +102,7 @@ end
 rule "trip mode update"
 when 
     Action(id == "PlayerCalendarTrip")
-    InputData( $mode : data["mode"] != null, $mode != "absent", $meteo : data["meteo"] != null, $date : data["school-date"] != null )
+    InputData( $mode : data["mode"] != null, $mode != "absent", $weather : data["weather"] != null, $date : data["school-date"] != null )
     $tot_dist : PointConcept(name == "total_distance")
     $tot_trips : PointConcept(name == "total_trips")
     $mode_dist : PointConcept(name == (String)$mode + "_distance")
@@ -110,20 +110,20 @@ when
     $bonus_dist : PointConcept(name == "bonus_distance")
 then
 	String myMode = (String)$mode;
-	String myMeteo = (String)$meteo;
-	Double meteoBonus = 0.0;
+	String myWeather = (String)$weather;
+	Double weatherBonus = 0.0;
 	Double distance = 0.0;
 		
 	if (myMode.startsWith("zeroImpact") || myMode.equals("pedibus")) {
-		meteoBonus = getMeteoBonus(myMeteo);
-		if (meteoBonus > 0.0) {
-			utils.log("apply meteo Bonus for " + myMeteo + " weather");
+		weatherBonus = getWeatherBonus(myWeather);
+		if (weatherBonus > 0.0) {
+			utils.log("apply weather Bonus for " + myWeather + " weather");
 		}
 		if (myMode.equals("zeroImpact_solo")) {
 			utils.log("apply children independent mobility Bonus");
-			meteoBonus += const_zi_solo_bonus;
+			weatherBonus += const_zi_solo_bonus;
 		}
-		$bonus_dist.setScore($bonus_dist.getScore() + meteoBonus);
+		$bonus_dist.setScore($bonus_dist.getScore() + weatherBonus);
 	}
 	if (! myMode.equals("pedibus")) {
 		utils.log("apply " + myMode + " update");		
@@ -133,7 +133,7 @@ then
 		$tot_trips.setScore($tot_trips.getScore() + 1d);
 	}
 	
-	Double totalUpdate = distance + meteoBonus;
+	Double totalUpdate = distance + weatherBonus;
 	$tot_dist.setScore($tot_dist.getScore() + totalUpdate);  
     
     update($bonus_dist);
@@ -148,7 +148,7 @@ end
 
 rule "trip mode update propagation"
 when
-    Member($mode : inputData["mode"] != null, $mode != "absent", $meteo : inputData["meteo"] != null, $date : inputData["school-date"] != null)
+    Member($mode : inputData["mode"] != null, $mode != "absent", $weather : inputData["weather"] != null, $date : inputData["school-date"] != null)
     Player($playerId : id, team == true)
     $tot_dist : PointConcept(name == "total_distance")
     $tot_trips : PointConcept(name == "total_trips")
@@ -158,16 +158,16 @@ when
 then
   utils.log("apply trip mode update propagation");
 	String myMode = (String)$mode;
-	String myMeteo = (String)$meteo;
-	Double meteoBonus = 0.0;
+	String myWeather = (String)$weather;
+	Double weatherBonus = 0.0;
 	Double distance = 0.0;
 	
 	if (myMode.startsWith("zeroImpact") || myMode.equals("pedibus")) {
-		meteoBonus = getMeteoBonus(myMeteo);
+		weatherBonus = getWeatherBonus(myWeather);
 		if (myMode.equals("zeroImpact_solo")) {
-			meteoBonus += const_zi_solo_bonus;
+			weatherBonus += const_zi_solo_bonus;
 		}
-		$bonus_dist.setScore($bonus_dist.getScore() + meteoBonus);
+		$bonus_dist.setScore($bonus_dist.getScore() + weatherBonus);
 	}
 	if (! myMode.equals("pedibus")) {
 		distance = getDistanceByMode(myMode);
@@ -176,7 +176,7 @@ then
 		$tot_trips.setScore($tot_trips.getScore() + 1d);
 	}
 	
-	Double totalUpdate = distance + meteoBonus;
+	Double totalUpdate = distance + weatherBonus;
 	$tot_dist.setScore($tot_dist.getScore() + totalUpdate);
     
     update($bonus_dist);

@@ -202,7 +202,7 @@ angular.module('climbGame.services.data', [])
         },
         data: {
           'day': data.day,
-          'meteo': data.meteo,
+          'weather': data.weather,
           'modeMap': data.modeMap
         },
         timeout: configService.httpTimout()
@@ -277,7 +277,7 @@ angular.module('climbGame.services.data', [])
     dataService.postExcursion = function (params) {
       var deferred = $q.defer()
 
-      if (!params || !params.name || !params.date || !params.children || !params.distance || !params.meteo) {
+      if (!params || !params.name || !params.date || !params.children || !params.distance || !params.weather) {
         deferred.reject('Invalid or missing data')
         return deferred.promise
       }
@@ -298,7 +298,7 @@ angular.module('climbGame.services.data', [])
           date: params.date,
           children: params.children,
           distance: params.distance,
-          meteo: params.meteo
+          weather: params.weather
         }
       }).then(function (response) {
         deferred.resolve(response.data)

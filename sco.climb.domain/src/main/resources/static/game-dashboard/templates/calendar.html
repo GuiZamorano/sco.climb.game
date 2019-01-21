@@ -57,7 +57,7 @@
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
           <div layout="row" flex="100">
             <div ng-if="weekData[dayIndex].closed" layout="row" flex="100" ng-class="{'cal-today-middle':today(dayIndex)}">
-              <md-button class="md-icon-button single-weather"><i layout="column" flex="100" class="weather-icon" ng-class="{'icon-sun':weekData[dayIndex].meteo=='sunny','icon-cloudy':weekData[dayIndex].meteo=='cloudy','icon-rain':weekData[dayIndex].meteo=='rain','icon-snow':weekData[dayIndex].meteo=='snow'}"></i></md-button>
+              <md-button class="md-icon-button single-weather"><i layout="column" flex="100" class="weather-icon" ng-class="{'icon-sun':weekData[dayIndex].weather=='sunny','icon-cloudy':weekData[dayIndex].weather=='cloudy','icon-rain':weekData[dayIndex].weather=='rain','icon-snow':weekData[dayIndex].weather=='snow'}"></i></md-button>
             </div>
             <div ng-if="!today(dayIndex) && isFuture(dayIndex)" class="cal-header-future" layout="row" flex="100">
               <md-button class="md-icon-button wheater-button "><i layout="column" flex="25" class="weather-icon icon-sun_outline"></i></md-button>

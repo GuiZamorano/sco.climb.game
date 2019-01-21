@@ -154,7 +154,7 @@ angular.module('climbGame.controllers.calendar', [])
               $scope.confirmSend = function () {
                 if (!$scope.sendingData) {
                   $scope.sendingData = true
-                  $scope.todayData.meteo = $scope.selectedWeather
+                  $scope.todayData.weather = $scope.selectedWeather
                   $scope.todayData.day = new Date().setHours(0, 0, 0, 0)
                   var babiesMap = {}
                   for (var i = 0; i < $scope.todayData.babies.length; i++) {
@@ -271,7 +271,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
 
       function dataAreComplete() {
-        // meteo and means must  be chosen
+        // weather and means must  be chosen
         if (!$scope.selectedWeather) {
           return false
         }
@@ -398,8 +398,8 @@ angular.module('climbGame.controllers.calendar', [])
                 }
                 $scope.weekData[i][calendar[k].modeMap[property]] = $scope.weekData[i][calendar[k].modeMap[property]] + 1
               }
-              if (calendar[k].meteo) {
-                $scope.weekData[i].meteo = calendar[k].meteo
+              if (calendar[k].weather) {
+                $scope.weekData[i].weather = calendar[k].weather
               }
               // if (calendar[i].closed) {
               $scope.weekData[i].closed = calendar[k].closed

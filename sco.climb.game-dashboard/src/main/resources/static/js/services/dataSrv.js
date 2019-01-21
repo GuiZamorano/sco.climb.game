@@ -28,14 +28,14 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'GET',
-        url: configService.getCalendarURL() + loginService.getOwnerId() + '/' + loginService.getGameId() + '/' + loginService.getClassRoom(),
+        url: 'api/calendar/123/1/EE 364D',
         params: {
           from: from,
           to: to
         },
         headers: {
-          'Accept': 'application/json',
-          'x-access-token': loginService.getUserToken()
+          'Accept': 'application/json'
+          //'x-access-token': loginService.getUserToken()
         },
         timeout: configService.httpTimout()
       }).then(function (response) {
@@ -72,17 +72,17 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'POST',
-        url: configService.getCalendarURL() + loginService.getOwnerId() + '/' + loginService.getGameId() + '/' + loginService.getClassRoom(),
+        url: 'api/calendar/123/1/EE 364D',
         headers: {
-          'Accept': 'application/json',
-          'x-access-token': loginService.getUserToken()
+          'Accept': 'application/json'
+          //'x-access-token': loginService.getUserToken()
         },
         data: {
           'day': data.day,
           'meteo': data.meteo,
           'modeMap': data.modeMap
         },
-        timeout: configService.httpTimout()
+        //timeout: configService.httpTimout()
       }).then(function (response) {
         deferred.resolve(response.data)
       }, function (reason) {
@@ -97,7 +97,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'GET',
-        url: configService.getStatsURL() + loginService.getOwnerId() + '/' + loginService.getGameId(),
+        url: 'api/stat/123/1',
         headers: {
           'Accept': 'application/json',
           'x-access-token': loginService.getUserToken()

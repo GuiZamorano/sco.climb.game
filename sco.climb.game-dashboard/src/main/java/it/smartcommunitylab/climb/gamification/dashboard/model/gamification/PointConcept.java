@@ -60,6 +60,15 @@ public class PointConcept extends GameConcept {
 		super(name);
 	}
 
+	public PointConcept(String name, double score) {
+		super(name);
+		this.score = score;
+	}
+
+	public PointConcept(){
+
+	}
+
 	@JsonCreator
 	public PointConcept(Map<String, Object> jsonProps) {
 		super(jsonProps);

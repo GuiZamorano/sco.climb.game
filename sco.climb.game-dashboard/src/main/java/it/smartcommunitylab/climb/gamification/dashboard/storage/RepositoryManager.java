@@ -9,6 +9,9 @@ import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusItineraryL
 import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusPlayer;
 import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusTeam;
 import it.smartcommunitylab.climb.gamification.dashboard.model.events.WsnEvent;
+import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.ExecutionDataDTO;
+import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
+import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PointConcept;
 import it.smartcommunitylab.climb.gamification.dashboard.security.DataSetInfo;
 import it.smartcommunitylab.climb.gamification.dashboard.security.Token;
 
@@ -195,7 +198,29 @@ public class RepositoryManager {
 		result.put(Const.CLOSED, closed);
 		return result;
 	}
-	
+
+	public void savePlayerDTO(ExecutionDataDTO executionDataDTO){
+			mongoTemplate.save(executionDataDTO);
+	}
+	public void saveTeamDTO(PlayerStateDTO playerStateDTO){
+		mongoTemplate.save(playerStateDTO);
+	}
+	public void updateTeamDTO(PlayerStateDTO teamDTO, String gameId, String playerId){
+		Query query = new Query(new Criteria("playerId").is(playerId).and("gameId").is(gameId));
+		PlayerStateDTO prevDTO = mongoTemplate.findOne(query, PlayerStateDTO.class);
+		if(prevDTO == null){
+			saveTeamDTO(teamDTO);
+		} else {
+			Update update = new Update();
+			update.set("state", teamDTO.getState());
+			mongoTemplate.updateFirst(query, update, PlayerStateDTO.class);
+		}
+	}
+	public PlayerStateDTO getTeamDTO(String gameId, String playerId){
+			Query query = new Query(new Criteria("gameId").is(gameId).and("playerId").is(playerId));
+			PlayerStateDTO teamDTO = mongoTemplate.findOne(query, PlayerStateDTO.class);
+			return teamDTO;
+	}
 	public void updateCalendarDayFromPedibus(String ownerId, String gameId, String classRoom, 
 			Date day, Map<String, String> modeMap) {
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)

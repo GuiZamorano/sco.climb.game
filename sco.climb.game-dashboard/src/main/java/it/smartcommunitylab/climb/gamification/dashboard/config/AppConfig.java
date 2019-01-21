@@ -26,6 +26,7 @@ import it.smartcommunitylab.climb.gamification.dashboard.exception.StorageExcept
 import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusGame;
 import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusPlayer;
 import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusTeam;
+import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -113,6 +114,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		PedibusGame pedibusGame = new PedibusGame("003658", "UT Austin", new ArrayList<String>(){{
 			add("EE 364D");
 			add("EE 360C"); }}, "1", "Game 1", "Trial Game", "Gui", dateObjectFrom, dateObjectTo);
+		pedibusGame.setGlobalTeam("Class");
 		PedibusTeam pedibusTeam = new PedibusTeam("EE 364D", "1", new ArrayList<String>(){{
 			add("1");add("2");add("3");add("4");add("5");add("6");add("7");}}, 0.0);
 		PedibusPlayer Dylan = new PedibusPlayer("1", "Dylan", "Bray", "EE 364D", "1");
@@ -131,6 +133,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusPlayer(Grayson, "123", true);
 		repositoryManager.savePedibusPlayer(Kevin, "123", true);
 		repositoryManager.savePedibusPlayer(Gui, "123", true);
+		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics
+		teamDTO.setGameId("1");
+		teamDTO.setPlayerId("Class");
+		repositoryManager.updateTeamDTO(teamDTO, "1", "Class");
 		return repositoryManager;
 	}
 	

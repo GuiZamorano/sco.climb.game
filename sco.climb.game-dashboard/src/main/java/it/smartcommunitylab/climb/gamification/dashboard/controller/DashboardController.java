@@ -19,12 +19,7 @@ import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.Poin
 import it.smartcommunitylab.climb.gamification.dashboard.storage.DataSetSetup;
 import it.smartcommunitylab.climb.gamification.dashboard.storage.RepositoryManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -136,19 +131,33 @@ public class DashboardController {
 		}
 		return teams; 
 	}
-	
+
 	@RequestMapping(value = "/api/calendar/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody Boolean saveCalendarDay(@PathVariable String ownerId, 
 			@PathVariable String gameId, @PathVariable String classRoom,
 			@RequestBody CalendarDay calendarDay,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
-			throw new UnauthorizedException("Unauthorized Exception: token not valid");
-		}
 		Map<String, Boolean> result = storage.saveCalendarDay(ownerId, gameId, classRoom, calendarDay);
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("saveCalendarDay[%s]: %s - %s - %s", ownerId, gameId, classRoom, result.toString()));
 		}
+		PlayerStateDTO teamDTO = storage.getTeamDTO(gameId, "Class");
+		double totalScore = 0;
+		if(teamDTO.getState().isEmpty()) { //Populate class with possible stats set to zero.
+			Map<String, Set<Object>> state = new HashMap<>();
+			Set<Object> pointConcepts = new HashSet<>();
+			pointConcepts.add(new PointConcept("total_distance", 0.0));
+			pointConcepts.add(new PointConcept("zeroImpact_solo_distance", 0.0));
+			pointConcepts.add(new PointConcept("zeroImpact_wAdult_distance", 0.0));
+			pointConcepts.add(new PointConcept("pedibus_distance", 0.0));
+			pointConcepts.add(new PointConcept("bus_distance", 0.0));
+			pointConcepts.add(new PointConcept("pandr_distance", 0.0));
+			pointConcepts.add(new PointConcept("car_distance", 0.0));
+			pointConcepts.add(new PointConcept("bonus_distance", 0.0));
+			state.put("PointConcept", pointConcepts);
+			teamDTO.setState(state);
+		}
+
 		if(!result.get(Const.CLOSED)) {
 			for(String childId : calendarDay.getModeMap().keySet()) {
 				ExecutionDataDTO ed = new ExecutionDataDTO();
@@ -161,14 +170,55 @@ public class DashboardController {
 				data.put(paramDate, System.currentTimeMillis());
 				data.put(paramMeteo, calendarDay.getMeteo());
 				ed.setData(data);
-				
+
+				//Add stats to transport mode. Values are currently big so it shows up on statistics page.
+				if(calendarDay.getModeMap().get(childId).equals("zeroImpact_solo")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "zeroImpact_solo_distance");
+					pc.setScore(pc.getScore()+300000);
+					totalScore+=300000;
+				}
+				else if(calendarDay.getModeMap().get(childId).equals("zeroImpact_wAdult")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "zeroImpact_wAdult_distance");
+					pc.setScore(pc.getScore()+8);
+					totalScore+=8;
+				}
+				else if(calendarDay.getModeMap().get(childId).equals("pedibus")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "pedibus_distance");
+					pc.setScore(pc.getScore()+6);
+					totalScore+=6;
+				}
+				else if(calendarDay.getModeMap().get(childId).equals("bus")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "bus_distance");
+					pc.setScore(pc.getScore()+6);
+					totalScore+=6;
+				}
+				else if(calendarDay.getModeMap().get(childId).equals("pandr")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "pandr_distance");
+					pc.setScore(pc.getScore()+5);
+					totalScore+=5;
+				}
+				else if(calendarDay.getModeMap().get(childId).equals("car")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "car_distance");
+					pc.setScore(pc.getScore()+0);
+					totalScore+=0;
+				}
+				else if(calendarDay.getModeMap().get(childId).equals("bonus")){
+					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "bonus_distance");
+					pc.setScore(pc.getScore()+5);
+					totalScore+=5;
+				}
 				try {
-					gengineUtils.executeAction(ed);
+					//gengineUtils.executeAction(ed);
+					storage.savePlayerDTO(ed);
 				} catch (Exception e) {
 					logger.warn(String.format("saveCalendarDay[%s]: error in GE excecute action %s - %s",
 							ownerId, gameId, classRoom));
 				}
-			}			
+			}
+			PointConcept pc = gengineUtils.getPointConcept(teamDTO, "total_distance");
+			pc.setScore(pc.getScore()+totalScore);
+			storage.updateTeamDTO(teamDTO, gameId, "Class");
+
 		}
 		return result.get(Const.MERGED);
 	}
@@ -178,9 +228,7 @@ public class DashboardController {
 			@PathVariable String gameId, @PathVariable String classRoom,
 			@RequestParam Long from, @RequestParam Long to, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
-			throw new UnauthorizedException("Unauthorized Exception: token not valid");
-		}
+
 		Date dateFrom = new Date(from);
 		Date dateTo = new Date(to);
 		List<CalendarDay> result = storage.getCalendarDays(ownerId, gameId, classRoom, dateFrom, dateTo);
@@ -307,13 +355,11 @@ public class DashboardController {
 	@RequestMapping(value = "/api/stat/{ownerId}/{gameId}", method = RequestMethod.GET)
 	public @ResponseBody Stats getStats(@PathVariable String ownerId, @PathVariable String gameId,  
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
-			throw new UnauthorizedException("Unauthorized Exception: token not valid");
-		}
+
 		Stats result = new Stats();
 		PedibusGame game = storage.getPedibusGame(ownerId, gameId);
 		if(game != null) {
-			PlayerStateDTO playerStatus = gengineUtils.getPlayerStatus(gameId, game.getGlobalTeam());
+			PlayerStateDTO playerStatus = storage.getTeamDTO(gameId, "Class");
 			PointConcept pointConcept = gengineUtils.getPointConcept(playerStatus, env.getProperty("score.name"));
 			if(pointConcept != null) {
 				result.setGameScore(pointConcept.getScore());

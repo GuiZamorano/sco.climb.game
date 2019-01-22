@@ -5,7 +5,7 @@ angular.module('climbGame.controllers.stats', [])
 
     $scope.stats = {
       'gameScore': 0,
-      'maxGameScore': 0
+      'maxGameScore': 10000
     }
 
     var data2stats = function (data) {

@@ -144,7 +144,7 @@ angular.module('climbGame', [
               views: {
                 'content@home': {
                   templateUrl: 'templates/statsNew.html',
-                  controller: 'statsNewCtrl'
+                  controller: 'statsCtrl'
                 }
               }
             })

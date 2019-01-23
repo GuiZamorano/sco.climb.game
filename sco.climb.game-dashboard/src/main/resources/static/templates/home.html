@@ -34,6 +34,10 @@
         <md-icon class="material-icons menu-colors">&#xE24B;</md-icon>
         <p>{{'menu_stats' | translate}}</p>
       </md-list-item>
+      <md-list-item ng-click="go('home.statsNew')" ng-class="{'menu-selected' : isCurrentState('home.statsNew')}">
+        <md-icon class="material-icons menu-colors">&#xE24B;</md-icon>
+        <p>{{'menu_stats_new' | translate}}</p>
+      </md-list-item>
       <md-list-item ng-click="changeClass()">
         <md-icon class="material-icons menu-colors">&#xE627;</md-icon>
         <p>{{'menu_change_class' | translate}}</p>

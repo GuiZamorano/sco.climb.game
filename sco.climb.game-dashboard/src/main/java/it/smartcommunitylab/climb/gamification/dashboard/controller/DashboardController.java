@@ -351,7 +351,8 @@ public class DashboardController {
 		}
 		return result;
 	}
-	
+
+	/*Stats page*/
 	@RequestMapping(value = "/api/stat/{ownerId}/{gameId}", method = RequestMethod.GET)
 	public @ResponseBody Stats getStats(@PathVariable String ownerId, @PathVariable String gameId,  
 			HttpServletRequest request, HttpServletResponse response) throws Exception {

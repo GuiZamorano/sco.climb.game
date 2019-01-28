@@ -1,11 +1,16 @@
 /* global angular */
 angular.module('climbGame.controllers.excursions', [])
-  .controller('excursionsCtrl',
-    function ($scope, $window, $mdDialog, dataService) {
+  .controller('excursionsCtrl', ['$scope', '$q', '$http', '$window', '$mdDialog', 'dataService', 'excursionsService',
+    function ($scope, $q, $http, $window, $mdDialog, dataService, excursionsService) {
       $scope.showHints = false
       $scope.datepickerisOpen = false
       $scope.excursions = null
       $scope.sendingData = false
+      $scope.classMap = {}
+      $scope.todayData = {
+              babies: [],
+              means: {}
+            }
 
       /* excursion example
       {
@@ -23,18 +28,35 @@ angular.module('climbGame.controllers.excursions', [])
       }
       */
 
-      $scope.refreshExcursions = function () {
-        dataService.getExcursions().then(
-          function (excursions) {
-            $scope.excursions = excursions
-          },
-          function (reason) {
-            // console.log(reason)
-          }
-        )
-      }
+excursionsService.getClassPlayers().then(
+                      function (players) {
+                        $scope.class = players
+                        for (var i = 0; i < players.length; i++) {
+                          $scope.todayData.babies.push({
+                            name: players[i].name,
+                            surname: players[i].surname,
+                            childId: players[i].childId,
+                            color: ''
+                          })
+                          $scope.classMap[players[i].childId] = players[i]
+                        }
 
-      $scope.refreshExcursions()
+
+                      },
+                      function () {}
+                    )
+//      $scope.refreshExcursions = function () {
+//        dataService.getExcursions().then(
+//          function (excursions) {
+//            $scope.excursions = excursions
+//          },
+//          function (reason) {
+//            // console.log(reason)
+//          }
+//        )
+//      }
+
+      //$scope.refreshExcursions()
 
       $scope.scroll = function (direction) {
         if (direction === 'up') {
@@ -72,18 +94,30 @@ angular.module('climbGame.controllers.excursions', [])
         if (!params.name || !params.date || !params.children || !params.distance || !params.meteo) {
           return
         }
+        $scope.todayData.day = params.date
+        $scope.todayData.meteo = params.meteo
+        $scope.todayData.name = params.name
+        $scope.todayData.distance = params.distance
+        $scope.todayData.children = params.children
+
+        var babiesMap = {}
+        for (var i = 0; i < params.children; i++) {
+                babiesMap[$scope.todayData.babies[i].childId] = 'zeroImpact_solo'
+        }
+
+        $scope.todayData.modeMap = babiesMap
         $mdDialog.show({
           // targetEvent: $event,
           scope: $scope, // use parent scope in template
           preserveScope: true, // do not forget this if use parent scope
           template: '<md-dialog>' +
-            '  <div class="cal-dialog-title"> Invio dati  </div><md-divider></md-divider>' +
-            '  <div class="cal-dialog-text">Invia i dati definitivi al sistema, completata l\'operazione non sarà piu possibile modificarli.</div>' +
+            '  <div class="cal-dialog-title"> Data sending  </div><md-divider></md-divider>' +
+            '  <div class="cal-dialog-text">Send final data to the system \'You will no longer be able to modify it.</div>' +
             '    <div layout="row"  layout-align="start center" ><div layout"column" flex="50" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
-            '      Annulla' +
+            '      Cancel' +
             '   </div> </md-button>' +
             '<div layout"column" flex="50" ><md-button ng-click = "confirmSend()" class = "send-dialog-confirm" > ' +
-            '      Invia' +
+            '      Submit' +
             '    </md-button></div>' +
             '</div></md-dialog>',
           controller: function DialogController($scope, $mdDialog) {
@@ -94,12 +128,12 @@ angular.module('climbGame.controllers.excursions', [])
             $scope.confirmSend = function () {
               if (!$scope.sendingData) {
                 $scope.sendingData = true;
-                dataService.postExcursion(params).then(
+                dataService.sendData($scope.todayData).then(
                   function (data) {
                     // reset form
                     $scope.resetForm()
                       // refresh
-                    $scope.refreshExcursions()
+                    //$scope.refreshExcursions()
                       //close dialog
                     $mdDialog.hide();
                     $scope.sendingData = false;
@@ -121,4 +155,4 @@ angular.module('climbGame.controllers.excursions', [])
         $scope.excursionForm.$setPristine()
         $scope.excursionForm.$setUntouched()
       }
-    })
+    }])

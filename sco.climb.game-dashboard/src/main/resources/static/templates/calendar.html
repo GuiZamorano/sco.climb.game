@@ -36,10 +36,10 @@
     <div layout="column" flex="95">
       <div layout="row" class="state-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_state'|translate| uppercase}}</div>
-        <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-first':today(dayIndex)}" class="cal-header">
+        <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-first':today(day)}" class="cal-header">
           <span ng-if="weekData[dayIndex].closed">{{'cal_header_sent'|translate}}</span>
-          <span ng-if="!today(dayIndex) && isFuture(dayIndex)" class="cal-header-future">{{'cal_send_data_button'|translate}}</span>
-          <span ng-if="today(dayIndex) && !weekData[dayIndex].closed" ng-click="sendData()" class="cal-interactive-button">{{'cal_send_data_button'|translate}}</span>
+          <span ng-if="!today(day) && isFuture(dayIndex)" class="cal-header-future">{{'cal_send_data_button'|translate}}</span>
+          <span ng-if="today(day) && !weekData[dayIndex].closed" ng-click="sendData()" class="cal-interactive-button">{{'cal_send_data_button'|translate}}</span>
         </div>
       </div>
       <div layout="row" class="days-row">
@@ -49,22 +49,33 @@
             <md-button class="md-icon-button week-button" ng-click="nextWeek()"><i layout="column" flex="25" class="icon-arrow_right"></i></md-button>
           </div>
         </div>
-        <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header" ng-class="{'cal-today-middle':today(dayIndex),'cal-header-future':isFuture(dayIndex)}">{{day |date:'EEEE MM-dd'}}</div>
+        <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header" ng-class="{'cal-today-middle':today(day),'cal-header-future':isFuture(dayIndex)}">
+          <div ng-if="weekData[dayIndex].closed">
+            {{ getEventName(day) }}
+          </div>
+          <div ng-if="today(day)" md-input-container class="md-block">
+            <form novalidate name="eventForm">
+          <md-input-container class="md-block">
+          <input id="text1" type="text" ng-model="inputVal.name"/>
+          </md-input-container>
+            </form>
+          </div>
+      </div>
       </div>
       <div layout="row" class="weather-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_clima'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
           <div layout="row" flex="100">
-            <div ng-if="weekData[dayIndex].closed" layout="row" flex="100" ng-class="{'cal-today-middle':today(dayIndex)}">
+            <div ng-if="weekData[dayIndex].closed" layout="row" flex="100" ng-class="{'cal-today-middle':today(day)}">
               <md-button class="md-icon-button single-weather"><i layout="column" flex="100" class="weather-icon" ng-class="{'icon-sun':weekData[dayIndex].meteo=='sunny','icon-cloudy':weekData[dayIndex].meteo=='cloudy','icon-rain':weekData[dayIndex].meteo=='rain','icon-snow':weekData[dayIndex].meteo=='snow'}"></i></md-button>
             </div>
-            <div ng-if="!today(dayIndex) && isFuture(dayIndex)" class="cal-header-future" layout="row" flex="100">
+            <div ng-if="!today(day) && isFuture(dayIndex)" class="cal-header-future" layout="row" flex="100">
               <md-button class="md-icon-button wheater-button "><i layout="column" flex="25" class="weather-icon icon-sun_outline"></i></md-button>
               <md-button class="md-icon-button wheater-button "><i layout="column" flex="25" class="weather-icon icon-cloudy_outline"></i></md-button>
               <md-button class="md-icon-button wheater-button "><i layout="column" flex="25" class="weather-icon icon-rain_outline"></i></md-button>
               <md-button class="md-icon-button wheater-button "><i layout="column" flex="25" class="weather-icon icon-snow_outline"></i></md-button>
             </div>
-            <div layout="row" ng-class="{'cal-today-middle':today(dayIndex)}" ng-if="today(dayIndex) && !weekData[dayIndex].closed" flex="100">
+            <div layout="row" ng-class="{'cal-today-middle':today(day)}" ng-if="today(day) && !weekData[dayIndex].closed" flex="100">
               <md-button class="md-icon-button wheater-button cal-interactive-button" ng-click="selectWather('sunny')"><i layout="column" flex="25" class="weather-icon" ng-class="{'icon-sun':selectedWeather=='sunny','icon-sun_outline':selectedWeather!='sunny'}"></i></md-button>
               <md-button class="md-icon-button wheater-button cal-interactive-button" ng-click="selectWather('cloudy')"><i layout="column" flex="25" class="weather-icon" ng-class="{'icon-cloudy':selectedWeather=='cloudy','icon-cloudy_outline':selectedWeather!='cloudy'}"></i></md-button>
               <md-button class="md-icon-button wheater-button cal-interactive-button" ng-click="selectWather('rain')"><i layout="column" flex="25" class="weather-icon" ng-class="{'icon-rain':selectedWeather=='rain','icon-rain_outline':selectedWeather!='rain'}"></i></md-button>
@@ -80,9 +91,9 @@
               {{baby.name}} {{baby.surname}}
               <!--              ******* *******-->
             </div>
-            <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-middle':today(dayIndex),'cal-future-middle':isFuture(dayIndex)}">
-              <md-button ng-if="!today(dayIndex) || weekData[dayIndex].closed" class="cal-baby-cell" ng-class="weekData[dayIndex][baby.childId].color"><span ng-if="weekData[dayIndex][baby.childId].mean=='pedibus'">PEDIBUS</span><span ng-if="weekData[dayIndex][baby.childId].mean=='absent'">A</span> </md-button>
-              <md-button ng-if="today(dayIndex) && !weekData[dayIndex].closed" class="cal-baby-cell" ng-click="selectBabyMean(babyIndex)" ng-class="todayData.babies[babyIndex].color"><span ng-if="todayData.babies[babyIndex].mean=='pedibus'">PEDIBUS</span><span ng-if="todayData.babies[babyIndex].mean=='absent'">A</span></md-button>
+            <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-middle':today(day),'cal-future-middle':isFuture(dayIndex)}">
+              <md-button ng-if="!today(day) || weekData[dayIndex].closed" class="cal-baby-cell" ng-class="weekData[dayIndex][baby.childId].color"><span ng-if="weekData[dayIndex][baby.childId].mean=='pedibus'">PEDIBUS</span><span ng-if="weekData[dayIndex][baby.childId].mean=='absent'">A</span> </md-button>
+              <md-button ng-if="today(day) && !weekData[dayIndex].closed" class="cal-baby-cell" ng-click="selectBabyMean(babyIndex)" ng-class="todayData.babies[babyIndex].color"><span ng-if="todayData.babies[babyIndex].mean=='pedibus'">PEDIBUS</span><span ng-if="todayData.babies[babyIndex].mean=='absent'">A</span></md-button>
             </div>
           </div>
         </md-list>
@@ -96,7 +107,7 @@
       Total
     </div>
     <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index">
-      <div layout="row" ng-if="!today(dayIndex)">
+      <div layout="row" ng-if="!today(day)">
         <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
           <span ng-if="weekData[dayIndex].zeroImpact_solo">{{weekData[dayIndex].zeroImpact_solo}}</span><span ng-if="!weekData[dayIndex].zeroImpact_solo">0</span>
         </div>
@@ -116,7 +127,7 @@
           <span ng-if="weekData[dayIndex].absent">{{weekData[dayIndex].absent}}</span><span ng-if="!weekData[dayIndex].absent">0</span>
         </div>
       </div>
-      <div layout="row" ng-if="today(dayIndex)">
+      <div layout="row" ng-if="today(day)">
         <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
           <span ng-if="todayData.means['zeroImpact_solo']">{{todayData.means['zeroImpact_solo']}}</span><span ng-if="!todayData.means['zeroImpact_solo']">0</span>
         </div>

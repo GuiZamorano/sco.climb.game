@@ -19,7 +19,7 @@ angular.module('climbGame.services.conf', [])
     }
 
     configService.getGameStatusURL = function () {
-      return URL + '/game-dashboard/api/game/status/'
+      return URL + '/api/game/status/'
     }
 
     configService.getCalendarURL = function () {

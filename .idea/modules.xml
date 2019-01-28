@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sco.climb.context-model/sco.climb.context-model.iml" filepath="$PROJECT_DIR$/sco.climb.context-model/sco.climb.context-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sco.climb.domain/sco.climb.domain.iml" filepath="$PROJECT_DIR$/sco.climb.domain/sco.climb.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sco.climb.game-dashboard/sco.climb.game-dashboard.iml" filepath="$PROJECT_DIR$/sco.climb.game-dashboard/sco.climb.game-dashboard.iml" />
+    </modules>
+  </component>
+</project>

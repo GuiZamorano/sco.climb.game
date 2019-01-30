@@ -1,13 +1,6 @@
 <div layout="column" class="stats" layout-padding>
     <div layout="row">
-        <div layout="column" flex="80" flex-offset="10">
-            <h1 class="md-title title-progress">{{'stats_gamescore' | translate:'{done: ' + stats.gameScore + ', total: ' + stats.maxGameScore + '}'}}</h1>
-            <div layout="row" layout-align="start" layout-margin>
-                <h1 class="md-display-1">{{stats.gameScore}}</h1>
-                <md-progress-linear md-mode="determinate" ng-value="getGameScorePercentage()"></md-progress-linear>
-                <h1 class="md-display-1">{{stats.maxGameScore}}</h1>
-            </div>
-        </div>
+        <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stats.gameScore + ', remaining_miles: ' + (stats.maxGameScore - stats.gameScore) + '}'}}</h1>
     </div>
     <div layout="row" layout-align="start center">
         <div flex="50">

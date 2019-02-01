@@ -18,6 +18,7 @@ angular.module('climbGame', [
   'climbGame.controllers.classSelection',
   'climbGame.services.cache',
   'climbGame.services.data',
+  'climbGame.services.excursions',
   'climbGame.services.conf',
   'climbGame.services.map',
   'climbGame.services.login',

@@ -132,12 +132,20 @@ public class DashboardController {
 		return teams; 
 	}
 
+	@RequestMapping(value = "/api/calendar/index", method = RequestMethod.GET)
+	public @ResponseBody Integer getIndex(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		Integer index = storage.getIndex("123");
+
+		return index;
+	}
+
 	@RequestMapping(value = "/api/calendar/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody Boolean saveCalendarDay(@PathVariable String ownerId, 
 			@PathVariable String gameId, @PathVariable String classRoom,
 			@RequestBody CalendarDay calendarDay,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Boolean> result = storage.saveCalendarDay(ownerId, gameId, classRoom, calendarDay);
+		Map<String, Boolean> result = storage.saveCalendarDay(ownerId, gameId, classRoom, calendarDay.getIndex(), calendarDay);
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("saveCalendarDay[%s]: %s - %s - %s", ownerId, gameId, classRoom, result.toString()));
 		}
@@ -226,12 +234,10 @@ public class DashboardController {
 	@RequestMapping(value = "/api/calendar/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody List<CalendarDay> getCalendarDays(@PathVariable String ownerId, 
 			@PathVariable String gameId, @PathVariable String classRoom,
-			@RequestParam Long from, @RequestParam Long to, 
+			@RequestParam Integer from, @RequestParam Integer to,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		Date dateFrom = new Date(from);
-		Date dateTo = new Date(to);
-		List<CalendarDay> result = storage.getCalendarDays(ownerId, gameId, classRoom, dateFrom, dateTo);
+		List<CalendarDay> result = storage.getCalendarDays(ownerId, gameId, classRoom, from, to);
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("getCalendarDays[%s]: %s - %s - %s", ownerId, gameId, classRoom, result.size()));
 		}

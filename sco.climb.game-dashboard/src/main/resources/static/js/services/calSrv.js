@@ -21,6 +21,16 @@ angular.module('climbGame.services.calendar', [])
       });
       return deferr.promise;
     }
+    calendarService.getIndex = function () {
+          var deferr = $q.defer();
+          dataService.getIndex().then(function (data) {
+            //return only the path and the legs
+            deferr.resolve(data);
+          }, function (err) {
+            deferr.reject();
+          });
+          return deferr.promise;
+        }
     calendarService.sendData = function (todayData) {
       var deferr = $q.defer();
       dataService.sendData(todayData).then(function (data) {

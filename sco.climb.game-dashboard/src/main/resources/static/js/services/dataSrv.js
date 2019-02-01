@@ -8,10 +8,10 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'GET',
-        url: configService.getGameStatusURL() + loginService.getOwnerId() + '/' + loginService.getGameId(),
+        url: 'api/game/status/123/1',
         headers: {
-          'Accept': 'application/json',
-          'x-access-token': loginService.getUserToken()
+          'Accept': 'application/json'
+          //'x-access-token': loginService.getUserToken()
         },
         timeout: configService.httpTimout()
       }).then(function (response) {
@@ -47,6 +47,25 @@ angular.module('climbGame.services.data', [])
       return deferred.promise
     }
 
+        dataService.getIndex = function () {
+          var deferred = $q.defer()
+          $http({
+            method: 'GET',
+            url: 'api/calendar/index',
+            headers: {
+              'Accept': 'application/json'
+              //'x-access-token': loginService.getUserToken()
+            },
+            timeout: configService.httpTimout()
+          }).then(function (response) {
+            deferred.resolve(response.data)
+          }, function (reason) {
+            console.log(reason)
+            deferred.reject(reason)
+          })
+          return deferred.promise
+        }
+
     // get components of the class
     dataService.getClassPlayers = function () {
       var deferred = $q.defer()
@@ -58,7 +77,7 @@ angular.module('climbGame.services.data', [])
           'Accept': 'application/json'
          // 'x-access-token': loginService.getUserToken()
         },
-        timeout: configService.httpTimout()
+        //timeout: configService.httpTimout()
       }).then(function (response) {
         deferred.resolve(response.data)
       }, function (reason) {
@@ -79,8 +98,10 @@ angular.module('climbGame.services.data', [])
         },
         data: {
           'day': data.day,
-          'weather': data.weather,
-          'modeMap': data.modeMap
+          'meteo': data.meteo,
+          'modeMap': data.modeMap,
+          'index': data.index,
+          'name' : data.name
         },
         //timeout: configService.httpTimout()
       }).then(function (response) {
@@ -156,18 +177,19 @@ angular.module('climbGame.services.data', [])
 
       $http({
         method: 'POST',
-        url: configService.getExcursionsURL() + loginService.getOwnerId() + '/' + loginService.getGameId() + '/' + loginService.getClassRoom(),
+        url: 'api/calendar/123/1/EE 364D',
         headers: {
           'Accept': 'application/json',
-          'x-access-token': loginService.getUserToken()
+
         },
         timeout: configService.httpTimout(),
         params: {
-          name: params.name,
-          date: params.date,
-          children: params.children,
-          distance: params.distance,
-          weather: params.weather
+          'name': params.name,
+          'day': params.day,
+          //children: params.children,
+          //distance: params.distance,
+          'meteo': params.meteo,
+          'modeMap': data.modeMap
         }
       }).then(function (response) {
         deferred.resolve(response.data)

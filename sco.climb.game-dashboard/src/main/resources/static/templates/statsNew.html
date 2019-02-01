@@ -11,7 +11,7 @@
         </div>
     </div>
     <div layout="row" class="table">
-        <div layout="column" flex="20" class="mode-zeroImpact_solo">
+        <div layout="column" flex="33" class="mode-zeroImpact_solo">
             <div class="header">{{'stats_zeroimpact_solo' | translate}}</div>
             <div class="scroller">
                 <md-button class="md-icon-button" ng-click="scroll('zeroImpact_solo', 'up')">
@@ -33,7 +33,7 @@
                 </div>
             </md-content>
         </div>
-        <div layout="column" flex="20" class="mode-zeroImpact_wAdult">
+        <div layout="column" flex="33" class="mode-zeroImpact_wAdult">
             <div class="header">{{'stats_zeroImpact_wAdult' | translate}}</div>
             <div class="scroller">
                 <md-button class="md-icon-button" ng-click="scroll('zeroImpact_wAdult', 'up')">
@@ -56,7 +56,7 @@
                 </div>
             </md-content>
         </div>
-        <div layout="column" flex="20" class="mode-bus">
+        <div layout="column" flex="33" class="mode-bus">
             <div class="header">{{'stats_bus' | translate}}</div>
             <div class="scroller">
                 <md-button class="md-icon-button" ng-click="scroll('bus', 'up')">
@@ -78,49 +78,77 @@
                 </div>
             </md-content>
         </div>
-        <div layout="column" flex="20" class="mode-pandr">
-            <div class="header">{{'stats_pandr' | translate}}</div>
+
+    </div>
+
+    <div layout="row" class="table">
+        <div layout="column" flex="33" class="mode-zeroImpact_solo">
+            <div class="header">{{'stats_zeroimpact_solo' | translate}}</div>
             <div class="scroller">
-                <md-button class="md-icon-button" ng-click="scroll('pandr', 'up')">
+                <md-button class="md-icon-button" ng-click="scroll('zeroImpact_solo', 'up')">
                     <md-icon class="icon-arrow_up"></md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="scroll('pandr', 'down')">
+                <md-button class="md-icon-button" ng-click="scroll('zeroImpact_solo', 'down')">
                     <md-icon class="icon-arrow_down"></md-icon>
                 </md-button>
             </div>
-            <md-content id="pandr" class="content">
-                <div layout="row" layout-wrap ng-repeat="n in getCount(MathFloor(stats.scoreModeMap.pandr / 10)) track by $index">
+            <md-content id="zeroImpact_solo" class="content">
+                <div layout="row" layout-wrap ng-repeat="n in getCount(MathFloor(stats.scoreModeMap.zeroImpact_solo / 10)) track by $index">
                     <i flex="10" class="icon icon-foot" ng-repeat="i in getCount(10) track by $index"></i>
                     <div flex="100" ng-if="($index + 1) % 10 === 0">
                         <hr>
                     </div>
                 </div>
                 <div layout="row">
-                    <i flex="10" class="icon icon-foot" ng-repeat="n in getCount(stats.scoreModeMap.pandr % 10) track by $index"></i>
+                    <i flex="10" class="icon icon-foot" ng-repeat="n in getCount(stats.scoreModeMap.zeroImpact_solo % 10) track by $index"></i>
                 </div>
             </md-content>
         </div>
-        <div layout="column" flex="20" class="bonus">
-            <div class="header">{{'stats_bonus' | translate}}</div>
+        <div layout="column" flex="33" class="mode-zeroImpact_wAdult">
+            <div class="header">{{'stats_zeroImpact_wAdult' | translate}}</div>
             <div class="scroller">
-                <md-button class="md-icon-button" ng-click="scroll('bonus', 'up')">
+                <md-button class="md-icon-button" ng-click="scroll('zeroImpact_wAdult', 'up')">
                     <md-icon class="icon-arrow_up"></md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="scroll('bonus', 'down')">
+                <md-button class="md-icon-button" ng-click="scroll('zeroImpact_wAdult', 'down')">
                     <md-icon class="icon-arrow_down"></md-icon>
                 </md-button>
             </div>
-            <md-content id="bonus" class="content">
-                <div layout="row" layout-wrap ng-repeat="n in getCount(MathFloor(stats.scoreModeMap.bonus / 10)) track by $index">
-                    <i flex="10" class="icon icon-star" ng-repeat="i in getCount(10) track by $index"></i>
+            <md-content id="zeroImpact_wAdult" class="content">
+                <!--stats.scoreModeMap.zeroImpact_wAdult-->
+                <div layout="row" layout-wrap ng-repeat="n in getCount(MathFloor(stats.scoreModeMap.zeroImpact_wAdult / 10)) track by $index">
+                    <i flex="10" class="icon icon-foot" ng-repeat="i in getCount(10) track by $index"></i>
                     <div flex="100" ng-if="($index + 1) % 10 === 0">
                         <hr>
                     </div>
                 </div>
                 <div layout="row">
-                    <i flex="10" class="icon icon-star" ng-repeat="n in getCount(stats.scoreModeMap.bonus % 10) track by $index"></i>
+                    <i flex="10" class="icon icon-foot" ng-repeat="n in getCount(stats.scoreModeMap.zeroImpact_wAdult % 10) track by $index"></i>
                 </div>
             </md-content>
         </div>
+        <div layout="column" flex="33" class="mode-bus">
+            <div class="header">{{'stats_bus' | translate}}</div>
+            <div class="scroller">
+                <md-button class="md-icon-button" ng-click="scroll('bus', 'up')">
+                    <md-icon class="icon-arrow_up"></md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="scroll('bus', 'down')">
+                    <md-icon class="icon-arrow_down"></md-icon>
+                </md-button>
+            </div>
+            <md-content id="bus" class="content">
+                <div layout="row" layout-wrap ng-repeat="n in getCount(MathFloor(stats.scoreModeMap.bus / 10)) track by $index">
+                    <i flex="10" class="icon icon-foot" ng-repeat="i in getCount(10) track by $index"></i>
+                    <div flex="100" ng-if="($index + 1) % 10 === 0">
+                        <hr>
+                    </div>
+                </div>
+                <div layout="row">
+                    <i flex="10" class="icon icon-foot" ng-repeat="n in getCount(stats.scoreModeMap.bus % 10) track by $index"></i>
+                </div>
+            </md-content>
+        </div>
+
     </div>
 </div>

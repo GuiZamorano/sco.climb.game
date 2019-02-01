@@ -7,7 +7,7 @@
   "menu_change_class": "Cambiar La Clase",
   "menu_logout": "Cerrar Sesión",
   "stats_gamescore": "¡Has alcanzado {{done}} km en {{total}}!",
-  "stats_update": "Has viajado {{miles}} millas. Te quedan {{remaining_miles}} millas para ir",
+  "stats_update": "¡Has viajado {{miles}} millas! Te quedan {{remaining_miles}} millas para ir",
   "stats_ranking_global": "Estadísticas Globales:",
   "stats_legenda": "Leyenda:",
   "stats_zeroimpact_solo": "A pie o en bicicleta solo o en bicicleta con amigos",

@@ -11,11 +11,7 @@ import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.Poin
 import it.smartcommunitylab.climb.gamification.dashboard.security.DataSetInfo;
 import it.smartcommunitylab.climb.gamification.dashboard.security.Token;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -161,6 +157,27 @@ public class RepositoryManager {
 		Boolean merged = Boolean.FALSE; 
 		Boolean closed = Boolean.FALSE;
 		if(calendarDayDB == null) {
+			Iterator it = calendarDay.getModeMap().entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry pair = (Map.Entry)it.next();
+				if(pair.getValue().equals("zeroImpact_solo")){
+					int EActive = calendarDay.getEActive()+1;
+					calendarDay.setEActive(EActive);
+				}
+				if(pair.getValue().equals("zeroImpact_wAdult")){
+					int VActive = calendarDay.getVActive()+1;
+					calendarDay.setVActive(VActive);
+				}
+				if(pair.getValue().equals("bus")){
+					int FActive = calendarDay.getFActive()+1;
+					calendarDay.setFActive(FActive);
+				}
+				if(pair.getValue().equals("pandr")){
+					int IActive = calendarDay.getIActive()+1;
+					calendarDay.setIActive(IActive);
+				}
+
+			}
 			calendarDay.setCreationDate(now);
 			calendarDay.setLastUpdate(now);
 			calendarDay.setOwnerId(ownerId);
@@ -239,13 +256,18 @@ public class RepositoryManager {
 		PlayerStateDTO prevDTO = mongoTemplate.findOne(query, PlayerStateDTO.class);
 		if(prevDTO == null){
 			saveTeamDTO(teamDTO);
-		} else {
-			if(prevDTO.getState().isEmpty()) {
+		} else if(teamDTO.getState().isEmpty()) {
 				Update update = new Update();
-				update.set("state", teamDTO.getState());
+				update.set("state", prevDTO.getState());
 				mongoTemplate.updateFirst(query, update, PlayerStateDTO.class);
 			}
+			else{
+			Update update = new Update();
+			update.set("state", teamDTO.getState());
+			mongoTemplate.updateFirst(query, update, PlayerStateDTO.class);
 		}
+
+
 	}
 	public PlayerStateDTO getTeamDTO(String gameId, String playerId){
 			Query query = new Query(new Criteria("gameId").is(gameId).and("playerId").is(playerId));

@@ -95,15 +95,6 @@ angular.module('climbGame.controllers.calendar', [])
         case 'pandr':
           color = 'cal-car-square-col'
           break
-        case 'car':
-          color = 'cal-car-school-col'
-          break
-        case 'absent':
-          color = 'cal-away-col'
-          break
-        case 'pedibus':
-          color = 'cal-pedibus-col'
-          break
         }
         return color
       }
@@ -252,8 +243,33 @@ angular.module('climbGame.controllers.calendar', [])
                                           setTodayIndex()
                                           $scope.todayData = {
                                                                                       babies: [],
-                                                                                      means: {}
+                                                                                      means: {},
+                                                                                      meteo : '',
+                                                                                      name : ''
                                                                                     }
+                                                                                    calendarService.getClassPlayers().then(
+                                                                                            function (players) {
+                                                                                              $scope.class = players
+                                                                                              for (var i = 0; i < players.length; i++) {
+                                                                                                $scope.todayData.babies.push({
+                                                                                                  name: players[i].name,
+                                                                                                  surname: players[i].surname,
+                                                                                                  childId: players[i].childId,
+                                                                                                  color: ''
+                                                                                                })
+                                                                                                $scope.classMap[players[i].childId] = players[i]
+                                                                                              }
+
+                                                                                              calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
+                                                                                                function (calendar) {
+                                                                                                  createWeekData(calendar)
+                                                                                                  updateTodayData(calendar)
+                                                                                                },
+                                                                                                function () {}
+                                                                                              )
+                                                                                            },
+                                                                                            function () {}
+                                                                                          )
                                           }
                                     )
 

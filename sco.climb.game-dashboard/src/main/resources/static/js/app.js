@@ -18,6 +18,7 @@ angular.module('climbGame', [
   'climbGame.controllers.classSelection',
   'climbGame.services.cache',
   'climbGame.services.data',
+  'climbGame.services.excursions',
   'climbGame.services.conf',
   'climbGame.services.map',
   'climbGame.services.login',
@@ -139,6 +140,15 @@ angular.module('climbGame', [
           }
         }
       })
+      .state('home.statsNew', {
+              url: 'statsNew',
+              views: {
+                'content@home': {
+                  templateUrl: 'templates/statsNew.html',
+                  controller: 'statsCtrl'
+                }
+              }
+            })
       .state('home.stats', {
         url: 'stats',
         views: {

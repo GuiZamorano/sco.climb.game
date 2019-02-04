@@ -9,6 +9,8 @@ import java.util.Map;
 public class CalendarDay extends BaseObject {
 	private String gameId;
 	private Date day;
+	private String name;
+	private Integer index;
 	private String classRoom;
 	private String weather;
 	private Map<String, String> modeMap = new HashMap<String, String>();
@@ -50,6 +52,21 @@ public class CalendarDay extends BaseObject {
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
-	
-	
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
 }

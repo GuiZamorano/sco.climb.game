@@ -362,9 +362,7 @@ public class GamificationController {
 	public @ResponseBody void createPedibusItineraryLeg(@PathVariable String ownerId, 
 			@RequestBody PedibusItineraryLeg leg, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
-			throw new UnauthorizedException("Unauthorized Exception: token not valid");
-		}
+
 
 		try {
 			leg.setLegId(getUUID());
@@ -449,9 +447,7 @@ public class GamificationController {
 	@RequestMapping(value = "/api/game/status/{ownerId}/{gameId}", method = RequestMethod.GET)
 	public @ResponseBody Map<String, Object> getGameStatus(@PathVariable String ownerId, @PathVariable String gameId, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
-			throw new UnauthorizedException("Unauthorized Exception: token not valid");
-		}
+
 
 		try {
 			PedibusGame game = storage.getPedibusGame(ownerId, gameId);
@@ -471,10 +467,12 @@ public class GamificationController {
 			// teams score
 			List<PedibusTeam> teams = storage.getPedibusTeams(ownerId, gameId);
 			for (PedibusTeam team : teams) {
-				updateGamificationData(team, gameId, team.getClassRoom());
+				//updateGamificationData(team, gameId, team.getClassRoom());
 
 				// find "current" leg
+				//team.setScore(1000000.0);
 				for (PedibusItineraryLeg leg : legs) {
+
 					if (team.getScore() >= leg.getScore()) {
 						team.setPreviousLeg(leg);
 					} else {

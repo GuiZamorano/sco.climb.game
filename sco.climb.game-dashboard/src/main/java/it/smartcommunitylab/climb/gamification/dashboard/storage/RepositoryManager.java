@@ -1,13 +1,9 @@
 package it.smartcommunitylab.climb.gamification.dashboard.storage;
 
 import it.smartcommunitylab.climb.gamification.dashboard.common.Const;
+import it.smartcommunitylab.climb.gamification.dashboard.common.GEngineUtils;
 import it.smartcommunitylab.climb.gamification.dashboard.exception.StorageException;
-import it.smartcommunitylab.climb.gamification.dashboard.model.CalendarDay;
-import it.smartcommunitylab.climb.gamification.dashboard.model.Excursion;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusGame;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusItineraryLeg;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusPlayer;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusTeam;
+import it.smartcommunitylab.climb.gamification.dashboard.model.*;
 import it.smartcommunitylab.climb.gamification.dashboard.model.events.WsnEvent;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.ExecutionDataDTO;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
@@ -23,6 +19,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -31,6 +28,9 @@ import org.springframework.data.mongodb.core.query.Update;
 
 public class RepositoryManager {
 	private static final transient Logger logger = LoggerFactory.getLogger(RepositoryManager.class);
+
+	@Autowired
+	private GEngineUtils gengineUtils;
 	
 	private MongoTemplate mongoTemplate;
 	private String defaultLang;
@@ -135,24 +135,27 @@ public class RepositoryManager {
 	}
 	
 	public List<CalendarDay> getCalendarDays(String ownerId, String gameId, String classRoom,
-			Date from, Date to) {
+			Integer from, Integer to) {
 		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
 				.and("classRoom").is(classRoom);
 		Criteria timeCriteria = new Criteria().andOperator(
-				Criteria.where("day").gte(from),
-				Criteria.where("day").lte(to));
+				Criteria.where("index").gte(from),
+				Criteria.where("index").lte(to));
 		criteria = criteria.andOperator(timeCriteria);
 		Query query = new Query(criteria);
-		query.with(new Sort(Sort.Direction.ASC, "day"));
+		query.with(new Sort(Sort.Direction.ASC, "index"));
 		List<CalendarDay> result = mongoTemplate.find(query, CalendarDay.class);
 		return result;
 	}	
 	
-	public Map<String, Boolean> saveCalendarDay(String ownerId, String gameId, String classRoom,
+	public Map<String, Boolean> saveCalendarDay(String ownerId, String gameId, String classRoom, Integer index,
 			CalendarDay calendarDay) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
+		if(index == null){
+			index = getIndex("123");
+		}
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
-				.and("classRoom").is(classRoom).and("day").is(calendarDay.getDay()));
+				.and("classRoom").is(classRoom).and("index").is(calendarDay.getIndex()));
 		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
 		Date now = new Date();
 		Boolean merged = Boolean.FALSE; 
@@ -165,6 +168,7 @@ public class RepositoryManager {
 			calendarDay.setGameId(gameId);
 			calendarDay.setClassRoom(classRoom);
 			calendarDay.setClosed(true);
+			calendarDay.setIndex(index);
 			mongoTemplate.save(calendarDay);
 		} else {
 			if(calendarDayDB.isClosed()) {
@@ -194,11 +198,36 @@ public class RepositoryManager {
 				mongoTemplate.updateFirst(query, update, CalendarDay.class);				
 			}
 		}
+		int updateIndex = index;
+		updateIndex++;
+		Index indexClass = new Index();
+		indexClass.index = updateIndex;
+		indexClass.ownerId = "123";
+		saveIndex(indexClass);
 		result.put(Const.MERGED, merged);
 		result.put(Const.CLOSED, closed);
 		return result;
 	}
 
+	public void saveIndex(Index index){
+		Query query = new Query(new Criteria("ownerId").is(index.ownerId));
+		Index indexTry = mongoTemplate.findOne(query, Index.class);
+		if(indexTry == null) {
+			mongoTemplate.save(index);
+		} else {
+			Update update = new Update();
+			update.set("index", index.index);
+			mongoTemplate.updateFirst(query, update, Index.class);
+		}
+	}
+	public Integer getIndex(String ownderId){
+		Query query = new Query(new Criteria("ownerId").is(ownderId));
+		Index index = mongoTemplate.findOne(query, Index.class);
+		if(index == null){
+			return 0;
+		}
+		return index.index;
+	}
 	public void savePlayerDTO(ExecutionDataDTO executionDataDTO){
 			mongoTemplate.save(executionDataDTO);
 	}
@@ -211,9 +240,11 @@ public class RepositoryManager {
 		if(prevDTO == null){
 			saveTeamDTO(teamDTO);
 		} else {
-			Update update = new Update();
-			update.set("state", teamDTO.getState());
-			mongoTemplate.updateFirst(query, update, PlayerStateDTO.class);
+			if(prevDTO.getState().isEmpty()) {
+				Update update = new Update();
+				update.set("state", teamDTO.getState());
+				mongoTemplate.updateFirst(query, update, PlayerStateDTO.class);
+			}
 		}
 	}
 	public PlayerStateDTO getTeamDTO(String gameId, String playerId){

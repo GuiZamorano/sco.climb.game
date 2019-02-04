@@ -85,17 +85,7 @@
         <div layout="column" flex="33" class="mode-zeroImpact_solo">
             <div class="header">{{'stats_zeroimpact_solo' | translate}}</div>
             <md-content id="zeroImpact_solo" class="content">
-                <table>
-                    <tr ng-repeat="x in names">
-                        <td ng-if="$odd" style="background-color:#f1f1f1">
-                            {{ x.Name }}</td>
-                        <td ng-if="$even">
-                            {{ x.Name }}</td>
-                        <td ng-if="$odd" style="background-color:#f1f1f1">
-                            {{ x.Country }}</td>
-                        <td ng-if="$even">
-                            {{ x.Country }}</td>
-                    </tr>
+                <h1 class="md-title title-progress">{{stats.closed}}</h1>
                 </table>
             </md-content>
         </div>

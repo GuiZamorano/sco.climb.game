@@ -3,28 +3,32 @@ angular.module('climbGame.controllers.stats', [])
   .controller('statsNewCtrl', function ($scope, $filter, $window, dataService) {
     var KMS_PER_FOOT = 10
 
-    $scope.stats = {
-      'gameScore': 0,
-      'maxGameScore': 10000
-    }
+    $scope.stats
 
     //need data structure with info about all trips
 
     var data2stats = function (data) {
       return {
-        'gameScore': Math.round(data.gameScore / 1000, 0),
-        'maxGameScore': Math.round(data.maxGameScore / 1000, 0),
-        'scoreModeMap': {
-          'zeroImpact_wAdult': Math.floor(data['scoreModeMap']['zeroImpact_wAdult'] / (1000 * KMS_PER_FOOT)),
-          'bus': Math.floor(data['scoreModeMap']['bus'] / (1000 * KMS_PER_FOOT)),
-          'pandr': Math.floor(data['scoreModeMap']['pandr'] / (1000 * KMS_PER_FOOT)),
-          'bonus': Math.floor(data['scoreModeMap']['bonus'] / (1000 * KMS_PER_FOOT)),
-          'zeroImpact_solo': Math.floor(data['scoreModeMap']['zeroImpact_solo'] / (1000 * KMS_PER_FOOT))
-        }
+          'ownerId': data.ownerId,
+          'gameId': data.gameId,
+          'name': data.name,
+          'index': data.index,
+          'classRoom': data.classRoom,
+          'weather': data.weather,
+          'modeMap': {
+              '1': data['modeMap']['1'],
+              '2': data['modeMap']['2'],
+              '3': data['modeMap']['3'],
+              '4': data['modeMap']['4'],
+              '5': data['modeMap']['5'],
+              '6': data['modeMap']['6'],
+              '7': data['modeMap']['7'],
+          },
+          'closed': data.closed
       }
     }
 
-    dataService.getStats().then(
+    dataService.getMathStats().then(
       function (stats) {
         $scope.stats = data2stats(stats)
       },

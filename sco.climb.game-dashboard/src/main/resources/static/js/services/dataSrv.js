@@ -252,5 +252,28 @@ angular.module('climbGame.services.data', [])
       return deferred.promise
     }
 
+    dataService.getMathStats = function(from, to){
+        var deferred = $q.defer()
+        $http({
+            method: 'GET',
+            url:'api/calendar/123/1/EE 364D',
+            params: {
+                from: from,
+                to: to
+            },
+            headers: {
+                'Accept': 'application/json'
+                //'x-access-token': loginService.getUserToken()
+            },
+            timeout: configService.httpTimout()
+        }).then(function (response) {
+            deferred.resolve(response.data)
+        }, function (reason) {
+            console.log(reason)
+            deferred.reject(reason)
+        })
+        return deferred.promise
+
+    }
     return dataService
   })

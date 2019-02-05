@@ -11,6 +11,9 @@ import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.Poin
 import it.smartcommunitylab.climb.gamification.dashboard.security.DataSetInfo;
 import it.smartcommunitylab.climb.gamification.dashboard.security.Token;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.*;
 
 import org.slf4j.Logger;
@@ -30,7 +33,10 @@ public class RepositoryManager {
 	
 	private MongoTemplate mongoTemplate;
 	private String defaultLang;
-	
+
+	private static final SimpleDateFormat shortSdf = new SimpleDateFormat("yyyy-MM-dd");
+
+
 	public RepositoryManager(MongoTemplate template, String defaultLang) {
 		this.mongoTemplate = template;
 		this.defaultLang = defaultLang;
@@ -115,6 +121,14 @@ public class RepositoryManager {
 		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
 		return calendarDayDB;
 	}
+
+	public CalendarDay getCalendarDay(String ownerId, String gameId, String classRoom,
+									  Integer index) {
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom).and("index").is(index));
+		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
+		return calendarDayDB;
+	}
 	
 	public List<Excursion> getExcursions(String ownerId, String gameId, String classRoom,
 			Date from, Date to) {
@@ -141,6 +155,7 @@ public class RepositoryManager {
 		Query query = new Query(criteria);
 		query.with(new Sort(Sort.Direction.ASC, "index"));
 		List<CalendarDay> result = mongoTemplate.find(query, CalendarDay.class);
+		result.add(getCalendarDay(ownerId, gameId, classRoom, Integer.MIN_VALUE));
 		return result;
 	}	
 	
@@ -203,7 +218,7 @@ public class RepositoryManager {
 					}	else if(mode.equals(Const.MODE_PIEDI_ADULTO) && oldMode.equals(Const.MODE_PEDIBUS)) {
 						calendarDay.getModeMap().put(childId, Const.MODE_PEDIBUS);
 					} else if(oldMode.equals(Const.MODE_PEDIBUS)){
-						calendarDay.getModeMap().put(childId, Const.MODE_PEDIBUS);
+						calendarDay.getModeMap().put(childId, Const.MODE_PEDIBUS); // does this change anything???
 						merged = Boolean.TRUE;
 					}
 				}
@@ -301,6 +316,57 @@ public class RepositoryManager {
 				update.set("lastUpdate", now);
 				mongoTemplate.updateFirst(query, update, CalendarDay.class);
 			}
+		}
+	}
+
+	// TODO may not be sending fully populated modeMap if not every student swipes
+	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId, String activityLevel){
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom).and("index").is(Integer.MIN_VALUE));
+		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
+		Date now = new Date();
+		if(calendarDayDB == null) {
+			CalendarDay calendarDay = new CalendarDay();
+
+			calendarDay.setCreationDate(now);
+			calendarDay.setLastUpdate(now);
+
+			Calendar day = Calendar.getInstance();
+			day.set(Calendar.HOUR, 0);
+			day.set(Calendar.MINUTE, 0);
+			day.set(Calendar.SECOND, 0);
+			calendarDay.setDay(day.getTime());
+
+			calendarDay.setOwnerId(ownerId);
+			calendarDay.setObjectId(generateObjectId());
+			calendarDay.setGameId(gameId);
+			calendarDay.setClassRoom(classRoom);
+			Map<String, String> modeMap = new HashMap<String, String>();
+			modeMap.put(studentId, activityLevel);
+			calendarDay.setModeMap(modeMap);
+			calendarDay.setIndex(Integer.MIN_VALUE);
+			mongoTemplate.save(calendarDay);
+		} else {
+			Map<String, String> modeMap = calendarDayDB.getModeMap();
+			modeMap.put(studentId, activityLevel);
+			Update update = new Update();
+			update.set("modeMap", calendarDayDB.getModeMap());
+			update.set("lastUpdate", now);
+			mongoTemplate.updateFirst(query, update, CalendarDay.class);
+		}
+	}
+
+	public void clearBabySwipes(String ownerId, String gameId, String classRoom){
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom).and("index").is(Integer.MIN_VALUE));
+		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
+		if(calendarDayDB != null) {
+			Map<String, String> modeMap = calendarDayDB.getModeMap();
+			modeMap.clear();
+			Update update = new Update();
+			update.set("modeMap", calendarDayDB.getModeMap());
+			update.set("lastUpdate", new Date());
+			mongoTemplate.updateFirst(query, update, CalendarDay.class);
 		}
 	}
 	

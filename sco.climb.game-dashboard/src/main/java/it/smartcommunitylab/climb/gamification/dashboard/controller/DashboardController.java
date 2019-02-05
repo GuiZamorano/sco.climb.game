@@ -85,6 +85,13 @@ public class DashboardController {
 	@Autowired
 	@Value("${param.class.distance}")	
 	private String paramClassDistance;
+
+	private final Map<Integer,String> piActivity = new HashMap<Integer,String>() {{
+		put(0, "pandr");
+		put(1, "bus");
+		put(2, "zeroImpact_wAdult");
+		put(3, "zeroImpact_solo");
+	}};
 	
 	@RequestMapping(value = "/api/player/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody List<PedibusPlayer> getPlayersByClassRoom1(@PathVariable String ownerId,
@@ -243,7 +250,33 @@ public class DashboardController {
 		}
 		return result;
 	}
-	
+
+	@RequestMapping(value = "/api/calendar/swipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody CalendarDay getBabySwipes(@PathVariable String ownerId,
+												 @PathVariable String gameId, @PathVariable String classRoom,
+												 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return storage.getCalendarDay(ownerId, gameId, classRoom, Integer.MIN_VALUE);
+	}
+
+	@RequestMapping(value = "/api/calendar/swipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
+	public @ResponseBody boolean submitBabySwipe(@PathVariable String ownerId,
+			@PathVariable String gameId, @PathVariable String classRoom,
+			@RequestParam Long rfid, @RequestParam Integer activityLevel,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		storage.submitBabySwipe(ownerId, gameId, classRoom, rfid.toString(), piActivity.get(activityLevel));
+		return true;
+	}
+
+	@RequestMapping(value = "/api/calendar/swipes/clear/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody void clearBabySwipes(@PathVariable String ownerId,
+												 @PathVariable String gameId, @PathVariable String classRoom,
+												 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		storage.clearBabySwipes(ownerId, gameId, classRoom);
+	}
+
 	@RequestMapping(value = "/api/excursion/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody void saveExcursion(@PathVariable String ownerId, 
 			@PathVariable String gameId, @PathVariable String classRoom,

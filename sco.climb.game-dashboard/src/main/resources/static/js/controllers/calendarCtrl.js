@@ -275,6 +275,7 @@ angular.module('climbGame.controllers.calendar', [])
 
                     }
                     $scope.closeDialog()
+                    calendarService.clearSwipes()
                   }, function () {
                     // TODO get error
                     $scope.sendingData = false
@@ -375,6 +376,13 @@ angular.module('climbGame.controllers.calendar', [])
         return false
       }
 
+      function isSwipesEntry(dayFromData, indexOfWeek) {
+        if(dayFromData.index < 0 && $scope.Index == $scope.week[indexOfWeek]) {
+            return true
+        }
+        return false
+      }
+
       function setTodayIndex() {
         /* set the day of week */
         //var day = new Date().getDay()
@@ -467,7 +475,7 @@ angular.module('climbGame.controllers.calendar', [])
             // if calendar[i] esiste vado avanti
           if (calendar[k]) {
             // se giorno della settimana coincide con calendar.day vado avanti altrimenti skip
-            if (checkDayOfTheWeek(calendar[k], i)) {
+            if (checkDayOfTheWeek(calendar[k], i) || isSwipesEntry(calendar[k], i)) {
               for (var property in calendar[k].modeMap) {
                 $scope.weekData[i][property] = {
                   mean: calendar[k].modeMap[property]
@@ -482,9 +490,13 @@ angular.module('climbGame.controllers.calendar', [])
                 $scope.weekData[i].meteo = calendar[k].meteo
               }
               // if (calendar[i].closed) {
-              $scope.weekData[i].closed = calendar[k].closed
-
-              $scope.weekName[i] = calendar[k].name
+              if(isSwipesEntry(calendar[k], i)) {
+                calendar[k].index = $scope.Index
+                $scope.weekData[i].closed = false
+              } else {
+                $scope.weekData[i].closed = calendar[k].closed
+                $scope.weekName[i] = calendar[k].name
+              }
 
               k++
             } else {

@@ -53,5 +53,17 @@ angular.module('climbGame.services.calendar', [])
       });
       return deferr.promise;
     }
+
+    calendarService.clearSwipes = function () {
+      var deferr = $q.defer();
+      dataService.clearSwipes().then(function (data) {
+        //return only the path and the legs
+        deferr.resolve(data);
+      }, function (err) {
+        deferr.reject();
+      });
+      return deferr.promise;
+    }
+
     return calendarService;
   });

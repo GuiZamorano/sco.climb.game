@@ -446,6 +446,17 @@ md-sidenav {
   margin-right: 20px;
 }
 
+.time-row {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.without_ampm::-webkit-datetime-edit-ampm-field {
+   display: none;
+ }
+
 .weather-icon {
   line-height: 50px;
   font-size: 22px;

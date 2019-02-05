@@ -84,6 +84,37 @@
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+      <!-- TODO: inputVal.name needs to be changed. id probably needs to be changed.-->
+      <div layout="row" class="time-row">
+        <div layout="column" flex="25" class="cal-header">{{'cal_header_time'|translate| uppercase}}</div>
+        <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
+          <div ng-if="weekData[dayIndex].closed">
+            {{ getEventName(day) }}
+          </div>
+          <div ng-if="today(day)" md-input-container class="md-block">
+            <form novalidate name="eventForm">
+              <md-input-container class="md-block">
+                <input id="time1" type="time" ng-model="inputVal.duration" class="without_ampm" step="60"/>
+              </md-input-container>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
       <md-content id="table" class="baby-list">
         <md-list class="cal-listbabies">
           <div layout="row" ng-repeat="baby in class track by $index" ng-init="babyIndex = $index" class="cal-baby">

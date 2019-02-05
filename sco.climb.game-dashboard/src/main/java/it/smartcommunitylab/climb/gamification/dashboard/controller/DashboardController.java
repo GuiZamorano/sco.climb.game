@@ -86,11 +86,12 @@ public class DashboardController {
 	@Value("${param.class.distance}")	
 	private String paramClassDistance;
 
-	Map<Integer,String> piActivity = new HashMap<Integer,String>() {{
-		put(1, "zeroImpact_solo");
+	private final Map<Integer,String> piActivity = new HashMap<Integer,String>() {{
+		put(0, "pandr");
+		put(1, "bus");
 		put(2, "zeroImpact_wAdult");
-		put(3, "pandr");
-	}};  // TODO populate with correct values
+		put(3, "zeroImpact_solo");
+	}};
 	
 	@RequestMapping(value = "/api/player/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody List<PedibusPlayer> getPlayersByClassRoom1(@PathVariable String ownerId,

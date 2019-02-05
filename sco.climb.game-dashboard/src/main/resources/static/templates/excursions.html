@@ -24,28 +24,64 @@
         </div>
       </md-input-container>
       <div layout="row">
-        <!-- Numero bambini -->
-        <md-input-container class="md-block">
-          <!--md-no-float-->
-          <label>{{'excursion_form_children_placeholder' | translate}}</label>
-          <input name="children" type="number" max="1000" name="children" ng-model="newExcursion.children" required />
-          <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
-          <div ng-messages="excursionForm.children.$error" ng-if="!showHints && excursionForm.children.$touched">
-            <div ng-message="required">{{'excursion_form_children_error_required' | translate}}</div>
-            <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
-          </div>
-        </md-input-container>
-        <!-- Distanza -->
-        <md-input-container class="md-block">
-          <!--md-no-float-->
-          <label>{{'excursion_form_distance_placeholder' | translate}}</label>
-          <input name="distance" type="number" name="children" ng-model="newExcursion.distance" required />
-          <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
-          <div ng-messages="excursionForm.distance.$error" ng-if="!showHints && excursionForm.distance.$touched">
-            <div ng-message="required">{{'excursion_form_distance_error_required' | translate}}</div>
-            <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
-          </div>
-        </md-input-container>
+        <table>
+          <tr>
+            <td bgcolor="#66bb6a">Extremely Active</td>
+            <td><md-input-container class="md-block">
+              <!--md-no-float-->
+              <label>{{'excursion_form_children_placeholder' | translate}}</label>
+              <input name="childrenEA" type="number" max="1000" name="childrenEA" ng-model="newExcursion.childrenEA" required />
+              <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+              <div ng-messages="excursionForm.children.$error" ng-if="!showHints && excursionForm.children.$touched">
+                <div ng-message="required">{{'excursion_form_children_error_required' | translate}}</div>
+                <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+              </div>
+            </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#ffee58">Very Active</td>
+            <td><md-input-container class="md-block">
+              <!--md-no-float-->
+              <label>{{'excursion_form_children_placeholder' | translate}}</label>
+              <input name="childrenVE" type="number" max="1000" name="childrenVE" ng-model="newExcursion.childrenVA" required />
+              <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+              <div ng-messages="excursionForm.children.$error" ng-if="!showHints && excursionForm.children.$touched">
+                <div ng-message="required">{{'excursion_form_children_error_required' | translate}}</div>
+                <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+              </div>
+            </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#ef5350">Fairly Active</td>
+            <td><md-input-container class="md-block">
+              <!--md-no-float-->
+              <label>{{'excursion_form_children_placeholder' | translate}}</label>
+              <input name="childrenFA" type="number" max="1000" name="childrenFA" ng-model="newExcursion.childrenFA" required />
+              <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+              <div ng-messages="excursionForm.children.$error" ng-if="!showHints && excursionForm.children.$touched">
+                <div ng-message="required">{{'excursion_form_children_error_required' | translate}}</div>
+                <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+              </div>
+            </md-input-container>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#f2f2f2">Inactive</td>
+            <td><md-input-container class="md-block">
+              <!--md-no-float-->
+              <label>{{'excursion_form_children_placeholder' | translate}}</label>
+              <input name="childrenIA" type="number" max="1000" name="childrenIA" ng-model="newExcursion.childrenIA" required />
+              <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
+              <div ng-messages="excursionForm.children.$error" ng-if="!showHints && excursionForm.children.$touched">
+                <div ng-message="required">{{'excursion_form_children_error_required' | translate}}</div>
+                <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
+              </div>
+            </md-input-container>
+            </td>
+          </tr>
+        </table>
       </div>
       <!--
         <md-input-container md-no-float class="md-block">
@@ -101,9 +137,14 @@
               </md-card-title-media>
             </md-card-title>
             <md-card-content>
-              <p class="md-subhead">{{(ex.distance / 1000) % 1 !== 0 ? ((ex.distance / 1000) | number:1) : ((ex.distance / 1000) | number:0)}}
-                {{'excursion_distance' | translate}}</p>
-              <p class="md-subhead">{{'excursion_children' | translate:'{children: ' + ex.children + '}'}}</p>
+              <p class="md-subhead">
+                <ul>
+              <li>Extremely Active: {{ex.eactive}}</li>
+              <li>Very Active: {{ex.vactive}}</li>
+              <li>Fairly Active: {{ex.factive}}</li>
+              <li>Inactive: {{ex.iactive}}</li>
+            </ul>
+              </p>
             </md-card-content>
           </md-card>
         </div>

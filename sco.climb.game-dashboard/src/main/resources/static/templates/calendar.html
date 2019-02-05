@@ -120,12 +120,6 @@
         <div layout="column" flex="15" class="cal-car-square-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
           <span ng-if="weekData[dayIndex].pandr">{{weekData[dayIndex].pandr}}</span><span ng-if="!weekData[dayIndex].pandr">0</span>
         </div>
-        <div layout="column" flex="15" class="cal-car-school-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="weekData[dayIndex].car">{{weekData[dayIndex].car}}</span><span ng-if="!weekData[dayIndex].car">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-away-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="weekData[dayIndex].absent">{{weekData[dayIndex].absent}}</span><span ng-if="!weekData[dayIndex].absent">0</span>
-        </div>
       </div>
       <div layout="row" ng-if="today(day)">
         <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
@@ -139,12 +133,6 @@
         </div>
         <div layout="column" flex="15" class="cal-car-square-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
           <span ng-if="todayData.means['pandr']">{{todayData.means['pandr']}}</span><span ng-if="!todayData.means['pandr']">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-car-school-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="todayData.means['car']">{{todayData.means['car']}}</span><span ng-if="!todayData.means['car']">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-away-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="todayData.means['absent']">{{todayData.means['absent']}}</span><span ng-if="!todayData.means['absent']">0</span>
         </div>
       </div>
     </div>
@@ -169,12 +157,6 @@
       </md-button>
       <md-button aria-label="In macchina fino alla piazzola di sosta " class="md-fab md-raised md-mini cal-car-square-col " ng-click="selectGeneralMean( 'pandr') ">
         <md-tooltip md-visible="cal.meanOpen " md-direction="left ">{{'cal_mean_pandr'|translate}}</md-tooltip>
-      </md-button>
-      <md-button aria-label="In macchina fino a scuola " class="md-fab md-raised md-mini cal-car-school-col " ng-click="selectGeneralMean( 'car') ">
-        <md-tooltip md-visible="cal.meanOpen " md-direction="left ">{{'cal_mean_car'|translate}}</md-tooltip>
-      </md-button>
-      <md-button aria-label="Assente " class="md-fab md-raised md-mini cal-away-col " ng-click="selectGeneralMean( 'absent') ">A
-        <md-tooltip md-visible="cal.meanOpen " md-direction="left ">{{'cal_mean_absent'|translate}}</md-tooltip>
       </md-button>
     </md-fab-actions>
   </md-fab-speed-dial>

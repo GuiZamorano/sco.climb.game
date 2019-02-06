@@ -28,7 +28,7 @@ angular.module('climbGame.controllers.stats', [])
       }
     }
 
-    dataService.getMathStats().then(
+    dataService.getMathStats(0,4).then(
       function (stats) {
         $scope.stats = data2stats(stats)
       },

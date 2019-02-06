@@ -1,6 +1,6 @@
 <div layout="column" class="stats" layout-padding>
     <div layout="row">
-        <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stats.gameScore + ', remaining_miles: ' + (stats.maxGameScore - stats.gameScore) + '}'}}</h1>
+        <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stats.gameId + ', remaining_miles: ' + stats.gameId + '}'}}</h1>
     </div>
     <div layout="row" layout-align="start center">
         <div flex="50">
@@ -85,7 +85,7 @@
         <div layout="column" flex="33" class="mode-zeroImpact_solo">
             <div class="header">{{'stats_zeroimpact_solo' | translate}}</div>
             <md-content id="zeroImpact_solo" class="content">
-                <h1 class="md-title title-progress">{{stats.closed}}</h1>
+                <h1 class="md-title title-progress">{{'menu_class' | translate}}</h1>
                 </table>
             </md-content>
         </div>

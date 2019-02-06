@@ -12,7 +12,11 @@ public class CalendarDay extends BaseObject {
 	private String name;
 	private Integer index;
 	private String classRoom;
-	private String weather;
+	private String meteo;
+	private int EActive=0;
+	private int VActive=0;
+	private int FActive=0;
+	private int IActive=0;
 	private Map<String, String> modeMap = new HashMap<String, String>();
 	private boolean closed = false;
 	
@@ -28,11 +32,11 @@ public class CalendarDay extends BaseObject {
 	public void setDay(Date day) {
 		this.day = day;
 	}
-	public String getWeather() {
-		return weather;
+	public String getMeteo() {
+		return meteo;
 	}
-	public void setWeather(String weather) {
-		this.weather = weather;
+	public void setMeteo(String meteo) {
+		this.meteo = meteo;
 	}
 	public Map<String, String> getModeMap() {
 		return modeMap;
@@ -68,5 +72,38 @@ public class CalendarDay extends BaseObject {
 
 	public void setIndex(Integer index) {
 		this.index = index;
+	}
+
+
+	public int getEActive() {
+		return EActive;
+	}
+
+	public void setEActive(int EActive) {
+		this.EActive = EActive;
+	}
+
+	public int getVActive() {
+		return VActive;
+	}
+
+	public void setVActive(int VActive) {
+		this.VActive = VActive;
+	}
+
+	public int getFActive() {
+		return FActive;
+	}
+
+	public void setFActive(int FActive) {
+		this.FActive = FActive;
+	}
+
+	public int getIActive() {
+		return IActive;
+	}
+
+	public void setIActive(int IActive) {
+		this.IActive = IActive;
 	}
 }

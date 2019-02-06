@@ -373,7 +373,7 @@ md-sidenav {
 }
 
 .cal-foot-friend-col {
-  background-color: #ef5350 !important;
+  background-color: #66bb6a !important;
 }
 
 .cal-foot-adult-col {
@@ -381,11 +381,11 @@ md-sidenav {
 }
 
 .cal-bus-col {
-  background-color: #66bb6a !important;
+  background-color: #ef5350 !important;
 }
 
 .cal-car-square-col {
-  background-color: #1565c0 !important;
+  background-color: #f2f2f2 !important;
 }
 
 .cal-car-school-col {
@@ -480,7 +480,7 @@ md-sidenav {
 }
 
 .body-app {
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .baby-list {
@@ -670,7 +670,6 @@ md-dialog {
 
 .excursions {
   height: 695px;
-  overflow: hidden;
 }
 
 .excursions .form-column {

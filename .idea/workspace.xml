@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de70916f-3419-4d66-8fc5-8add75056280" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/calSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/calSrv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/calendar.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/calendar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/sco.climb.domain/target/" />
     <ignored path="$PROJECT_DIR$/sco.climb.game-dashboard/target/" />
@@ -24,20 +45,21 @@
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="5" />
+          <entry key="css" value="6" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="18" />
-          <entry key="java" value="25" />
-          <entry key="js" value="27" />
-          <entry key="json" value="3" />
+          <entry key="html" value="25" />
+          <entry key="java" value="26" />
+          <entry key="js" value="43" />
+          <entry key="json" value="5" />
           <entry key="ts" value="1" />
           <entry key="txt" value="1" />
           <entry key="xml" value="5" />
@@ -45,11 +67,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="5" />
-          <entry key="HTML" value="18" />
-          <entry key="JAVA" value="25" />
-          <entry key="JSON" value="3" />
-          <entry key="JavaScript" value="27" />
+          <entry key="CSS" value="6" />
+          <entry key="HTML" value="25" />
+          <entry key="JAVA" value="26" />
+          <entry key="JSON" value="5" />
+          <entry key="JavaScript" value="43" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="TypeScript" value="1" />
           <entry key="XML" value="5" />
@@ -58,19 +80,19 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="18" />
-          <entry key="html" value="205" />
-          <entry key="java" value="93" />
-          <entry key="js" value="433" />
+          <entry key="html" value="364" />
+          <entry key="java" value="146" />
+          <entry key="js" value="907" />
           <entry key="json" value="205" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="18" />
-          <entry key="HTML" value="205" />
-          <entry key="JAVA" value="93" />
+          <entry key="HTML" value="364" />
+          <entry key="JAVA" value="146" />
           <entry key="JSON" value="205" />
-          <entry key="JavaScript" value="433" />
+          <entry key="JavaScript" value="907" />
         </counts>
       </usages-collector>
     </session>
@@ -122,8 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+            <state relative-caret-position="102">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -132,19 +154,17 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/translator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-            </state>
+            <state relative-caret-position="-259" />
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsCtrl.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+            <state relative-caret-position="-2195">
+              <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -153,24 +173,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/serv_shared.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/confSrv.js">
+        <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/excursionsCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+            <state relative-caret-position="391">
+              <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/en.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="84" column="54" lean-forward="true" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+            <state relative-caret-position="85">
+              <caret line="5" column="50" lean-forward="true" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -178,17 +193,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/stats.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1173">
+            <state relative-caret-position="85">
               <caret line="5" column="45" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="254" column="4" selection-start-line="254" selection-start-column="4" selection-end-line="254" selection-end-column="4" />
+            <state relative-caret-position="94">
+              <caret line="53" column="36" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -197,19 +212,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/en.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="358" column="5" lean-forward="true" selection-start-line="358" selection-start-column="5" selection-end-line="358" selection-end-column="5" />
+            <state relative-caret-position="136">
+              <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2406">
-              <caret line="236" column="16" selection-start-line="236" selection-start-column="16" selection-end-line="236" selection-end-column="16" />
+            <state relative-caret-position="34">
+              <caret line="2" column="83" selection-start-line="2" selection-start-column="83" selection-end-line="2" selection-end-column="83" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="125" column="39" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -225,22 +249,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>google</find>
-      <find>getstatus</find>
-      <find>leaflet</find>
-      <find>directive</find>
-      <find>stats_ranking_global</find>
-      <find>stats_gamescore</find>
-      <find>=====</find>
-      <find>zero</find>
-      <find>20</find>
-      <find>cal-today-first</find>
-      <find>cal-header</find>
-      <find>legend</find>
-      <find>scroll</find>
-      <find>data2stats</find>
-      <find>ng-controller</find>
-      <find>ng-app</find>
       <find>getG</find>
       <find>sendData</find>
       <find>todayIndex</find>
@@ -250,11 +258,27 @@
       <find>getClassPlayers</find>
       <find>to</find>
       <find>getCalendar</find>
-      <find>get</find>
-      <find>stats.game</find>
       <find>stats.</find>
       <find>storage.updateTeamDTO</find>
       <find>getStats</find>
+      <find>&lt;&lt;&lt;&lt;</find>
+      <find>stats.game</find>
+      <find>get</find>
+      <find>calendarctrl</find>
+      <find>en</find>
+      <find>clos</find>
+      <find>ng-app</find>
+      <find>ng-controller</find>
+      <find>calendarCtrl</find>
+      <find>getstats</find>
+      <find>en.json</find>
+      <find>en.js</find>
+      <find>menu_class</find>
+      <find>menu</find>
+      <find>ex in</find>
+      <find>refreshExcursions</find>
+      <find>dataService.</find>
+      <find>calendar</find>
     </findStrings>
     <replaceStrings>
       <replace>weather</replace>
@@ -271,9 +295,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java" />
-        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java" />
-        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/en.json" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json" />
@@ -281,10 +302,17 @@
         <option value="$PROJECT_DIR$/.idea/compiler.xml" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/calendar.html" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/calSrv.js" />
-        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js" />
-        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/index.html" />
+        <option value="$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/app.js" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/app.js" />
+        <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html" />
         <option value="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js" />
       </list>
     </option>
@@ -313,7 +341,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -391,6 +421,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="i18n" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sco.climb.game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sco.climb" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="sco.climb.game-dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -429,8 +469,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -508,16 +546,18 @@
       <workItem from="1547756575744" duration="6800000" />
       <workItem from="1548706390468" duration="17262000" />
       <workItem from="1549163248010" duration="5296000" />
+      <workItem from="1549481755091" duration="9443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53985000" />
+    <option name="totallyTimeSpent" value="63428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18380567" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12064777" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -527,7 +567,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32740214" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32206404" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -535,7 +575,7 @@
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32740214" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3291815" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3291815" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32851985" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="13" />
@@ -596,85 +636,49 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js</url>
-          <line>117</line>
+          <url>file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js</url>
+          <line>31</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js</url>
+          <line>10</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js</url>
+          <line>254</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js</url>
+          <line>3</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/excursionsCtrl.js</url>
+          <line>44</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/excursionsCtrl.js</url>
+          <line>25</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/calendarCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="421" column="17" selection-start-line="421" selection-start-column="17" selection-end-line="421" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/es.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/it.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/backend/event/event-search-map.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/backend/event/lib/jqueryui/jquery-ui-i18n.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="2" column="947" selection-start-line="2" selection-start-column="947" selection-end-line="2" selection-end-column="947" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/.idea/compiler.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="46" lean-forward="true" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lib/angular/angular-google-maps.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="5" column="58" selection-start-line="5" selection-start-column="58" selection-end-line="5" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/mapSrv.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/mapCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="633" column="32" selection-start-line="633" selection-start-column="23" selection-end-line="633" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/en.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="89" lean-forward="true" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="89" />
         </state>
       </provider>
     </entry>
@@ -684,9 +688,6 @@
           <caret line="5" column="2190" lean-forward="true" selection-start-line="5" selection-start-column="2190" selection-end-line="5" selection-end-column="2190" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/en.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/fonts/climbFont.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -703,18 +704,6 @@
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/home.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="474" column="18" lean-forward="true" selection-start-line="474" selection-start-column="18" selection-end-line="474" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/GamificationController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -722,20 +711,6 @@
           <folding>
             <element signature="e#3110#3131#1" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/templates/console.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="16" lean-forward="true" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/templates/pedibus-game.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="37" column="19" lean-forward="true" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -757,13 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -858,27 +826,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="6" lean-forward="true" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/gamification/PointConcept.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7473">
           <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2406">
-          <caret line="236" column="16" selection-start-line="236" selection-start-column="16" selection-end-line="236" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -889,58 +840,178 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/stats.html">
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/serv_shared.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/confSrv.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1173">
-          <caret line="5" column="45" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="45" />
+        <state relative-caret-position="544">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html">
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/model/CalendarDay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="84" column="54" lean-forward="true" selection-start-line="84" selection-start-column="54" selection-end-line="84" selection-end-column="54" />
+        <state relative-caret-position="108">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#712#713#0" expanded="true" />
+            <element signature="e#732#733#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/storage/RepositoryManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="225" column="60" selection-start-line="225" selection-start-column="60" selection-end-line="225" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/java/it/smartcommunitylab/climb/gamification/dashboard/controller/DashboardController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="358" column="5" lean-forward="true" selection-start-line="358" selection-start-column="5" selection-end-line="358" selection-end-column="5" />
+        <state relative-caret-position="108">
+          <caret line="185" column="59" selection-start-line="185" selection-start-column="59" selection-end-line="185" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/confSrv.js">
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/calendarCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/serv_shared.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="8" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        <state relative-caret-position="2074">
+          <caret line="271" column="21" selection-start-line="271" selection-start-column="21" selection-end-line="271" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/directives.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="63" selection-start-line="1" selection-start-column="63" selection-end-line="1" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="42" column="38" lean-forward="true" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/es.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="60" column="95" selection-start-line="60" selection-start-column="95" selection-end-line="60" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="556" column="1" selection-start-line="556" selection-start-column="1" selection-end-line="556" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/templates/console.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/templates/pedibus-game.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="143" column="8" lean-forward="true" selection-start-line="143" selection-start-column="8" selection-end-line="143" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="161" column="25" selection-start-line="161" selection-start-column="25" selection-end-line="161" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/pg_app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="77" column="23" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/en.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="50" lean-forward="true" selection-start-line="5" selection-start-column="50" selection-end-line="5" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/lang/translator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-259" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/i18n/en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="26" lean-forward="true" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/stats.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="45" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/statsNew.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="83" selection-start-line="2" selection-start-column="83" selection-end-line="2" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/templates/excursions.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="125" column="39" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.domain/src/main/resources/static/game-dashboard/js/controllers/excursionsCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
+        <state relative-caret-position="102">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -949,8 +1020,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="254" column="4" selection-start-line="254" selection-start-column="4" selection-end-line="254" selection-end-column="4" />
+        <state relative-caret-position="94">
+          <caret line="53" column="36" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/excursionsCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2195">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

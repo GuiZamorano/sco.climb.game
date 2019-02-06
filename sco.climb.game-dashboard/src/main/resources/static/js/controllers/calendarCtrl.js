@@ -91,15 +91,6 @@ angular.module('climbGame.controllers.calendar', [])
         case 'pandr':
           color = 'cal-car-square-col'
           break
-        case 'car':
-          color = 'cal-car-school-col'
-          break
-        case 'absent':
-          color = 'cal-away-col'
-          break
-        case 'pedibus':
-          color = 'cal-pedibus-col'
-          break
         }
         return color
       }
@@ -244,16 +235,43 @@ angular.module('climbGame.controllers.calendar', [])
                         }
                       )
                       calendarService.getIndex().then(
-                          function(index) {
-                            $scope.Index = index
-                              setTodayIndex()
-                              $scope.todayData = {
-                                  babies: [],
-                                  means: {}
+                      function(index) {
+                          $scope.Index = index
+                          setTodayIndex()
+                          $scope.todayData = {
+                              babies: [],
+                              means: {},
+                              meteo : '',
+                              name : ''
+                          }
+                          calendarService.getClassPlayers().then(
+                              function (players) {
+                                  $scope.class = players
+                                  for (var i = 0; i < players.length; i++) {
+                                      $scope.todayData.babies.push({
+                                      name: players[i].name,
+                                      surname: players[i].surname,
+                                      childId: players[i].childId,
+                                      color: ''
+                                      })
+                                      $scope.classMap[players[i].childId] = players[i]
+                                   }
+                                   calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
+                                       function (calendar) {
+                                           createWeekData(calendar)
+                                           updateTodayData(calendar)
+                                       },
+                                       function () {}
+                                       )
+                              },
+                              function () {}
+                                                                                          )
                               }
-                          })
+                      )
+
                     }
                     $scope.closeDialog()
+                    calendarService.clearSwipes()
                   }, function () {
                     // TODO get error
                     $scope.sendingData = false
@@ -354,6 +372,13 @@ angular.module('climbGame.controllers.calendar', [])
         return false
       }
 
+      function isSwipesEntry(dayFromData, indexOfWeek) {
+        if(dayFromData.index < 0 && $scope.Index == $scope.week[indexOfWeek]) {
+            return true
+        }
+        return false
+      }
+
       function setTodayIndex() {
         /* set the day of week */
         //var day = new Date().getDay()
@@ -446,7 +471,7 @@ angular.module('climbGame.controllers.calendar', [])
             // if calendar[i] esiste vado avanti
           if (calendar[k]) {
             // se giorno della settimana coincide con calendar.day vado avanti altrimenti skip
-            if (checkDayOfTheWeek(calendar[k], i)) {
+            if (checkDayOfTheWeek(calendar[k], i) || isSwipesEntry(calendar[k], i)) {
               for (var property in calendar[k].modeMap) {
                 $scope.weekData[i][property] = {
                   mean: calendar[k].modeMap[property]
@@ -461,9 +486,13 @@ angular.module('climbGame.controllers.calendar', [])
                 $scope.weekData[i].weather = calendar[k].weather
               }
               // if (calendar[i].closed) {
-              $scope.weekData[i].closed = calendar[k].closed
-
-              $scope.weekName[i] = calendar[k].name
+              if(isSwipesEntry(calendar[k], i)) {
+                calendar[k].index = $scope.Index
+                $scope.weekData[i].closed = false
+              } else {
+                $scope.weekData[i].closed = calendar[k].closed
+                $scope.weekName[i] = calendar[k].name
+              }
 
               k++
             } else {

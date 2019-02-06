@@ -275,5 +275,21 @@ angular.module('climbGame.services.data', [])
         return deferred.promise
 
     }
+
+    dataService.clearSwipes = function () {
+      var deferred = $q.defer()
+        $http({
+          method: 'GET',
+          url: 'api/calendar/swipes/clear/123/1/EE 364D',
+          timeout: configService.httpTimout()
+        }).then(function (response) {
+          deferred.resolve(response.data)
+        }, function (reason) {
+          console.log(reason)
+          deferred.reject(reason)
+        })
+        return deferred.promise
+    }
+
     return dataService
   })

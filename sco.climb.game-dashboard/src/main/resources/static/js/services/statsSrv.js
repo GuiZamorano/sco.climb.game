@@ -1,5 +1,5 @@
-angular.module('climbGame.services.calendar', [])
-    .factory('statsService', function ($q, $filter, dataService, loginService) {
+angular.module('climbGame.services.stats', [])
+    .factory('statsService', function ($q, $filter, dataService) {
         var statsService = {};
         statsService.getMathStats = function (from, to) {
             var deferr = $q.defer();

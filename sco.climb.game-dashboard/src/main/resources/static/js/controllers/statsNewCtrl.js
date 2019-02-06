@@ -1,9 +1,10 @@
 /* global angular */
-angular.module('climbGame.controllers.stats', [])
+angular.module('climbGame.controllers.newStats', [])
   .controller('statsNewCtrl', function ($scope, $filter, $window, dataService) {
     var KMS_PER_FOOT = 10
 
-    $scope.stats
+    $scope.stats = null
+    $scope.index = ''
 
     //need data structure with info about all trips
 
@@ -36,6 +37,15 @@ angular.module('climbGame.controllers.stats', [])
         console.log(reason)
       }
     )
+
+      dataService.getIndex().then(
+          function(index) {
+              $scope.index = index
+              for(var i = 0; i<4; i++){
+                  $scope.meansNumber.push(0)
+              }
+              $scope.refreshExcursions()
+          })
 
     $scope.scroll = function (id, direction) {
       if (direction === 'up') {

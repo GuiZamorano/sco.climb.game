@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.mongodb.MongoClientURI;
 import it.smartcommunitylab.climb.gamification.dashboard.exception.StorageException;
 import it.smartcommunitylab.climb.gamification.dashboard.model.*;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
@@ -98,7 +99,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public MongoTemplate getMongo() throws UnknownHostException, MongoException {
-		return new MongoTemplate(new MongoClient(), dbName);
+		return new MongoTemplate(new MongoClient(new MongoClientURI(
+				"mongodb+srv://dbuser:dbuserpassword@testcluster-msoq5.mongodb.net/test?retryWrites=true")), dbName);
 	}
 
 	@Bean

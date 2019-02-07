@@ -101,7 +101,8 @@ angular.module('climbGame.services.data', [])
           'meteo': data.meteo,
           'modeMap': data.modeMap,
           'index': data.index,
-          'name' : data.name
+          'name' : data.name,
+          'duration' : data.duration
         },
         //timeout: configService.httpTimout()
       }).then(function (response) {

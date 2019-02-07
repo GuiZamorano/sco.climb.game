@@ -4,6 +4,7 @@ angular.module('climbGame.controllers.calendar', [])
     function ($scope, $filter, $window, $interval, $mdDialog, $mdToast, CacheSrv, dataService, calendarService) {
       $scope.week = []
       $scope.weekName = []
+      $scope.weekDuration = []
       $scope.weekNumber = []
       $scope.selectedWeather = ''
       $scope.selectedMean = ''
@@ -344,9 +345,14 @@ angular.module('climbGame.controllers.calendar', [])
             return $scope.weekName[day]
       }
 
+      $scope.getDuration = function(day) {
+        day = day%5
+        return $scope.weekDuration[day]
+      }
+
       function dataAreComplete() {
         // meteo and means must  be chosen
-        if (!$scope.selectedWeather) {
+        if (!$scope.selectedWeather || !$scope.inputVal.name || !$scope.inputVal.duration) {
           return false
         }
         for (var i = 0; i < $scope.todayData.babies.length; i++) {
@@ -486,6 +492,7 @@ angular.module('climbGame.controllers.calendar', [])
               $scope.weekData[i].closed = calendar[k].closed
 
               $scope.weekName[i] = calendar[k].name
+              $scope.weekDuration[i] = calendar[k].duration
 
               k++
             } else {

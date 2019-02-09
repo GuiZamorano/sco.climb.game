@@ -1,6 +1,8 @@
 <div layout="column" class="stats" layout-padding>
     <div layout="row">
-        <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stats.gameId + ', remaining_miles: ' + stats.gameId + '}'}}</h1>
+        <div flex="50" ng-repeat="stat in stats">
+            <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stat.gameId + ', remaining_miles: ' + stat.gameId + '}'}}</h1>
+        </div>
     </div>
     <div layout="row" layout-align="start center">
         <div flex="50">

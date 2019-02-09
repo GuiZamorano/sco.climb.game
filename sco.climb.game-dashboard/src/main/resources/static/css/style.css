@@ -457,6 +457,10 @@ md-sidenav {
    display: none;
  }
 
+#timeInput {
+    margin: 0px;
+}
+
 .weather-icon {
   line-height: 50px;
   font-size: 22px;

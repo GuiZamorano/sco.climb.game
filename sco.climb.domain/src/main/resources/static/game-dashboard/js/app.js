@@ -190,6 +190,15 @@ angular.module('climbGame', [
           }
         }
       })
+      .state('home.newStats', {
+        url: 'newStats',
+        views: {
+          'content@home': {
+            templateUrl: 'templates/statsNew.html',
+            controller: 'statsNewCtrl'
+          }
+        }
+      })
     }
   ])
 

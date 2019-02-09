@@ -1,6 +1,8 @@
 <div layout="column" class="stats" layout-padding>
     <div layout="row">
-        <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stats.gameScore + ', remaining_miles: ' + (stats.maxGameScore - stats.gameScore) + '}'}}</h1>
+        <div flex="50" ng-repeat="stat in stats">
+            <h1 class="md-label"> {{'stats_update' | translate:'{miles:' + stat.gameId + ', remaining_miles: ' + stat.gameId + '}'}}</h1>
+        </div>
     </div>
     <div layout="row" layout-align="start center">
         <div flex="50">
@@ -85,17 +87,7 @@
         <div layout="column" flex="33" class="mode-zeroImpact_solo">
             <div class="header">{{'stats_zeroimpact_solo' | translate}}</div>
             <md-content id="zeroImpact_solo" class="content">
-                <table>
-                    <tr ng-repeat="x in names">
-                        <td ng-if="$odd" style="background-color:#f1f1f1">
-                            {{ x.Name }}</td>
-                        <td ng-if="$even">
-                            {{ x.Name }}</td>
-                        <td ng-if="$odd" style="background-color:#f1f1f1">
-                            {{ x.Country }}</td>
-                        <td ng-if="$even">
-                            {{ x.Country }}</td>
-                    </tr>
+                <h1 class="md-title title-progress">{{'menu_class' | translate}}</h1>
                 </table>
             </md-content>
         </div>

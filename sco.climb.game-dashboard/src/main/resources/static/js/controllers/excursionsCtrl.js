@@ -6,7 +6,9 @@ angular.module('climbGame.controllers.excursions', [])
       $scope.datepickerisOpen = false
       $scope.excursions = null
       $scope.sendingData = false
+      $scope.index = ''
       $scope.classMap = {}
+      $scope.meansNumber = []
       $scope.todayData = {
               babies: [],
               means: {}
@@ -27,6 +29,16 @@ angular.module('climbGame.controllers.excursions', [])
         ownerId: 'VELA'
       }
       */
+dataService.getIndex().then(
+      function(index) {
+      $scope.index = index
+      for(var i = 0; i<4; i++){
+      $scope.meansNumber.push(0)
+      }
+      $scope.refreshExcursions()
+      })
+
+
 
 excursionsService.getClassPlayers().then(
                       function (players) {
@@ -45,18 +57,41 @@ excursionsService.getClassPlayers().then(
                       },
                       function () {}
                     )
-//      $scope.refreshExcursions = function () {
-//        dataService.getExcursions().then(
-//          function (excursions) {
-//            $scope.excursions = excursions
-//          },
-//          function (reason) {
-//            // console.log(reason)
-//          }
-//        )
-//      }
+      $scope.countMeans = function (excursion) {
 
-      //$scope.refreshExcursions()
+      for(var i = 1; i<Object.keys($scope.excursion.modeMap).length+1; i++){
+      if(excursion.modeMap[i] == 'zeroImpact_solo'){
+      $scope.meansNumber[0]++
+      }
+      if(excursion.modeMap[i] == 'zeroImpact_wAdult'){
+            $scope.meansNumber[1]++
+            }
+      if(excursion.modeMap[i] == 'bus'){
+                  $scope.meansNumber[2]++
+                  }
+      if(excursion.modeMap[i] == 'pandr'){
+                        $scope.meansNumber[3]++
+                        }
+
+      }
+      return $scope.meansNumber
+      }
+
+
+
+
+      $scope.refreshExcursions = function () {
+        dataService.getCalendar(0, $scope.index).then(
+          function (excursions) {
+            $scope.excursions = excursions
+          },
+          function (reason) {
+            // console.log(reason)
+          }
+        )
+      }
+
+
 
       $scope.scroll = function (direction) {
         if (direction === 'up') {
@@ -65,14 +100,22 @@ excursionsService.getClassPlayers().then(
           $window.document.getElementById('excursions-list').scrollTop += 50
         }
       }
+       $scope.scrollUp = function () {
+              document.getElementById('table').scrollTop -= 50
+            }
+            $scope.scrollDown = function () {
+              document.getElementById('table').scrollTop += 50
+            }
 
       /* Form */
       var emptyExcursion = {
         name: null,
         date: null,
-        children: null,
-        distance: null,
-        weather: 'sunny'
+        childrenEA: null,
+        childrenVA: null,
+        childrenFA: null,
+        childrenIA: null,
+        meteo: 'sunny'
       }
 
       $scope.newExcursion = angular.copy(emptyExcursion)
@@ -86,23 +129,64 @@ excursionsService.getClassPlayers().then(
         var params = {
           name: $scope.newExcursion.name,
           date: $scope.newExcursion.date.getTime(),
-          children: $scope.newExcursion.children,
-          distance: $scope.newExcursion.distance * 1000,
-          weather: $scope.newExcursion.weather
+          childrenEA: $scope.newExcursion.childrenEA,
+          childrenVA: $scope.newExcursion.childrenVA,
+          childrenFA: $scope.newExcursion.childrenFA,
+          childrenIA: $scope.newExcursion.childrenIA,
+          meteo: $scope.newExcursion.meteo
         }
 
-        if (!params.name || !params.date || !params.children || !params.distance || !params.weather) {
-          return
+        if (!params.name || !params.date || !params.meteo) {
+        return
+        }
+        if (!(params.childrenEA + params.childrenVA + params.childrenFA + params.childrenIA == $scope.todayData.babies.length) ){
+                    $mdDialog.show({
+                      // targetEvent: $event,
+                      scope: $scope, // use parent scope in template
+                      preserveScope: true, // do not forget this if use parent scope
+                      template: '<md-dialog>' +
+                        '  <div class="cal-dialog-title"> Number of Children Incorrect, Just count it out jeez  </div><md-divider></md-divider>' +
+                        '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
+                        '      I understand' +
+                        '   </div> </md-button>' +
+                        '</div></md-dialog>',
+                      controller: function DialogController($scope, $mdDialog) {
+                        $scope.closeDialog = function () {
+                          $mdDialog.hide()
+                        }
+                      }
+                    })
+                    return
         }
         $scope.todayData.day = params.date
         $scope.todayData.meteo = params.meteo
         $scope.todayData.name = params.name
         $scope.todayData.distance = params.distance
-        $scope.todayData.children = params.children
-
+        $scope.todayData.childrenEA = params.childrenEA
+        $scope.todayData.childrenVA = params.childrenVA
+        $scope.todayData.childrenFA = params.childrenFA
+        $scope.todayData.childrenIA = params.childrenIA
+        var count = 0;
         var babiesMap = {}
-        for (var i = 0; i < params.children; i++) {
-                babiesMap[$scope.todayData.babies[i].childId] = 'zeroImpact_solo'
+        for (var i =0; i < params.childrenEA; i++){
+            $scope.todayData.babies[count].mean = 'zeroImpact_solo'
+            count++
+        }
+        for (var i =0; i < params.childrenVA; i++){
+            $scope.todayData.babies[count].mean = 'zeroImpact_wAdult'
+            count++
+        }
+        for (var i =0; i < params.childrenFA; i++){
+            $scope.todayData.babies[count].mean = 'bus'
+            count++
+        }
+        for (var i =0; i < params.childrenIA; i++){
+            $scope.todayData.babies[count].mean = 'pandr'
+            count++
+        }
+        var total = params.childrenEA+params.childrenVA+params.childrenFA+params.childrenIA
+        for (var i = 0; i < total; i++) {
+                babiesMap[$scope.todayData.babies[i].childId] = $scope.todayData.babies[i].mean
         }
 
         $scope.todayData.modeMap = babiesMap

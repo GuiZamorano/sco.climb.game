@@ -7,7 +7,7 @@
 	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>domain</name>
+	<name>sco.climb.domain</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

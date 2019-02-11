@@ -194,28 +194,28 @@ public class DashboardController {
 				}
 				else if(calendarDay.getModeMap().get(childId).equals("zeroImpact_wAdult")){
 					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "zeroImpact_wAdult_distance");
-					pc.setScore(pc.getScore()+8);
-					totalScore+=8;
+					pc.setScore(pc.getScore()+100000);
+					totalScore+=300000;
 				}
 				else if(calendarDay.getModeMap().get(childId).equals("pedibus")){
 					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "pedibus_distance");
-					pc.setScore(pc.getScore()+6);
-					totalScore+=6;
+					pc.setScore(pc.getScore()+100000);
+					totalScore+=100000;
 				}
 				else if(calendarDay.getModeMap().get(childId).equals("bus")){
 					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "bus_distance");
-					pc.setScore(pc.getScore()+6);
-					totalScore+=6;
+					pc.setScore(pc.getScore()+50000);
+					totalScore+=50000;
 				}
 				else if(calendarDay.getModeMap().get(childId).equals("pandr")){
 					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "pandr_distance");
-					pc.setScore(pc.getScore()+5);
-					totalScore+=5;
+					pc.setScore(pc.getScore()+0);
+					totalScore+=0;
 				}
 				else if(calendarDay.getModeMap().get(childId).equals("car")){
 					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "car_distance");
-					pc.setScore(pc.getScore()+0);
-					totalScore+=0;
+					pc.setScore(pc.getScore()+10000);
+					totalScore+=10000;
 				}
 				else if(calendarDay.getModeMap().get(childId).equals("bonus")){
 					PointConcept pc = gengineUtils.getPointConcept(teamDTO, "bonus_distance");
@@ -232,6 +232,11 @@ public class DashboardController {
 			}
 			PointConcept pc = gengineUtils.getPointConcept(teamDTO, "total_distance");
 			pc.setScore(pc.getScore()+totalScore);
+			List<PedibusTeam> pedibusTeams = storage.getPedibusTeams(ownerId, gameId);
+			//need to come back and format, should add to team score
+			PedibusTeam pedibusTeam = pedibusTeams.get(0) ;
+			pedibusTeam.setScore(pedibusTeam.getScore()+totalScore);
+			storage.savePedibusTeam(pedibusTeam, ownerId, true);
 			storage.updateTeamDTO(teamDTO, gameId, "Class");
 
 		}

@@ -30,7 +30,7 @@ angular.module('climbGame.services.calendar', [])
             deferr.reject();
           });
           return deferr.promise;
-        }
+    }
     calendarService.sendData = function (todayData) {
       var deferr = $q.defer();
       dataService.sendData(todayData).then(function (data) {

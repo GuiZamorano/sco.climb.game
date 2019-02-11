@@ -1,51 +1,60 @@
 /* global angular */
 angular.module('climbGame.controllers.newStats', [])
-  .controller('statsNewCtrl', function ($scope, $filter, $window, dataService) {
+  .controller('statsNewCtrl', function ($scope, $filter, $window, dataService, statsService) {
     var KMS_PER_FOOT = 10
-
     $scope.stats = null
+    $scope.currentScore = 0
     $scope.index = ''
+      $scope.totalScore = 5000
 
     //need data structure with info about all trips
-
-    var data2stats = function (data) {
-      return {
-          'ownerId': data.ownerId,
-          'gameId': data.gameId,
-          'name': data.name,
-          'index': data.index,
-          'classRoom': data.classRoom,
-          'weather': data.weather,
-          'modeMap': {
-              '1': data['modeMap']['1'],
-              '2': data['modeMap']['2'],
-              '3': data['modeMap']['3'],
-              '4': data['modeMap']['4'],
-              '5': data['modeMap']['5'],
-              '6': data['modeMap']['6'],
-              '7': data['modeMap']['7'],
-          },
-          'closed': data.closed
-      }
-    }
-
-    dataService.getMathStats(0,4).then(
-      function (stats) {
-        $scope.stats = data2stats(stats)
-      },
-      function (reason) {
-        console.log(reason)
-      }
+      //testing ssh
+      dataService.getIndex().then(
+        function(index) {
+            $scope.index = index
+        }
     )
 
-      dataService.getIndex().then(
-          function(index) {
-              $scope.index = index
-              for(var i = 0; i<4; i++){
-                  $scope.meansNumber.push(0)
-              }
-              $scope.refreshExcursions()
-          })
+
+     statsService.getMathStats(0,$scope.index).then(
+          function (stats) {
+              $scope.stats = data2stats(stats)
+          },
+          function (reason) {
+            console.log(reason)
+      }
+      )
+      var data2stats = function (data) {
+          var ret = []
+          for (i = 0; i < data.length; ++i) {
+              ret.push(data[i]);
+          }
+          return ret;
+      }
+
+    $scope.getCurrentScore = function(){
+        //iterate through each event
+        for(i=0; i<$scope.stats; i++){
+            //iterate through the modeMap of each event
+            for (var property in stats[i].modeMap) {
+                switch(property){
+                    case 'zeroImpact_solo':
+                        $scope.currentScore +=  3
+                        break
+                    case 'zeroImpact_wAdult':
+                        $scope.currentScore +=  2
+                        break
+                    case 'bus':
+                        $scope.currentScore +=  1
+                        break
+                    case 'pandr':
+                        $scope.currentScore +=  0
+                        break
+                }
+            }
+        }
+        return $scope.currentScore;
+    }
 
     $scope.scroll = function (id, direction) {
       if (direction === 'up') {
@@ -77,5 +86,8 @@ angular.module('climbGame.controllers.newStats', [])
       //   TODO: return number of students with activity level
       // }
 
-      $scope.getNumberofStudents
+      $scope.init = function () {
+          statsService.getIndex();
+          statsService.getMathStats();
+      };
   })

@@ -40,24 +40,22 @@ dataService.getIndex().then(
 
 
 
-excursionsService.getClassPlayers().then(
-                      function (players) {
-                        $scope.class = players
-                        for (var i = 0; i < players.length; i++) {
-                          $scope.todayData.babies.push({
-                            name: players[i].name,
-                            surname: players[i].surname,
-                            childId: players[i].childId,
-                            color: ''
-                          })
-                          $scope.classMap[players[i].childId] = players[i]
-                        }
-
-
-                      },
-                      function () {}
-                    )
-      $scope.countMeans = function (excursion) {
+    excursionsService.getClassPlayers().then(
+    function (players) {
+        $scope.class = players
+        for (var i = 0; i < players.length; i++) {
+            $scope.todayData.babies.push({
+                name: players[i].name,
+                surname: players[i].surname,
+                childId: players[i].childId,
+                color: ''
+            })
+            $scope.classMap[players[i].childId] = players[i]
+        }
+    },
+    function () {}
+    )
+    $scope.countMeans = function (excursion) {
 
       for(var i = 1; i<Object.keys($scope.excursion.modeMap).length+1; i++){
       if(excursion.modeMap[i] == 'zeroImpact_solo'){
@@ -77,9 +75,6 @@ excursionsService.getClassPlayers().then(
       return $scope.meansNumber
       }
 
-
-
-
       $scope.refreshExcursions = function () {
         dataService.getCalendar(0, $scope.index).then(
           function (excursions) {
@@ -90,8 +85,6 @@ excursionsService.getClassPlayers().then(
           }
         )
       }
-
-
 
       $scope.scroll = function (direction) {
         if (direction === 'up') {

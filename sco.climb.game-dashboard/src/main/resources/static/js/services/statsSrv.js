@@ -11,4 +11,15 @@ angular.module('climbGame.services.stats', [])
             });
             return deferr.promise;
         }
+
+        statsService.getIndex = function () {
+            var deferr = $q.defer();
+            dataService.getIndex().then(function (data) {
+                deferr.resolve(data);
+            }, function (err) {
+                deferr.reject();
+            });
+            return deferr.promise;
+        }
+        return statsService;
     })

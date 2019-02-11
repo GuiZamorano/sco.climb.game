@@ -94,13 +94,17 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Value("${swagger.license.url}")
 	private String swaggerLicenseUrl;
 
+	@Autowired
+	@Value("${spring.data.mongodb.host}")
+	private String mongodbHost;
+
+
 	public AppConfig() {
 	}
 
 	@Bean
 	public MongoTemplate getMongo() throws UnknownHostException, MongoException {
-		return new MongoTemplate(new MongoClient(new MongoClientURI(
-				"mongodb+srv://dbuser:dbuserpassword@testcluster-msoq5.mongodb.net/test?retryWrites=true")), dbName);
+		return new MongoTemplate(new MongoClient(new MongoClientURI(mongodbHost)), dbName);
 	}
 
 	@Bean

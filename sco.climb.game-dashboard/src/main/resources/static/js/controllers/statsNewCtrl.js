@@ -7,6 +7,7 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.index = ''
 
     //need data structure with info about all trips
+      //testing ssh
 
     var data2stats = function (data) {
         var ret = []

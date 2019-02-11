@@ -1,6 +1,6 @@
 /* global angular */
 angular.module('climbGame.controllers.newStats', [])
-  .controller('statsNewCtrl', function ($scope, $filter, $window, dataService) {
+  .controller('statsNewCtrl', function ($scope, $filter, $window, dataService, statsService) {
     var KMS_PER_FOOT = 10
 
     $scope.stats = null
@@ -9,27 +9,32 @@ angular.module('climbGame.controllers.newStats', [])
     //need data structure with info about all trips
 
     var data2stats = function (data) {
-      return {
-          'ownerId': data.ownerId,
-          'gameId': data.gameId,
-          'name': data.name,
-          'index': data.index,
-          'classRoom': data.classRoom,
-          'weather': data.weather,
-          'modeMap': {
-              '1': data['modeMap']['1'],
-              '2': data['modeMap']['2'],
-              '3': data['modeMap']['3'],
-              '4': data['modeMap']['4'],
-              '5': data['modeMap']['5'],
-              '6': data['modeMap']['6'],
-              '7': data['modeMap']['7'],
-          },
-          'closed': data.closed
-      }
+        var ret = []
+        for (i = 0; i < data.length; ++i) {
+            ret.push(data[i]);
+        }
+        return ret;
+      // return {
+      //     'ownerId': data.ownerId,
+      //     'gameId': data.gameId,
+      //     'name': data.name,
+      //     'index': data.index,
+      //     'classRoom': data.classRoom,
+      //     'weather': data.weather,
+      //     'modeMap': {
+      //         '1': data['modeMap']['1'],
+      //         '2': data['modeMap']['2'],
+      //         '3': data['modeMap']['3'],
+      //         '4': data['modeMap']['4'],
+      //         '5': data['modeMap']['5'],
+      //         '6': data['modeMap']['6'],
+      //         '7': data['modeMap']['7']
+      //     },
+      //     'closed': data.closed
+      // }
     }
 
-    dataService.getMathStats(0,4).then(
+    statsService.getMathStats(0,4).then(
       function (stats) {
         $scope.stats = data2stats(stats)
       },
@@ -38,14 +43,11 @@ angular.module('climbGame.controllers.newStats', [])
       }
     )
 
-      dataService.getIndex().then(
-          function(index) {
-              $scope.index = index
-              for(var i = 0; i<4; i++){
-                  $scope.meansNumber.push(0)
-              }
-              $scope.refreshExcursions()
-          })
+    statsService.getIndex().then(
+        function(index) {
+            $scope.index = index
+      }
+    )
 
     $scope.scroll = function (id, direction) {
       if (direction === 'up') {

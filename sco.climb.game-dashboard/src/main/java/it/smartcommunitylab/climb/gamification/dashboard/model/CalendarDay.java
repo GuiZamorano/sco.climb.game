@@ -15,6 +15,7 @@ public class CalendarDay extends BaseObject {
 	private String meteo;
 
 	private Integer duration;
+	private Integer distance;
 
 	private int EActive=0;
 	private int VActive=0;
@@ -80,6 +81,10 @@ public class CalendarDay extends BaseObject {
 	public Integer getDuration() {return duration;}
 
 	public void setDuration(Integer duration) {this.duration = duration;}
+
+	public Integer getDistance() {return distance;}
+
+	public void setDistance(Integer distance) {this.distance = distance;}
 
 
 	public int getEActive() {

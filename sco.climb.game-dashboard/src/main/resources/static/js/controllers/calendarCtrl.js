@@ -12,6 +12,7 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.labelWeek = ''
       $scope.sendingData = false
       $scope.inputVal = {}
+      $scope.distance = {}
       $scope.cal = {
         meanOpen: false
       }
@@ -170,11 +171,28 @@ angular.module('climbGame.controllers.calendar', [])
               }
 
               $scope.confirmSend = function () {
+                $scope.distance.slow = 1 //red bus
+                $scope.distance.med = 2 //yellow zero with adult
+                $scope.distance.fast = 3 //green zero solo
                 if (!$scope.sendingData) {
                   $scope.sendingData = true
                   $scope.todayData.meteo = $scope.selectedWeather
                   $scope.todayData.name = $scope.inputVal.name
                   $scope.todayData.duration = $scope.inputVal.duration
+
+                  //calculate distance travelled
+                  $scope.distance.means_bus = $scope.todayData.means.bus
+                  $scope.distance.means_zeroImpact_wAdult = $scope.todayData.means.zeroImpact_wAdult
+                  $scope.distance.means_zeroImpact_solo = $scope.todayData.means.zeroImpact_solo
+                  if (typeof $scope.distance.means_bus == "undefined")
+                    $scope.distance.means_bus = 0
+                  if (typeof $scope.distance.means_zeroImpact_wAdult == "undefined")
+                    $scope.distance.means_zeroImpact_wAdult = 0
+                  if (typeof $scope.distance.means_zeroImpact_solo == "undefined")
+                    $scope.distance.means_zeroImpact_solo = 0
+                  $scope.todayData.distance = Number($scope.distance.means_bus) * $scope.distance.slow * Number($scope.todayData.duration)/60 + Number($scope.distance.means_zeroImpact_wAdult) * $scope.distance.med * Number($scope.todayData.duration)/60 + Number($scope.distance.means_zeroImpact_solo) * $scope.distance.fast * Number($scope.todayData.duration)/60
+                  $scope.distance.popup_distance = Number($scope.todayData.distance)
+
                   $scope.todayData.day = new Date().setHours(0, 0, 0, 0)
                   var babiesMap = {}
                   for (var i = 0; i < $scope.todayData.babies.length; i++) {
@@ -227,6 +245,44 @@ angular.module('climbGame.controllers.calendar', [])
                     } else {
                       // sent data
                       $mdToast.show($mdToast.simple().content('Data sending'))
+
+
+
+
+
+
+                        //show math TODO time multiplier
+
+
+                        $mdDialog.show({
+                                    // targetEvent: $event,
+                                    scope: $scope, // use parent scope in template
+                                    preserveScope: true, // do not forget this if use parent scope
+                                    template: '<md-dialog>' +
+
+                                      '  <div class="cal-dialog-title"> {{distance.popup_distance}} miles added! </div><md-divider></md-divider>' +
+                                      '  <div class="cal-dialog-text"># students x speed x time = distance</div>' +
+                                      '  <div class="cal-dialog-text">{{distance.means_bus}} students x {{distance.slow}} mph x {{weekData[(todayIndex-1)%5].duration/60}} hour(s) = {{distance.means_bus*distance.slow*weekData[(todayIndex-1)%5].duration/60}} miles</div>' +
+                                      '  <div class="cal-dialog-text">{{distance.means_zeroImpact_wAdult}} students x {{distance.med}} mph x {{weekData[(todayIndex-1)%5].duration/60}} hour(s) = {{distance.means_zeroImpact_wAdult*distance.med*weekData[(todayIndex-1)%5].duration/60}} miles</div>' +
+                                      '  <div class="cal-dialog-text">{{distance.means_zeroImpact_solo}} students x {{distance.fast}} mph x {{weekData[(todayIndex-1)%5].duration/60}} hour(s) = {{distance.means_zeroImpact_solo*distance.fast*weekData[(todayIndex-1)%5].duration/60}} miles</div>' +
+
+                                      '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
+                                      '      Cool!' +
+                                      '   </div> </md-button>' +
+                                      '</div></md-dialog>',
+                                    controller: function DialogController($scope, $mdDialog) {
+                                      $scope.closeDialog = function () {
+                                        $mdDialog.hide()
+                                        $scope.sendingData = false
+                                      }
+                                    }
+                                  })
+
+
+
+
+
+
                         // reload and show
                       calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
                         function (calendar) {
@@ -244,35 +300,35 @@ angular.module('climbGame.controllers.calendar', [])
                                           $scope.Index = index
                                           setTodayIndex()
                                           $scope.todayData = {
-                                                                                      babies: [],
-                                                                                      means: {},
-                                                                                      meteo : '',
-                                                                                      name : ''
-                                                                                    }
-                                                                                    calendarService.getClassPlayers().then(
-                                                                                            function (players) {
-                                                                                              $scope.class = players
-                                                                                              for (var i = 0; i < players.length; i++) {
-                                                                                                $scope.todayData.babies.push({
-                                                                                                  name: players[i].name,
-                                                                                                  surname: players[i].surname,
-                                                                                                  childId: players[i].childId,
-                                                                                                  color: ''
-                                                                                                })
-                                                                                                $scope.classMap[players[i].childId] = players[i]
-                                                                                              }
-
-                                                                                              calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
-                                                                                                function (calendar) {
-                                                                                                  createWeekData(calendar)
-                                                                                                  updateTodayData(calendar)
-                                                                                                },
-                                                                                                function () {}
-                                                                                              )
-                                                                                            },
-                                                                                            function () {}
-                                                                                          )
+                                              babies: [],
+                                              means: {},
+                                              meteo : '',
+                                              name : ''
                                           }
+                                          calendarService.getClassPlayers().then(
+                                                    function (players) {
+                                                      $scope.class = players
+                                                      for (var i = 0; i < players.length; i++) {
+                                                        $scope.todayData.babies.push({
+                                                          name: players[i].name,
+                                                          surname: players[i].surname,
+                                                          childId: players[i].childId,
+                                                          color: ''
+                                                        })
+                                                        $scope.classMap[players[i].childId] = players[i]
+                                                      }
+
+                                                      calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
+                                                        function (calendar) {
+                                                          createWeekData(calendar)
+                                                          updateTodayData(calendar)
+                                                        },
+                                                        function () {}
+                                                      )
+                                                    },
+                                                    function () {}
+                                           )
+                                      }
                                     )
 
                     }
@@ -490,6 +546,7 @@ angular.module('climbGame.controllers.calendar', [])
               }
               // if (calendar[i].closed) {
               $scope.weekData[i].closed = calendar[k].closed
+              $scope.weekData[i].duration = calendar[k].duration
 
               $scope.weekName[i] = calendar[k].name
               $scope.weekDuration[i] = calendar[k].duration

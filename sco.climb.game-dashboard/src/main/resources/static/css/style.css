@@ -472,6 +472,7 @@ md-sidenav {
 
 .cal-header {
   background-color: #f2f2f2;
+  cursor: pointer;
 }
 
 .cal-header-future {

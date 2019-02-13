@@ -22,4 +22,5 @@ angular.module('climbGame.services.stats', [])
             return deferr.promise;
         }
         return statsService;
+
     })

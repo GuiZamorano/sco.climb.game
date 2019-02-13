@@ -8,7 +8,6 @@ angular.module('climbGame.controllers.newStats', [])
       $scope.totalScore = 5000
 
     //need data structure with info about all trips
-      //testing ssh
       dataService.getIndex().then(
         function(index) {
             $scope.index = index
@@ -22,6 +21,7 @@ angular.module('climbGame.controllers.newStats', [])
           },
           function (reason) {
             console.log(reason)
+
       }
       )
       var data2stats = function (data) {
@@ -56,6 +56,39 @@ angular.module('climbGame.controllers.newStats', [])
         return $scope.currentScore;
     }
 
+      var data2stats = function (data) {
+          var ret = []
+          for (i = 0; i < data.length; ++i) {
+              ret.push(data[i]);
+          }
+          return ret;
+      }
+
+    $scope.getCurrentScore = function(){
+        //iterate through each event
+        for(i=0; i<$scope.stats; i++){
+            //iterate through the modeMap of each event
+            for (var property in stats[i].modeMap) {
+                switch(property){
+                    case 'zeroImpact_solo':
+                        $scope.currentScore +=  3
+                        break
+                    case 'zeroImpact_wAdult':
+                        $scope.currentScore +=  2
+                        break
+                    case 'bus':
+                        $scope.currentScore +=  1
+                        break
+                    case 'pandr':
+                        $scope.currentScore +=  0
+                        break
+                }
+            }
+        }
+        return $scope.currentScore;
+    }
+
+
     $scope.scroll = function (id, direction) {
       if (direction === 'up') {
         $window.document.getElementById(id).scrollTop -= 50
@@ -78,6 +111,10 @@ angular.module('climbGame.controllers.newStats', [])
       return Math.floor(n)
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3c601af1ad831c0fd042bf22e42231a71b2dd4a
     // $scope.getAverageMilesPerStudent = function(){
     //     TODO: return average
     // }

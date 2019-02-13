@@ -12,6 +12,7 @@ angular.module('climbGame', [
   'climbGame.controllers.map',
   'climbGame.controllers.calendar',
   'climbGame.controllers.stats',
+  'climbGame.controllers.newStats',
   'climbGame.controllers.excursions',
   'climbGame.controllers.notifications',
   'climbGame.controllers.login',
@@ -25,6 +26,7 @@ angular.module('climbGame', [
   'climbGame.services.map',
   'climbGame.services.calendar',
   'climbGame.services.classSelection',
+  'climbGame.services.stats',
   'climbGame.services.home'
 ])
 
@@ -145,7 +147,7 @@ angular.module('climbGame', [
               views: {
                 'content@home': {
                   templateUrl: 'templates/statsNew.html',
-                  controller: 'statsCtrl'
+                  controller: 'statsNewCtrl'
                 }
               }
             })

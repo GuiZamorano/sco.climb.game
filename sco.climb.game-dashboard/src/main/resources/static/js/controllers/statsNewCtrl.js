@@ -110,11 +110,7 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.MathFloor = function (n) {
       return Math.floor(n)
     }
-
-<<<<<<< HEAD
-=======
-
->>>>>>> b3c601af1ad831c0fd042bf22e42231a71b2dd4a
+    
     // $scope.getAverageMilesPerStudent = function(){
     //     TODO: return average
     // }

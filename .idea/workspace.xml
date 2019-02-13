@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="de70916f-3419-4d66-8fc5-8add75056280" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/dataSrv.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js" beforeDir="false" afterPath="$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/services/statsSrv.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/sco.climb.domain/target/" />
     <ignored path="$PROJECT_DIR$/sco.climb.game-dashboard/target/" />
@@ -126,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+            <state relative-caret-position="203">
+              <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -473,7 +471,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550085911380" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550086288465" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -544,7 +542,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74373000" />
+    <option name="totallyTimeSpent" value="74749000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="754" height="687" extended-state="0" />
@@ -1010,8 +1008,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sco.climb.game-dashboard/src/main/resources/static/js/controllers/statsNewCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="9" column="51" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+        <state relative-caret-position="203">
+          <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

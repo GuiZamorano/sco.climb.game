@@ -79,7 +79,6 @@ angular.module('climbGame.controllers.newStats', [])
       return Math.floor(n)
     }
 
-
     // $scope.getAverageMilesPerStudent = function(){
     //     TODO: return average
     // }

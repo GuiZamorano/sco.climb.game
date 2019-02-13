@@ -7,12 +7,14 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.currentScore = 0
     $scope.index = ''
     $scope.totalScore = 5000
+    $scope.excursions = null
 
     //need data structure with info about all trips
     //testing ssh
     dataService.getIndex().then(
         function(index) {
         $scope.index = index;
+        $scope.refreshExcursions()
      })
 
     statsService.getMathStats(0, $scope.index).then(
@@ -31,6 +33,18 @@ angular.module('climbGame.controllers.newStats', [])
           }
           return ret;
       }
+
+
+    $scope.refreshExcursions = function () {
+         dataService.getCalendar(0, $scope.index).then(
+           function (excursions) {
+             $scope.excursions = excursions
+           },
+           function (reason) {
+                // console.log(reason)
+           }
+         )
+       }
 
     $scope.getCurrentScore = function(){
         //iterate through each event

@@ -8,8 +8,6 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.index = ''
     $scope.totalScore = 5000
 
-    //need data structure with info about all trips
-    //testing ssh
     dataService.getIndex().then(
         function(index) {
         $scope.index = index;

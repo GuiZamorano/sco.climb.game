@@ -8,6 +8,7 @@
   "menu_change_class": "Change Class",
   "menu_logout": "Logout",
   "stats_gamescore": "Reached {{done}} km on {{total}}!",
+  "stats_update": "You've traveled {{miles}} miles! You have {{remaining_miles}} to go.",
   "stats_ranking_global": "Global Statistics:",
   "stats_legenda": "Legend:",
   "stats_zeroimpact_solo": "Extremely Active: 2 miles",

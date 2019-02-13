@@ -121,4 +121,38 @@
         </div>
 
     </div>
+
+    <div class = excursions layout="column" flex >
+        <h1 class="md-title">{{'excursions_history' | translate}}</h1>
+        <md-content id="excursions-list">
+            <div layout="row" layout-wrap>
+                <div flex="50" ng-repeat="stat in stats">
+                    <md-card md-theme="default">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{stat.name}}</span>
+                                <span class="md-subhead">{{stat.day | date:'dd MMMM yyyy'}}</span>
+                            </md-card-title-text>
+                            <md-card-title-media>
+                                <div class="md-media-sm card-media">
+                                    <i class="meteo" ng-class="{'icon-sun': stat.meteo === 'sunny', 'icon-cloudy': stat.meteo === 'cloudy', 'icon-rain': stat.meteo === 'rain', 'icon-snow': stat.meteo === 'snow'}"></i>
+                                </div>
+                            </md-card-title-media>
+                        </md-card-title>
+                        <md-card-content>
+                            <p class="md-subhead">
+                            <ul>
+                                <li>Extremely Active: {{stat.eactive}}</li>
+                                <li>Very Active: {{stat.vactive}}</li>
+                                <li>Fairly Active: {{stat.factive}}</li>
+                                <li>Inactive: {{stat.iactive}}</li>
+                            </ul>
+                            </p>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+        </md-content>
+    </div>
+
 </div>

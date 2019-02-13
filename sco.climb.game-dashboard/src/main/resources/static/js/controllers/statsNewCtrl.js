@@ -5,32 +5,17 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.stats = null
     $scope.currentScore = 0
     $scope.index = ''
-      $scope.totalScore = 5000
+    $scope.totalScore = 5000
+    $scope.excursions = null
 
     //need data structure with info about all trips
-    //   statsService.getIndex().then(
-    //     function(index) {
-    //         $scope.index = index
-    //     }
-    // )
+    //testing ssh
+    dataService.getIndex().then(
+        function(index) {
+        $scope.index = index;
+        $scope.getMathStats()
+     })
 
-    //statsService.getIndex()
-     dataService.getMathStats(0,999999999).then(
-          function (stats) {
-              $scope.stats = data2stats(stats)
-          },
-          function (reason) {
-            console.log(reason)
-
-      }
-      )
-      var data2stats = function (data) {
-          var ret = []
-          for (i = 0; i < data.length; ++i) {
-              ret.push(data[i]);
-          }
-          return ret;
-      }
 
     $scope.getCurrentScore = function(){
         //iterate through each event
@@ -56,13 +41,17 @@ angular.module('climbGame.controllers.newStats', [])
         return $scope.currentScore;
     }
 
-      var data2stats = function (data) {
-          var ret = []
-          for (i = 0; i < data.length; ++i) {
-              ret.push(data[i]);
-          }
-          return ret;
-      }
+
+    $scope.getMathStats = function () {
+         dataService.getCalendar(0, $scope.index).then(
+           function (stats) {
+             $scope.stats = stats
+           },
+           function (reason) {
+                // console.log(reason)
+           }
+         )
+       }
 
     $scope.getCurrentScore = function(){
         //iterate through each event
@@ -115,9 +104,9 @@ angular.module('climbGame.controllers.newStats', [])
     //     TODO: return average
     // }
 
-      // $scope.getNumberOfStudentsByActivityLevel(activityLevel){
-      //   TODO: return number of students with activity level
-      // }
+      $scope.getNumberOfStudentsByActivityLevel = function(activityLevel){
+
+      }
 
       $scope.init = function () {
           statsService.getIndex();

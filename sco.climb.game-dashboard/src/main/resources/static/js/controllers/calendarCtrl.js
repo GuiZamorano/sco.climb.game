@@ -3,8 +3,6 @@ angular.module('climbGame.controllers.calendar', [])
   .controller('calendarCtrl', ['$scope', '$filter', '$window', '$interval', '$mdDialog', '$mdToast', 'CacheSrv', 'dataService', 'calendarService',
     function ($scope, $filter, $window, $interval, $mdDialog, $mdToast, CacheSrv, dataService, calendarService) {
       $scope.week = []
-      $scope.weekName = []
-      $scope.weekDuration = []
       $scope.weekNumber = []
       $scope.selectedWeather = ''
       $scope.selectedMean = ''
@@ -178,7 +176,13 @@ angular.module('climbGame.controllers.calendar', [])
                   $scope.sendingData = true
                   $scope.todayData.meteo = $scope.selectedWeather
                   $scope.todayData.name = $scope.inputVal.name
+                  //divide duration by 60 for fraction of hour and make sure its not a long decimal
+                  $scope.distance.duration = Number($scope.inputVal.duration)/60
+                  if ($scope.distance.duration % 1 != 0){   //divide by 60 above right
+                    $scope.distance.duration = Number(($scope.distance.duration).toFixed(2))
+                  }
                   $scope.todayData.duration = $scope.inputVal.duration
+
 
                   //calculate distance travelled
                   $scope.distance.means_bus = $scope.todayData.means.bus
@@ -190,7 +194,22 @@ angular.module('climbGame.controllers.calendar', [])
                     $scope.distance.means_zeroImpact_wAdult = 0
                   if (typeof $scope.distance.means_zeroImpact_solo == "undefined")
                     $scope.distance.means_zeroImpact_solo = 0
-                  $scope.todayData.distance = Number($scope.distance.means_bus) * $scope.distance.slow * Number($scope.todayData.duration)/60 + Number($scope.distance.means_zeroImpact_wAdult) * $scope.distance.med * Number($scope.todayData.duration)/60 + Number($scope.distance.means_zeroImpact_solo) * $scope.distance.fast * Number($scope.todayData.duration)/60
+                  $scope.distance.slowDistance = Number($scope.distance.means_bus) * $scope.distance.slow * Number($scope.distance.duration)
+                  $scope.distance.medDistance = Number($scope.distance.means_zeroImpact_wAdult) * $scope.distance.med * Number($scope.distance.duration)
+                  $scope.distance.fastDistance = Number($scope.distance.means_zeroImpact_solo) * $scope.distance.fast * Number($scope.distance.duration)
+                  if ($scope.distance.slowDistance % 1 != 0)
+                    $scope.distance.slowDistance = ($scope.distance.slowDistance).toFixed(2)
+                  if ($scope.distance.medDistance % 1 != 0)
+                    $scope.distance.medDistance = ($scope.distance.medDistance).toFixed(2)
+                  if ($scope.distance.fastDistance % 1 != 0)
+                    $scope.distance.fastDistance = ($scope.distance.fastDistance).toFixed(2)
+
+
+                  $scope.todayData.distance = Number($scope.distance.slowDistance) + Number($scope.distance.medDistance) + Number($scope.distance.fastDistance)
+//                  if ($scope.todayData.distance % .1 == .04)
+//                    $scope.todayData.distance -= .01
+//                  else if ($scope.todayData.distance % .1 == .06 || $scope.todayData.distance % .1 == .09)
+//                    $scope.todayData.distance += .01
                   $scope.distance.popup_distance = Number($scope.todayData.distance)
 
                   $scope.todayData.day = new Date().setHours(0, 0, 0, 0)
@@ -262,9 +281,9 @@ angular.module('climbGame.controllers.calendar', [])
 
                                       '  <div class="cal-dialog-title"> {{distance.popup_distance}} miles added! </div><md-divider></md-divider>' +
                                       '  <div class="cal-dialog-text"># students x speed x time = distance</div>' +
-                                      '  <div class="cal-dialog-text">{{distance.means_bus}} students x {{distance.slow}} mph x {{weekData[(todayIndex-1)%5].duration/60}} hour(s) = {{distance.means_bus*distance.slow*weekData[(todayIndex-1)%5].duration/60}} miles</div>' +
-                                      '  <div class="cal-dialog-text">{{distance.means_zeroImpact_wAdult}} students x {{distance.med}} mph x {{weekData[(todayIndex-1)%5].duration/60}} hour(s) = {{distance.means_zeroImpact_wAdult*distance.med*weekData[(todayIndex-1)%5].duration/60}} miles</div>' +
-                                      '  <div class="cal-dialog-text">{{distance.means_zeroImpact_solo}} students x {{distance.fast}} mph x {{weekData[(todayIndex-1)%5].duration/60}} hour(s) = {{distance.means_zeroImpact_solo*distance.fast*weekData[(todayIndex-1)%5].duration/60}} miles</div>' +
+                                      '  <div class="cal-dialog-text">{{distance.means_bus}} students x {{distance.slow}} mph x {{distance.duration}} hour(s) = {{distance.slowDistance}} miles</div>' +
+                                      '  <div class="cal-dialog-text">{{distance.means_zeroImpact_wAdult}} students x {{distance.med}} mph x {{distance.duration}} hour(s) = {{distance.medDistance}} miles</div>' +
+                                      '  <div class="cal-dialog-text">{{distance.means_zeroImpact_solo}} students x {{distance.fast}} mph x {{distance.duration}} hour(s) = {{distance.fastDistance}} miles</div>' +
 
                                       '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
                                       '      Cool!' +
@@ -398,13 +417,19 @@ angular.module('climbGame.controllers.calendar', [])
 
       $scope.getEventName = function (day) {
             day = day%5
-            return $scope.weekName[day]
+            return $scope.weekData[day].name
       }
 
       $scope.getDuration = function(day) {
         day = day%5
-        return $scope.weekDuration[day]
+        return $scope.weekData[day].duration
       }
+
+      $scope.getDistance = function(day) {
+              day = day%5
+              return $scope.weekData[day].distance
+       }
+
 
       function dataAreComplete() {
         // meteo and means must  be chosen
@@ -547,10 +572,8 @@ angular.module('climbGame.controllers.calendar', [])
               // if (calendar[i].closed) {
               $scope.weekData[i].closed = calendar[k].closed
               $scope.weekData[i].duration = calendar[k].duration
-
-              $scope.weekName[i] = calendar[k].name
-              $scope.weekDuration[i] = calendar[k].duration
-
+              $scope.weekData[i].distance = calendar[k].distance
+              $scope.weekData[i].name = calendar[k].name
               k++
             } else {
               // add entire day of null data

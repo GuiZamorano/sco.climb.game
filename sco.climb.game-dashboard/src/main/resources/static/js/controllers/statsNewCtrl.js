@@ -8,14 +8,14 @@ angular.module('climbGame.controllers.newStats', [])
       $scope.totalScore = 5000
 
     //need data structure with info about all trips
-      dataService.getIndex().then(
-        function(index) {
-            $scope.index = index
-        }
-    )
+    //   statsService.getIndex().then(
+    //     function(index) {
+    //         $scope.index = index
+    //     }
+    // )
 
-
-     statsService.getMathStats(0,$scope.index).then(
+    //statsService.getIndex()
+     dataService.getMathStats(0,999999999).then(
           function (stats) {
               $scope.stats = data2stats(stats)
           },
@@ -110,7 +110,7 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.MathFloor = function (n) {
       return Math.floor(n)
     }
-    
+
     // $scope.getAverageMilesPerStudent = function(){
     //     TODO: return average
     // }

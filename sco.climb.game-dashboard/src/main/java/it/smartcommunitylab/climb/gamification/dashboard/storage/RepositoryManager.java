@@ -93,10 +93,11 @@ public class RepositoryManager {
 	}
 	
 	public List<PedibusPlayer> getPedibusPlayersByClassRoom(String ownerId, String gameId, String classRoom) {
-		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId).and("classRoom").is(classRoom))
-		.with(new Sort(Sort.Direction.ASC, "surname", "name"));
-		return mongoTemplate.find(query, PedibusPlayer.class);		
-	}	
+		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId).and("classRoom").is(classRoom));
+		List<PedibusPlayer> players = mongoTemplate.find(query, PedibusPlayer.class);
+		players.sort(Comparator.comparing((PedibusPlayer p) -> Integer.valueOf(p.getSurname())));
+		return players;
+	}
 
 	
 //	public PedibusPlayer getPedibusPlayerByWsnId(String ownerId, String gameId, int wsnId) {

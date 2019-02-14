@@ -37,7 +37,7 @@
       <div layout="row" class="state-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_state'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-first':today(day)}" class="cal-header">
-          <span ng-if="weekData[dayIndex].closed">{{'cal_header_sent'|translate}}</span>
+          <span ng-if="weekData[dayIndex].closed">{{getDistance(day)}} miles</span>
           <span ng-if="!today(day) && isFuture(dayIndex)" class="cal-header-future">{{'cal_send_data_button'|translate}}</span>
           <span ng-if="today(day) && !weekData[dayIndex].closed" ng-click="sendData()" class="cal-interactive-button">{{'cal_send_data_button'|translate}}</span>
         </div>
@@ -84,6 +84,47 @@
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+      <!-- TODO: inputVal.name needs to be changed. id probably needs to be changed.-->
+      <div layout="row" class="time-row">
+        <div layout="column" flex="25" class="cal-header">{{'cal_header_time'|translate| uppercase}}</div>
+        <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
+          <div ng-if="weekData[dayIndex].closed">
+            {{ getDuration(day) }} minutes
+          </div>
+          <div ng-if="today(day)" md-input-container class="md-block" ng-class="{'cal-today-middle':today(day)}">
+            <form novalidate name="eventForm">
+              <md-input-container class="md-block" id="timeInput">
+                <!-- <input id="time1" type="time" ng-model="inputVal.duration" class="without_ampm" step="60"/> -->
+                <select id="time1" ng-model="inputVal.duration">
+                  <option value="15">15 minutes</option>
+                  <option value="30">30 minutes</option>
+                  <option value="45">45 minutes</option>
+                  <option value="60">60 minutes</option>
+                  <option value="75">75 minutes</option>
+                  <option value="90">90 minutes</option>
+                  <option value="105">105 minutes</option>
+                  <option value="120">120 minutes</option>
+                </select>
+              </md-input-container>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
       <md-content id="table" class="baby-list">
         <md-list class="cal-listbabies">
           <div layout="row" ng-repeat="baby in class track by $index" ng-init="babyIndex = $index" class="cal-baby">

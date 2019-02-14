@@ -573,6 +573,8 @@ public class RepositoryManager {
 			update.set("gameId", team.getGameId());
 			update.set("childrenId", team.getChildrenId());
 			update.set("lastUpdate", now);
+			//test code Charlie
+			update.set("score", team.getScore());
 			mongoTemplate.updateFirst(query, update, PedibusTeam.class);
 			return true;
 		} else {

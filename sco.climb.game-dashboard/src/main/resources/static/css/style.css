@@ -640,7 +640,7 @@ md-dialog {
 }
 
 .stats .table .mode-zeroImpact_solo .header {
-  background-color: #ef5350;
+  background-color: #66bb6a;
 }
 
 .stats .table .mode-zeroImpact_wAdult .header {
@@ -648,7 +648,7 @@ md-dialog {
 }
 
 .stats .table .mode-bus .header {
-  background-color: #66bb6a;
+  background-color: #ef5350
 }
 
 .stats .table .mode-pandr .header {
@@ -660,7 +660,7 @@ md-dialog {
 }
 
 .stats .table .mode-zeroImpact_solo .content {
-  color: #ef5350;
+  color: #66bb6a;
 }
 
 .stats .table .mode-zeroImpact_wAdult .content {
@@ -668,7 +668,7 @@ md-dialog {
 }
 
 .stats .table .mode-bus .content {
-  color: #66bb6a;
+  color: #ef5350;
 }
 
 .stats .table .mode-pandr .content {

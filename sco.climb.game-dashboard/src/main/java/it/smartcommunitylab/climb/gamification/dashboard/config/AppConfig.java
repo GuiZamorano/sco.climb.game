@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import it.smartcommunitylab.climb.contextstore.model.Pedibus;
 import it.smartcommunitylab.climb.gamification.dashboard.exception.StorageException;
 import it.smartcommunitylab.climb.gamification.dashboard.model.*;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
@@ -131,66 +132,81 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusPlayer(Grayson, "123", true);
 		repositoryManager.savePedibusPlayer(Kevin, "123", true);
 		repositoryManager.savePedibusPlayer(Gui, "123", true);
-		PedibusItineraryLeg pedibusItineraryLeg = new PedibusItineraryLeg();
-		pedibusItineraryLeg.setLegId("1");
-		pedibusItineraryLeg.setScore(0);
-		pedibusItineraryLeg.setBadgeId("1");
-		pedibusItineraryLeg.setDescription("Test");
-		pedibusItineraryLeg.setName("TestLeg");
-		pedibusItineraryLeg.setGameId("1");
-		double [] go = {11.100807499999974, 46.083009};
-		pedibusItineraryLeg.setGeocoding(go);
-		pedibusItineraryLeg.setPolyline("");
-		pedibusItineraryLeg.setPosition(0);
-		List<Link> urls = new ArrayList<>();
-		Link link = new Link();
-		link.setLink("https://github.com/GuiZamorano/sco.climb.game/settings/collaboration");
-		link.setName("GitHub");
-		urls.add(link);
-		pedibusItineraryLeg.setExternalUrls(urls);
-		pedibusItineraryLeg.setImageUrl("http://imgur.com/oFB6oyem.jpg");
-		pedibusItineraryLeg.setTransport("foot");
-		repositoryManager.savePedibusItineraryLeg(pedibusItineraryLeg, "123", true);
-		PedibusItineraryLeg pedibusItineraryLeg1 = new PedibusItineraryLeg();
-		pedibusItineraryLeg1.setLegId("2");
-		pedibusItineraryLeg1.setScore(560000);
-		pedibusItineraryLeg1.setBadgeId("2");
-		pedibusItineraryLeg1.setDescription("Test1");
-		pedibusItineraryLeg1.setName("TestLeg1");
-		pedibusItineraryLeg1.setGameId("1");
-		double [] go1 = {12.31551509999997, 45.4408474};
-		pedibusItineraryLeg1.setGeocoding(go1);
-		pedibusItineraryLeg1.setPolyline("yqgxGccwbAjEwL`@mVf[s[i@q[fG}e@~GeLpEeP|FyPrAeL}GwF}BeQiEcEaA{MYgXqA_OoOqh@_Gu\\kKiVT_NHiWuHi^aFyZoBkN}GHuIuB_BwKsCsThOwZ~Vq]dDcCbKuc@jWmf@n_@{{@ns@e_A|m@q_@ho@mNt]kAzJgLxFq[jPmI~f@uIhc@yB|e@a~@hk@wf@hSqTpIe[|TuvAsGwxAwBc~AaXi{@gViVm\\olAiFsw@{Jw_AoI__@cU{e@gX}c@Hc[kGuj@sOs]o@mJaE{ByJy]qEyHcFqNmCyl@kQwp@qZy}@ge@gbCsG{j@yMed@wAef@vFgp@p@sBxFaLpCmNlH{bAD[gCq_BmG}GxGoSuC_HnDw@d@CnFkD~Ec_@|C_Ut^k|Apr@abCpYeyA|XqbAjYis@nWanA|Tg`@pS{qB`Dk}@ng@ieA`VybAtn@gV|i@_f@j\\uTbXiIt\\qWz^{PvZqg@i@_n@dFua@z_@wa@dNwQ`CqPdPsj@fTwLrZiGlk@jI`g@aPfe@ErX}A`WhGfm@pYje@`|@vRvfBfCfTjJpLrZ_@hPzElZb[pf@va@nT`L~NlIzEtM|g@dz@jMbPhYzDtWyWrb@q`@h^ye@hg@w{Al\\_d@dI_W~\\oZpUi^xP}OvP_Qzm@kI|\\oChQoKfP_Vta@cTjXsa@fI}EHsQtWak@~HaUdWue@h_@a`@dLqZfJkLl@oKnCqHfMoE~U_Oba@iKdDwLjq@ca@|L_Cb@{HxLsIb]gKbb@_Hpz@mS~hAca@xR_I~Kyj@vNgIdDkRbDo_@~Mwi@nDsPfJaGnGeRkAuUvIk\\vNml@eJwmA}Fyw@zE_Uxq@mnBd{@amChVuTfAsSz@iRc@wFlIwBxFcFa@oOxEgBRG?C@CDCJBr[kb@r[gUrxB{|AvIyFj[wGvVsGtc@mhA`a@e_AgBwa@|AqY~ImRlCyLtNwhAdAsAhSmf@hNqt@vHuc@~Uq]|Hca@dFqNdXWpLyIhEgLjBul@bLm@~KgBjDcJh@_NzPkU~D}OrF_WjFaE~GuUvEaxAzEsbAnKoeA|DiM|QqObSyRzRqp@lHkUlC{WjL{Q|V}P~R}SnK_d@vWw`AxFgg@hIi[xO_SnGsVfWiVbh@cy@tO}QtKyVbFaJz^y_@dL}Zva@ku@n[aYpSuRjJoSpMee@pCmHx@qYfCh@b@D~]bBXEdf@bNvDgLrD{C`F_VbItBrGhC~AgIzEaa@bGuSdSyZpLuXpKyu@dTuq@|Jwa@p|AkeDn_@iq@~Q{B");
-		pedibusItineraryLeg1.setPosition(1);
+
+		double [] go = {-106.4850, 31.7619};
+		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();
 		Link link1 = new Link();
-		link1.setLink("https://github.com/GuiZamorano/sco.climb.game/settings/collaboration");
-		link1.setName("GitHub");
+		link1.setLink("https://en.wikipedia.org/wiki/El_Paso%2C_Texas");
+		link1.setName("El Paso");
 		urls1.add(link1);
-		pedibusItineraryLeg1.setExternalUrls(urls1);
-		pedibusItineraryLeg1.setImageUrl("https://i.imgur.com/pwyMe8j.jpg");
-		pedibusItineraryLeg1.setTransport("foot");
-		repositoryManager.savePedibusItineraryLeg(pedibusItineraryLeg1, "123", true);
-		PedibusItineraryLeg pedibusItineraryLeg2 = new PedibusItineraryLeg();
-		pedibusItineraryLeg2.setLegId("3");
-		pedibusItineraryLeg2.setScore(1475000);
-		pedibusItineraryLeg2.setBadgeId("3");
-		pedibusItineraryLeg2.setDescription("Test2");
-		pedibusItineraryLeg2.setName("TestLeg2");
-		pedibusItineraryLeg2.setGameId("1");
-		double [] go2 = {12.496365500000024, 41.90278349999999};
-		pedibusItineraryLeg2.setGeocoding(go2);
-		pedibusItineraryLeg2.setPolyline("kdjtGekdjA|b@_aBjIie@Fec@j_@i_@b^oa@vNrk@nzBx}AleA|Fb~Bq_@`kDdzDxjAodA|hArJxbFlwA|}C|Q``AjOn~@pgAjhApOhS`Hx\\xJRF||Av@fn@_[dtCjl@nxCpo@v{ElwAv|@_Whx@x\\hyB`e@hbCwDdtD`tAb`EpiAfhJop@p~A{e@`eBto@nnC|qDv|ChdCbwBhTtvDq[hnKoyCfiEeuB|vCuHrcCkr@h`FmfAl~H}fAleFrcCl_GjeBl{Dhr@jrA~l@hUly@ngAcp@rd@zC~}Am^~~BoeApy@~PjpEeElFqtAgNguCjSeg@vjFifDliCudB`nBsoCz_GymFjjFokEpiEk|EnnBkqCrzDwpCvjEcdHfmA}hBptA{KpgAycBv^q}BlcBod@peDemBdgCkFvm@pGbk@uEzi@lm@vlClTnk@pAjb@yb@xC|F|k@_\\td@aX|Gch@fVrMxZ{NrbAmXzs@r{@h}ChdAtPha@lk@mXj~@z[Yj\\tLgYrv@Ipe@u`AdvAaxBrj@mMxhA{cBnoAuXn_@g^|gAds@d_Adi@bp@cBzaAjMt~Aut@jo@yItqBcm@n}Ag{@dy@_kA`aAmPzk@e@pp@kJtqBbFveB}RvvA|a@jgBfoA|xArk@jmAl[|aAbWhy@hLfjBfy@nc@la@vkA[tj@gKfvBc|DxbB}aDzk@s{Bl_AiYni@dZbZdoBtz@p`BrY}`@daAme@tZYz[q{@bhBqbCjnEisDpeAqcBpwBlQtg@d[tdAe^hgB}p@pwGipCbjGfAdkCa~@dpAfP~uCpU~kA`}@beAp}A~`A`J`oB|h@jxBrHfeBmg@thBcs@dn@ds@ntArVnh@vu@~UltA~Ypt@hm@a@fWxYhvApXtnCedAtmDoAx`BeL`tBud@fb@b^zsEpIrsGnJ|bA`k@hzAkd@|iAsl@|x@hZzd@g`@fsArvAvhDuQr|BeA`s@sw@~uHzK`aAfq@aAfdAps@f]lpCt_HhhArcAzj@vp@ph@wQjqChjBxfB`r@vyCkfBlfCyVxoA|Gpb@}n@tzAgSpkBuUl}A}TjyBnj@vhBtEpx@yH|l@h[hi@bMd|BrHvdCkeAbwAbyAluBzK`}AfVf|@kvBxv@n@xv@ne@b`B}YfpAbzAdwAeB|l@a_A~u@tAjuDfl@`hA|_@nz@plAdlAlmAfhBtb@~uBr_Dfm@uS|w@iuAbYug@t_AvYjy@j`@jKvT~gBxlAdj@yMrDzJjx@toBz{@|s@xdA|YlgEhqCfmCfaD");
-		pedibusItineraryLeg2.setPosition(2);
+		leg1.setExternalUrls(urls1);
+		leg1.setImageUrl("https://i.imgur.com/lsU13Qm.jpg");
+		leg1.setTransport("foot");
+		repositoryManager.savePedibusItineraryLeg(leg1, "123", true);
+
+		double [] go1 = {-98.4936, 29.4241};
+		PedibusItineraryLeg leg2 = newLeg(go1, "2", "2", 2000000, "San Antonio", "1", "{nz`Efz|hSfrgMgywo@", 1);
 		List<Link> urls2 = new ArrayList<>();
 		Link link2 = new Link();
-		link2.setLink("https://github.com/GuiZamorano/sco.climb.game/settings/collaboration");
-		link2.setName("GitHub");
+		link2.setLink("https://en.wikipedia.org/wiki/San_Antonio");
+		link2.setName("San Antonio");
 		urls2.add(link2);
-		pedibusItineraryLeg2.setExternalUrls(urls2);
-		pedibusItineraryLeg2.setImageUrl("https://i.imgur.com/41Q7t91.jpg");
-		pedibusItineraryLeg2.setTransport("foot");
-		repositoryManager.savePedibusItineraryLeg(pedibusItineraryLeg2, "123", true);
+		leg2.setExternalUrls(urls2);
+		leg2.setImageUrl("https://i.imgur.com/7ssVorZ.jpg");
+		leg2.setTransport("foot");
+		repositoryManager.savePedibusItineraryLeg(leg2, "123", true);
+
+
+		double [] go2 = {-97.7431, 30.2672};
+		PedibusItineraryLeg leg3 = newLeg(go2, "3", "3", 4000000, "Austin", "1", "s{qrD~_dxQktcDsqqC", 2);
+		List<Link> urls3 = new ArrayList<>();
+		Link link3 = new Link();
+		link3.setLink("https://en.wikipedia.org/wiki/Austin,_Texas");
+		link3.setName("Austin");
+		urls3.add(link3);
+		leg3.setExternalUrls(urls3);
+		leg3.setImageUrl("https://i.imgur.com/QiPsH7d.jpg");
+		leg3.setTransport("foot");
+		repositoryManager.savePedibusItineraryLeg(leg3, "123", true);
+
+		double [] go3 = {-95.3698,29.7604};
+		PedibusItineraryLeg leg4 = newLeg(go3, "4", "4",5000000, "Houston", "1", "_qvwDjmqsQn~aBcpnM", 3);
+		List<Link> urls4 = new ArrayList<>();
+		Link link4 = new Link();
+		link4.setLink("https://en.wikipedia.org/wiki/Houston");
+		link4.setName("Houston");
+		urls4.add(link4);
+		leg4.setExternalUrls(urls4);
+		leg4.setImageUrl("https://i.imgur.com/zqgU1W0.jpg");
+		leg4.setTransport("foot");
+		repositoryManager.savePedibusItineraryLeg(leg4, "123", true);
+
+		double [] go4 = {-96.7970,32.7767};
+		PedibusItineraryLeg leg5 = newLeg(go4, "5","5", 6000000, "Dallas", "1", "oqstDf|aeQ{blQ~vuG", 4);
+		List<Link> urls5 = new ArrayList<>();
+		Link link5 = new Link();
+		link5.setLink("https://en.wikipedia.org/wiki/Dallas");
+		link5.setName("Dallas");
+		urls5.add(link5);
+		leg5.setExternalUrls(urls5);
+		leg5.setImageUrl("https://i.imgur.com/CQZsLnq.jpg");
+		leg5.setTransport("foot");
+		repositoryManager.savePedibusItineraryLeg(leg5, "123", true);
+
+		double [] go5 = {-101.8313,35.2220};
+		PedibusItineraryLeg leg6 = newLeg(go5, "6","6", 7000000, "Amarillo", "1", "ku`gEftxmQcr|Mjgv]", 5);
+		List<Link> urls6 = new ArrayList<>();
+		Link link6 = new Link();
+		link6.setLink("https://en.wikipedia.org/wiki/Amarillo,_Texas");
+		link6.setName("Amarillo");
+		urls6.add(link6);
+		leg6.setExternalUrls(urls6);
+		leg6.setImageUrl("https://i.imgur.com/lcdRGxi.jpg");
+		leg6.setTransport("foot");
+		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);
+
+
 		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics
 		teamDTO.setGameId("1");
 		teamDTO.setPlayerId("Class");
@@ -308,6 +324,19 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	  authorizationScopes[0] = authorizationScope;
 	  result.add(new SecurityReference("X-ACCESS-TOKEN", authorizationScopes));
 	  return result;
+	}
+
+	private PedibusItineraryLeg newLeg(double [] go, String legID, String badgeID, int score, String name, String gameID, String polyline, int pos){
+		PedibusItineraryLeg leg = new PedibusItineraryLeg();
+		leg.setGeocoding(go);
+		leg.setLegId(legID);
+		leg.setBadgeId(badgeID);
+		leg.setScore(score);
+		leg.setName(name);
+		leg.setGameId(gameID);
+		leg.setPolyline(polyline);
+		leg.setPosition(pos);
+		return leg;
 	}
 
 }

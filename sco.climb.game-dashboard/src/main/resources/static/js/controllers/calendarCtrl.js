@@ -178,13 +178,10 @@ angular.module('climbGame.controllers.calendar', [])
                   $scope.todayData.name = $scope.inputVal.name
                   //divide duration by 60 for fraction of hour and make sure its not a long decimal
                   $scope.distance.duration = Number($scope.inputVal.duration)/60
-                  if ($scope.distance.duration % 1 != 0){   //divide by 60 above right
-                    $scope.distance.duration = Number(($scope.distance.duration).toFixed(2))
-                  }
                   $scope.todayData.duration = $scope.inputVal.duration
 
 
-                  //calculate distance travelled
+                  //calculate distances travelled by each group and aggregate
                   $scope.distance.means_bus = $scope.todayData.means.bus
                   $scope.distance.means_zeroImpact_wAdult = $scope.todayData.means.zeroImpact_wAdult
                   $scope.distance.means_zeroImpact_solo = $scope.todayData.means.zeroImpact_solo
@@ -197,19 +194,8 @@ angular.module('climbGame.controllers.calendar', [])
                   $scope.distance.slowDistance = Number($scope.distance.means_bus) * $scope.distance.slow * Number($scope.distance.duration)
                   $scope.distance.medDistance = Number($scope.distance.means_zeroImpact_wAdult) * $scope.distance.med * Number($scope.distance.duration)
                   $scope.distance.fastDistance = Number($scope.distance.means_zeroImpact_solo) * $scope.distance.fast * Number($scope.distance.duration)
-                  if ($scope.distance.slowDistance % 1 != 0)
-                    $scope.distance.slowDistance = ($scope.distance.slowDistance).toFixed(2)
-                  if ($scope.distance.medDistance % 1 != 0)
-                    $scope.distance.medDistance = ($scope.distance.medDistance).toFixed(2)
-                  if ($scope.distance.fastDistance % 1 != 0)
-                    $scope.distance.fastDistance = ($scope.distance.fastDistance).toFixed(2)
-
-
+                  //add group distances to get total
                   $scope.todayData.distance = Number($scope.distance.slowDistance) + Number($scope.distance.medDistance) + Number($scope.distance.fastDistance)
-//                  if ($scope.todayData.distance % .1 == .04)
-//                    $scope.todayData.distance -= .01
-//                  else if ($scope.todayData.distance % .1 == .06 || $scope.todayData.distance % .1 == .09)
-//                    $scope.todayData.distance += .01
                   $scope.distance.popup_distance = Number($scope.todayData.distance)
 
                   $scope.todayData.day = new Date().setHours(0, 0, 0, 0)

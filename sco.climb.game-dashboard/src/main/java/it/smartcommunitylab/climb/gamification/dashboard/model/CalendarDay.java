@@ -86,7 +86,6 @@ public class CalendarDay extends BaseObject {
 
 	public void setDistance(Double distance) {this.distance = distance;}
 
-
 	public int getEActive() {
 		return EActive;
 	}

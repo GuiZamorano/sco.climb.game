@@ -23,6 +23,32 @@
           <!--<div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>-->
         </div>
       </md-input-container>
+
+      <!-- Duration -->
+      <md-input-container class="md-block" id="timeInput">
+        <label>{{'excursion_form_duration_placeholder' | translate}}</label>
+        <md-select id="time" ng-model="newExcursion.time">
+          <md-option ng-value="15">15 minutes</md-option>
+          <md-option ng-value="30">30 minutes</md-option>
+          <md-option ng-value="45">45 minutes</md-option>
+          <md-option ng-value="60">60 minutes</md-option>
+          <md-option ng-value="75">75 minutes</md-option>
+          <md-option ng-value="90">90 minutes</md-option>
+          <md-option ng-value="105">105 minutes</md-option>
+          <md-option ng-value="120">120 minutes</md-option>
+        </md-select>
+
+        <!-- below 3 line do not enable error message -->
+        <div ng-messages="excursionForm.date.$error" ng-if="!showHints && excursionForm.date.$touched">
+          <div ng-message="required">{{'excursion_form_duration_error_required' | translate}}</div>
+        </div>
+
+        <br>
+      </md-input-container>
+
+
+
+
       <div layout="row">
         <table>
           <tr>
@@ -129,6 +155,8 @@
               <md-card-title-text>
                 <span class="md-headline">{{ex.name}}</span>
                 <span class="md-subhead">{{ex.day | date:'dd MMMM yyyy'}}</span>
+                <span class="md-subhead">{{ex.duration}} minutes</span>
+                <span class="md-subhead">{{ex.distance}} miles</span>
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-sm card-media">

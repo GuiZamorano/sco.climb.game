@@ -7,7 +7,18 @@ angular.module('climbGame.controllers.newStats', [])
     $scope.currentScore = 0
     $scope.index = ''
     $scope.totalScore = 5000
-    $scope.excursions = null
+    $scope.weatherDays = null
+    $scope.mean = 0;
+    $scope.mode = [0,0];
+    $scope.median = 0;
+    $scope.scores = {
+          'gameScore': 0,
+          'maxGameScore': 0
+    }
+
+
+
+
 
     dataService.getIndex().then(
         function(index) {
@@ -24,6 +35,7 @@ angular.module('climbGame.controllers.newStats', [])
       }
     )
 
+
       var data2stats = function (data) {
           var ret = []
           for (i = 0; i < data.length; ++i) {
@@ -35,8 +47,11 @@ angular.module('climbGame.controllers.newStats', [])
 
     $scope.refreshExcursions = function () {
          dataService.getCalendar(0, $scope.index).then(
-           function (excursions) {
-             $scope.excursions = excursions
+           function (stats) {
+             $scope.stats = stats;
+             $scope.mean = $scope.getMeanDistance();
+             $scope.mode = $scope.getModeDistance();
+             $scope.median = $scope.getMedianDistance();
            },
            function (reason) {
                 // console.log(reason)
@@ -101,23 +116,80 @@ angular.module('climbGame.controllers.newStats', [])
         for(i=0; i<$scope.stats.length; i++){
             switch(activityLevel){
                 case 'vactive':
-                    retVal+=$scope.stats[i].vactive
-                    break
-                case 'zeroImpact_wAdult':
-                    $scope.currentScore +=  2
-                    break
-                case 'bus':
-                    $scope.currentScore +=  1
-                    break
-                case 'pandr':
-                    $scope.currentScore +=  0
-                    break
+                    retVal+=$scope.stats[i].vactive;
+                    break;
+                case 'eactive':
+                    retVal+=$scope.stats[i].eactive;
+                    break;
+                case 'factive':
+                    retVal+=$scope.stats[i].factive;
+                    break;
+                case 'iactive':
+                    retVal+=$scope.stats[i].eactive;
+                    break;
             }
         }
+        return retVal;
       }
+
+      $scope.getWeatherDays = function(weather){
+          var weatherDays = statsService.getWeather(weather);
+          $scope.weatherDays = weatherDays;
+      }
+
+      $scope.getMeanDistance = function(){
+        var sum=0;
+        var count=0;
+        for(var i =0; i<$scope.stats.length-1; i++){
+            sum += $scope.stats[i].distance;
+            count++;
+        }
+        return sum/count;
+      }
+
+      $scope.getModeDistance = function(){
+          var map = {};
+          var retVal = [0, 0];
+          for(var i =0; i<$scope.stats.length-1; i++ ){
+              if(typeof map[$scope.stats[i].distance] == "undefined"){
+                  map[$scope.stats[i].distance] = 1;
+              }
+              else{
+                  map[$scope.stats[i].distance]+=1;
+              }
+          }
+
+          for(key in map){
+              if(map[key] > retVal[1]){
+                  retVal[1] = map[key];
+                  retVal[0] = key;
+              }
+          }
+          return retVal; // [distance, number of occurrences]
+      }
+
+      $scope.getMedianDistance = function() {
+          var median = 0;
+          var sort = [];
+          for(var i =0; i<$scope.stats.length-1; i++){
+              sort.push($scope.stats[i].distance)
+          }
+          sort = sort.sort(function(a, b){return a-b});
+          var length = sort.length;
+
+          if (length % 2 == 0)
+              median = (sort[length / 2 - 1] + sort[length / 2] / 2)
+          else
+              median = sort[(length-1)/2]
+
+          return median;
+
+      }
+
 
       $scope.init = function () {
           statsService.getIndex();
           statsService.getMathStats();
+          statsService.getStats();
       };
   })

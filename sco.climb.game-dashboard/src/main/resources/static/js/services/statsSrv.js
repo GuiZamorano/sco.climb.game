@@ -21,5 +21,15 @@ angular.module('climbGame.services.stats', [])
             });
             return deferr.promise;
         }
+
+        statsService.getWeather = function (weather) {
+            var deferr = $q.defer();
+            dataService.getWeather(weather).then(function (data) {
+                deferr.resolve(data);
+            }, function (err) {
+                deferr.reject();
+            });
+            return deferr.promise;
+        }
         return statsService;
     })

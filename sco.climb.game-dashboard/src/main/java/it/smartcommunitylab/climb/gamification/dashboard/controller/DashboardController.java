@@ -267,10 +267,10 @@ public class DashboardController {
 	@RequestMapping(value = "/api/calendar/swipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody boolean submitBabySwipe(@PathVariable String ownerId,
 			@PathVariable String gameId, @PathVariable String classRoom,
-			@RequestParam Long rfid, @RequestParam Integer activityLevel,
+			@RequestParam String rfid, @RequestParam Integer activityLevel,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		storage.submitBabySwipe(ownerId, gameId, classRoom, rfid.toString(), piActivity.get(activityLevel));
+		storage.submitBabySwipe(ownerId, gameId, classRoom, rfid, piActivity.get(activityLevel));
 		return true;
 	}
 

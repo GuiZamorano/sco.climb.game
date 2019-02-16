@@ -256,6 +256,19 @@ public class DashboardController {
 		return result;
 	}
 
+	@RequestMapping(value = "/api/weather/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody List<CalendarDay> getWeatherDays(@PathVariable String ownerId,
+														   @PathVariable String gameId, @PathVariable String classRoom,
+														   @RequestParam String weather,
+														   HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		List<CalendarDay> result = storage.getWeatherDays(ownerId, gameId, classRoom, weather);
+		if(logger.isInfoEnabled()) {
+			logger.info(String.format("getWeatherDays[%s]: %s - %s - %s", ownerId, gameId, classRoom, result.size()));
+		}
+		return result;
+	}
+
 	@RequestMapping(value = "/api/calendar/swipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody CalendarDay getBabySwipes(@PathVariable String ownerId,
 												 @PathVariable String gameId, @PathVariable String classRoom,

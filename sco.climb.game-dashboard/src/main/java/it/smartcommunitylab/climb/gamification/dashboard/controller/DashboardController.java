@@ -256,7 +256,7 @@ public class DashboardController {
 		return result;
 	}
 
-	@RequestMapping(value = "/api/calendar/swipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/calendar/getSwipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody CalendarDay getBabySwipes(@PathVariable String ownerId,
 												 @PathVariable String gameId, @PathVariable String classRoom,
 												 HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -264,7 +264,8 @@ public class DashboardController {
 		return storage.getCalendarDay(ownerId, gameId, classRoom, Integer.MIN_VALUE);
 	}
 
-	@RequestMapping(value = "/api/calendar/swipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
+	// This makes more sense as a post but costs less on aws as a get
+	@RequestMapping(value = "/api/calendar/submitSwipes/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody boolean submitBabySwipe(@PathVariable String ownerId,
 			@PathVariable String gameId, @PathVariable String classRoom,
 			@RequestParam String rfid, @RequestParam Integer activityLevel,

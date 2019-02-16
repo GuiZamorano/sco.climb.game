@@ -13,6 +13,10 @@ public class CalendarDay extends BaseObject {
 	private Integer index;
 	private String classRoom;
 	private String meteo;
+
+	private Integer duration;
+	private Double distance;
+
 	private int EActive=0;
 	private int VActive=0;
 	private int FActive=0;
@@ -74,6 +78,13 @@ public class CalendarDay extends BaseObject {
 		this.index = index;
 	}
 
+	public Integer getDuration() {return duration;}
+
+	public void setDuration(Integer duration) {this.duration = duration;}
+
+	public Double getDistance() {return distance;}
+
+	public void setDistance(Double distance) {this.distance = distance;}
 
 	public int getEActive() {
 		return EActive;

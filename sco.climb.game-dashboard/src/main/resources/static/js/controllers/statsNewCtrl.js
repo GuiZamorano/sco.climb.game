@@ -95,9 +95,26 @@ angular.module('climbGame.controllers.newStats', [])
     //     TODO: return average
     // }
 
-      // $scope.getNumberOfStudentsByActivityLevel(activityLevel){
-      //   TODO: return number of students with activity level
-      // }
+
+      $scope.getNumberOfStudentsByActivityLevel = function(activityLevel){
+        var retVal = 0;
+        for(i=0; i<$scope.stats.length; i++){
+            switch(activityLevel){
+                case 'vactive':
+                    retVal+=$scope.stats[i].vactive
+                    break
+                case 'zeroImpact_wAdult':
+                    $scope.currentScore +=  2
+                    break
+                case 'bus':
+                    $scope.currentScore +=  1
+                    break
+                case 'pandr':
+                    $scope.currentScore +=  0
+                    break
+            }
+        }
+      }
 
       $scope.init = function () {
           statsService.getIndex();

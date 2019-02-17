@@ -27,6 +27,10 @@ md-sidenav {
   margin-top: 0;
 }
 
+.infobox {
+  padding-bottom: 50px;
+}
+
 .side-menu .md-button.active {
   color: deeppink;
 }
@@ -429,28 +433,28 @@ md-sidenav {
   height: 30px;
   line-height: 30px;
   text-align: center;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 .days-row {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 .weather-row {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 .time-row {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 .without_ampm::-webkit-datetime-edit-ampm-field {

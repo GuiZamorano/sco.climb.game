@@ -143,6 +143,9 @@ public class RepositoryManager {
 		List<Excursion> result = mongoTemplate.find(query, Excursion.class);
 		return result;
 	}
+
+
+
 	
 	public List<CalendarDay> getCalendarDays(String ownerId, String gameId, String classRoom,
 			Integer from, Integer to) {
@@ -157,7 +160,20 @@ public class RepositoryManager {
 		List<CalendarDay> result = mongoTemplate.find(query, CalendarDay.class);
 		result.add(getCalendarDay(ownerId, gameId, classRoom, Integer.MIN_VALUE));
 		return result;
-	}	
+	}
+
+
+
+	public List<CalendarDay> getWeatherDays(String ownerId, String gameId, String classRoom,
+											 String weather) {
+		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom).and("meteo").is(weather);
+		Query query = new Query(criteria);
+		query.with(new Sort(Sort.Direction.ASC, "index"));
+		List<CalendarDay> result = mongoTemplate.find(query, CalendarDay.class);
+		result.add(getCalendarDay(ownerId, gameId, classRoom, Integer.MIN_VALUE));
+		return result;
+	}
 	
 	public Map<String, Boolean> saveCalendarDay(String ownerId, String gameId, String classRoom, Integer index,
 			CalendarDay calendarDay) {

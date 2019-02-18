@@ -500,7 +500,7 @@ md-sidenav {
 .baby-list {
   height: 400px;
   overflow: auto;
-  margin-right: 5px;
+  margin-right: -8px;
 }
 
 md-dialog {

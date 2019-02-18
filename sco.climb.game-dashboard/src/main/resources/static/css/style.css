@@ -27,10 +27,6 @@ md-sidenav {
   margin-top: 0;
 }
 
-.infobox {
-  padding-bottom: 50px;
-}
-
 .side-menu .md-button.active {
   color: deeppink;
 }
@@ -426,7 +422,8 @@ md-sidenav {
 }
 
 .cal-listbabies {
-  padding: 0px!important;
+  padding-top: 0px !important;
+  padding-bottom: 50px;
 }
 
 .state-row {
@@ -504,7 +501,7 @@ md-sidenav {
 
 .baby-list {
   height: 400px;
-  overflow: auto;
+  overflow: visible;
   margin-right: 5px;
 }
 

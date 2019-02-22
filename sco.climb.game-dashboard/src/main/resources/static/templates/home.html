@@ -17,6 +17,10 @@
         <md-icon class="material-icons menu-colors icon-calendar"></md-icon>
         <p>{{'menu_class' | translate}}</p>
       </md-list-item>
+      <md-list-item ng-click="go('home.calendarStats')" ng-class="{'menu-selected' : isCurrentState('home.calendarStats')}">
+        <md-icon class="material-icons menu-colors icon-calendar"></md-icon>
+        <p>Calendar Stats</p>
+      </md-list-item>
       <md-list-item ng-click="go('home.map')" ng-class="{'menu-selected' : isCurrentState('home.map')}">
         <md-icon class="material-icons menu-colors icon-path"></md-icon>
         <p>{{'menu_map' | translate}}</p>

@@ -7,10 +7,12 @@ angular.module('climbGame', [
   'ngAria',
   'ngMessages',
   'leaflet-directive',
+  'ui.calendar',
   'pascalprecht.translate',
   'climbGame.controllers.home',
   'climbGame.controllers.map',
   'climbGame.controllers.calendar',
+  'climbGame.controllers.calendarStats',
   'climbGame.controllers.stats',
   'climbGame.controllers.newStats',
   'climbGame.controllers.excursions',
@@ -124,6 +126,15 @@ angular.module('climbGame', [
           }
         }
       })
+      .state('home.calendarStats', {
+        url: 'calendarStats',
+        views: {
+          'content@home': {
+            templateUrl: 'templates/calendarStats.html',
+            controller: 'calendarStatsCtrl'
+          }
+        }
+       })
       .state('home.excursions', {
         url: 'excursions',
         views: {

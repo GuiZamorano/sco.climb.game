@@ -5,10 +5,19 @@
             <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
         </div>
         <div class="col-md-4">
-            <div ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
+            <div style="background-color:#B2D9FF;color:black;" ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
                 <h2 style="margin-top:0px"> Selected Event:</h2>
-                <h3 style="color:#A9A50E">{{SelectedEvent.title}}</h3>
-                <p>{{SelectedEvent.description}}</p>
+                <h3 style="color:black">{{SelectedEvent.title}}</h3>
+                <div class="md-media-sm card-media">
+                    <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
+                </div>
+                <ul style="color:black">
+                    <li style="background-color: #99FF99;"> Extremely Active: {{SelectedEvent.eactive}}</li>
+                    <li style="background-color: #FFFF99;"> Very Active: {{SelectedEvent.vactive}}</li>
+                    <li style="background-color: #FF6666;"> Fairly Active: {{SelectedEvent.factive}}</li>
+                    <li style="background-color: #CCCCCC;"> Inactive: {{SelectedEvent.iactive}}</li>
+                </ul>
+
             </div>
         </div>
     </div>

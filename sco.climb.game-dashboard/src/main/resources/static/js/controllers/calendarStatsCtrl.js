@@ -13,8 +13,13 @@ angular.module('climbGame.controllers.calendarStats', [])
                   for (var i = 0; i<events.length; i++)
                       $scope.events.push({
                           title: events[i].name,
-                          description: events[i].meteo,
+                          meteo: events[i].meteo,
+                          eactive: events[i].eactive,
+                          vactive: events[i].vactive,
+                          factive: events[i].factive,
+                          iactive: events[i].iactive,
                           start: events[i].day,
+                          stick: true
                       });
                   });
           })

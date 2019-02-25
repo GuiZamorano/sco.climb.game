@@ -8766,7 +8766,7 @@ Calendar.defaults = {
 	
 	dropAccept: '*',
 
-	eventOrder: 'title',
+	eventOrder: 'id',
 
 	eventLimit: false,
 	eventLimitText: 'more',

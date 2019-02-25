@@ -7,11 +7,9 @@ import it.smartcommunitylab.climb.gamification.dashboard.model.*;
 import it.smartcommunitylab.climb.gamification.dashboard.model.events.WsnEvent;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.ExecutionDataDTO;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
-import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PointConcept;
 import it.smartcommunitylab.climb.gamification.dashboard.security.DataSetInfo;
 import it.smartcommunitylab.climb.gamification.dashboard.security.Token;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.*;
@@ -241,6 +239,8 @@ public class RepositoryManager {
 				Update update = new Update();
 				update.set("meteo", calendarDay.getMeteo());
 				update.set("modeMap", calendarDay.getModeMap());
+				update.set("activityType", calendarDay.getActivityType());
+				update.set("activityMap", calendarDay.getActivityMap());
 				update.set("closed", Boolean.TRUE);
 				update.set("lastUpdate", now);
 				mongoTemplate.updateFirst(query, update, CalendarDay.class);				

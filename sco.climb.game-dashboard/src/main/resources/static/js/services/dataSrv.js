@@ -121,7 +121,9 @@ angular.module('climbGame.services.data', [])
         data: {
           'day': data.day,
           'meteo': data.meteo,
+          'activityType' : data.activityType,
           'modeMap': data.modeMap,
+          'activityMap' : data.activityMap,
           'index': data.index,
           'name' : data.name,
           'duration' : data.duration,

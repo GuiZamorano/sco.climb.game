@@ -22,6 +22,8 @@ public class CalendarDay extends BaseObject {
 	private int FActive=0;
 	private int IActive=0;
 	private Map<String, String> modeMap = new HashMap<String, String>();
+	private String activityType;
+	private Map<String, Double> activityMap = new HashMap<String, Double>();
 	private boolean closed = false;
 	
 	public String getGameId() {
@@ -48,6 +50,10 @@ public class CalendarDay extends BaseObject {
 	public void setModeMap(Map<String, String> modeMap) {
 		this.modeMap = modeMap;
 	}
+	public String getActivityType() {return activityType;}
+	public void setActivityType(String activityType) {this.activityType = activityType;}
+	public Map<String, Double> getActivityMap() {return activityMap;}
+	public void setActivityMap(Map<String, Double> activityMap) {this.activityMap = activityMap;}
 	public String getClassRoom() {
 		return classRoom;
 	}

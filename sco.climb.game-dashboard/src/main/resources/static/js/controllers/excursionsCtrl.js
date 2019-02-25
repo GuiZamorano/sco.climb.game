@@ -177,6 +177,7 @@ excursionsService.getClassPlayers().then(
         $scope.todayData.childrenIA = params.childrenIA
         var count = 0;
         var babiesMap = {}
+        var activityMap = {}
         for (var i =0; i < params.childrenEA; i++){
             $scope.todayData.babies[count].mean = 'zeroImpact_solo'
             count++
@@ -194,21 +195,6 @@ excursionsService.getClassPlayers().then(
             count++
         }
         var total = params.childrenEA+params.childrenVA+params.childrenFA+params.childrenIA
-        for (var i = 0; i < total; i++) {
-                babiesMap[$scope.todayData.babies[i].childId] = $scope.todayData.babies[i].mean
-        }
-
-        $scope.todayData.modeMap = babiesMap
-
-
-
-
-
-
-
-
-
-
 
         //time input
         $scope.distance.slow = 1 //red bus
@@ -235,16 +221,21 @@ excursionsService.getClassPlayers().then(
         $scope.todayData.distance = Number($scope.distance.slowDistance) + Number($scope.distance.medDistance) + Number($scope.distance.fastDistance)
         $scope.distance.popup_distance = Number($scope.todayData.distance)
 
+        for (var i = 0; i < total; i++) {
+            babiesMap[$scope.todayData.babies[i].childId] = $scope.todayData.babies[i].mean
+            if($scope.todayData.babies[i].mean == "zeroImpact_solo") // green
+                activityMap[$scope.todayData.babies[i].childId] = $scope.distance.fast * Number($scope.distance.duration)
+            else if($scope.todayData.babies[i].mean == "zeroImpact_wAdult") // yellow
+                activityMap[$scope.todayData.babies[i].childId] = $scope.distance.med * Number($scope.distance.duration)
+            else if($scope.todayData.babies[i].mean == "bus") // red
+                activityMap[$scope.todayData.babies[i].childId] = $scope.distance.slow * Number($scope.distance.duration)
+            else // grey
+                activityMap[$scope.todayData.babies[i].childId] = 0
+        }
 
-
-
-
-
-
-
-
-
-
+        $scope.todayData.modeMap = babiesMap
+        $scope.todayData.activityType = "miles" // TODO un-hardcode string
+        $scope.todayData.activityMap = activityMap
 
         $mdDialog.show({
           // targetEvent: $event,

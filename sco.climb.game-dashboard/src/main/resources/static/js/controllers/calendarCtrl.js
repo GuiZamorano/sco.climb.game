@@ -201,13 +201,24 @@ angular.module('climbGame.controllers.calendar', [])
 
                       $scope.todayData.day = new Date().setHours(0, 0, 0, 0)
                       var babiesMap = {}
+                      var activityMap = {}
                       for (var i = 0; i < $scope.todayData.babies.length; i++) {
                         if ($scope.todayData.babies[i].mean) {
                           babiesMap[$scope.todayData.babies[i].childId] = $scope.todayData.babies[i].mean
+                          if($scope.todayData.babies[i].mean == "zeroImpact_solo") // green
+                            activityMap[$scope.todayData.babies[i].childId] = $scope.distance.fast * Number($scope.distance.duration)
+                          else if($scope.todayData.babies[i].mean == "zeroImpact_wAdult") // yellow
+                            activityMap[$scope.todayData.babies[i].childId] = $scope.distance.med * Number($scope.distance.duration)
+                          else if($scope.todayData.babies[i].mean == "bus") // red
+                            activityMap[$scope.todayData.babies[i].childId] = $scope.distance.slow * Number($scope.distance.duration)
+                          else // grey
+                            activityMap[$scope.todayData.babies[i].childId] = 0
                         }
                       }
 
                       $scope.todayData.modeMap = babiesMap
+                      $scope.todayData.activityType = "miles" // TODO un-hardcode string
+                      $scope.todayData.activityMap = activityMap
                       $scope.todayData.index = $scope.Index
                       calendarService.sendData($scope.todayData).then(function (returnValue) {
                         // change weekdata to closed

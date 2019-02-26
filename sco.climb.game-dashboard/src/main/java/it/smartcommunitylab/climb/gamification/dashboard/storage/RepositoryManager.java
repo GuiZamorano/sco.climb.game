@@ -335,8 +335,9 @@ public class RepositoryManager {
 		}
 	}
 
-	// TODO may not be sending fully populated modeMap if not every student swipes
-	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId, String activityLevel){
+	// TODO what do I do with activityType?
+	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId,
+			String activityLevel, String activityType){
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
 				.and("classRoom").is(classRoom).and("index").is(Integer.MIN_VALUE));
 		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);

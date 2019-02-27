@@ -24,7 +24,9 @@
       </div>
     </div>
   </div>
-  <div layout="row">
+
+
+  <div layout="row" ng-show="view" id="view1">
     <div layout="column" flex="100">
       <div layout="row" class="state-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_state'|translate| uppercase}}</div>
@@ -76,14 +78,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-      <!-- TODO: inputVal.name needs to be changed. id probably needs to be changed.-->
       <div layout="row" class="time-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_time'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
@@ -93,7 +87,6 @@
           <div ng-if="today(day)" md-input-container class="md-block" ng-class="{'cal-today-middle':today(day)}">
             <form novalidate name="eventForm">
               <md-input-container class="md-block" id="timeInput">
-                <!-- <input id="time1" type="time" ng-model="inputVal.duration" class="without_ampm" step="60"/> -->
                 <select id="time1" ng-model="inputVal.duration">
                   <option value="15">15 minutes</option>
                   <option value="30">30 minutes</option>
@@ -109,20 +102,11 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
       <md-content id="table" class="baby-list">
         <md-list class="cal-listbabies">
           <div layout="row" ng-repeat="baby in class track by $index" ng-init="babyIndex = $index" class="cal-baby">
             <div layout="column" flex="25" class="cal-name">
               {{baby.name}} {{baby.surname}}
-              <!--              ******* *******-->
             </div>
             <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-middle':today(day),'cal-future-middle':isFuture(dayIndex)}">
               <md-button ng-if="!today(day) || weekData[dayIndex].closed" class="cal-baby-cell" ng-class="weekData[dayIndex][baby.childId].color"><span ng-if="weekData[dayIndex][baby.childId].mean=='pedibus'">PEDIBUS</span><span ng-if="weekData[dayIndex][baby.childId].mean=='absent'">A</span> </md-button>
@@ -133,10 +117,16 @@
       </md-content>
     </div>
   </div>
+
+  <div id="view2" ng-show="!view">dis is view 2</div>
+
+
+
   <div class="cal-total" layout="row">
-    <div layout="column" flex="5">
+    <div layout="column" flex="10">
+      <md-switch class="switch" ng-click="switchView()">Graph View</md-switch>
     </div>
-    <div layout="column" flex="25" class="cal-name">
+    <div layout="column" flex="20" class="cal-name">
       Total
     </div>
     <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index">

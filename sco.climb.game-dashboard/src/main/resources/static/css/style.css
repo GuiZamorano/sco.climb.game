@@ -760,6 +760,12 @@ md-dialog {
   margin-top: 100px;
 }
 
+/* Misc */
+.switch {
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
 @media all and (-ms-high-contrast: none),
 (-ms-high-contrast: active) {
   .days-row {

@@ -22,6 +22,7 @@ angular.module('climbGame.controllers.calendar', [])
         means: {}
       }
       $scope.Index = ''
+      $scope.view = true
       calendarService.getIndex().then(
         function(index) {
             $scope.Index = index
@@ -411,6 +412,11 @@ angular.module('climbGame.controllers.calendar', [])
       }
       $scope.nextWeek = function () {
         changeWeek(1)
+      }
+
+      $scope.switchView = function () {
+        $scope.view = !$scope.view
+        document.getElementById('view1').setAttribute('ng-show', $scope.view)
       }
 
       $scope.newEvent = function () {

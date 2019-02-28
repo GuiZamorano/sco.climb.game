@@ -1,9 +1,6 @@
 <md-sidenav class="md-sidenav-left md-whiteframe-z2 menu-colors" md-component-id="leftMenu">
   <md-toolbar layout="row">
     <div class="md-toolbar-tools menu-colors">
-      <div class="menu-header">
-        <img src="./img/logo_header.png">
-      </div>
       <span flex></span>
       <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
         <md-tooltip>Close Side Panel</md-tooltip>
@@ -55,12 +52,9 @@
       <md-tooltip>Menu</md-tooltip>
       <md-icon class="material-icons bar-colors">&#xE5D2;</md-icon>
     </md-button>
-    <md-button class="md-raised md-primary" aria-label="Language Button" ng-click="translatePage()"> Translate Page </md-button>
+    <md-button class="md-raised md-primary" id="trans-button" aria-label="Language Button" ng-click="translatePage()"> Translate Page </md-button>
     <h2> <span>{{title}}</span>
     </h2>
-    <div class="bar-logo">
-      <img src="./img/logo_header.png">
-    </div>
   </div>
 </md-toolbar>
 <main layout="row" flex>

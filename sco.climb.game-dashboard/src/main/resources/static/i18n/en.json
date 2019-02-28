@@ -39,6 +39,7 @@
   "cal_notifications_empty": "There are no notifications",
   "cal_challenges": "Challenges",
   "cal_header_state": "Status",
+  "cal_header_category": "Category",
   "cal_header_clima": "Weather",
   "cal_header_time": "Duration",
   "cal_header_sent": "Data Sent",

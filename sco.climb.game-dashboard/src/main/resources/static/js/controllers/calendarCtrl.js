@@ -1,7 +1,7 @@
 /* global angular */
 angular.module('climbGame.controllers.calendar', [])
-  .controller('calendarCtrl', ['$scope', '$filter', '$window', '$interval', '$mdDialog', '$mdToast', 'CacheSrv', 'dataService', 'calendarService',
-    function ($scope, $filter, $window, $interval, $mdDialog, $mdToast, CacheSrv, dataService, calendarService) {
+  .controller('calendarCtrl', ['$scope', '$filter', '$window', '$interval', '$mdDialog', '$mdToast', 'CacheSrv', 'dataService', 'calendarService', 'chartService',
+    function ($scope, $filter, $window, $interval, $mdDialog, $mdToast, CacheSrv, dataService, calendarService, chartService) {
       $scope.week = []
       $scope.weekNumber = []
       $scope.selectedWeather = ''
@@ -23,6 +23,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
       $scope.Index = ''
       $scope.view = true
+
       calendarService.getIndex().then(
         function(index) {
             $scope.Index = index
@@ -45,10 +46,6 @@ angular.module('climbGame.controllers.calendar', [])
             }
       )
       setClassSize()
-
-
-
-
 
       calendarService.setTitle().then(
         function () {},
@@ -99,8 +96,6 @@ angular.module('climbGame.controllers.calendar', [])
         }
         return color
       }
-
-
 
       $scope.selectWather = function (weather) {
         $scope.selectedWeather = weather
@@ -416,7 +411,8 @@ angular.module('climbGame.controllers.calendar', [])
 
       $scope.switchView = function () {
         $scope.view = !$scope.view
-        document.getElementById('view1').setAttribute('ng-show', $scope.view)
+        if(!$scope.view)
+            chartService.loadChart();
       }
 
       $scope.newEvent = function () {
@@ -588,6 +584,7 @@ angular.module('climbGame.controllers.calendar', [])
 
       function createWeekData(calendar) {
         $scope.weekData = []
+        chartService.clearData()
         var k = 0
         for (var i = 0; i < 5; i++) {
           // get i-th day data and put baby with that object id with that setted mean
@@ -607,10 +604,17 @@ angular.module('climbGame.controllers.calendar', [])
                 }
                 $scope.weekData[i][calendar[k].modeMap[property]] = $scope.weekData[i][calendar[k].modeMap[property]] + 1
               }
+              var modes = ['pandr', 'bus', 'zeroImpact_wAdult', 'zeroImpact_solo']
+              for(var j=0; j<modes.length; j++) {
+                $scope.weekData[i][modes[j]] ?
+                        chartService.setData($scope.weekData[i][modes[j]], j, i) : chartService.setData(0, j, i)
+              }
               if (calendar[k].meteo) {
                 $scope.weekData[i].meteo = calendar[k].meteo
               }
               // if (calendar[i].closed) {
+
+
              if(isSwipesEntry(calendar[k], i)) {
                 calendar[k].index = $scope.Index
                 $scope.weekData[i].closed = false
@@ -620,6 +624,8 @@ angular.module('climbGame.controllers.calendar', [])
                 $scope.weekData[i].closed = calendar[k].closed
                 $scope.weekData[i].duration = calendar[k].duration
                 $scope.weekData[i].distance = calendar[k].distance
+
+                chartService.setName(calendar[k].name, i)
               }
 
               k++
@@ -665,6 +671,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
       */
 
+      // can we get rid of this???
       var startPoller = function () {
         /* comment this if you don't want always the last notification available */
         CacheSrv.resetLastCheck('calendar')

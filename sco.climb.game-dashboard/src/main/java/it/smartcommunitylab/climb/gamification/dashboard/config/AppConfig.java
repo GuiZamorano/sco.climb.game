@@ -133,6 +133,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusPlayer(Kevin, "123", true);
 		repositoryManager.savePedibusPlayer(Gui, "123", true);
 
+		repositoryManager.createBabySwipes("123", "1", "EE 364D");
+
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();

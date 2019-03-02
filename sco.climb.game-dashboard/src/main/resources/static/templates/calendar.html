@@ -1,5 +1,5 @@
 <div>
-  <div layout="row" ng-show="view" id="view1">
+  <div layout="row" ng-show="view" id="student-list">
     <div layout="column" flex="100">
       <div layout="row" class="state-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_state'|translate| uppercase}}</div>
@@ -116,7 +116,9 @@
     </div>
   </div>
 
-  <div id="view2" ng-show="!view">dis is view 2</div>
+  <div ng-show="!view" style="width: 75%">
+    <canvas id="canvas"></canvas>
+  </div>
 
 
 

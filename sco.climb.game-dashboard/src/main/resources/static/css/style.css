@@ -776,6 +776,14 @@ md-dialog {
     background-color: #7AC5CD;
 }
 
+.chart {
+    margin: auto;
+}
+
+.card-list-header {
+    height: 20%
+}
+
 @media all and (-ms-high-contrast: none),
 (-ms-high-contrast: active) {
   .days-row {

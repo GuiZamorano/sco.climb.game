@@ -2,6 +2,7 @@ angular.module('climbGame.services.chart', [])
   .service('chartService', function () {
     var color = Chart.helpers.color;
     var max = 0;
+    var barChart = 0;
     var barChartData = {
       labels : ['', '', '', '', ''],
       datasets : [
@@ -68,8 +69,10 @@ angular.module('climbGame.services.chart', [])
     });
 
     this.loadChart = function() {
+        if(barChart)
+            barChart.destroy()
         var ctx = document.getElementById('canvas').getContext('2d');
-        new Chart(ctx, {
+        barChart = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
             options: {

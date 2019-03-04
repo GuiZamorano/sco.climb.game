@@ -146,7 +146,12 @@
     </md-button>
   </div>
   <div layout="column" flex>
-    <h1 class="md-title">{{'excursions_history' | translate}}</h1>
+    <div layout="row" class="card-list-header">
+      <h1 class="md-title" flex="85">{{'excursions_history' | translate}}</h1>
+      <div flex="15">
+        <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
+      </div>
+    </div>
     <md-content id="excursions-list">
       <div layout="row" layout-wrap>
         <div flex="50" ng-repeat="ex in excursions">
@@ -156,7 +161,8 @@
                 <span class="md-headline">{{ex.name}}</span>
                 <span class="md-subhead">{{ex.day | date:'dd MMMM yyyy'}}</span>
                 <span class="md-subhead">{{ex.duration}} minutes</span>
-                <span class="md-subhead">{{ex.distance}} miles</span>
+                <span class="md-subhead" ng-if="imperial">{{ex.distance}} miles</span>
+                <span class="md-subhead" ng-if="!imperial">{{ex.distance*1.61}} km</span>
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-sm card-media">
@@ -166,12 +172,18 @@
             </md-card-title>
             <md-card-content>
               <p class="md-subhead">
-                <ul>
-              <li>Extremely Active: {{ex.eactive}} ----- 3 mph</li>
-              <li>Very Active: {{ex.vactive}} ----- 2 mph</li>
-              <li>Fairly Active: {{ex.factive}} ----- 1 mph</li>
-              <li>Inactive: {{ex.iactive}} ----- 0 mph</li>
-            </ul>
+                <ul ng-if="imperial">
+                  <li>Extremely Active: {{ex.eactive}} ----- 3 mph</li>
+                  <li>Very Active: {{ex.vactive}} ----- 2 mph</li>
+                  <li>Fairly Active: {{ex.factive}} ----- 1 mph</li>
+                  <li>Inactive: {{ex.iactive}} ----- 0 mph</li>
+                </ul>
+                <ul ng-if="!imperial">
+                  <li>Extremely Active: {{ex.eactive}} ----- 4.83 kph</li>
+                  <li>Very Active: {{ex.vactive}} ----- 3.22 kph</li>
+                  <li>Fairly Active: {{ex.factive}} ----- 1.61 kph</li>
+                  <li>Inactive: {{ex.iactive}} ----- 0 kph</li>
+                </ul>
               </p>
             </md-card-content>
           </md-card>

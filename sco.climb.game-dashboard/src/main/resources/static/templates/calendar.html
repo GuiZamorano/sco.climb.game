@@ -1,39 +1,17 @@
 <div>
-  <div layout="row" class="cal-sub-bar">
-    <div layout="column" flex="50">
-      <div layout="row">
-        <div layout="column" class="cal-arrow cal-arrow-notif">
-          <div class="md-title">{{'cal_notifications' | translate}}</div>
-          <div ng-if="!lastNotification">{{'cal_notifications_empty' | translate}}</div>
-          <div ng-if="lastNotification.key">{{'notif_' + lastNotification.key | translate:lastNotification.data}}</div>
-          <div ng-if="lastNotification.badge">{{'notif_badge' | translate:'{badge: "' + lastNotification.badge + '"}'}}</div>
-        </div>
-        <div layout="column" class="cal-arrow-max"></div>
-      </div>
-    </div>
-    <div layout="column" flex="50">
-      <div layout="row">
-        <div layout="column" class="cal-arrow-min"></div>
-        <div layout="column" class="cal-arrow cal-arrow-challenge">
-          <div class="md-title">{{'cal_challenges' | translate}}</div>
-          <div ng-if="openChallenge" ng-repeat="state in lastChallenge.state">
-            {{'challenge_' + state.modelName | translate:state.fields}}
-          </div>
-          <div ng-if="!openChallenge">{{'cal_challenge_empty' | translate}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div layout="row">
+  <div layout="row" ng-show="view" id="student-list">
     <div layout="column" flex="100">
       <div layout="row" class="state-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_state'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-first':today(day)}" class="cal-header">
-          <span ng-if="weekData[dayIndex].closed">{{getDistance(day)}} miles</span>
+          <span ng-if="weekData[dayIndex].closed && imperial">{{getDistance(day)}} miles</span>
+          <span ng-if="weekData[dayIndex].closed && !imperial">{{getDistance(day)*1.61}} km</span>
+
           <span ng-if="!today(day) && isFuture(dayIndex)" class="cal-header-future">{{'cal_send_data_button'|translate}}</span>
           <span ng-if="today(day) && !weekData[dayIndex].closed" ng-click="sendData()" class="cal-interactive-button">{{'cal_send_data_button'|translate}}</span>
         </div>
       </div>
+
       <div layout="row" class="days-row">
         <div layout="column" flex="25" class="cal-header">
           <div layout="row" class="cal-header">
@@ -47,13 +25,19 @@
           </div>
           <div ng-if="today(day)" md-input-container class="md-block">
             <form novalidate name="eventForm">
-          <md-input-container class="md-block">
-          <input id="text1" type="text" ng-model="inputVal.name"/>
-          </md-input-container>
+              <md-input-container class="md-block" id="timeInput">
+                <input list="categories" id="text1" ng-model="inputVal.name">
+                <datalist id="categories">
+                  <option value="Brain Break">
+                  <option value="P.E.">
+                  <option value="Recess">
+                </datalist>
+              </md-input-container>
             </form>
           </div>
+        </div>
       </div>
-      </div>
+
       <div layout="row" class="weather-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_clima'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
@@ -76,14 +60,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-      <!-- TODO: inputVal.name needs to be changed. id probably needs to be changed.-->
       <div layout="row" class="time-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_time'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
@@ -93,7 +69,6 @@
           <div ng-if="today(day)" md-input-container class="md-block" ng-class="{'cal-today-middle':today(day)}">
             <form novalidate name="eventForm">
               <md-input-container class="md-block" id="timeInput">
-                <!-- <input id="time1" type="time" ng-model="inputVal.duration" class="without_ampm" step="60"/> -->
                 <select id="time1" ng-model="inputVal.duration">
                   <option value="15">15 minutes</option>
                   <option value="30">30 minutes</option>
@@ -109,20 +84,11 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
       <md-content id="table" class="baby-list">
         <md-list class="cal-listbabies">
           <div layout="row" ng-repeat="baby in class track by $index" ng-init="babyIndex = $index" class="cal-baby">
             <div layout="column" flex="25" class="cal-name">
               {{baby.name}} {{baby.surname}}
-              <!--              ******* *******-->
             </div>
             <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-class="{'cal-today-middle':today(day),'cal-future-middle':isFuture(dayIndex)}">
               <md-button ng-if="!today(day) || weekData[dayIndex].closed" class="cal-baby-cell" ng-class="weekData[dayIndex][baby.childId].color"><span ng-if="weekData[dayIndex][baby.childId].mean=='pedibus'">PEDIBUS</span><span ng-if="weekData[dayIndex][baby.childId].mean=='absent'">A</span> </md-button>
@@ -133,42 +99,55 @@
       </md-content>
     </div>
   </div>
+
+  <div ng-show="!view" layout="row">
+    <md-button class="md-icon-button week-button" ng-click="prevWeek()"><i layout="column" flex="25" class="icon-arrow_left"></i></md-button>
+    <canvas id="canvas" flex="75" class="chart"></canvas>
+    <md-button class="md-icon-button week-button" ng-click="nextWeek()"><i layout="column" flex="25" class="icon-arrow_right"></i></md-button>
+  </div>
+  
   <div class="cal-total" layout="row">
-    <div layout="column" flex="5">
+    <div layout="column" flex="10">
+      <md-switch class="switch" ng-click="switchView()">Graph View</md-switch>
     </div>
-    <div layout="column" flex="25" class="cal-name">
-      Total
+    <div layout="column" flex="10">
+      <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
     </div>
-    <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index">
-      <div layout="row" ng-if="!today(day)">
-        <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="weekData[dayIndex].zeroImpact_solo">{{weekData[dayIndex].zeroImpact_solo}}</span><span ng-if="!weekData[dayIndex].zeroImpact_solo">0</span>
+      <div layout="column" flex="5" class="cal-name" ng-show="view">
+        Totals:
+      </div>
+      <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-show="view">
+        <div layout="row" ng-if="!today(day)">
+          <span flex="20"></span>
+          <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="weekData[dayIndex].zeroImpact_solo">{{weekData[dayIndex].zeroImpact_solo}}</span><span ng-if="!weekData[dayIndex].zeroImpact_solo">0</span>
+          </div>
+          <div layout="column" flex="15" class="cal-foot-adult-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="weekData[dayIndex].zeroImpact_wAdult || weekData[dayIndex].pedibus">{{(weekData[dayIndex].zeroImpact_wAdult + weekData[dayIndex].pedibus)}}</span><span ng-if="!weekData[dayIndex].zeroImpact_wAdult && !weekData[dayIndex].pedibus ">0</span>
+          </div>
+          <div layout="column" flex="15" class="cal-bus-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="weekData[dayIndex].bus">{{weekData[dayIndex].bus}}</span><span ng-if="!weekData[dayIndex].bus">0</span>
+          </div>
+          <div layout="column" flex="15" class="cal-car-square-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="weekData[dayIndex].pandr">{{weekData[dayIndex].pandr}}</span><span ng-if="!weekData[dayIndex].pandr">0</span>
+          </div>
         </div>
-        <div layout="column" flex="15" class="cal-foot-adult-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="weekData[dayIndex].zeroImpact_wAdult || weekData[dayIndex].pedibus">{{(weekData[dayIndex].zeroImpact_wAdult + weekData[dayIndex].pedibus)}}</span><span ng-if="!weekData[dayIndex].zeroImpact_wAdult && !weekData[dayIndex].pedibus ">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-bus-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="weekData[dayIndex].bus">{{weekData[dayIndex].bus}}</span><span ng-if="!weekData[dayIndex].bus">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-car-square-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="weekData[dayIndex].pandr">{{weekData[dayIndex].pandr}}</span><span ng-if="!weekData[dayIndex].pandr">0</span>
+        <div layout="row" ng-if="today(day)">
+          <span flex="20"></span>
+          <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="todayData.means['zeroImpact_solo']">{{todayData.means['zeroImpact_solo']}}</span><span ng-if="!todayData.means['zeroImpact_solo']">0</span>
+          </div>
+          <div layout="column" flex="15" class="cal-foot-adult-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="todayData.means['zeroImpact_wAdult'] || todayData.means['pedibus']">{{(todayData.means['zeroImpact_wAdult'] + todayData.means['pedibus'])}}</span><span ng-if="!todayData.means['zeroImpact_wAdult'] && !todayData.means['pedibus'] ">0</span>
+          </div>
+          <div layout="column" flex="15" class="cal-bus-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="todayData.means['bus']">{{todayData.means['bus']}}</span><span ng-if="!todayData.means['bus']">0</span>
+          </div>
+          <div layout="column" flex="15" class="cal-car-square-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
+            <span ng-if="todayData.means['pandr']">{{todayData.means['pandr']}}</span><span ng-if="!todayData.means['pandr']">0</span>
+          </div>
         </div>
       </div>
-      <div layout="row" ng-if="today(day)">
-        <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="todayData.means['zeroImpact_solo']">{{todayData.means['zeroImpact_solo']}}</span><span ng-if="!todayData.means['zeroImpact_solo']">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-foot-adult-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="todayData.means['zeroImpact_wAdult'] || todayData.means['pedibus']">{{(todayData.means['zeroImpact_wAdult'] + todayData.means['pedibus'])}}</span><span ng-if="!todayData.means['zeroImpact_wAdult'] && !todayData.means['pedibus'] ">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-bus-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="todayData.means['bus']">{{todayData.means['bus']}}</span><span ng-if="!todayData.means['bus']">0</span>
-        </div>
-        <div layout="column" flex="15" class="cal-car-square-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
-          <span ng-if="todayData.means['pandr']">{{todayData.means['pandr']}}</span><span ng-if="!todayData.means['pandr']">0</span>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 <div class="cal-fab">

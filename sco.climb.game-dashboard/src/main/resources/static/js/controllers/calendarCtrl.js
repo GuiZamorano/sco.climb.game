@@ -1,7 +1,7 @@
 /* global angular */
 angular.module('climbGame.controllers.calendar', [])
-  .controller('calendarCtrl', ['$scope', '$filter', '$window', '$interval', '$mdDialog', '$mdToast', 'CacheSrv', 'dataService', 'calendarService',
-    function ($scope, $filter, $window, $interval, $mdDialog, $mdToast, CacheSrv, dataService, calendarService) {
+  .controller('calendarCtrl', ['$scope', '$filter', '$window', '$interval', '$mdDialog', '$mdToast', 'CacheSrv', 'dataService', 'calendarService', 'chartService',
+    function ($scope, $filter, $window, $interval, $mdDialog, $mdToast, CacheSrv, dataService, calendarService, chartService) {
       $scope.week = []
       $scope.weekNumber = []
       $scope.selectedWeather = ''
@@ -22,6 +22,9 @@ angular.module('climbGame.controllers.calendar', [])
         means: {}
       }
       $scope.Index = ''
+      $scope.view = true
+      $scope.imperial = true
+
       calendarService.getIndex().then(
         function(index) {
             $scope.Index = index
@@ -44,10 +47,6 @@ angular.module('climbGame.controllers.calendar', [])
             }
       )
       setClassSize()
-
-
-
-
 
       calendarService.setTitle().then(
         function () {},
@@ -98,8 +97,6 @@ angular.module('climbGame.controllers.calendar', [])
         }
         return color
       }
-
-
 
       $scope.selectWather = function (weather) {
         $scope.selectedWeather = weather
@@ -269,16 +266,31 @@ angular.module('climbGame.controllers.calendar', [])
                                         preserveScope: true, // do not forget this if use parent scope
                                         template: '<md-dialog>' +
 
-                                          '  <div class="cal-dialog-title"> {{distance.popup_distance}} miles added! </div><md-divider></md-divider>' +
-                                          '  <div class="cal-dialog-text"># students x speed x time = distance</div>' +
-                                          '  <div class="cal-dialog-text">{{distance.means_bus}} students x {{distance.slow}} mph x {{distance.duration}} hour(s) = {{distance.slowDistance}} miles</div>' +
-                                          '  <div class="cal-dialog-text">{{distance.means_zeroImpact_wAdult}} students x {{distance.med}} mph x {{distance.duration}} hour(s) = {{distance.medDistance}} miles</div>' +
-                                          '  <div class="cal-dialog-text">{{distance.means_zeroImpact_solo}} students x {{distance.fast}} mph x {{distance.duration}} hour(s) = {{distance.fastDistance}} miles</div>' +
+                                          '  <div class="cal-dialog-title" ng-if="imperial"> {{distance.popup_distance}} miles added! </div><md-divider></md-divider>' +
+                                          '  <div class="cal-dialog-title" ng-if="!imperial"> {{distance.popup_distance*1.61}} km added! </div><md-divider></md-divider>' +
+
+
+                                          '  <div class="cal-dialog-text" ng-if="imperial"># students x speed x time = distance</div>' +
+                                          '  <div class="cal-dialog-text" ng-if="!imperial"># students x speed x time = distance</div>' +
+
+                                          '  <div class="cal-dialog-text" ng-if="imperial">{{distance.means_bus}} students x {{distance.slow}} mph x {{distance.duration}} hour(s) = {{distance.slowDistance}} miles</div>' +
+                                          '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_bus}} students x {{distance.slow*1.61}} kph x {{distance.duration}} hour(s) = {{distance.slowDistance*1.61}} km</div>' +
+
+
+                                          '  <div class="cal-dialog-text" ng-if="imperial">{{distance.means_zeroImpact_wAdult}} students x {{distance.med}} mph x {{distance.duration}} hour(s) = {{distance.medDistance}} miles</div>' +
+                                          '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_zeroImpact_wAdult}} students x {{distance.med*1.61}} kph x {{distance.duration}} hour(s) = {{distance.medDistance*1.61}} km</div>' +
+
+
+                                          '  <div class="cal-dialog-text" ng-if="imperial">{{distance.means_zeroImpact_solo}} students x {{distance.fast}} mph x {{distance.duration}} hour(s) = {{distance.fastDistance}} miles</div>' +
+                                          '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_zeroImpact_solo}} students x {{distance.fast*1.61}} kph x {{distance.duration}} hour(s) = {{distance.fastDistance*1.61}} km</div>' +
+
+
+
 
                                           '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
                                           '      Cool!' +
-                                          '   </div> </md-button>' +
-                                          '</div></md-dialog>',
+                                          '   </div> </md-button> </div>' +
+                                          '</md-dialog>',
                                         controller: function DialogController($scope, $mdDialog) {
                                           $scope.closeDialog = function () {
                                             $mdDialog.hide()
@@ -410,10 +422,22 @@ angular.module('climbGame.controllers.calendar', [])
       }
 
       $scope.prevWeek = function () {
+        if ($scope.week[0] <= 0) return;
         changeWeek(-1)
       }
+
       $scope.nextWeek = function () {
         changeWeek(1)
+      }
+
+      $scope.switchView = function () {
+        $scope.view = !$scope.view
+        if(!$scope.view)
+            chartService.loadChart();
+      }
+
+      $scope.switchUnit = function () {
+        $scope.imperial = !$scope.imperial
       }
 
       $scope.newEvent = function () {
@@ -522,12 +546,12 @@ angular.module('climbGame.controllers.calendar', [])
                 $scope.week.push(i);
               }
               setLabelWeek($scope.weekNumber)
-
         calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
           function (calendar) {
             createWeekData(calendar)
-          },
-          function () {}
+            if(!$scope.view)
+                chartService.loadChart()
+          }
         )
 
         // if the new week is the actual week
@@ -585,6 +609,7 @@ angular.module('climbGame.controllers.calendar', [])
 
       function createWeekData(calendar) {
         $scope.weekData = []
+        chartService.clearData()
         var k = 0
         for (var i = 0; i < 5; i++) {
           // get i-th day data and put baby with that object id with that setted mean
@@ -604,10 +629,17 @@ angular.module('climbGame.controllers.calendar', [])
                 }
                 $scope.weekData[i][calendar[k].modeMap[property]] = $scope.weekData[i][calendar[k].modeMap[property]] + 1
               }
+              var modes = ['pandr', 'bus', 'zeroImpact_wAdult', 'zeroImpact_solo']
+              for(var j=0; j<modes.length; j++) {
+                $scope.weekData[i][modes[j]] ?
+                        chartService.setData($scope.weekData[i][modes[j]], j, i) : chartService.setData(0, j, i)
+              }
               if (calendar[k].meteo) {
                 $scope.weekData[i].meteo = calendar[k].meteo
               }
               // if (calendar[i].closed) {
+
+
              if(isSwipesEntry(calendar[k], i)) {
                 calendar[k].index = $scope.Index
                 $scope.weekData[i].closed = false
@@ -617,6 +649,8 @@ angular.module('climbGame.controllers.calendar', [])
                 $scope.weekData[i].closed = calendar[k].closed
                 $scope.weekData[i].duration = calendar[k].duration
                 $scope.weekData[i].distance = calendar[k].distance
+
+                chartService.setName(calendar[k].name, i)
               }
 
               k++
@@ -662,6 +696,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
       */
 
+      // can we get rid of this???
       var startPoller = function () {
         /* comment this if you don't want always the last notification available */
         CacheSrv.resetLastCheck('calendar')

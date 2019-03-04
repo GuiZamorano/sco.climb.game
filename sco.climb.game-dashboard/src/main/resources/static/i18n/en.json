@@ -1,5 +1,5 @@
 {
-  "menu_class": "Activity History and Individual Data Entry",
+  "menu_class": "Individual Data Entry",
   "menu_map": "Path",
   "menu_excursions": "Aggregate Activity Entry",
   "menu_stats": "Statistics",
@@ -39,6 +39,7 @@
   "cal_notifications_empty": "There are no notifications",
   "cal_challenges": "Challenges",
   "cal_header_state": "Status",
+  "cal_header_category": "Category",
   "cal_header_clima": "Weather",
   "cal_header_time": "Duration",
   "cal_header_sent": "Data Sent",

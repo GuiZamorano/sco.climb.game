@@ -421,13 +421,10 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.prevWeek = function () {
         if ($scope.week[0] <= 0) return;
         changeWeek(-1)
-        if(!$scope.view)
-            chartService.loadChart()
       }
+
       $scope.nextWeek = function () {
         changeWeek(1)
-        if(!$scope.view)
-            chartService.loadChart()
       }
 
       $scope.switchView = function () {
@@ -549,8 +546,9 @@ angular.module('climbGame.controllers.calendar', [])
         calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
           function (calendar) {
             createWeekData(calendar)
-          },
-          function () {}
+            if(!$scope.view)
+                chartService.loadChart()
+          }
         )
 
         // if the new week is the actual week

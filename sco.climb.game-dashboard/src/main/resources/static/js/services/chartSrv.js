@@ -69,8 +69,6 @@ angular.module('climbGame.services.chart', [])
     });
 
     this.loadChart = function() {
-        if(barChart)
-            barChart.destroy()
         var ctx = document.getElementById('canvas').getContext('2d');
         barChart = new Chart(ctx, {
             type: 'bar',
@@ -102,6 +100,8 @@ angular.module('climbGame.services.chart', [])
      };
 
      this.clearData = function() {
+         if(barChart)
+             barChart.destroy()
         barChartData.datasets.forEach(function(dataset) {
             dataset.data = []
         });

@@ -29,7 +29,8 @@ angular.module('climbGame', [
   'climbGame.services.calendar',
   'climbGame.services.classSelection',
   'climbGame.services.stats',
-  'climbGame.services.home'
+  'climbGame.services.home',
+  'zingchart-angularjs'
 ])
 
 .config(function ($mdThemingProvider) {

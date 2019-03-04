@@ -626,8 +626,8 @@ be a descendant of the grid when it is being dragged.
 
 
 .fc-day-grid-event .fc-content { /* force events to be one-line tall */
-	white-space: nowrap;
-	overflow: hidden;
+	white-space: normal;
+	/*overflow: hidden;*/
 }
 
 .fc-day-grid-event .fc-time {

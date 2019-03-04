@@ -125,7 +125,10 @@ angular.module('climbGame.services.data', [])
           'index': data.index,
           'name' : data.name,
           'duration' : data.duration,
-          'distance' : data.distance
+          'eadistance' : data.eadistance,
+          'distance' : data.distance,
+          'vadistance' : data.vadistance,
+          'fadistance' : data.fadistance
         },
         //timeout: configService.httpTimout()
       }).then(function (response) {

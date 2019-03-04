@@ -232,6 +232,9 @@ excursionsService.getClassPlayers().then(
         $scope.distance.medDistance = Number($scope.distance.means_zeroImpact_wAdult) * $scope.distance.med * Number($scope.distance.duration)
         $scope.distance.fastDistance = Number($scope.distance.means_zeroImpact_solo) * $scope.distance.fast * Number($scope.distance.duration)
         //add group distances to get total
+        $scope.todayData.eadistance = $scope.distance.fastDistance
+                              $scope.todayData.vadistance = $scope.distance.medDistance
+                              $scope.todayData.fadistance = $scope.distance.slowDistance
         $scope.todayData.distance = Number($scope.distance.slowDistance) + Number($scope.distance.medDistance) + Number($scope.distance.fastDistance)
         $scope.distance.popup_distance = Number($scope.todayData.distance)
 

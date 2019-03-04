@@ -154,7 +154,7 @@ excursionsService.getClassPlayers().then(
                       scope: $scope, // use parent scope in template
                       preserveScope: true, // do not forget this if use parent scope
                       template: '<md-dialog>' +
-                        '  <div class="cal-dialog-title"> Number of Children Incorrect, Just count it out jeez  </div><md-divider></md-divider>' +
+                        '  <div class="cal-dialog-title"> Number of Children Incorrect. If children are absent mark as inactive. </div><md-divider></md-divider>' +
                         '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
                         '      I understand' +
                         '   </div> </md-button>' +

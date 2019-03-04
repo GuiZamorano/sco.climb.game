@@ -177,7 +177,9 @@ excursionsService.getClassPlayers().then(
         $scope.todayData.childrenIA = params.childrenIA
         var count = 0;
         var babiesMap = {}
+        var activityTypes = {}
         var activityMap = {}
+        var distanceMap = {}
         for (var i =0; i < params.childrenEA; i++){
             $scope.todayData.babies[count].mean = 'zeroImpact_solo'
             count++
@@ -223,19 +225,29 @@ excursionsService.getClassPlayers().then(
 
         for (var i = 0; i < total; i++) {
             babiesMap[$scope.todayData.babies[i].childId] = $scope.todayData.babies[i].mean
-            if($scope.todayData.babies[i].mean == "zeroImpact_solo") // green
-                activityMap[$scope.todayData.babies[i].childId] = $scope.distance.fast * Number($scope.distance.duration)
-            else if($scope.todayData.babies[i].mean == "zeroImpact_wAdult") // yellow
-                activityMap[$scope.todayData.babies[i].childId] = $scope.distance.med * Number($scope.distance.duration)
-            else if($scope.todayData.babies[i].mean == "bus") // red
-                activityMap[$scope.todayData.babies[i].childId] = $scope.distance.slow * Number($scope.distance.duration)
-            else // grey
+            activityTypes[$scope.todayData.babies[i].childId] = 'mph'
+            if($scope.todayData.babies[i].mean == "zeroImpact_solo") { // green
+                distanceMap[$scope.todayData.babies[i].childId] = $scope.distance.fast * Number($scope.distance.duration)
+                activityMap[$scope.todayData.babies[i].childId] = 3
+            }
+            else if($scope.todayData.babies[i].mean == "zeroImpact_wAdult") { // yellow
+                distanceMap[$scope.todayData.babies[i].childId] = $scope.distance.med * Number($scope.distance.duration)
+                activityMap[$scope.todayData.babies[i].childId] = 2
+            }
+            else if($scope.todayData.babies[i].mean == "bus") { // red
+                distanceMap[$scope.todayData.babies[i].childId] = $scope.distance.slow * Number($scope.distance.duration)
+                activityMap[$scope.todayData.babies[i].childId] = 1
+            }
+            else { // grey
+                distanceMap[$scope.todayData.babies[i].childId] = 0
                 activityMap[$scope.todayData.babies[i].childId] = 0
+            }
         }
 
         $scope.todayData.modeMap = babiesMap
-        $scope.todayData.activityType = "miles" // TODO un-hardcode string
+        $scope.todayData.activityTypes = activityTypes
         $scope.todayData.activityMap = activityMap
+        $scope.todayData.distanceMap = distanceMap
 
         $mdDialog.show({
           // targetEvent: $event,

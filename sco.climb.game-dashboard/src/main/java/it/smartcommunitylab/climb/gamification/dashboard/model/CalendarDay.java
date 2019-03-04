@@ -21,9 +21,12 @@ public class CalendarDay extends BaseObject {
 	private int VActive=0;
 	private int FActive=0;
 	private int IActive=0;
-	private Map<String, String> modeMap = new HashMap<String, String>();
-	private String activityType;
-	private Map<String, Double> activityMap = new HashMap<String, Double>();
+
+	private Map<String, String> modeMap = new HashMap<String, String>();       // color
+	private Map<String, String> activityTypes = new HashMap<String, String>(); // units (epochs, mph)
+	private Map<String, Double> activityMap = new HashMap<String, Double>();   // measurements (epochs, mph)
+	private Map<String, Double> distanceMap = new HashMap<String, Double>();   // distance in miles
+
 	private boolean closed = false;
 	
 	public String getGameId() {
@@ -50,10 +53,12 @@ public class CalendarDay extends BaseObject {
 	public void setModeMap(Map<String, String> modeMap) {
 		this.modeMap = modeMap;
 	}
-	public String getActivityType() {return activityType;}
-	public void setActivityType(String activityType) {this.activityType = activityType;}
+	public Map<String, String> getActivityTypes() {return activityTypes;}
+	public void setActivityTypes(Map<String, String> activityTypes) {this.activityTypes = activityTypes;}
 	public Map<String, Double> getActivityMap() {return activityMap;}
 	public void setActivityMap(Map<String, Double> activityMap) {this.activityMap = activityMap;}
+	public Map<String, Double> getDistanceMap() {return this.distanceMap;}
+	public void setDistanceMap(Map<String, Double> distanceMap) {this.distanceMap = distanceMap;}
 	public String getClassRoom() {
 		return classRoom;
 	}

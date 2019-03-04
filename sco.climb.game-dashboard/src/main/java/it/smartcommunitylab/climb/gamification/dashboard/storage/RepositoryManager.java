@@ -239,8 +239,9 @@ public class RepositoryManager {
 				Update update = new Update();
 				update.set("meteo", calendarDay.getMeteo());
 				update.set("modeMap", calendarDay.getModeMap());
-				update.set("activityType", calendarDay.getActivityType());
+				update.set("activityTypes", calendarDay.getActivityTypes());
 				update.set("activityMap", calendarDay.getActivityMap());
+				update.set("distanceMap", calendarDay.getDistanceMap());
 				update.set("closed", Boolean.TRUE);
 				update.set("lastUpdate", now);
 				mongoTemplate.updateFirst(query, update, CalendarDay.class);				

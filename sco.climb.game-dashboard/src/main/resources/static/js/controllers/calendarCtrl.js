@@ -19,7 +19,8 @@ angular.module('climbGame.controllers.calendar', [])
 
       $scope.todayData = {
         babies: [],
-        means: {}
+        means: {},
+        activityTypes : {}
       }
       $scope.Index = ''
       calendarService.getIndex().then(
@@ -201,24 +202,35 @@ angular.module('climbGame.controllers.calendar', [])
 
                       $scope.todayData.day = new Date().setHours(0, 0, 0, 0)
                       var babiesMap = {}
-                      var activityMap = {}
+                      var distanceMap = {}
+                      $scope.todayData.activityMap = {}
                       for (var i = 0; i < $scope.todayData.babies.length; i++) {
                         if ($scope.todayData.babies[i].mean) {
                           babiesMap[$scope.todayData.babies[i].childId] = $scope.todayData.babies[i].mean
-                          if($scope.todayData.babies[i].mean == "zeroImpact_solo") // green
-                            activityMap[$scope.todayData.babies[i].childId] = $scope.distance.fast * Number($scope.distance.duration)
-                          else if($scope.todayData.babies[i].mean == "zeroImpact_wAdult") // yellow
-                            activityMap[$scope.todayData.babies[i].childId] = $scope.distance.med * Number($scope.distance.duration)
-                          else if($scope.todayData.babies[i].mean == "bus") // red
-                            activityMap[$scope.todayData.babies[i].childId] = $scope.distance.slow * Number($scope.distance.duration)
-                          else // grey
-                            activityMap[$scope.todayData.babies[i].childId] = 0
+                          if(!$scope.todayData.activityTypes[$scope.todayData.babies[i].childId]) {
+                              $scope.todayData.activityTypes[$scope.todayData.babies[i].childId] = 'mph'
+                              if($scope.todayData.babies[i].mean == "zeroImpact_solo") { // green
+                                distanceMap[$scope.todayData.babies[i].childId] = $scope.distance.fast * Number($scope.distance.duration)
+                                $scope.todayData.activityMap[$scope.todayData.babies[i].childId] = 3;
+                              }
+                              else if($scope.todayData.babies[i].mean == "zeroImpact_wAdult") { // yellow
+                                distanceMap[$scope.todayData.babies[i].childId] = $scope.distance.med * Number($scope.distance.duration)
+                                $scope.todayData.activityMap[$scope.todayData.babies[i].childId] = 2;
+                              }
+                              else if($scope.todayData.babies[i].mean == "bus") { // red
+                                distanceMap[$scope.todayData.babies[i].childId] = $scope.distance.slow * Number($scope.distance.duration)
+                                $scope.todayData.activityMap[$scope.todayData.babies[i].childId] = 1;
+                              }
+                              else { // grey
+                                distanceMap[$scope.todayData.babies[i].childId] = 0
+                                $scope.todayData.activityMap[$scope.todayData.babies[i].childId] = 0;
+                              }
+                          }
                         }
                       }
 
                       $scope.todayData.modeMap = babiesMap
-                      $scope.todayData.activityType = "miles" // TODO un-hardcode string
-                      $scope.todayData.activityMap = activityMap
+                      $scope.todayData.distanceMap = distanceMap
                       $scope.todayData.index = $scope.Index
                       calendarService.sendData($scope.todayData).then(function (returnValue) {
                         // change weekdata to closed
@@ -619,6 +631,7 @@ angular.module('climbGame.controllers.calendar', [])
              if(isSwipesEntry(calendar[k], i)) {
                 calendar[k].index = $scope.Index
                 $scope.weekData[i].closed = false
+                $scope.todayData.activityTypes = calendar[k].activityTypes
               } else {
                 $scope.weekData[i].closed = calendar[k].closed
                 $scope.weekData[i].name = calendar[k].name

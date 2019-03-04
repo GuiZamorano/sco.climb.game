@@ -27,6 +27,7 @@ public class CalendarDay extends BaseObject {
 	private Map<String, Double> activityMap = new HashMap<String, Double>();   // measurements (epochs, mph)
 	private Map<String, Double> distanceMap = new HashMap<String, Double>();   // distance in miles
 
+	private boolean aggregate = false;
 	private boolean closed = false;
 	
 	public String getGameId() {
@@ -127,5 +128,13 @@ public class CalendarDay extends BaseObject {
 
 	public void setIActive(int IActive) {
 		this.IActive = IActive;
+	}
+
+	public boolean getAggregate() {
+		return aggregate;
+	}
+
+	public void setAggregate(boolean aggregate){
+		this.aggregate = aggregate;
 	}
 }

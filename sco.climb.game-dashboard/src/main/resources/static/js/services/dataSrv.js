@@ -128,7 +128,8 @@ angular.module('climbGame.services.data', [])
           'index': data.index,
           'name' : data.name,
           'duration' : data.duration,
-          'distance' : data.distance
+          'distance' : data.distance,
+          'aggregate' : data.aggregate
         },
         //timeout: configService.httpTimout()
       }).then(function (response) {

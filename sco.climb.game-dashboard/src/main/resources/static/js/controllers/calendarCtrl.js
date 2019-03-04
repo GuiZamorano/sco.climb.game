@@ -232,6 +232,7 @@ angular.module('climbGame.controllers.calendar', [])
                       $scope.todayData.modeMap = babiesMap
                       $scope.todayData.distanceMap = distanceMap
                       $scope.todayData.index = $scope.Index
+                      $scope.todayData.aggregate = false
                       calendarService.sendData($scope.todayData).then(function (returnValue) {
                         // change weekdata to closed
                         $scope.weekData[$scope.todayIndex%5].closed = true

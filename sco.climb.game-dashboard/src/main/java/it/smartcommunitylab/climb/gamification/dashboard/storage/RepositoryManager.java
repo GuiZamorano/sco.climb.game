@@ -242,6 +242,7 @@ public class RepositoryManager {
 				update.set("activityTypes", calendarDay.getActivityTypes());
 				update.set("activityMap", calendarDay.getActivityMap());
 				update.set("distanceMap", calendarDay.getDistanceMap());
+				update.set("aggregate", calendarDay.getAggregate());
 				update.set("closed", Boolean.TRUE);
 				update.set("lastUpdate", now);
 				mongoTemplate.updateFirst(query, update, CalendarDay.class);				

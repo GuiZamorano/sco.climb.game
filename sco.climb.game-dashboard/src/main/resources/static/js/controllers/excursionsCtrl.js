@@ -248,6 +248,7 @@ excursionsService.getClassPlayers().then(
         $scope.todayData.activityTypes = activityTypes
         $scope.todayData.activityMap = activityMap
         $scope.todayData.distanceMap = distanceMap
+        $scope.todayData.aggregate = true
 
         $mdDialog.show({
           // targetEvent: $event,

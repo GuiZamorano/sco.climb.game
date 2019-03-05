@@ -162,7 +162,7 @@
                 <span class="md-subhead">{{ex.day | date:'dd MMMM yyyy'}}</span>
                 <span class="md-subhead">{{ex.duration}} minutes</span>
                 <span class="md-subhead" ng-if="imperial">{{ex.distance}} miles</span>
-                <span class="md-subhead" ng-if="!imperial">{{ex.distance*1.61}} km</span>
+                <span class="md-subhead" ng-if="!imperial">{{roundToPlaces(ex.distance*1.61, 2)}} km</span>
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-sm card-media">

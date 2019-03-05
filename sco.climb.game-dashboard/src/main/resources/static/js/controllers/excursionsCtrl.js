@@ -294,19 +294,19 @@ excursionsService.getClassPlayers().then(
                                               template: '<md-dialog>' +
 
                                               '  <div class="cal-dialog-title" ng-if="imperial"> {{distance.popup_distance}} miles added! </div><md-divider></md-divider>' +
-                                              '  <div class="cal-dialog-title" ng-if="!imperial"> {{distance.popup_distance*1.61}} km added! </div><md-divider></md-divider>' +
+                                              '  <div class="cal-dialog-title" ng-if="!imperial"> {{roundToPlaces(distance.popup_distance*1.61, 2)}} km added! </div><md-divider></md-divider>' +
 
                                               '  <div class="cal-dialog-text" ng-if="imperial"># students x speed x time = distance</div>' +
                                               '  <div class="cal-dialog-text" ng-if="!imperial"># students x speed x time = distance</div>' +
 
                                               '  <div class="cal-dialog-text" ng-if="imperial">{{distance.means_bus}} students x {{distance.slow}} mph x {{distance.duration}} hour(s) = {{distance.slowDistance}} miles</div>' +
-                                              '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_bus}} students x {{distance.slow*1.61}} kph x {{distance.duration}} hour(s) = {{distance.slowDistance*1.61}} km</div>' +
+                                              '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_bus}} students x {{roundToPlaces(distance.slow*1.61, 2)}} kph x {{distance.duration}} hour(s) = {{roundToPlaces(distance.slowDistance*1.61, 2)}} km</div>' +
 
                                               '  <div class="cal-dialog-text" ng-if="imperial">{{distance.means_zeroImpact_wAdult}} students x {{distance.med}} mph x {{distance.duration}} hour(s) = {{distance.medDistance}} miles</div>' +
-                                              '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_zeroImpact_wAdult}} students x {{distance.med*1.61}} kph x {{distance.duration}} hour(s) = {{distance.medDistance*1.61}} km</div>' +
+                                              '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_zeroImpact_wAdult}} students x {{roundToPlaces(distance.med*1.61, 2)}} kph x {{distance.duration}} hour(s) = {{roundToPlaces(distance.medDistance*1.61, 2)}} km</div>' +
 
                                               '  <div class="cal-dialog-text" ng-if="imperial">{{distance.means_zeroImpact_solo}} students x {{distance.fast}} mph x {{distance.duration}} hour(s) = {{distance.fastDistance}} miles</div>' +
-                                              '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_zeroImpact_solo}} students x {{distance.fast*1.61}} kph x {{distance.duration}} hour(s) = {{distance.fastDistance*1.61}} km</div>' +
+                                              '  <div class="cal-dialog-text" ng-if="!imperial">{{distance.means_zeroImpact_solo}} students x {{roundToPlaces(distance.fast*1.61, 2)}} kph x {{distance.duration}} hour(s) = {{roundToPlaces(distance.fastDistance*1.61, 2)}} km</div>' +
 
                                               '    <div layout="row"  layout-align="start center" ><div layout"column" flex="100" ><md-button ng-click="closeDialog()" class=" send-dialog-delete">' +
                                               '      Cool!' +
@@ -339,6 +339,10 @@ excursionsService.getClassPlayers().then(
         $scope.newExcursion = angular.copy(emptyExcursion)
         $scope.excursionForm.$setPristine()
         $scope.excursionForm.$setUntouched()
+      }
+
+      $scope.roundToPlaces = function(num, places){
+          return +(Math.round(num + "e+" + places)  + "e-" + places)
       }
 
 

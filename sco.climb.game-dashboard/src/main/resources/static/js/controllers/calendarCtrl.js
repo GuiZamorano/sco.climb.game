@@ -25,6 +25,10 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.view = true
       $scope.imperial = true
 
+      chartService.init(['#F2F2F2', '#EF5350', '#FFEE58', '#66BB6A'],
+            ['Inactive', 'Fairly Active', 'Very Active', 'Extremely Active'])
+      chartService.setY(5)
+
       calendarService.getIndex().then(
         function(index) {
             $scope.Index = index
@@ -433,7 +437,7 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.switchView = function () {
         $scope.view = !$scope.view
         if(!$scope.view)
-            chartService.loadChart();
+            chartService.loadChart('canvas');
       }
 
       $scope.switchUnit = function () {
@@ -550,7 +554,7 @@ angular.module('climbGame.controllers.calendar', [])
           function (calendar) {
             createWeekData(calendar)
             if(!$scope.view)
-                chartService.loadChart()
+                chartService.loadChart('canvas')
           }
         )
 

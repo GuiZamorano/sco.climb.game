@@ -1,3 +1,5 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
 <div class="excursions" layout="row" layout-padding>
   <div layout="column" flex="33" class="form-column">
     <h1 class="md-title">{{'excursions_new' | translate}}</h1>
@@ -5,7 +7,14 @@
       <!-- Name -->
       <md-input-container class="md-block">
         <label>{{'excursion_form_name_placeholder' | translate}}</label>
-        <input name="name" type="text" ng-model="newExcursion.name" required />
+        <!-- <input name="name" type="text" ng-model="newExcursion.name" required />-->
+        <input list="categories" id="text1" ng-model="newExcursion.name" name="name">
+        <datalist id="categories">
+          <option value="Brain Break">
+          <option value="P.E.">
+          <option value="Recess">
+        </datalist>
+
         <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
         <div ng-messages="excursionForm.name.$error" ng-if="!showHints && excursionForm.name.$touched">
           <div ng-message="required">{{'excursion_form_name_error_required' | translate}}</div>
@@ -146,7 +155,12 @@
     </md-button>
   </div>
   <div layout="column" flex>
-    <h1 class="md-title">{{'excursions_history' | translate}}</h1>
+    <div layout="row" class="card-list-header">
+      <h1 class="md-title" flex="85">{{'excursions_history' | translate}}</h1>
+      <div flex="15">
+        <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
+      </div>
+    </div>
     <md-content id="excursions-list">
       <div layout="row" layout-wrap>
         <div flex="50" ng-repeat="ex in excursions">
@@ -156,7 +170,8 @@
                 <span class="md-headline">{{ex.name}}</span>
                 <span class="md-subhead">{{ex.day | date:'dd MMMM yyyy'}}</span>
                 <span class="md-subhead">{{ex.duration}} minutes</span>
-                <span class="md-subhead">{{ex.distance}} miles</span>
+                <span class="md-subhead" ng-if="imperial">{{ex.distance}} miles</span>
+                <span class="md-subhead" ng-if="!imperial">{{roundToPlaces(ex.distance*1.61, 2)}} km</span>
               </md-card-title-text>
               <md-card-title-media>
                 <div class="md-media-sm card-media">
@@ -166,12 +181,18 @@
             </md-card-title>
             <md-card-content>
               <p class="md-subhead">
-                <ul>
-              <li>Extremely Active: {{ex.eactive}} ----- 3 mph</li>
-              <li>Very Active: {{ex.vactive}} ----- 2 mph</li>
-              <li>Fairly Active: {{ex.factive}} ----- 1 mph</li>
-              <li>Inactive: {{ex.iactive}} ----- 0 mph</li>
-            </ul>
+                <ul ng-if="imperial">
+                  <li>Extremely Active: {{ex.eactive}} ----- 3 mph</li>
+                  <li>Very Active: {{ex.vactive}} ----- 2 mph</li>
+                  <li>Fairly Active: {{ex.factive}} ----- 1 mph</li>
+                  <li>Inactive: {{ex.iactive}} ----- 0 mph</li>
+                </ul>
+                <ul ng-if="!imperial">
+                  <li>Extremely Active: {{ex.eactive}} ----- 4.83 kph</li>
+                  <li>Very Active: {{ex.vactive}} ----- 3.22 kph</li>
+                  <li>Fairly Active: {{ex.factive}} ----- 1.61 kph</li>
+                  <li>Inactive: {{ex.iactive}} ----- 0 kph</li>
+                </ul>
               </p>
             </md-card-content>
           </md-card>

@@ -46,7 +46,7 @@ angular.module('climbGame.services.calendar', [])
       var deferr = $q.defer();
       dataService.getStatus().then(function (data) {
         //getStatus
-        loginService.setTitle(data.game.globalTeam + " - " + $filter('translate')('title_class') + " " + loginService.getClassRoom());
+        loginService.setTitle(data.game.globalTeam);// + " - " + $filter('translate')('title_class') + " " + loginService.getClassRoom());
         deferr.resolve();
       }, function (err) {
         deferr.reject();

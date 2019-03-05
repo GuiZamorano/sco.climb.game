@@ -1,0 +1,49 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
+<div layout="row">
+    <md-button class="md-raised md-primary" aria-label="Calendar Button" ng-click="switchCalendar()"> Switch Calendar View </md-button>
+    <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
+</div>
+<div class="row">
+        <div class="col-md-8">
+            <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+        </div>
+    <div ng-if="calendarView == 0">
+        <div class="col-md-4">
+            <div style="background-color:#B2D9FF;color:black;" ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
+                <h2 style="margin-top:0px"> Selected Event:</h2>
+                <!--<div class="md-media-sm card-media">
+                    <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
+                </div>-->
+                {{setJsonOriginalView(SelectedEvent)}}
+                <div zingchart id="chart-2" zc-json="myJson" zc-width="100%" zc-height="450px">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="calendarView == 1">
+    <div class="col-md-4">
+        <div style="background-color:#B2D9FF;color:black;" ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
+            <h2 style="margin-top:0px"> Selected Event:</h2>
+           <!-- <div class="md-media-sm card-media">
+                <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
+            </div> -->
+
+                {{setJson(SelectedEvent)}}
+
+
+            <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="450px">
+
+            </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+
+
+<!--<script src="~/Scripts/MyApp.js"></script> -->

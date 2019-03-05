@@ -2,36 +2,9 @@ angular.module('climbGame.services.chart', [])
   .service('chartService', function () {
     var color = Chart.helpers.color;
     var max = 0;
-    var barChart = 0;
-    var barChartData = {
-      labels : ['', '', '', '', ''],
-      datasets : [
-      {
-          type: 'bar',
-          label: 'Inactive',
-          backgroundColor: color('#F2F2F2').alpha(0.8).rgbString(),
-          borderColor: color('#F2F2F2'),
-          data : []
-      },  {
-          type: 'bar',
-          label: 'Fairly Active',
-          backgroundColor: color('#EF5350').alpha(0.8).rgbString(),
-          borderColor: color('#EF5350'),
-          data : []
-      },  {
-          type: 'bar',
-          label: 'Very Active',
-          backgroundColor: color('#FFEE58').alpha(0.8).rgbString(),
-          borderColor: color('#FFEE58'),
-          data : []
-      },  {
-          type: 'bar',
-          label: 'Extremely Active',
-          backgroundColor: color('#66BB6A').alpha(0.8).rgbString(),
-          borderColor: color('#66BB6A'),
-          data : []
-      }]
-    };
+    var barChart = null;
+    var ySize = -1;
+    var barChartData = {};
 
     Chart.defaults.global.defaultFontStyle = 'Bold';
     Chart.defaults.global.defaultFontSize = 16;
@@ -68,8 +41,18 @@ angular.module('climbGame.services.chart', [])
         }
     });
 
-    this.loadChart = function() {
-        var ctx = document.getElementById('canvas').getContext('2d');
+    this.init = function(colors, categories) {
+        barChartData.datasets = [];
+        for(var i=0; i<colors.length; i++) {
+            barChartData.datasets[i] = {};
+            barChartData.datasets[i].type = 'bar';
+            barChartData.datasets[i].backgroundColor = color(colors[i]).alpha(0.8).rgbString()
+            barChartData.datasets[i].label = categories[i];
+        }
+    }
+
+    this.loadChart = function(elementId) {
+        var ctx = document.getElementById(elementId).getContext('2d');
         barChart = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
@@ -93,23 +76,34 @@ angular.module('climbGame.services.chart', [])
         });
      };
 
-     this.setData = function(data, datasetIndex, dataIndex) {
-        barChartData.datasets[datasetIndex].data[dataIndex] = data;
-        if(data > max)
-            max = data
-     };
+    this.setData = function(data, datasetIndex, dataIndex) {
+       barChartData.datasets[datasetIndex].data[dataIndex] = data;
+       if(data > max)
+           max = data
+    };
 
-     this.clearData = function() {
-         if(barChart)
-             barChart.destroy()
+    this.clearData = function() {
+        if(barChart)
+            barChart.destroy()
+
         barChartData.datasets.forEach(function(dataset) {
-            dataset.data = []
+            dataset.data = [];
         });
-        max = 0;
-        barChartData.labels = ['', '', '', '', '']
-     };
+
+        for(var i=0; i<ySize; i++)
+            barChartData.labels[i] = '';
+
+       max = 0;
+    };
 
     this.setName = function(name, index) {
         barChartData.labels[index] = name;
+    };
+
+    this.setY = function(num) {
+        ySize = num;
+        barChartData.labels = []
+        for(var i=0; i<num; i++)
+            barChartData.labels[i] = '';
     };
   });

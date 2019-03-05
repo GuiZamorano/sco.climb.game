@@ -289,9 +289,6 @@ $scope.eventSources = [$scope.events];
              item: {
                 fontAngle: -45,
                 fontSize: "9px"
-             },
-             label: {
-                text:"Activity"
              }
          },
          scaleY: {

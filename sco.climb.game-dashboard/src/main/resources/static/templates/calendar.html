@@ -107,18 +107,18 @@
   </div>
   
   <div class="cal-total" layout="row">
-    <div layout="column" flex="10">
+    <div layout="column" flex="12">
       <md-switch class="switch" ng-click="switchView()">Graph View</md-switch>
     </div>
     <div layout="column" flex="10">
       <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
     </div>
-      <div layout="column" flex="5" class="cal-name" ng-show="view">
+      <div layout="column" flex="2" class="cal-name" ng-show="view">
         Totals:
       </div>
       <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-show="view">
         <div layout="row" ng-if="!today(day)">
-          <span flex="20"></span>
+          <span flex="40"></span>
           <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
             <span ng-if="weekData[dayIndex].zeroImpact_solo">{{weekData[dayIndex].zeroImpact_solo}}</span><span ng-if="!weekData[dayIndex].zeroImpact_solo">0</span>
           </div>
@@ -133,7 +133,7 @@
           </div>
         </div>
         <div layout="row" ng-if="today(day)">
-          <span flex="20"></span>
+          <span flex="40"></span>
           <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
             <span ng-if="todayData.means['zeroImpact_solo']">{{todayData.means['zeroImpact_solo']}}</span><span ng-if="!todayData.means['zeroImpact_solo']">0</span>
           </div>

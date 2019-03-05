@@ -167,7 +167,7 @@ $scope.eventSources = [$scope.events];
             editable: true,
             displayEventTime: false,
             header: {
-                left: 'month basicWeek basicDay agendaWeek agendaDay',
+                left: 'month basicWeek',
                 center: 'title',
                 right:'today prev,next'
             },

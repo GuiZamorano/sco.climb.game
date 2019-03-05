@@ -7,7 +7,14 @@
       <!-- Name -->
       <md-input-container class="md-block">
         <label>{{'excursion_form_name_placeholder' | translate}}</label>
-        <input name="name" type="text" ng-model="newExcursion.name" required />
+        <!-- <input name="name" type="text" ng-model="newExcursion.name" required />-->
+        <input list="categories" id="text1" ng-model="newExcursion.name" name="name">
+        <datalist id="categories">
+          <option value="Brain Break">
+          <option value="P.E.">
+          <option value="Recess">
+        </datalist>
+
         <!--<div class="hint" ng-if="showHints">This is a hint</div>-->
         <div ng-messages="excursionForm.name.$error" ng-if="!showHints && excursionForm.name.$touched">
           <div ng-message="required">{{'excursion_form_name_error_required' | translate}}</div>

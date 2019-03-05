@@ -10731,11 +10731,6 @@ fcViews.basic = {
 	'class': BasicView
 };
 
-fcViews.basicDay = {
-	type: 'basic',
-	duration: { days: 1 }
-};
-
 fcViews.basicWeek = {
 	type: 'basic',
 	duration: { weeks: 1 }
@@ -11154,17 +11149,6 @@ fcViews.agenda = {
 		slotEventOverlap: true // a bad name. confused with overlap/constraint system
 	}
 };
-
-fcViews.agendaDay = {
-	type: 'agenda',
-	duration: { days: 1 }
-};
-
-fcViews.agendaWeek = {
-	type: 'agenda',
-	duration: { weeks: 1 }
-};
-;;
 
 return fc; // export for Node/CommonJS
 });

@@ -1,3 +1,5 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
 <div layout="row">
     <md-button class="md-raised md-primary" aria-label="Calendar Button" ng-click="switchCalendar()"> Switch Calendar View </md-button>
     <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
@@ -14,7 +16,7 @@
                     <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
                 </div>-->
                 {{setJsonOriginalView(SelectedEvent)}}
-                <div zingchart id="chart-2" zc-json="myJson" zc-width="100%" zc-height="420px">
+                <div zingchart id="chart-2" zc-json="myJson" zc-width="100%" zc-height="450px">
 
                 </div>
             </div>
@@ -31,7 +33,7 @@
                 {{setJson(SelectedEvent)}}
 
 
-            <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="420px">
+            <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="450px">
 
             </div>
             </div>
@@ -43,7 +45,5 @@
     </div>
 
 
-<link href="css/fullcalendar.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 
 <!--<script src="~/Scripts/MyApp.js"></script> -->

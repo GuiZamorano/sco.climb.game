@@ -193,6 +193,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		PedibusPlayer player32 = new PedibusPlayer("55007486EF48", "Student", "32", "EE 364D", "1");
 		repositoryManager.savePedibusPlayer(player32, "123", true);
 
+		repositoryManager.createBabySwipes("123", "1", "EE 364D");
+
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();

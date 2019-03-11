@@ -1,6 +1,17 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 
 <div layout="row">
+    <div layout="column" flex="80" flex-offset="10">
+        <!--<h1 class="md-title title-progress">{{'stats_gamescore' | translate:'{done: ' + stats.gameScore + ', total: ' + stats.maxGameScore + '}'}}</h1>-->
+        <div layout="row" layout-align="start" layout-margin>
+            <h1 class="md-display-1">{{stats.gameScore}}</h1>
+            <md-progress-linear md-mode="determinate" ng-value="getGameScorePercentage()"></md-progress-linear>
+            <h1 class="md-display-1">{{stats.maxGameScore}}</h1>
+        </div>
+    </div>
+</div>
+
+<div layout="row">
     <md-button class="md-raised md-primary" aria-label="Calendar Button" ng-click="switchCalendar()"> Switch Calendar View </md-button>
     <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
 </div>

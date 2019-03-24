@@ -58,17 +58,29 @@ angular.module('climbGame.services.chart', [])
             data: barChartData,
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 legend: {
-                    display: true
+                    display: true,
+                    position: "bottom"
                 },
                 scales: {
+                    xAxes: [{
+                        display: false,
+                        gridLines: {
+                            drawOnChartArea: false
+                        }
+                    }],
                     yAxes: [{
+                        display: false,
                         ticks: {
                             beginAtZero: true,
                             steps: max + 1,
                             stepValue: 1,
                             max: max + 1,
-                            callback: function (value) {if (Number.isInteger(value)) { return value; }}
+                            callback: function (value) {if (Number.isInteger(value)) { return value; }},
+                        },
+                        gridLines: {
+                            drawOnChartArea: false
                         }
                     }]
                 }

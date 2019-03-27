@@ -468,6 +468,18 @@ md-sidenav {
     margin: 0px;
 }
 
+#time-day {
+    border: solid;
+    border-width: 0px 2px 0px 2px;
+    border-color: #F2F2F2;
+    padding-bottom: 290px;
+    background: rgba(0, 0, 0, 0);
+}
+
+#time-day div {
+    background-color: #F2F2F2;
+}
+
 .weather-icon {
   line-height: 50px;
   font-size: 22px;
@@ -548,6 +560,7 @@ md-dialog {
   border-color: #cc5500;
   border-style: solid;
   border-width: 0px 2px 0px 2px;
+  border-spacing: 143px;
 }
 
 .cal-future-middle {
@@ -776,7 +789,9 @@ md-dialog {
 }
 
 .chart {
-    margin: auto;
+    margin-right: 5px;
+    width: 75% !important;
+    height: 325px !important;
 }
 
 .card-list-header {

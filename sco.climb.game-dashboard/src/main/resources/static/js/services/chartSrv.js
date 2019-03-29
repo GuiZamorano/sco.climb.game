@@ -64,68 +64,75 @@ angular.module('climbGame.services.chart', [])
     }
 
     this.loadChart = function(elementId) {
-        var ctx = document.getElementById(elementId).getContext('2d');
-        if(barChart) {
+        if(!document.getElementById(elementId).className.includes("render")) {
+            if(barChart)
+                barChart.destroy();
+            createNewBarChart(elementId);
+        }
+        else if(barChart) {
             findNewMax();
             barChart.options.scales.yAxes[0].ticks.max = max + 1;
             barChart.update();
         }
-        else
-            barChart = new Chart(ctx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: {
-                        display: true,
-                        position: "bottom",
-                        onClick: function(event, legendItem) {
-                            var meta = this.chart.getDatasetMeta(legendItem.datasetIndex);
-                            meta.hidden = meta.hidden === null ? !this.chart.data.datasets[legendItem.datasetIndex].hidden : null;
-                            if(meta.hidden){
-                                for(var i=0; i<barChart.data.datasets[legendItem.datasetIndex].data.length; i++) {
-                                    if(barChart.data.datasets[legendItem.datasetIndex].data[i] == max) {
-                                        findNewMax();
-                                        break;
-                                    }
+    };
+
+    var createNewBarChart = function(elementId) {
+        var ctx = document.getElementById(elementId).getContext('2d');
+        barChart = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    onClick: function(event, legendItem) {
+                        var meta = this.chart.getDatasetMeta(legendItem.datasetIndex);
+                        meta.hidden = meta.hidden === null ? !this.chart.data.datasets[legendItem.datasetIndex].hidden : null;
+                        if(meta.hidden){
+                            for(var i=0; i<barChart.data.datasets[legendItem.datasetIndex].data.length; i++) {
+                                if(barChart.data.datasets[legendItem.datasetIndex].data[i] == max) {
+                                    findNewMax();
+                                    break;
                                 }
                             }
-                            else {
-                                barChart.data.datasets[legendItem.datasetIndex].data.forEach(function(element) {
-                                    if(element > max) {
-                                        max = element;
-                                    }
-                                })
-                            }
-
-                            barChart.options.scales.yAxes[0].ticks.max = max + 1;
-                            this.chart.update();
                         }
-                    },
-                    scales: {
-                        xAxes: [{
-                            display: false,
-                            gridLines: {
-                                drawOnChartArea: false
-                            }
-                        }],
-                        yAxes: [{
-                            display: false,
-                            ticks: {
-                                beginAtZero: true,
-                                steps: max + 1,
-                                stepValue: 1,
-                                max: max + 1,
-                                callback: function (value) {if (Number.isInteger(value)) { return value; }},
-                            },
-                            gridLines: {
-                                drawOnChartArea: false
-                            }
-                        }]
+                        else {
+                            barChart.data.datasets[legendItem.datasetIndex].data.forEach(function(element) {
+                                if(element > max) {
+                                    max = element;
+                                }
+                            })
+                        }
+
+                        barChart.options.scales.yAxes[0].ticks.max = max + 1;
+                        this.chart.update();
                     }
+                },
+                scales: {
+                    xAxes: [{
+                        display: false,
+                        gridLines: {
+                            drawOnChartArea: false
+                        }
+                    }],
+                    yAxes: [{
+                        display: false,
+                        ticks: {
+                            beginAtZero: true,
+                            steps: max + 1,
+                            stepValue: 1,
+                            max: max + 1,
+                            callback: function (value) {if (Number.isInteger(value)) { return value; }},
+                        },
+                        gridLines: {
+                            drawOnChartArea: false
+                        }
+                    }]
                 }
-            });
+            }
+        });
      };
 
     this.setData = function(data, datasetIndex, dataIndex) {

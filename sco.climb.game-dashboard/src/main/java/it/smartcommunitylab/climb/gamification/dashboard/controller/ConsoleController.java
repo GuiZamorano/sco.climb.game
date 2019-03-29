@@ -126,6 +126,9 @@ public class ConsoleController {
 			logger.info("getToken:" + username);
 		}
 		return token;
+		//Token token1 = new Token();
+		//token1.setToken("2019");
+		//return token1;
 	}
 
 	@ExceptionHandler(EntityNotFoundException.class)

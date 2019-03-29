@@ -26,6 +26,7 @@ import it.smartcommunitylab.climb.contextstore.model.Pedibus;
 import it.smartcommunitylab.climb.gamification.dashboard.exception.StorageException;
 import it.smartcommunitylab.climb.gamification.dashboard.model.*;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.PlayerStateDTO;
+import it.smartcommunitylab.climb.gamification.dashboard.security.DataSetInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -110,9 +111,24 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		String dateStringTo = "2018-12-25";
 		Date dateObjectFrom = sdf.parse(dateStringFrom);
 		Date dateObjectTo = sdf.parse(dateStringTo);
+		DataSetInfo dataSetInfo = new DataSetInfo();
+		dataSetInfo.setOwnerId("123");
+		dataSetInfo.setPassword("kidsgogreen");
+		dataSetInfo.setToken("2019");
+		repositoryManager.saveAppToken("123", "2019");
+		repositoryManager.saveDataSetInfo(dataSetInfo);
+		DataSetInfo dataSetInfo1 = new DataSetInfo();
+		dataSetInfo1.setOwnerId("321");
+		dataSetInfo1.setPassword("kidsgogreen");
+		dataSetInfo1.setToken("2019a");
+		repositoryManager.saveAppToken("321", "2019a");
+		repositoryManager.saveDataSetInfo(dataSetInfo1);
 		PedibusGame pedibusGame = new PedibusGame("003658", "UT Austin", new ArrayList<String>(){{
 			add("EE 364D");
-			add("EE 360C"); }}, "1", "Game 1", "Trial Game", "Gui", dateObjectFrom, dateObjectTo);
+			 }}, "1", "Game 1", "Trial Game", "Gui", dateObjectFrom, dateObjectTo);
+		PedibusGame pedibusGame1 = new PedibusGame("0036581", "UT Austin1", new ArrayList<String>(){{
+			add("EE 464H");
+		}}, "2", "Game 2", "Trial Game1", "Gui1", dateObjectFrom, dateObjectTo);
 		pedibusGame.setGlobalTeam("EE 364D");
 		PedibusTeam pedibusTeam = new PedibusTeam("EE 364D", "1", new ArrayList<String>(){{
 			add("1");add("2");add("3");add("4");add("5");add("6");add("7");}}, 0.0);
@@ -123,6 +139,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		PedibusPlayer Grayson = new PedibusPlayer("5", "Grayson", "Barrett", "EE 364D", "1");
 		PedibusPlayer Kevin = new PedibusPlayer("6", "Kevin", "Brill", "EE 364D", "1");
 		PedibusPlayer Gui = new PedibusPlayer("7", "Gui", "Zamorano", "EE 364D", "1");
+		PedibusTeam pedibusTeam1 = new PedibusTeam("EE 464H", "2", new ArrayList<String>(){{
+			add("1");add("2");}}, 0.0);
+		PedibusPlayer Steve = new PedibusPlayer("1", "Steve", "Bray", "EE 464H", "2");
+		PedibusPlayer Bob = new PedibusPlayer("2", "Bob", "Tewani", "EE 464H", "2");
 		repositoryManager.savePedibusGame(pedibusGame, "123", true);
 		repositoryManager.savePedibusTeam(pedibusTeam, "123", true);
 		repositoryManager.savePedibusPlayer(Dylan, "123", true);
@@ -132,6 +152,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusPlayer(Grayson, "123", true);
 		repositoryManager.savePedibusPlayer(Kevin, "123", true);
 		repositoryManager.savePedibusPlayer(Gui, "123", true);
+		repositoryManager.savePedibusGame(pedibusGame1, "321", true);
+		repositoryManager.savePedibusTeam(pedibusTeam1, "321", true);
+		repositoryManager.savePedibusPlayer(Steve, "321", true);
+		repositoryManager.savePedibusPlayer(Bob, "321", true);
+
 
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
@@ -211,6 +236,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		teamDTO.setGameId("1");
 		teamDTO.setPlayerId("Class");
 		repositoryManager.updateTeamDTO(teamDTO, "1", "Class");
+		PlayerStateDTO teamDTO1 = new PlayerStateDTO();// Set up class to hold statistics
+		teamDTO.setGameId("2");
+		teamDTO.setPlayerId("Class");
+		repositoryManager.updateTeamDTO(teamDTO1, "2", "Class");
 		return repositoryManager;
 	}
 	

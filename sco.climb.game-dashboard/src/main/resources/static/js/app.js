@@ -86,8 +86,8 @@ angular.module('climbGame', [
         url: '/login',
         views: {
           '@': {
-            templateUrl: 'templates/home.html',
-            controller: 'HomeCtrl'
+            templateUrl: 'templates/login.html',
+            controller: 'loginCtrl'
           }
         }
       })

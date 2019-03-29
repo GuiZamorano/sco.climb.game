@@ -341,9 +341,9 @@ public class GamificationController {
 	@RequestMapping(value = "/api/game/{ownerId}", method = RequestMethod.GET)
 	public @ResponseBody List<PedibusGame> getPedibusGames(@PathVariable String ownerId, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
-			throw new UnauthorizedException("Unauthorized Exception: token not valid");
-		}
+		//if (!Utils.validateAPIRequest(request, dataSetSetup, storage)) {
+		//	throw new UnauthorizedException("Unauthorized Exception: token not valid");
+		//}
 
 		try {
 			List<PedibusGame> result = storage.getPedibusGames(ownerId);

@@ -252,9 +252,9 @@ $scope.eventSources = [$scope.events];
 
 
     $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
-    $scope.myJson.plot.styles.push("#FF6666");
-    $scope.myJson.plot.styles.push("#FFFF99");
-    $scope.myJson.plot.styles.push("#99FF99");
+    $scope.myJson.plot.styles.push($scope.colorLevel[2]);
+    $scope.myJson.plot.styles.push($scope.colorLevel[1]);
+    $scope.myJson.plot.styles.push($scope.colorLevel[0]);
     }
 
     $scope.setJson = function(SelectedEvent){
@@ -307,9 +307,9 @@ var eventToDisplay = (SelectedEvent.diffNumber*4);
 
             }
     $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
-        $scope.myJson.plot.styles.push("#FF6666");
-        $scope.myJson.plot.styles.push("#FFFF99");
-        $scope.myJson.plot.styles.push("#99FF99");
+        $scope.myJson.plot.styles.push($scope.colorLevel[2]);
+        $scope.myJson.plot.styles.push($scope.colorLevel[1]);
+        $scope.myJson.plot.styles.push($scope.colorLevel[0]);
         }
     }
 

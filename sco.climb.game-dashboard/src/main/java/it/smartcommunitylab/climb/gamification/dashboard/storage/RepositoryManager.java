@@ -335,6 +335,29 @@ public class RepositoryManager {
 		}
 	}
 
+	public void createBabySwipes(String ownerId, String gameId, String classRoom) {
+
+		Date now = new Date();
+		CalendarDay calendarDay = new CalendarDay();
+		calendarDay.setCreationDate(now);
+		calendarDay.setLastUpdate(now);
+
+		Calendar day = Calendar.getInstance();
+		day.set(Calendar.HOUR, 0);
+		day.set(Calendar.MINUTE, 0);
+		day.set(Calendar.SECOND, 0);
+		calendarDay.setDay(day.getTime());
+
+		calendarDay.setOwnerId(ownerId);
+		calendarDay.setObjectId(generateObjectId());
+		calendarDay.setGameId(gameId);
+		calendarDay.setClassRoom(classRoom);
+		Map<String, String> modeMap = new HashMap<String, String>();
+		calendarDay.setModeMap(modeMap);
+		calendarDay.setIndex(Integer.MIN_VALUE);
+		mongoTemplate.save(calendarDay);
+	}
+
 	// TODO may not be sending fully populated modeMap if not every student swipes
 	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId, String activityLevel){
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
@@ -342,26 +365,7 @@ public class RepositoryManager {
 		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
 		Date now = new Date();
 		if(calendarDayDB == null) {
-			CalendarDay calendarDay = new CalendarDay();
-
-			calendarDay.setCreationDate(now);
-			calendarDay.setLastUpdate(now);
-
-			Calendar day = Calendar.getInstance();
-			day.set(Calendar.HOUR, 0);
-			day.set(Calendar.MINUTE, 0);
-			day.set(Calendar.SECOND, 0);
-			calendarDay.setDay(day.getTime());
-
-			calendarDay.setOwnerId(ownerId);
-			calendarDay.setObjectId(generateObjectId());
-			calendarDay.setGameId(gameId);
-			calendarDay.setClassRoom(classRoom);
-			Map<String, String> modeMap = new HashMap<String, String>();
-			modeMap.put(studentId, activityLevel);
-			calendarDay.setModeMap(modeMap);
-			calendarDay.setIndex(Integer.MIN_VALUE);
-			mongoTemplate.save(calendarDay);
+			logger.error("Baby Swipe CalendarDay should already be initialized in repository");
 		} else {
 			Map<String, String> modeMap = calendarDayDB.getModeMap();
 			modeMap.put(studentId, activityLevel);

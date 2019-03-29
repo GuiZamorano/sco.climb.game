@@ -27,6 +27,7 @@ angular.module('climbGame', [
   'climbGame.services.login',
   'climbGame.services.map',
   'climbGame.services.calendar',
+  'climbGame.services.chart',
   'climbGame.services.classSelection',
   'climbGame.services.stats',
   'climbGame.services.home',

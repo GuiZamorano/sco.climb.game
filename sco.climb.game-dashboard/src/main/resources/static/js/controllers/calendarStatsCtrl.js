@@ -5,6 +5,7 @@ angular.module('climbGame.controllers.calendarStats', [])
     $scope.index = ''
     $scope.calendarView = 0
     $scope.activityLevel = ["Extremely Active", "Very Active", "Fairly Active", "Inactive"]
+    $scope.activityLevelInverse = ["Fairly Active", "Very Active", "Extremely Active"]
     $scope.colors = ["red", "blue", "orange", "green", "purple", "yellow", "brown", "white", "gray", "black"]
     $scope.colorLevel = ['#66BB6A', '#FFEE58', '#EF5350', '#F2F2F2']
     $scope.stats = {
@@ -174,9 +175,11 @@ $scope.switchCalendar = function () {
                                     textColor: 'black',
                                     color: '#7FFFD4',
                                     stick: true,
+                                    diffNumber: i,
                                     distanceEvent: true
                                 });
                             }
+
                         }
                     );
                 }
@@ -225,31 +228,33 @@ $scope.eventSources = [$scope.events];
     };
 
     $scope.setJsonOriginalView = function(SelectedEvent){
+
         $scope.myJson.title.text = SelectedEvent.activityName;
         $scope.myJson.scaleX.values.splice(0, $scope.myJson.scaleX.values.length);
         for(var i = 0; i<3; i++){
-            $scope.myJson.scaleX.values.push($scope.activityLevel[i]);
+            $scope.myJson.scaleX.values.push($scope.activityLevelInverse[i]);
         }
 
         $scope.myJson.series[0].values.splice(0, $scope.myJson.series[0].values.length);
         if ($scope.imperial){
-            $scope.myJson.series[0].values.push($scope.roundToPlaces(SelectedEvent.eactive*1.61,2));
-            $scope.myJson.series[0].values.push($scope.roundToPlaces(SelectedEvent.vactive*1.61,2));
             $scope.myJson.series[0].values.push($scope.roundToPlaces(SelectedEvent.factive*1.61,2));
+            $scope.myJson.series[0].values.push($scope.roundToPlaces(SelectedEvent.vactive*1.61,2));
+            $scope.myJson.series[0].values.push($scope.roundToPlaces(SelectedEvent.eactive*1.61,2));
             $scope.myJson.scaleY.label.text = "Kilometers"
 
         }
         else {
-            $scope.myJson.series[0].values.push(SelectedEvent.eactive);
-            $scope.myJson.series[0].values.push(SelectedEvent.vactive);
             $scope.myJson.series[0].values.push(SelectedEvent.factive);
+            $scope.myJson.series[0].values.push(SelectedEvent.vactive);
+            $scope.myJson.series[0].values.push(SelectedEvent.eactive);
             $scope.myJson.scaleY.label.text = "Miles"
         }
 
-        $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
-        $scope.myJson.plot.styles.push("#99FF99");
-        $scope.myJson.plot.styles.push("#FFFF99");
-        $scope.myJson.plot.styles.push("#FF6666");
+
+    $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
+    $scope.myJson.plot.styles.push($scope.colorLevel[2]);
+    $scope.myJson.plot.styles.push($scope.colorLevel[1]);
+    $scope.myJson.plot.styles.push($scope.colorLevel[0]);
     }
 
     $scope.setJson = function(SelectedEvent){
@@ -278,31 +283,33 @@ $scope.eventSources = [$scope.events];
             $scope.myJson.title.text = "Total Distance";
             $scope.myJson.scaleX.values.splice(0, $scope.myJson.scaleX.values.length);
 
+
             $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
             for(var i = 0; i<3; i++){
-                $scope.myJson.scaleX.values.push($scope.activityLevel[i]);
+                $scope.myJson.scaleX.values.push($scope.activityLevelInverse[i]);
             }
 
             $scope.myJson.series[0].values.splice(0, $scope.myJson.series[0].values.length);
+var eventToDisplay = (SelectedEvent.diffNumber*4);
 
             if ($scope.imperial) {
-                $scope.myJson.series[0].values.push($scope.roundToPlaces($scope.events[0].eactive*1.61,2));
-                $scope.myJson.series[0].values.push($scope.roundToPlaces($scope.events[0].vactive*1.61,2));
-                $scope.myJson.series[0].values.push($scope.roundToPlaces($scope.events[0].factive*1.61,2));
+                $scope.myJson.series[0].values.push($scope.roundToPlaces($scope.events[eventToDisplay].factive*1.61,2));
+                $scope.myJson.series[0].values.push($scope.roundToPlaces($scope.events[eventToDisplay].vactive*1.61,2));
+                $scope.myJson.series[0].values.push($scope.roundToPlaces($scope.events[eventToDisplay].eactive*1.61,2));
                 $scope.myJson.scaleY.label.text = "Kilometers"
 
             }
             else {
-                $scope.myJson.series[0].values.push($scope.events[0].eactive);
-                $scope.myJson.series[0].values.push($scope.events[0].vactive);
-                $scope.myJson.series[0].values.push($scope.events[0].factive);
+                $scope.myJson.series[0].values.push($scope.events[eventToDisplay].factive);
+                $scope.myJson.series[0].values.push($scope.events[eventToDisplay].vactive);
+                $scope.myJson.series[0].values.push($scope.events[eventToDisplay].eactive);
                 $scope.myJson.scaleY.label.text = "Miles"
 
             }
-            $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
-            $scope.myJson.plot.styles.push("#99FF99");
-            $scope.myJson.plot.styles.push("#FFFF99");
-            $scope.myJson.plot.styles.push("#FF6666");
+    $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
+        $scope.myJson.plot.styles.push($scope.colorLevel[2]);
+        $scope.myJson.plot.styles.push($scope.colorLevel[1]);
+        $scope.myJson.plot.styles.push($scope.colorLevel[0]);
         }
     }
 

@@ -40,8 +40,8 @@
            <!-- <div class="md-media-sm card-media">
                 <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
             </div> -->
+            <div id="template1" ng-bind>{{setJson(SelectedEvent)}}</div>
 
-                {{setJson(SelectedEvent)}}
 
 
             <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="450px">

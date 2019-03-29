@@ -22,7 +22,7 @@ angular.module('climbGame.controllers.calendar', [])
         means: {}
       }
       $scope.Index = ''
-      $scope.view = true
+      $scope.view = {val:true}
       $scope.imperial = true
 
       chartService.init(['#F2F2F2', '#EF5350', '#FFEE58', '#66BB6A'],
@@ -128,10 +128,13 @@ angular.module('climbGame.controllers.calendar', [])
           return
         }
 
+        var modes = ['pandr', 'bus', 'zeroImpact_wAdult', 'zeroImpact_solo']
         // set baby[$index]= selected mean;
         // add mean to index and remove the other
         if ($scope.todayData.babies[index].mean) {
           $scope.todayData.means[$scope.todayData.babies[index].mean]--
+          chartService.setData($scope.todayData.means[$scope.todayData.babies[index].mean],
+                  modes.indexOf($scope.todayData.babies[index].mean), $scope.Index%5)
         }
         $scope.todayData.babies[index].color = $scope.returnColorByType($scope.selectedMean)
         $scope.todayData.babies[index].mean = $scope.selectedMean
@@ -139,6 +142,8 @@ angular.module('climbGame.controllers.calendar', [])
           $scope.todayData.means[$scope.todayData.babies[index].mean] = 0
         }
         $scope.todayData.means[$scope.todayData.babies[index].mean]++
+        chartService.setData($scope.todayData.means[$scope.todayData.babies[index].mean],
+                modes.indexOf($scope.todayData.babies[index].mean), $scope.Index%5)
       }
 
       $scope.today = function (index) {
@@ -435,9 +440,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
 
       $scope.switchView = function () {
-        $scope.view = !$scope.view
-        if(!$scope.view)
-            chartService.loadChart('canvas');
+        chartService.loadChart('canvas');
       }
 
       $scope.switchUnit = function () {
@@ -488,7 +491,6 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.roundToPlaces = function(num, places){
         return +(Math.round(num + "e+" + places)  + "e-" + places)
       }
-
 
       function meanDataAreComplete() {
         for (var i = 0; i < $scope.todayData.babies.length; i++) {
@@ -557,7 +559,7 @@ angular.module('climbGame.controllers.calendar', [])
         calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
           function (calendar) {
             createWeekData(calendar)
-            if(!$scope.view)
+            if(!$scope.view.val)
                 chartService.loadChart('canvas')
           }
         )
@@ -639,8 +641,8 @@ angular.module('climbGame.controllers.calendar', [])
               }
               var modes = ['pandr', 'bus', 'zeroImpact_wAdult', 'zeroImpact_solo']
               for(var j=0; j<modes.length; j++) {
-                $scope.weekData[i][modes[j]] ?
-                        chartService.setData($scope.weekData[i][modes[j]], j, i) : chartService.setData(0, j, i)
+                    $scope.weekData[i][modes[j]] ?
+                            chartService.setData($scope.weekData[i][modes[j]], j, i) : chartService.setData(0, j, i)
               }
               if (calendar[k].meteo) {
                 $scope.weekData[i].meteo = calendar[k].meteo
@@ -651,6 +653,16 @@ angular.module('climbGame.controllers.calendar', [])
              if(isSwipesEntry(calendar[k], i)) {
                 calendar[k].index = $scope.Index
                 $scope.weekData[i].closed = false
+                var todayPopulated = false
+                for(var j=0; j<modes.length; j++)
+                    if($scope.todayData.means[modes[j]]){
+                        if(!todayPopulated) {
+                            for(var l=0; l<modes.length; l++)
+                                chartService.setData(0, l, $scope.Index%5)
+                            todayPopulated = true
+                        }
+                        chartService.setData($scope.todayData.means[modes[j]], j, $scope.Index%5)
+                    }
               } else {
                 $scope.weekData[i].closed = calendar[k].closed
                 $scope.weekData[i].name = calendar[k].name
@@ -673,6 +685,7 @@ angular.module('climbGame.controllers.calendar', [])
           }
 
         }
+        chartService.loadChart("canvas")
       }
 
       /*

@@ -51,29 +51,81 @@ angular.module('climbGame.services.chart', [])
         }
     }
 
+    var findNewMax = function() {
+        max = 0;
+        for(var i=0; i<barChart.data.datasets.length; i++){
+            if(!barChart.chart.getDatasetMeta(i).hidden) {
+                barChart.data.datasets[i].data.forEach(function(element) {
+                    if(element > max)
+                        max = element;
+                })
+            }
+        }
+    }
+
     this.loadChart = function(elementId) {
         var ctx = document.getElementById(elementId).getContext('2d');
-        barChart = new Chart(ctx, {
-            type: 'bar',
-            data: barChartData,
-            options: {
-                responsive: true,
-                legend: {
-                    display: true
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            steps: max + 1,
-                            stepValue: 1,
-                            max: max + 1,
-                            callback: function (value) {if (Number.isInteger(value)) { return value; }}
+        if(barChart) {
+            findNewMax();
+            barChart.options.scales.yAxes[0].ticks.max = max + 1;
+            barChart.update();
+        }
+        else
+            barChart = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        onClick: function(event, legendItem) {
+                            var meta = this.chart.getDatasetMeta(legendItem.datasetIndex);
+                            meta.hidden = meta.hidden === null ? !this.chart.data.datasets[legendItem.datasetIndex].hidden : null;
+                            if(meta.hidden){
+                                for(var i=0; i<barChart.data.datasets[legendItem.datasetIndex].data.length; i++) {
+                                    if(barChart.data.datasets[legendItem.datasetIndex].data[i] == max) {
+                                        findNewMax();
+                                        break;
+                                    }
+                                }
+                            }
+                            else {
+                                barChart.data.datasets[legendItem.datasetIndex].data.forEach(function(element) {
+                                    if(element > max) {
+                                        max = element;
+                                    }
+                                })
+                            }
+
+                            barChart.options.scales.yAxes[0].ticks.max = max + 1;
+                            this.chart.update();
                         }
-                    }]
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: false,
+                            gridLines: {
+                                drawOnChartArea: false
+                            }
+                        }],
+                        yAxes: [{
+                            display: false,
+                            ticks: {
+                                beginAtZero: true,
+                                steps: max + 1,
+                                stepValue: 1,
+                                max: max + 1,
+                                callback: function (value) {if (Number.isInteger(value)) { return value; }},
+                            },
+                            gridLines: {
+                                drawOnChartArea: false
+                            }
+                        }]
+                    }
                 }
-            }
-        });
+            });
      };
 
     this.setData = function(data, datasetIndex, dataIndex) {
@@ -83,9 +135,6 @@ angular.module('climbGame.services.chart', [])
     };
 
     this.clearData = function() {
-        if(barChart)
-            barChart.destroy()
-
         barChartData.datasets.forEach(function(dataset) {
             dataset.data = [];
         });

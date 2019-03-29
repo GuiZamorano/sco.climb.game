@@ -7,7 +7,34 @@ angular.module('climbGame.controllers.calendarStats', [])
     $scope.activityLevel = ["Extremely Active", "Very Active", "Fairly Active", "Inactive"]
     $scope.colors = ["red", "blue", "orange", "green", "purple", "yellow", "brown", "white", "gray", "black"]
     $scope.colorLevel = ['#66BB6A', '#FFEE58', '#EF5350', '#F2F2F2']
+    $scope.stats = {
+          'gameScore': 0,
+          'maxGameScore': 0}
     $scope.imperial = false
+
+
+ var data2stats = function (data) {
+      return {
+        'gameScore': Math.round(data.gameScore / 1000, 0),
+        'maxGameScore': Math.round(data.maxGameScore / 1000, 0)
+      }
+    }
+
+    dataService.getStats().then(
+      function (stats) {
+        $scope.stats = data2stats(stats)
+      },
+      function (reason) {
+        console.log(reason)
+      }
+    )
+
+
+  $scope.getGameScorePercentage = function () {
+      if ($scope.stats) {
+        return ($scope.stats.gameScore * 100) / $scope.stats.maxGameScore
+      }
+    }
 
 $scope.switchCalendar = function () {
        if($scope.calendarView == 0){
@@ -39,8 +66,21 @@ $scope.switchCalendar = function () {
                       for (var i = 0; i<events.length; i++){
                         if(events[i].index >= 0){
                           var displaydist = ""
-                          if ($scope.imperial) displaydist += $scope.roundToPlaces(events[i].distance*1.61,2) + " Km"
-                          else displaydist += events[i].distance + " Miles"
+                          if ($scope.imperial) {
+                          displaydist += $scope.roundToPlaces(events[i].distance*1.61,2) + " Km"
+                          $scope.stats.gameScore = $scope.roundToPlaces($scope.stats.gameScore*1.61, 2)
+                          $scope.stats.maxGameScore = $scope.roundToPlaces($scope.stats.maxGameScore*1.61, 2)
+                          }
+                          else {displaydist += events[i].distance + " Miles"
+                             dataService.getStats().then(
+                                function (stats) {
+                                  $scope.stats = data2stats(stats)
+                                },
+                                function (reason) {
+                                  console.log(reason)
+                                }
+                              )
+                          }
 
                           $scope.events.push({
                               title: events[i].name + ": " + displaydist,

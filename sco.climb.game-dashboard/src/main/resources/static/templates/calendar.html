@@ -1,7 +1,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
 
 <div>
-  <div layout="row" ng-show="view" id="student-list">
+  <div layout="row" id="student-list">
     <div layout="column" flex="100">
       <div layout="row" class="state-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_state'|translate| uppercase}}</div>
@@ -65,7 +65,7 @@
       <div layout="row" class="time-row">
         <div layout="column" flex="25" class="cal-header">{{'cal_header_time'|translate| uppercase}}</div>
         <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" class="cal-header">
-          <div ng-if="weekData[dayIndex].closed">
+          <div ng-if="weekData[dayIndex].closed" id="time-day">
             {{ getDuration(day) }} minutes
           </div>
           <div ng-if="today(day)" md-input-container class="md-block" ng-class="{'cal-today-middle':today(day)}">
@@ -86,7 +86,7 @@
           </div>
         </div>
       </div>
-      <md-content id="table" class="baby-list">
+      <md-content id="table" class="baby-list" ng-show="!view.val">
         <md-list class="cal-listbabies">
           <div layout="row" ng-repeat="baby in class track by $index" ng-init="babyIndex = $index" class="cal-baby">
             <div layout="column" flex="25" class="cal-name">
@@ -102,23 +102,22 @@
     </div>
   </div>
 
-  <div ng-show="!view" layout="row">
-    <md-button class="md-icon-button week-button" ng-click="prevWeek()"><i layout="column" flex="25" class="icon-arrow_left"></i></md-button>
-    <canvas id="canvas" flex="75" class="chart"></canvas>
-    <md-button class="md-icon-button week-button" ng-click="nextWeek()"><i layout="column" flex="25" class="icon-arrow_right"></i></md-button>
+  <div ng-show="view.val" layout="row">
+    <span flex="25"></span>
+    <canvas id="canvas" style="display: flex" align="right" class="chart"></canvas>
   </div>
   
   <div class="cal-total" layout="row">
     <div layout="column" flex="12">
-      <md-switch class="switch" ng-click="switchView()">Graph View</md-switch>
+      <md-switch class="switch" ng-model="view.val" ng-click="switchView()">Graph View</md-switch>
     </div>
     <div layout="column" flex="10">
       <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
     </div>
-      <div layout="column" flex="2" class="cal-name" ng-show="view">
+      <div layout="column" flex="2" class="cal-name" ng-show="!view.val">
         Totals:
       </div>
-      <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-show="view">
+      <div layout="column" flex="15" ng-repeat="day in week track by $index" ng-init="dayIndex = $index" ng-show="!view.val">
         <div layout="row" ng-if="!today(day)">
           <span flex="40"></span>
           <div layout="column" flex="15" class="cal-foot-friend-col" ng-class="{'cal-header-future':isFuture(dayIndex)}">
@@ -152,7 +151,7 @@
       </div>
   </div>
 </div>
-<div class="cal-fab">
+<div class="cal-fab" ng-show="!view.val">
   <md-fab-speed-dial md-open="cal.meanOpen" md-direction="up" class="md-scale">
     <md-fab-trigger>
       <md-button aria-label="menu " class="md-fab " ng-class="selectedMeanColor">

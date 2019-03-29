@@ -12,7 +12,7 @@ angular.module('climbGame.services.login', [])
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: configService.getTokenURL(),
+        url: '/token',
         params: {
           username: user.username,
           password: user.password
@@ -26,10 +26,10 @@ angular.module('climbGame.services.login', [])
         loginService.setUserToken(data.token);
         $http({
           method: 'GET',
-          url: configService.getGameId() + data.name,
+          url: 'api/game/' + data.name,
           headers: {
-            'Accept': 'application/json',
-            'x-access-token': data.token
+            'Accept': 'application/json'
+            //'x-access-token': data.token
           }
 
         }).

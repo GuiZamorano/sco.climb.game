@@ -5,6 +5,7 @@ angular.module('climbGame.controllers.calendarStats', [])
     $scope.index = ''
     $scope.calendarView = 0
     $scope.activityLevel = ["Extremely Active", "Very Active", "Fairly Active", "Inactive"]
+    $scope.activityLevelInverse = ["Fairly Active", "Very Active", "Extremely Active"]
     $scope.colors = ["red", "blue", "orange", "green", "purple", "yellow", "brown", "white", "gray", "black"]
     $scope.colorLevel = ['#99FF99', '#FFFF99', '#FF6666', '#CCCCCC']
 
@@ -105,6 +106,7 @@ $scope.switchCalendar = function () {
                                       textColor: 'black',
                                       color: '#7FFFD4',
                                       stick: true,
+                                      diffNumber: i,
                                       distanceEvent: true
                                       });
                             }
@@ -157,17 +159,17 @@ $scope.eventSources = [$scope.events];
     $scope.myJson.title.text = SelectedEvent.activityName;
     $scope.myJson.scaleX.values.splice(0, $scope.myJson.scaleX.values.length);
     for(var i = 0; i<3; i++){
-    $scope.myJson.scaleX.values.push($scope.activityLevel[i]);
+    $scope.myJson.scaleX.values.push($scope.activityLevelInverse[i]);
     }
 
     $scope.myJson.series[0].values.splice(0, $scope.myJson.series[0].values.length);
-    $scope.myJson.series[0].values.push(SelectedEvent.eactive);
-    $scope.myJson.series[0].values.push(SelectedEvent.vactive);
     $scope.myJson.series[0].values.push(SelectedEvent.factive);
+    $scope.myJson.series[0].values.push(SelectedEvent.vactive);
+    $scope.myJson.series[0].values.push(SelectedEvent.eactive);
     $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
-    $scope.myJson.plot.styles.push("#99FF99");
-    $scope.myJson.plot.styles.push("#FFFF99");
     $scope.myJson.plot.styles.push("#FF6666");
+    $scope.myJson.plot.styles.push("#FFFF99");
+    $scope.myJson.plot.styles.push("#99FF99");
 
     }
 
@@ -195,17 +197,18 @@ $scope.eventSources = [$scope.events];
 
              $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
         for(var i = 0; i<3; i++){
-            $scope.myJson.scaleX.values.push($scope.activityLevel[i]);
+            $scope.myJson.scaleX.values.push($scope.activityLevelInverse[i]);
             }
 
 $scope.myJson.series[0].values.splice(0, $scope.myJson.series[0].values.length);
-    $scope.myJson.series[0].values.push($scope.events[0].eactive);
-    $scope.myJson.series[0].values.push($scope.events[0].vactive);
-    $scope.myJson.series[0].values.push($scope.events[0].factive);
+    var eventToDisplay = (SelectedEvent.diffNumber*4);
+    $scope.myJson.series[0].values.push($scope.events[eventToDisplay].factive);
+    $scope.myJson.series[0].values.push($scope.events[eventToDisplay].vactive);
+    $scope.myJson.series[0].values.push($scope.events[eventToDisplay].eactive);
     $scope.myJson.plot.styles.splice(0, $scope.myJson.plot.styles.length);
-        $scope.myJson.plot.styles.push("#99FF99");
-        $scope.myJson.plot.styles.push("#FFFF99");
         $scope.myJson.plot.styles.push("#FF6666");
+        $scope.myJson.plot.styles.push("#FFFF99");
+        $scope.myJson.plot.styles.push("#99FF99");
              }
 
 

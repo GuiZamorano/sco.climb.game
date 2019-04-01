@@ -206,7 +206,35 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg6.setExternalUrls(urls6);
 		leg6.setImageUrl("https://i.imgur.com/lcdRGxi.jpg");
 		leg6.setTransport("foot");
+
+
+		List<Discipline> disciplines = leg6.getDisciplines();
+		Discipline cs = new Discipline();
+		cs.setSubject(Discipline.Subject.CS);
+
+		List<Activity> csActivities = cs.getActivities();
+
+		Activity cs1 = newActivity(true, 4, null, "Read Sarah Plain and Tall");
+		List<Link> urls = cs1.getMaterials();
+		Link linkA = newLink("Quizlet", "https://quizlet.com/2646281/sarah-plain-and-tall-flash-cards/");
+		urls.add(linkA);
+		Link linkB = newLink("YouTube - read the story", "https://www.youtube.com/watch?v=00LNxG8LAJg");
+		urls.add(linkB);
+		Link linkC = newLink("Scholastic", "https://www.scholastic.com/teachers/books/sarah-plain-and-tall-by-patricia-maclachlan/");
+		urls.add(linkC);
+		cs1.setMaterials(urls);
+		csActivities.add(cs1);
+		cs.setActivities(csActivities);
+
+
+		disciplines.add(cs);
+
+		leg6.setDisciplines(disciplines);
 		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);
+
+
+
+
 
 
 		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics
@@ -339,6 +367,22 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg.setPolyline(polyline);
 		leg.setPosition(pos);
 		return leg;
+	}
+
+	private Activity newActivity(boolean active, int gradeLevel, String teks, String description){
+		Activity activity = new Activity();
+		activity.setActive(active);
+		activity.setGradeLevel(gradeLevel);
+		activity.setTeks(teks);
+		activity.setDescription(description);
+		return activity;
+	}
+
+	private Link newLink(String name, String url){
+		Link link = new Link();
+		link.setLink(url);
+		link.setName(name);
+		return link;
 	}
 
 }

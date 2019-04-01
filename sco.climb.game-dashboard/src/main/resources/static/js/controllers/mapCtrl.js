@@ -310,6 +310,17 @@ angular.module("climbGame.controllers.map", [])
             externalUrl = externalUrl + '<div class="row"> ' + ' <a href="' + data.legs[i].externalUrls[k].link + '" target="_blank">' + data.legs[i].externalUrls[k].name + '</a></div>';
           }
           externalUrl = externalUrl + '</div>';
+
+//          var materialUrl = "<div>"
+//          for (var a = 0; a<data.legs[i].disciplines.length; a++){
+//            for(var b = 0; b<data.legs[i].disciplines[a].length){
+//                for(var c = 0; c<data.legs[i].disciplines[a].activities[b]; c++){
+//                    materialUrl = materialUrl + '<div class ="row">' + ' <a href="' + data.legs[i].disciplines[a].activities[b].materials[c].link + '" target="_blank">' + data.legs[i].disciplines[a].activities[b].materials[c].name + '</a></div>';
+//                }
+//                materialUrl = materialUrl + "<div>"
+//            }
+//          }
+
           var icon = getMarkerIcon(data.legs[i]);
           if ((data.legs[i].position < $scope.currentLeg.position) || $scope.endReached) {
             $scope.pathMarkers.push(getMarker(data.legs[i], externalUrl, icon, i));

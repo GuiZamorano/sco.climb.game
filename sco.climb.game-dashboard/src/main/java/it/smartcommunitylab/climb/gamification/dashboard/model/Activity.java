@@ -1,5 +1,6 @@
 package it.smartcommunitylab.climb.gamification.dashboard.model;
 
+import it.smartcommunitylab.climb.contextstore.model.Pedibus;
 import it.smartcommunitylab.climb.gamification.dashboard.model.Link;
 import it.smartcommunitylab.climb.gamification.dashboard.model.events.BaseObject;
 
@@ -8,12 +9,15 @@ import java.util.List;
 
 public class Activity extends BaseObject{
 
+    public enum Subject {CS, STEM, PE}
     private String gameId;
     private String activityId;
     private boolean active;
     private int gradeLevel;
     private String teks;
-    List<Link> materials = new ArrayList<Link>();
+    private List<Link> materials = new ArrayList<Link>();
+    private List<PedibusItineraryLeg> possibleLegs = new ArrayList<PedibusItineraryLeg>();
+    private Subject subject;
     private String description;
 
     public String getActivityId() {
@@ -57,12 +61,30 @@ public class Activity extends BaseObject{
         this.materials = materials;
     }
 
+
+    public List<PedibusItineraryLeg> getPossibleLegs() {
+        return possibleLegs;
+    }
+
+    public void setPossibleLegs(List<PedibusItineraryLeg> possibleLegs) {
+        this.possibleLegs = possibleLegs;
+    }
+
     public String getGameId() {
         return gameId;
     }
 
     public void setGameId(String gameId) {
         this.gameId = gameId;
+    }
+
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
 

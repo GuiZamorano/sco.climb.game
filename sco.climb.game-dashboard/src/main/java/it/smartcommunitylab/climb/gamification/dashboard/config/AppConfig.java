@@ -135,6 +135,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.createBabySwipes("123", "1", "EE 364D");
 
+
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();
@@ -145,6 +146,19 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg1.setExternalUrls(urls1);
 		leg1.setImageUrl("https://i.imgur.com/lsU13Qm.jpg");
 		leg1.setTransport("foot");
+
+		List<Activity> leg1Activities = leg1.getActivities();
+
+		Activity stemAct = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		List<Link> urlsA = stemAct.getMaterials();
+		Link linkX = newLink("Ecosystems", "http://www.teacherplanet.com/content/food-chainweb");
+		urlsA.add(linkX);
+		Link linkY = newLink("Human Impact on the Ecosystem", "https://www.youtube.com/watch?v=5eTCZ9L834s");
+		urlsA.add(linkY);
+		stemAct.setMaterials(urlsA);
+		leg1Activities.add(stemAct);
+		leg1.setActivities(leg1Activities);
+
 		repositoryManager.savePedibusItineraryLeg(leg1, "123", true);
 
 		double [] go1 = {-98.4936, 29.4241};
@@ -208,13 +222,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg6.setTransport("foot");
 
 
-		List<Discipline> disciplines = leg6.getDisciplines();
-		Discipline cs = new Discipline();
-		cs.setSubject(Discipline.Subject.CS);
+		List<Activity> leg6Activities = leg6.getActivities();
 
-		List<Activity> csActivities = cs.getActivities();
-
-		Activity cs1 = newActivity(true, 4, null, "Read Sarah Plain and Tall");
+		Activity cs1 = newActivity(true, 4, null, "Read Sarah Plain and Tall", Activity.Subject.CS);
 		List<Link> urls = cs1.getMaterials();
 		Link linkA = newLink("Quizlet", "https://quizlet.com/2646281/sarah-plain-and-tall-flash-cards/");
 		urls.add(linkA);
@@ -223,13 +233,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		Link linkC = newLink("Scholastic", "https://www.scholastic.com/teachers/books/sarah-plain-and-tall-by-patricia-maclachlan/");
 		urls.add(linkC);
 		cs1.setMaterials(urls);
-		csActivities.add(cs1);
-		cs.setActivities(csActivities);
+		leg6Activities.add(cs1);
+		leg6.setActivities(leg6Activities);
 
-
-		disciplines.add(cs);
-
-		leg6.setDisciplines(disciplines);
 		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);
 
 
@@ -369,11 +375,12 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		return leg;
 	}
 
-	private Activity newActivity(boolean active, int gradeLevel, String teks, String description){
+	private Activity newActivity(boolean active, int gradeLevel, String teks, String description, Activity.Subject subject){
 		Activity activity = new Activity();
 		activity.setActive(active);
 		activity.setGradeLevel(gradeLevel);
 		activity.setTeks(teks);
+		activity.setSubject(subject);
 		activity.setDescription(description);
 		return activity;
 	}

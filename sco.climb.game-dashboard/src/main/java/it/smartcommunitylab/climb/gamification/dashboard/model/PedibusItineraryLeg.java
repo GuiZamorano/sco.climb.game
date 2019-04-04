@@ -19,7 +19,7 @@ public class PedibusItineraryLeg extends BaseObject implements Comparable<Pedibu
 	private String polyline;
 	private int score;
 	private String transport;
-	private List<Discipline> disciplines = new ArrayList<Discipline>();
+	private List<Activity> activities = new ArrayList<Activity>();
 
 	public String getGameId() {
 		return gameId;
@@ -78,8 +78,10 @@ public class PedibusItineraryLeg extends BaseObject implements Comparable<Pedibu
 	public boolean isWaypoint() { return waypoint; }
 	public void setWaypoint(boolean waypoint) { this.waypoint = waypoint; }
 
-	public List<Discipline> getDisciplines() { return disciplines; }
-	public void setDisciplines(List<Discipline> disciplines) { this.disciplines = disciplines; }
+
+	public List<Activity> getActivities() { return activities; }
+
+	public void setActivities(List<Activity> activities) { this.activities = activities; }
 
 	@Override
 	public int compareTo(PedibusItineraryLeg o) {

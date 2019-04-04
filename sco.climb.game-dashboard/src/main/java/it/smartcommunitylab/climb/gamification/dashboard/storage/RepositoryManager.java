@@ -544,7 +544,7 @@ public class RepositoryManager {
 			update.set("polyline", leg.getPolyline());
 			update.set("score", leg.getScore());
 			update.set("transport", leg.getTransport());
-			update.set("disciplines", leg.getDisciplines());
+			update.set("activities", leg.getActivities());
 			update.set("lastUpdate", now);
 			mongoTemplate.updateFirst(query, update, PedibusGame.class);
 		} else {

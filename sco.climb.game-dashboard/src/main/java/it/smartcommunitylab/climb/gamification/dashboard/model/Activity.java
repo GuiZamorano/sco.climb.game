@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Activity extends BaseObject{
 
-    public enum Subject {CS, STEM, PE}
+    public enum Subject {CS, STEM, SEL, PE}
     private String gameId;
     private String activityId;
     private boolean active;

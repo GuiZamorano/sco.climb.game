@@ -149,16 +149,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		List<Activity> leg1Activities = leg1.getActivities();
 
-		Activity stemAct = newActivity(true, 4, null, null, Activity.Subject.STEM);
-		List<Link> urlsA = stemAct.getMaterials();
-		Link linkX = newLink("Ecosystems", "http://www.teacherplanet.com/content/food-chainweb");
-		urlsA.add(linkX);
-		Link linkY = newLink("Human Impact on the Ecosystem", "https://www.youtube.com/watch?v=5eTCZ9L834s");
-		urlsA.add(linkY);
-		stemAct.setMaterials(urlsA);
-		leg1Activities.add(stemAct);
-		leg1.setActivities(leg1Activities);
-
 		repositoryManager.savePedibusItineraryLeg(leg1, "123", true);
 
 		double [] go1 = {-98.4936, 29.4241};
@@ -214,9 +204,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		PedibusItineraryLeg leg6 = newLeg(go5, "6","6", 7000000, "Amarillo", "1", "ku`gEftxmQcr|Mjgv]", 5);
 		List<Link> urls6 = new ArrayList<>();
 		Link link6 = new Link();
-		link6.setLink("https://en.wikipedia.org/wiki/Amarillo,_Texas");
-		link6.setName("Amarillo");
+		link6.setLink("https://www.tourtexas.com/attractions/panhandle-plains-historical-museum-canyon");
+		link6.setName("Panhandle Plains Historical Museum");
 		urls6.add(link6);
+		Link link7 = new Link();
+		link7.setLink("https://en.wikipedia.org/wiki/Panhandle%E2%80%93Plains_Historical_Museum");
+		link7.setName("Panhandle Plains Historical Museum Wikipedia");
+		urls6.add(link7);
+
 		leg6.setExternalUrls(urls6);
 		leg6.setImageUrl("https://i.imgur.com/lcdRGxi.jpg");
 		leg6.setTransport("foot");
@@ -224,16 +219,34 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		List<Activity> leg6Activities = leg6.getActivities();
 
-		Activity cs1 = newActivity(true, 4, null, "Read Sarah Plain and Tall", Activity.Subject.CS);
-		List<Link> urls = cs1.getMaterials();
+		Activity stemAct = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		List<Link> urlsA = stemAct.getMaterials();
+		Link linkX = newLink("Ecosystems", "http://www.teacherplanet.com/content/food-chainweb");
+		urlsA.add(linkX);
+		Link linkY = newLink("Human Impact on the Ecosystem", "https://www.youtube.com/watch?v=5eTCZ9L834s");
+		urlsA.add(linkY);
+		stemAct.setMaterials(urlsA);
+
+		Activity csAct = newActivity(true, 4, null, "Read Sarah Plain and Tall", Activity.Subject.CS);
+		List<Link> urls = csAct.getMaterials();
 		Link linkA = newLink("Quizlet", "https://quizlet.com/2646281/sarah-plain-and-tall-flash-cards/");
 		urls.add(linkA);
 		Link linkB = newLink("YouTube - read the story", "https://www.youtube.com/watch?v=00LNxG8LAJg");
 		urls.add(linkB);
 		Link linkC = newLink("Scholastic", "https://www.scholastic.com/teachers/books/sarah-plain-and-tall-by-patricia-maclachlan/");
 		urls.add(linkC);
-		cs1.setMaterials(urls);
-		leg6Activities.add(cs1);
+		csAct.setMaterials(urls);
+
+		Activity selAct = newActivity(true, 4, null, "Managing Worry", Activity.Subject.SEL);
+		List<Link> selUrls = selAct.getMaterials();
+		Link linkS = newLink("Managing Worry", "https://www.flocabulary.com/unit/managing-worry/");
+		selUrls.add(linkS);
+		selAct.setMaterials(selUrls);
+
+
+		leg6Activities.add(stemAct);
+		leg6Activities.add(csAct);
+		leg6Activities.add(selAct);
 		leg6.setActivities(leg6Activities);
 
 		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);

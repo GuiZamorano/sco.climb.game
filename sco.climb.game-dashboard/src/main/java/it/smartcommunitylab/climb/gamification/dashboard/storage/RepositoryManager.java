@@ -533,6 +533,7 @@ public class RepositoryManager {
 			mongoTemplate.save(leg);
 		} else if (canUpdate) {
 			Update update = new Update();
+			update.set("waypoint", leg.isWaypoint());
 			update.set("badgeId", leg.getBadgeId());
 			update.set("name", leg.getName());
 			update.set("description", leg.getDescription());
@@ -543,6 +544,7 @@ public class RepositoryManager {
 			update.set("polyline", leg.getPolyline());
 			update.set("score", leg.getScore());
 			update.set("transport", leg.getTransport());
+			update.set("activities", leg.getActivities());
 			update.set("lastUpdate", now);
 			mongoTemplate.updateFirst(query, update, PedibusGame.class);
 		} else {
@@ -659,6 +661,29 @@ public class RepositoryManager {
 		return UUID.randomUUID().toString();
 	}
 
+	public void saveActivity(Activity activity, String ownerId, boolean canUpdate) throws StorageException {
+		Query query = new Query(new Criteria("gameId").is(activity.getGameId()).and("activityId").is(activity.getActivityId()).and("ownerId").is(ownerId));
+		Activity activityDB = mongoTemplate.findOne(query, Activity.class);
+		Date now = new Date();
+		if (activityDB == null) {
+			activity.setCreationDate(now);
+			activity.setLastUpdate(now);
+			activity.setObjectId(generateObjectId());
+			activity.setOwnerId(ownerId);
+			mongoTemplate.save(activity);
+		} else if (canUpdate) {
+			Update update = new Update();
+			update.set("active", activity.isActive());
+			update.set("gradeLevel", activity.getGradeLevel());
+			update.set("teks", activity.getTeks());
+			update.set("materials", activity.getMaterials());
+			update.set("description", activity.getDescription());
+			update.set("lastUpdate", now);
+			mongoTemplate.updateFirst(query, update, PedibusGame.class);
+		} else {
+			logger.warn("Cannot update existing Activity with gameId " + activity.getGameId() + " and legId " + activity.getActivityId());
+		}
+	}
 
 
 }

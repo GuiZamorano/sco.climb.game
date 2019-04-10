@@ -24,6 +24,8 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.Index = ''
       $scope.view = {val:true}
       $scope.imperial = true
+      $scope.borderSpacing = {val:Math.round((window.innerHeight-300)*.5)-20 + "px"}
+      document.getElementById("canvas").style.height = (window.innerHeight-300) + "px"
 
       chartService.init(['#F2F2F2', '#EF5350', '#FFEE58', '#66BB6A'],
             ['Inactive', 'Fairly Active', 'Very Active', 'Extremely Active'])

@@ -68,7 +68,7 @@
           <div ng-if="weekData[dayIndex].closed" id="time-day">
             {{ getDuration(day) }} minutes
           </div>
-          <div ng-if="today(day)" md-input-container class="md-block" ng-class="{'cal-today-middle':today(day)}">
+          <div ng-if="today(day)" md-input-container class="md-block" ng-class="{'cal-today-middle':today(day)}" ng-style="{'border-spacing': borderSpacing.val}">
             <form novalidate name="eventForm">
               <md-input-container class="md-block" id="timeInput">
                 <select id="time1" ng-model="inputVal.duration">

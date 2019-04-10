@@ -560,7 +560,6 @@ md-dialog {
   border-color: #cc5500;
   border-style: solid;
   border-width: 0px 2px 0px 2px;
-  border-spacing: 143px;
 }
 
 .cal-future-middle {
@@ -791,7 +790,6 @@ md-dialog {
 .chart {
     margin-right: 5px;
     width: 75% !important;
-    height: 325px !important;
 }
 
 .card-list-header {

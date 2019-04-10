@@ -71,7 +71,7 @@ angular.module('climbGame.services.chart', [])
         }
         else if(barChart) {
             findNewMax();
-            barChart.options.scales.yAxes[0].ticks.max = max + 1;
+            barChart.options.scales.yAxes[0].ticks.max = Math.ceil(max*.2) + max;
             barChart.update();
         }
     };
@@ -106,7 +106,7 @@ angular.module('climbGame.services.chart', [])
                             })
                         }
 
-                        barChart.options.scales.yAxes[0].ticks.max = max + 1;
+                        barChart.options.scales.yAxes[0].ticks.max = Math.ceil(max*.2) + max;
                         this.chart.update();
                     }
                 },
@@ -121,9 +121,9 @@ angular.module('climbGame.services.chart', [])
                         display: false,
                         ticks: {
                             beginAtZero: true,
-                            steps: max + 1,
+                            steps: Math.ceil(max*.2) + max,
                             stepValue: 1,
-                            max: max + 1,
+                            max: Math.ceil(max*.2) + max,
                             callback: function (value) {if (Number.isInteger(value)) { return value; }},
                         },
                         gridLines: {

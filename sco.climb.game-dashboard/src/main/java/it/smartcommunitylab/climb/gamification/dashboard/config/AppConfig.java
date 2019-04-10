@@ -199,15 +199,34 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();
-		Link link1 = new Link();
-		link1.setLink("https://en.wikipedia.org/wiki/El_Paso%2C_Texas");
-		link1.setName("El Paso");
-		urls1.add(link1);
+		Link linkEP1 = new Link();
+		linkEP1.setLink("https://www.tripadvisor.com/Attraction_Review-g60768-d145533-Reviews-YDSP_Tigua_Indian_Cultural_Center_and_Museum-El_Paso_Texas.html");
+		linkEP1.setName("El Paso Indian Cultural Center and Museum");
+
+		Link linkEP2 = new Link();
+		linkEP2.setLink("https://www.tripadvisor.com/Attraction_Review-g60768-d146904-Reviews-Hueco_Tanks_State_Historic_Site-El_Paso_Texas.html");
+		linkEP2.setName("El Paso Hueco Tanks");
+
+
+		urls1.add(linkEP1);
+		urls1.add(linkEP2);
 		leg1.setExternalUrls(urls1);
 		leg1.setImageUrl("https://i.imgur.com/lsU13Qm.jpg");
 		leg1.setTransport("foot");
 
+		Activity stemActEP = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		List<Link> stemUrlsEP = stemActEP.getMaterials();
+		Link stemEP1 = newLink("Fab Lab","https://fablabelpaso.org/");
+		Link stemEP2 = newLink("Makeblock Robotics", "https://www.makeblock.com/");
+		Link stemEP3 = newLink("Make Virtual Reality Headset", "https://www.youtube.com/watch?v=8qNmRi-gNqE");
+		stemUrlsEP.add(stemEP1);
+		stemUrlsEP.add(stemEP2);
+		stemUrlsEP.add(stemEP3);
+		stemActEP.setMaterials(stemUrlsEP);
+
 		List<Activity> leg1Activities = leg1.getActivities();
+		leg1Activities.add(stemActEP);
+		leg1.setActivities(leg1Activities);
 
 		repositoryManager.savePedibusItineraryLeg(leg1, "123", true);
 
@@ -310,6 +329,28 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg6.setActivities(leg6Activities);
 
 		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);
+
+		double[] go6 = {-102.0779, 31.9973};
+		PedibusItineraryLeg leg7 = newLeg(go6, "7","7", 8000000, "Midland-Odessa", "1", "oh~uEr|olRjytRfdo@", 6);
+		List<Link> urls7 = new ArrayList<>();
+		Link linkM = newLink("Big Bend Ranch State Park", "https://tpwd.texas.gov/state-parks/big-bend-ranch");
+		urls7.add(linkM);
+		leg7.setExternalUrls(urls7);
+		leg7.setImageUrl("https://i.imgur.com/V7k6COY.jpg");
+
+		Activity stemActMid = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		List<Link> stemUrlsMid = stemActMid.getMaterials();
+		Link stemMid1 = newLink("Inspire Aspiring Toolkit", "https://www.scholastic.com/teachers/blog-posts/scholasticcom-editors/2018-2019/inspire-budding-scientists-with-this-interactive-teaching-tool/");
+		stemUrlsMid.add(stemMid1);
+		selAct.setMaterials(stemUrlsMid);
+
+		List<Activity> leg7Activities = leg7.getActivities();
+		leg7Activities.add(stemActMid);
+		leg7.setActivities(leg7Activities);
+
+		repositoryManager.savePedibusItineraryLeg(leg7, "123", true);
+
+
 
 
 

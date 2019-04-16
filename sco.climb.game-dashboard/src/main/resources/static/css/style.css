@@ -792,6 +792,11 @@ md-dialog {
     width: 75% !important;
 }
 
+figure {
+    float: left;
+    text-align: center;
+}
+
 .card-list-header {
     height: 20%
 }

@@ -178,7 +178,6 @@ angular.module('climbGame', [
           views: {
             'content@home': {
               templateUrl: 'templates/about.html',
-              controller: 'aboutCtrl'
             }
           }
       })

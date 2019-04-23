@@ -173,6 +173,14 @@ angular.module('climbGame', [
           }
         }
       })
+      .state('home.about', {
+          url: 'about',
+          views: {
+            'content@home': {
+              templateUrl: 'templates/about.html',
+            }
+          }
+      })
     }
   ])
 

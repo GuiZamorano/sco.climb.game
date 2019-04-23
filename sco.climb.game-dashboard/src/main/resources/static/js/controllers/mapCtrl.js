@@ -24,7 +24,6 @@ angular.module("climbGame.controllers.map", [])
               url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
               type: 'xyz'
             }
-
           }
         }
       });
@@ -257,6 +256,12 @@ angular.module("climbGame.controllers.map", [])
               return container;
             }
           });
+
+          $scope.sidebar = L.control.sidebar({ container: 'sidebar', position: 'right' })
+                  .addTo(map)
+          document.getElementById("sidebar").style.height =
+                (window.innerHeight-250) + "px"
+
           map.addControl(new leftarrow());
           map.addControl(new rightarrow());
           map.addControl(new uparrow());
@@ -271,6 +276,7 @@ angular.module("climbGame.controllers.map", [])
         });
 
     }
+    $scope.sidebar = {}
     init();
     setMapSize();
 
@@ -457,7 +463,7 @@ angular.module("climbGame.controllers.map", [])
           },
           lat: data.geocoding[1],
           lng: data.geocoding[0],
-          message: '<div class="map-balloon">' +
+          sidenavMessage: '<div class="map-balloon">' +
             '<h4 class="text-pop-up">' + (i + 1) + '. ' + data.name + '</h4>' +
             '<div class="row">' +
             '<div class="col">' + url + '</div>' +
@@ -648,5 +654,16 @@ angular.module("climbGame.controllers.map", [])
         $scope.scrollToPoint(Number(args.modelName) + 1)
           //      console.log(markerName);
       }
+
+      if(args.model.message)
+        return null;
+      if(args.model.sidenavMessage)
+          document.getElementById("waypoint").innerHTML =
+                args.model.sidenavMessage
+      else
+        document.getElementById("waypoint").innerHTML =
+                "<h4 class=\"map-balloon\" \"text-pop-up\">Waypoint not unlocked yet!</h4>"
+        $scope.sidebar.open('sidebar-open')
+
     });
   }]);

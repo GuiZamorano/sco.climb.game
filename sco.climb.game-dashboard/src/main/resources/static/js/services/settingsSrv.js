@@ -32,9 +32,9 @@ angular.module('climbGame.services.settings', [])
             return deferr.promise;
         }
 
-        settingsService.saveSettings = function() {
+        settingsService.saveSettings = function(settings) {
             var deferr = $q.defer();
-            dataService.saveSettings().then(function (data) {       //idk if this is supposed to match settings
+            dataService.saveSettings(settings).then(function (data) {       //idk if this is supposed to match settings
                 deferr.resolve(data);
             }, function (err) {
                 deferr.reject();

@@ -367,7 +367,7 @@ angular.module('climbGame.services.data', [])
               'Accept': 'application/json'
               //'x-access-token': loginService.getUserToken()
           },
-          data: {
+          params: {
               'subjects': settings.subjects,
               'gradeLevels': settings.gradeLevels,
               'teks': settings.teks,

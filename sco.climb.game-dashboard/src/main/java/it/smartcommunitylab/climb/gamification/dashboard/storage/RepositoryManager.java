@@ -687,7 +687,7 @@ public class RepositoryManager {
 
 	public Settings getSettings(String ownerId, String gameId, String classRoom) {
 		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
-				.and("classRoom").is(classRoom).and("settings");
+				.and("classRoom").is(classRoom);
 		Query query = new Query(criteria);
 		Settings settings = mongoTemplate.findOne(query, Settings.class);
 
@@ -696,7 +696,7 @@ public class RepositoryManager {
 
 	public boolean saveSettings(Settings settings, String ownerId, String gameId, String classRoom, boolean canUpdate) {
 		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
-				.and("classRoom").is(classRoom).and("settings");
+				.and("classRoom").is(classRoom);
 		Query query = new Query(criteria);
 		Settings settingsTry = mongoTemplate.findOne(query, Settings.class);
 
@@ -707,6 +707,8 @@ public class RepositoryManager {
 			settings.setLastUpdate(now);
 			settings.setObjectId(generateObjectId());
 			settings.setOwnerId(ownerId);
+			settings.setClassRoom(classRoom);
+			settings.setGameId(gameId);
 			mongoTemplate.save(settings);
 		} else if(canUpdate){
 			Update update = new Update();

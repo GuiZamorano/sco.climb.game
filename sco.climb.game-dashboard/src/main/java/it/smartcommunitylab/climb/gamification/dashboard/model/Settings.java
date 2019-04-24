@@ -7,9 +7,11 @@ import java.util.List;
 
 public class Settings extends BaseObject {
 
-    List<Activity.Subject> selectedSubjects;
-    List<Integer> selectedGradeLevels;
-    List<String> selectedTeks;
+    private List<Activity.Subject> selectedSubjects;
+    private List<Integer> selectedGradeLevels;
+    private List<String> selectedTeks;
+    private String gameId;
+    private String classRoom;
 
     public Settings() {
         selectedSubjects = new ArrayList<>();
@@ -39,5 +41,19 @@ public class Settings extends BaseObject {
 
     public List<String> getTeks() {
         return selectedTeks;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getClassRoom() {
+        return classRoom;
+    }
+    public void setClassRoom(String classRoom) {
+        this.classRoom = classRoom;
     }
 }

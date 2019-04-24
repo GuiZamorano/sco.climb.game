@@ -490,7 +490,7 @@ public class DashboardController {
 //		return true;
 //	}
 
-	@RequestMapping(value = "/api/settigs/selectModulesAndSaveSettings/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/settings/selectModulesAndSaveSettings/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody boolean selectModulesAndSaveSettings(@PathVariable String ownerId,
 											   @PathVariable String gameId, @PathVariable String classRoom,
 											   @RequestParam List<Integer> gradeLevels, @RequestParam List<String> teks,
@@ -508,31 +508,33 @@ public class DashboardController {
 					isActive = false;
 				}
 
-				//Check activity TEKS against all selected TEKS
-				boolean foundTeks = false;
-				for (String oneTeks: teks) {
-					if(activity.getTeks().contains(oneTeks)) {
-						foundTeks = true;
+				else {
+					//Check activity TEKS against all selected TEKS
+					boolean foundTeks = false;
+					for (String oneTeks: teks) {
+						if(activity.getTeks().contains(oneTeks)) {
+							foundTeks = true;
+						}
+					}
+
+					if(!foundTeks) {
+						isActive = false;
+					}
+					else {
+						//Check activity Subject against all selected subjects
+						boolean foundSubject = false;
+						for(Activity.Subject subject : subjects) {
+							if(activity.getSubject() == subject) {
+								foundSubject = true;
+							}
+						}
+						if(!foundSubject) {
+							isActive = false;
+						}
 					}
 				}
-				if(!foundTeks) {
-					isActive = false;
-				}
-
-				//Check activity Subject against all selected subjects
-				boolean foundSubject = false;
-				for(Activity.Subject subject : subjects) {
-					if(activity.getSubject() == subject) {
-						foundSubject = true;
-					}
-				}
-				if(!foundSubject) {
-					isActive = false;
-				}
-
 				activity.setActive(isActive);
 			}
-
 			storage.savePedibusItineraryLeg(leg, ownerId, true);
 		}
 
@@ -543,6 +545,9 @@ public class DashboardController {
 		settingsToUpdate.saveTeks(teks);
 
 		storage.saveSettings(settingsToUpdate, ownerId, gameId, classRoom, true);
+
+		Settings updatedSettings = storage.getSettings(ownerId, gameId, classRoom);
+		List<PedibusItineraryLeg> testLegs = storage.getPedibusItineraryLegs(ownerId);
 
 		return true;
 	}

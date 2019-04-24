@@ -135,6 +135,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.createBabySwipes("123", "1", "EE 364D");
 
+		Settings settings = new Settings();
+		repositoryManager.saveSettings(settings, "123", "1", "EE 364D", true);
 
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
@@ -278,7 +280,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg7.setExternalUrls(urls7);
 		leg7.setImageUrl("https://i.imgur.com/V7k6COY.jpg");
 
-		Activity stemActMid = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		Activity stemActMid = newActivity(true, 4, "teks4", null, Activity.Subject.STEM);
 		List<Link> stemUrlsMid = stemActMid.getMaterials();
 		Link stemMid1 = newLink("Inspire Aspiring Toolkit", "https://www.scholastic.com/teachers/blog-posts/scholasticcom-editors/2018-2019/inspire-budding-scientists-with-this-interactive-teaching-tool/");
 		stemUrlsMid.add(stemMid1);

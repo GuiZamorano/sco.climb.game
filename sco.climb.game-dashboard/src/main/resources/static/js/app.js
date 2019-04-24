@@ -19,6 +19,7 @@ angular.module('climbGame', [
   'climbGame.controllers.notifications',
   'climbGame.controllers.login',
   'climbGame.controllers.classSelection',
+  'climbGame.controllers.settings',
   'climbGame.services.cache',
   'climbGame.services.data',
   'climbGame.services.excursions',
@@ -30,6 +31,7 @@ angular.module('climbGame', [
   'climbGame.services.chart',
   'climbGame.services.classSelection',
   'climbGame.services.stats',
+  'climbGame.services.settings',
   'climbGame.services.home',
   'zingchart-angularjs'
 ])
@@ -164,6 +166,15 @@ angular.module('climbGame', [
                 }
               }
             })
+        .state('home.settings', {
+          url: 'settings',
+          views: {
+            'content@home': {
+              templateUrl: 'templates/settings.html',
+              controller: 'settingsCtrl'
+            }
+          }
+        })
       .state('home.stats', {
         url: 'stats',
         views: {

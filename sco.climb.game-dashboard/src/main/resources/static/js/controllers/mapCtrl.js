@@ -309,6 +309,9 @@ angular.module("climbGame.controllers.map", [])
           for (var k = 0; k < data.legs[i].externalUrls.length; k++) {
             externalUrl = externalUrl + '<div class="row"> ' + ' <a href="' + data.legs[i].externalUrls[k].link + '" target="_blank">' + data.legs[i].externalUrls[k].name + '</a></div>';
           }
+
+          //TODO: Only display active links
+
           for (var a = 0; a<data.legs[i].activities.length; a++){
             for(var b = 0; b<data.legs[i].activities[a].materials.length; b++){
                               externalUrl = externalUrl + '<div class ="row">' + ' <a href="' + data.legs[i].activities[a].materials[b].link + '" target="_blank">' + data.legs[i].activities[a].materials[b].name + '</a></div>';

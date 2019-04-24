@@ -277,11 +277,11 @@ angular.module('climbGame.services.data', [])
       return deferred.promise
     }
 
-    dataService.getMathStats = function(from, to){
+    dataService.getMathStats = function(from, to) {
         var deferred = $q.defer()
         $http({
             method: 'GET',
-            url:'api/calendar/123/1/EE 364D',
+            url: 'api/calendar/123/1/EE 364D',
             params: {
                 from: from,
                 to: to
@@ -301,6 +301,62 @@ angular.module('climbGame.services.data', [])
 
     }
 
+      dataService.getActivitySubjects = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getSubjectOptions/123/1/EE 364D',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+      }
+
+      dataService.getActivityTeks = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getTeksOptions/123/1/EE 364D',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+      }
+
+      dataService.getActivityGrades = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getGradeOptions/123/1/EE 364D',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+      }
 
     dataService.clearSwipes = function () {
       var deferred = $q.defer()

@@ -1,0 +1,36 @@
+<div class="settings" layout="column" layout-padding>
+    <div layout="column" flex="33" class="settings-column">
+        <h1 class="md-title">{{'settings' | translate}}</h1>
+        <form novalidate name="settingsForm">
+            <!-- Grade Levels -->
+            <label ng-repeat="grade in gradesList">
+                <input type="checkbox" checklist-model="selectedSubjects.subjects" checklist-value="subject" />
+                {{subject.toString()}}}
+                <br/>
+            </label>
+            <p>Grade Levels</p>
+            {{selectedGrades.grades}}
+
+            <!-- Subjects -->
+            <label ng-repeat="subject in subjectsList">
+                <input type="checkbox" checklist-model="selectedSubjects.subjects" checklist-value="subject" />
+                {{subject.toString()}}}
+                <br/>
+            </label>
+            <p>Subjects</p>
+            {{selectedSubjects.subjects}}
+
+            <!-- Teks -->
+            <label ng-repeat="oneTeks in teksList">
+                <input type="checkbox" checklist-model="selectedSubjects.subjects" checklist-value="subject" />
+                {{subject.toString()}}}
+                <br/>
+            </label>
+            <p>TEKS</p>
+            {{selectedTeks.teks}}
+        </form>
+        <md-button class="md-raised" ng-click="saveSettings(settingsForm)">
+            {{'settings_form_send' | translate}}
+        </md-button>
+    </div>
+</div>

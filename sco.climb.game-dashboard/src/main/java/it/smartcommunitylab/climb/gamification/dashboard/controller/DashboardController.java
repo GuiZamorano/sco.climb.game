@@ -119,7 +119,7 @@ public class DashboardController {
 //			pedibusPlayer.setSurname("Zamo");
 //			players.add(pedibusPlayer);
 //		}
-		List<PedibusPlayer> players = storage.getPedibusPlayersByClassRoom("123", "1", "EE 364D");
+		List<PedibusPlayer> players = storage.getPedibusPlayersByClassRoom("123", "1", "Smart Lab");
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("getPlayersByClassRoom[%s]: %s - %s", "123", "1", players.size()));
 		}

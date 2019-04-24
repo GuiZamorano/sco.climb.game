@@ -28,7 +28,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'GET',
-        url: 'api/calendar/123/1/EE 364D',
+        url: 'api/calendar/123/1/Smart Lab',
         params: {
           from: from,
           to: to
@@ -51,7 +51,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: 'api/weather/123/1/EE 364D',
+              url: 'api/weather/123/1/Smart Lab',
               params: {
                   weather: weather
               },
@@ -113,7 +113,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'POST',
-        url: 'api/calendar/123/1/EE 364D',
+        url: 'api/calendar/123/1/Smart Lab',
         headers: {
           'Accept': 'application/json'
           //'x-access-token': loginService.getUserToken()
@@ -204,7 +204,7 @@ angular.module('climbGame.services.data', [])
 
       $http({
         method: 'POST',
-        url: 'api/calendar/123/1/EE 364D',
+        url: 'api/calendar/123/1/Smart Lab',
         headers: {
           'Accept': 'application/json',
 
@@ -281,7 +281,7 @@ angular.module('climbGame.services.data', [])
         var deferred = $q.defer()
         $http({
             method: 'GET',
-            url:'api/calendar/123/1/EE 364D',
+            url:'api/calendar/123/1/Smart Lab',
             params: {
                 from: from,
                 to: to
@@ -306,7 +306,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
         $http({
           method: 'GET',
-          url: 'api/calendar/swipes/clear/123/1/EE 364D',
+          url: 'api/calendar/swipes/clear/123/1/Smart Lab',
           timeout: configService.httpTimout()
         }).then(function (response) {
           deferred.resolve(response.data)

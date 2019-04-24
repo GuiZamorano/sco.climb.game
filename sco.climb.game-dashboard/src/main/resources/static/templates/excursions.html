@@ -61,7 +61,7 @@
       <div layout="row">
         <table>
           <tr>
-            <td bgcolor="#66bb6a">Extremely Active</td>
+            <td bgcolor="#66bb6a">More Active</td>
             <td><md-input-container class="md-block">
               <!--md-no-float-->
               <label>{{'excursion_form_children_placeholder' | translate}}</label>
@@ -75,7 +75,7 @@
             </td>
           </tr>
           <tr>
-            <td bgcolor="#ffee58">Very Active</td>
+            <td bgcolor="#ffee58">Active</td>
             <td><md-input-container class="md-block">
               <!--md-no-float-->
               <label>{{'excursion_form_children_placeholder' | translate}}</label>
@@ -89,7 +89,7 @@
             </td>
           </tr>
           <tr>
-            <td bgcolor="#ef5350">Fairly Active</td>
+            <td bgcolor="#ef5350">Less Active</td>
             <td><md-input-container class="md-block">
               <!--md-no-float-->
               <label>{{'excursion_form_children_placeholder' | translate}}</label>
@@ -182,15 +182,15 @@
             <md-card-content>
               <p class="md-subhead">
                 <ul ng-if="imperial">
-                  <li>Extremely Active: {{ex.eactive}} ----- 3 mph</li>
-                  <li>Very Active: {{ex.vactive}} ----- 2 mph</li>
-                  <li>Fairly Active: {{ex.factive}} ----- 1 mph</li>
+                  <li>More Active: {{ex.eactive}} ----- 3 mph</li>
+                  <li>Active: {{ex.vactive}} ----- 2 mph</li>
+                  <li>Less Active: {{ex.factive}} ----- 1 mph</li>
                   <li>Inactive: {{ex.iactive}} ----- 0 mph</li>
                 </ul>
                 <ul ng-if="!imperial">
-                  <li>Extremely Active: {{ex.eactive}} ----- 4.83 kph</li>
-                  <li>Very Active: {{ex.vactive}} ----- 3.22 kph</li>
-                  <li>Fairly Active: {{ex.factive}} ----- 1.61 kph</li>
+                  <li>More Active: {{ex.eactive}} ----- 4.83 kph</li>
+                  <li>Active: {{ex.vactive}} ----- 3.22 kph</li>
+                  <li>Less Active: {{ex.factive}} ----- 1.61 kph</li>
                   <li>Inactive: {{ex.iactive}} ----- 0 kph</li>
                 </ul>
               </p>

@@ -4,8 +4,8 @@ angular.module('climbGame.controllers.calendarStats', [])
 
     $scope.index = ''
     $scope.calendarView = 0
-    $scope.activityLevel = ["Extremely Active", "Very Active", "Fairly Active", "Inactive"]
-    $scope.activityLevelInverse = ["Fairly Active", "Very Active", "Extremely Active"]
+    $scope.activityLevel = ["More Active", "Active", "Less Active", "Inactive"]
+    $scope.activityLevelInverse = ["Less Active", "Active", "More Active"]
     $scope.colors = ["red", "blue", "orange", "green", "purple", "yellow", "brown", "white", "gray", "black"]
     $scope.colorLevel = ['#66BB6A', '#FFEE58', '#EF5350', '#F2F2F2']
     $scope.stats = {

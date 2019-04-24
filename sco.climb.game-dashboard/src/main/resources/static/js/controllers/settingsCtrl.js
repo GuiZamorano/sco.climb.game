@@ -2,7 +2,7 @@
 angular.module('climbGame.controllers.settings', [])
   .controller('settingsCtrl', function ($scope, $filter, $window, dataService, settingsService) {
 
-    $scope.subjetcsList = null;
+    $scope.subjectsList = null;
     $scope.teksList = null;
     $scope.gradeLevelsList = null;
 
@@ -21,16 +21,29 @@ angular.module('climbGame.controllers.settings', [])
           $scope.gradeLevelsList = gradeLevels;
       })
 
-      $scope.fruitsList = [
-          {id: 1, name: 'Apple'},
-          {id: 2, name: 'Mango'},
-          {id: 3, name: 'Banana'},
-          {id: 4, name: 'Guava'},
-          {id: 5, name: 'Orange'}
-      ];
-      $scope.selected = {
-          fruits: []
-      };
+    settingsService.saveSettings().then(
+      function(selectedSubjects) {
+
+      })
+
+      //TODO after get the rest to work
+      // settingsService.getSelectedSubjects().then(
+      //     function(subjects) {
+      //         $scope.selectedSubjects = subjects;
+      //     }
+      // )
+      //
+      // settingsService.getSelectedSubjects().then(
+      //     function(subjects) {
+      //         $scope.selectedSubjects = subjects;
+      //     }
+      // )
+      //
+      // settingsService.getSelectedSubjects().then(
+      //     function(subjects) {
+      //         $scope.selectedSubjects = subjects;
+      //     }
+      // )
 
       $scope.selectedSubjects = {
           subjects: []
@@ -43,12 +56,4 @@ angular.module('climbGame.controllers.settings', [])
       $scope.selectedGradeLevels = {
           gradeLevels: []
       };
-
-      $scope.checkAll = function() {
-          $scope.selectedSubjects.subjects = angular.copy($scope.subjectsList);
-      };
-      $scope.uncheckAll = function() {
-          $scope.selectedSubjects.subjects = [];
-      };
-
   });

@@ -358,6 +358,30 @@ angular.module('climbGame.services.data', [])
           return deferred.promise
       }
 
+      dataService.saveSettings = function(settings) {
+      var deferred = $q.defer()
+      $http({
+          method: 'POST',
+          url: 'api/settings/selectModulesAndSaveSettings/123/1/EE 364D',
+          headers: {
+              'Accept': 'application/json'
+              //'x-access-token': loginService.getUserToken()
+          },
+          data: {
+              'subjects': settings.subjects,
+              'gradeLevels': settings.gradeLevels,
+              'teks': settings.teks,
+          },
+          //timeout: configService.httpTimout()
+      }).then(function (response) {
+          deferred.resolve(response.data)
+      }, function (reason) {
+          console.log(reason)
+          deferred.reject(reason)
+      })
+      return deferred.promise
+  }
+
     dataService.clearSwipes = function () {
       var deferred = $q.defer()
         $http({

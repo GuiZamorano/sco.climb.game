@@ -1,9 +1,11 @@
 package it.smartcommunitylab.climb.gamification.dashboard.model;
 
+import it.smartcommunitylab.climb.gamification.dashboard.model.events.BaseObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Settings {
+public class Settings extends BaseObject {
 
     List<Activity.Subject> selectedSubjects;
     List<Integer> selectedGradeLevels;
@@ -15,7 +17,7 @@ public class Settings {
         selectedTeks = new ArrayList<>();
     }
 
-    public void saveSubjects(ArrayList<Activity.Subject> newSelectedSubjects) {
+    public void saveSubjects(List<Activity.Subject> newSelectedSubjects) {
         selectedSubjects = newSelectedSubjects;
     }
 
@@ -23,7 +25,7 @@ public class Settings {
         return selectedSubjects;
     }
 
-    public void saveGradeLevels(ArrayList<Integer> newSelectedGradeLevels) {
+    public void saveGradeLevels(List<Integer> newSelectedGradeLevels) {
         selectedGradeLevels = newSelectedGradeLevels;
     }
 
@@ -31,7 +33,7 @@ public class Settings {
         return selectedGradeLevels;
     }
 
-    public void saveTeks(ArrayList<String> newSelectedTeks) {
+    public void saveTeks(List<String> newSelectedTeks) {
         selectedTeks = newSelectedTeks;
     }
 

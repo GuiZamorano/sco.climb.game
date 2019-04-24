@@ -472,22 +472,28 @@ public class DashboardController {
 		return result;
 	}
 
-	@RequestMapping(value =  "/api/settings/saveSettings/{ownerID}/{gameID}/{classRoom}", method = RequestMethod.POST)
-	public @ResponseBody Boolean saveSettings(@PathVariable String ownerId,
-											  @PathVariable String gameId, @PathVariable String classRoom,
-											  @RequestParam List<Integer> gradeLevels, @RequestParam List<String> teks,
-											  @RequestParam List<Activity.Subject> subjects,
-											  HttpServletRequest request, HttpServletResponse response) throws Exception {
+//	@RequestMapping(value =  "/api/settings/saveSettings/{ownerID}/{gameID}/{classRoom}", method = RequestMethod.POST)
+//	public @ResponseBody Boolean saveSettings(@PathVariable String ownerId,
+//											  @PathVariable String gameId, @PathVariable String classRoom,
+//											  @RequestParam List<Integer> gradeLevels, @RequestParam List<String> teks,
+//											  @RequestParam List<Activity.Subject> subjects,
+//											  HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//		Settings settingsToUpdate = storage.getSettings(ownerId, gameId, classRoom);
+//
+//		settingsToUpdate.saveGradeLevels(gradeLevels);
+//		settingsToUpdate.saveSubjects(subjects);
+//		settingsToUpdate.saveTeks(teks);
+//
+//		storage.saveSettings(settingsToUpdate, ownerId, gameId, classRoom, true);
+//
+//		return true;
+//	}
 
-		storage.saveSettings(gradeLevels, subjects, teks);
-
-		return true;
-	}
-
-	@RequestMapping(value = "/api/settigs/selectModules/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
-	public @ResponseBody boolean selectModules(@PathVariable String ownerId,
+	@RequestMapping(value = "/api/settigs/selectModulesAndSaveSettings/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
+	public @ResponseBody boolean selectModulesAndSaveSettings(@PathVariable String ownerId,
 											   @PathVariable String gameId, @PathVariable String classRoom,
-											   @RequestParam int gradeLevel, @RequestParam List<String> teks,
+											   @RequestParam List<Integer> gradeLevels, @RequestParam List<String> teks,
 											   @RequestParam List<Activity.Subject> subjects,
 												 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -498,7 +504,7 @@ public class DashboardController {
 				//assume all modules active
 				boolean isActive = true;
 
-				if(activity.getGradeLevel() != gradeLevel) {
+				if(!gradeLevels.contains(activity.getGradeLevel())) {
 					isActive = false;
 				}
 
@@ -530,16 +536,26 @@ public class DashboardController {
 			storage.savePedibusItineraryLeg(leg, ownerId, true);
 		}
 
+		Settings settingsToUpdate = storage.getSettings(ownerId, gameId, classRoom);
+
+		settingsToUpdate.saveGradeLevels(gradeLevels);
+		settingsToUpdate.saveSubjects(subjects);
+		settingsToUpdate.saveTeks(teks);
+
+		storage.saveSettings(settingsToUpdate, ownerId, gameId, classRoom, true);
+
 		return true;
 	}
 
 	@RequestMapping(value = "/api/settings/getSubjectOptions/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody Set<Activity.Subject> getSettingsSubjectOptions(@PathVariable String ownerId, @PathVariable String gameId,
+																		 @PathVariable String classRoom,
 										HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Set<Activity.Subject> result = new TreeSet<Activity.Subject>();
 
 		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
+		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
 
 		for (PedibusItineraryLeg leg: legs) {
 			for (Activity activity: leg.getActivities()) {
@@ -547,16 +563,23 @@ public class DashboardController {
 			}
 		}
 
+		if(settings != null) {
+			result.addAll(settings.getSubjects());
+		}
+
 		return result;
 	}
 
 	@RequestMapping(value = "/api/settings/getTeksOptions/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody Set<String> getSettingsTeksOptions(@PathVariable String ownerId, @PathVariable String gameId,
+															@PathVariable String classRoom,
 																		 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Set<String> result = new TreeSet<String>();
 
 		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
+		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
+
 
 		for (PedibusItineraryLeg leg: legs) {
 			for (Activity activity: leg.getActivities()) {
@@ -564,21 +587,31 @@ public class DashboardController {
 			}
 		}
 
+		if(settings != null) {
+			result.addAll(settings.getTeks());
+		}
+
 		return result;
 	}
 
 	@RequestMapping(value = "/api/settings/getGradeOptions/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
 	public @ResponseBody Set<Integer> getSettingsGradeOptions(@PathVariable String ownerId, @PathVariable String gameId,
+															  @PathVariable String classRoom,
 																		 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		Set<Integer> result = new TreeSet<Integer>();
 
 		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
+		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
 
 		for (PedibusItineraryLeg leg: legs) {
 			for (Activity activity: leg.getActivities()) {
 				result.add(activity.getGradeLevel());
 			}
+		}
+
+		if(settings != null) {
+			result.addAll(settings.getGradeLevels());
 		}
 
 		return result;

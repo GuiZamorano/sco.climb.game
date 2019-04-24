@@ -2,15 +2,6 @@
     <div layout="column" flex="33" class="settings-column">
         <h1 class="md-title">{{'settings' | translate}}</h1>
         <form novalidate name="settingsForm">
-            <!-- Grade Levels -->
-            <label ng-repeat="grade in gradesList">
-                <input type="checkbox" checklist-model="selectedSubjects.subjects" checklist-value="subject" />
-                {{subject.toString()}}}
-                <br/>
-            </label>
-            <p>Grade Levels</p>
-            {{selectedGrades.grades}}
-
             <!-- Subjects -->
             <label ng-repeat="subject in subjectsList">
                 <input type="checkbox" checklist-model="selectedSubjects.subjects" checklist-value="subject" />
@@ -20,10 +11,19 @@
             <p>Subjects</p>
             {{selectedSubjects.subjects}}
 
+            <!-- Grade Levels -->
+            <label ng-repeat="grade in gradeLevelsList">
+                <input type="checkbox" checklist-model="selectedGradesList.gradesLevels" checklist-value="grade" />
+                {{grade.toString()}}}
+                <br/>
+            </label>
+            <p>Grade Levels</p>
+            {{selectedGradeLevels.gradeLevels}}
+
             <!-- Teks -->
             <label ng-repeat="oneTeks in teksList">
-                <input type="checkbox" checklist-model="selectedSubjects.subjects" checklist-value="subject" />
-                {{subject.toString()}}}
+                <input type="checkbox" checklist-model="selectedTeks.teks" checklist-value="oneTeks" />
+                {{oneTeks.toString()}}}
                 <br/>
             </label>
             <p>TEKS</p>

@@ -191,6 +191,17 @@ md-sidenav {
   z-index: 0;
 }
 
+#subject-header {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#subject {
+    margin-left: 30px;
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
 .map-resources {
   position: absolute;
   bottom: 0px;
@@ -204,6 +215,7 @@ md-sidenav {
 .map-balloon {
   font-size: 20px;
   line-height: 30px;
+  margin: 0px 10px 0px 10px;
 }
 
 .gallery-arrow {
@@ -560,7 +572,6 @@ md-dialog {
   border-color: #cc5500;
   border-style: solid;
   border-width: 0px 2px 0px 2px;
-  border-spacing: 143px;
 }
 
 .cal-future-middle {
@@ -791,7 +802,11 @@ md-dialog {
 .chart {
     margin-right: 5px;
     width: 75% !important;
-    height: 325px !important;
+}
+
+figure {
+    float: left;
+    text-align: center;
 }
 
 .card-list-header {

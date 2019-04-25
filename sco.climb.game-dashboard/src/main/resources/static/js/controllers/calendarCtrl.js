@@ -24,6 +24,8 @@ angular.module('climbGame.controllers.calendar', [])
       $scope.Index = ''
       $scope.view = {val:true}
       $scope.imperial = true
+      $scope.borderSpacing = {val:Math.round((window.innerHeight-300)*.5)-20 + "px"}
+      document.getElementById("canvas").style.height = (window.innerHeight-300) + "px"
 
       chartService.init(['#F2F2F2', '#EF5350', '#FFEE58', '#66BB6A'],
             ['Inactive', 'Fairly Active', 'Very Active', 'Extremely Active'])
@@ -36,19 +38,26 @@ angular.module('climbGame.controllers.calendar', [])
             var moduloCheck = $scope.todayIndex
             var moduloAttempt = moduloCheck%10
             var counter = 0
-                  while(moduloAttempt != 5 && moduloAttempt != 0){
-                    moduloAttempt = --moduloCheck
-                    moduloAttempt = moduloAttempt%10
-                    counter++
-                    }
-                    var startPoint = $scope.todayIndex-counter
-                  for (var i = startPoint; i < startPoint+5; i++) {
-                    //$scope.week.push(new Date(getMonday(new Date()).getTime() + (i * 24 * 60 * 60 * 1000)))
-                    $scope.weekNumber.push("Event " + i);
-                    $scope.week.push(i);
-                  }
-                  setLabelWeek($scope.weekNumber)
+            while(moduloAttempt != 5 && moduloAttempt != 0){
+                moduloAttempt = --moduloCheck
+                moduloAttempt = moduloAttempt%10
+                counter++
             }
+            var startPoint = $scope.todayIndex-counter
+            for (var i = startPoint; i < startPoint+5; i++) {
+                //$scope.week.push(new Date(getMonday(new Date()).getTime() + (i * 24 * 60 * 60 * 1000)))
+                $scope.weekNumber.push("Event " + i);
+                $scope.week.push(i);
+            }
+            setLabelWeek($scope.weekNumber)
+
+            calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
+                function (calendar) {
+                  createWeekData(calendar)
+                  updateTodayData(calendar)
+                }
+            )
+        }
       )
       setClassSize()
 
@@ -71,16 +80,7 @@ angular.module('climbGame.controllers.calendar', [])
             })
             $scope.classMap[players[i].childId] = players[i]
           }
-
-          calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
-            function (calendar) {
-              createWeekData(calendar)
-              updateTodayData(calendar)
-            },
-            function () {}
-          )
-        },
-        function () {}
+        }
       )
 
       $scope.returnColorByType = function (type) {

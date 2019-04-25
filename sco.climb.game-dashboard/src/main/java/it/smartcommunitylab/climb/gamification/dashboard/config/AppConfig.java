@@ -111,18 +111,18 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		Date dateObjectFrom = sdf.parse(dateStringFrom);
 		Date dateObjectTo = sdf.parse(dateStringTo);
 		PedibusGame pedibusGame = new PedibusGame("003658", "UT Austin", new ArrayList<String>(){{
-			add("EE 364D");
-			add("EE 360C"); }}, "1", "Game 1", "Trial Game", "Gui", dateObjectFrom, dateObjectTo);
-		pedibusGame.setGlobalTeam("EE 364D");
-		PedibusTeam pedibusTeam = new PedibusTeam("EE 364D", "1", new ArrayList<String>(){{
+					add("PROJECT SMART");
+				}}, "1", "Game 1", "Trial Game", "Gui", dateObjectFrom, dateObjectTo);
+		pedibusGame.setGlobalTeam("PROJECT SMART");
+		PedibusTeam pedibusTeam = new PedibusTeam("PROJECT SMART", "1", new ArrayList<String>(){{
 			add("1");add("2");add("3");add("4");add("5");add("6");add("7");}}, 0.0);
-		PedibusPlayer Dylan = new PedibusPlayer("1", "Dylan", "Bray", "EE 364D", "1");
-		PedibusPlayer Anjali = new PedibusPlayer("2", "Anjali", "Tewani", "EE 364D", "1");
-		PedibusPlayer Charlie = new PedibusPlayer("3", "Charlie", "Yeng", "EE 364D", "1");
-		PedibusPlayer Grace = new PedibusPlayer("4", "Grace", "Zhuang", "EE 364D", "1");
-		PedibusPlayer Grayson = new PedibusPlayer("5", "Grayson", "Barrett", "EE 364D", "1");
-		PedibusPlayer Kevin = new PedibusPlayer("6", "Kevin", "Brill", "EE 364D", "1");
-		PedibusPlayer Gui = new PedibusPlayer("7", "Gui", "Zamorano", "EE 364D", "1");
+		PedibusPlayer Dylan = new PedibusPlayer("1", "Dylan", "Bray", "PROJECT SMART", "1");
+		PedibusPlayer Anjali = new PedibusPlayer("2", "Anjali", "Tewani", "PROJECT SMART", "1");
+		PedibusPlayer Charlie = new PedibusPlayer("3", "Charlie", "Yeng", "PROJECT SMART", "1");
+		PedibusPlayer Grace = new PedibusPlayer("4", "Grace", "Zhuang", "PROJECT SMART", "1");
+		PedibusPlayer Grayson = new PedibusPlayer("5", "Grayson", "Barrett", "PROJECT SMART", "1");
+		PedibusPlayer Kevin = new PedibusPlayer("6", "Kevin", "Brill", "PROJECT SMART", "1");
+		PedibusPlayer Gui = new PedibusPlayer("7", "Gui", "Zamorano", "PROJECT SMART", "1");
 		repositoryManager.savePedibusGame(pedibusGame, "123", true);
 		repositoryManager.savePedibusTeam(pedibusTeam, "123", true);
 		repositoryManager.savePedibusPlayer(Dylan, "123", true);
@@ -133,7 +133,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusPlayer(Kevin, "123", true);
 		repositoryManager.savePedibusPlayer(Gui, "123", true);
 
-		repositoryManager.createBabySwipes("123", "1", "EE 364D");
+		repositoryManager.createBabySwipes("123", "1", "PROJECT SMART");
 
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);

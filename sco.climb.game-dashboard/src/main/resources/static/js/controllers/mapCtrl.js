@@ -24,7 +24,6 @@ angular.module("climbGame.controllers.map", [])
               url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
               type: 'xyz'
             }
-
           }
         }
       });
@@ -257,6 +256,12 @@ angular.module("climbGame.controllers.map", [])
               return container;
             }
           });
+
+          $scope.sidebar = L.control.sidebar({ container: 'sidebar', position: 'right' })
+                  .addTo(map)
+          document.getElementById("sidebar").style.height =
+                (window.innerHeight-250) + "px"
+
           map.addControl(new leftarrow());
           map.addControl(new rightarrow());
           map.addControl(new uparrow());
@@ -271,6 +276,7 @@ angular.module("climbGame.controllers.map", [])
         });
 
     }
+    $scope.sidebar = {}
     init();
     setMapSize();
 
@@ -306,17 +312,24 @@ angular.module("climbGame.controllers.map", [])
             }
             //create div of external url
           var externalUrl = "<div>";
-          for (var k = 0; k < data.legs[i].externalUrls.length; k++) {
-            externalUrl = externalUrl + '<div class="row"> ' + ' <a href="' + data.legs[i].externalUrls[k].link + '" target="_blank">' + data.legs[i].externalUrls[k].name + '</a></div>';
-          }
 
           //TODO: Only display active links
 
           for (var a = 0; a<data.legs[i].activities.length; a++){
+            externalUrl += "<h5 id=\"subject-header\">" + data.legs[i].activities[a].subject + "</h5><ul id=\"subject\">"
+
             for(var b = 0; b<data.legs[i].activities[a].materials.length; b++){
-                              externalUrl = externalUrl + '<div class ="row">' + ' <a href="' + data.legs[i].activities[a].materials[b].link + '" target="_blank">' + data.legs[i].activities[a].materials[b].name + '</a></div>';
-                      }
-                }
+                              externalUrl = externalUrl + '<li>' + ' <a href="' + data.legs[i].activities[a].materials[b].link + '" target="_blank">' + data.legs[i].activities[a].materials[b].name + '</a></li>';
+            }
+            externalUrl += "</ul>"
+          }
+
+          if(data.legs[i].externalUrls.length > 0)
+            externalUrl += "<h5 id=\"subject-header\">OTHER</h5><ul id=\"subject\">"
+          for (var k = 0; k < data.legs[i].externalUrls.length; k++) {
+             externalUrl = externalUrl + '<li> ' + ' <a href="' + data.legs[i].externalUrls[k].link + '" target="_blank">' + data.legs[i].externalUrls[k].name + '</a></li>';
+          }
+          externalUrl += "</ul>"
 
           externalUrl = externalUrl + '</div>';
 
@@ -460,8 +473,8 @@ angular.module("climbGame.controllers.map", [])
           },
           lat: data.geocoding[1],
           lng: data.geocoding[0],
-          message: '<div class="map-balloon">' +
-            '<h4 class="text-pop-up">' + (i + 1) + '. ' + data.name + '</h4>' +
+          sidenavMessage: '<div class="map-balloon">' +
+            '<h4 class="text-pop-up" id="subject-header">' + (i + 1) + '. ' + data.name + '</h4>' +
             '<div class="row">' +
             '<div class="col">' + url + '</div>' +
             '</div>' +
@@ -651,5 +664,16 @@ angular.module("climbGame.controllers.map", [])
         $scope.scrollToPoint(Number(args.modelName) + 1)
           //      console.log(markerName);
       }
+
+      if(args.model.message)
+        return null;
+      if(args.model.sidenavMessage)
+          document.getElementById("waypoint").innerHTML =
+                args.model.sidenavMessage
+      else
+        document.getElementById("waypoint").innerHTML =
+                "<h4 class=\"map-balloon\" \"text-pop-up\">Waypoint not unlocked yet!</h4>"
+        $scope.sidebar.open('sidebar-open')
+
     });
   }]);

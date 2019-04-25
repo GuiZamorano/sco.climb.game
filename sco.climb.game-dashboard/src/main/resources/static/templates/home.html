@@ -26,6 +26,10 @@
         <md-icon class="material-icons menu-colors icon-trip"></md-icon>
         <p>{{'menu_excursions' | translate}}</p>
       </md-list-item>
+      <md-list-item ng-click="go('home.about')" ng-class="{'menu-selected' : isCurrentState('home.about')}">
+        <md-icon class="material-icons menu-colors icon-sun"></md-icon>
+        <p>About</p>
+      </md-list-item>
       <!-- <md-list-item ng-click="go('home.notifications')" ng-class="{'menu-selected' : isCurrentState('home.notifications')}">
         <md-icon class="material-icons menu-colors icon-notifications"></md-icon>
 

@@ -135,9 +135,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.createBabySwipes("123", "1", "EE 364D");
 
-		Settings settings = new Settings();
-		repositoryManager.saveSettings(settings, "123", "1", "EE 364D", true);
-
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();
@@ -291,13 +288,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg7.setActivities(leg7Activities);
 
 		repositoryManager.savePedibusItineraryLeg(leg7, "123", true);
-
-
-
-
-
-
-
+		
+		Settings settings = new Settings();
+		repositoryManager.saveSettings(settings, "123", "1", "EE 364D", true);
 
 		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics
 		teamDTO.setGameId("1");

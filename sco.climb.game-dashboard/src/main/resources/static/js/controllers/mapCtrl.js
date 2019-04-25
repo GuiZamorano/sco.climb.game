@@ -14,13 +14,23 @@ angular.module("climbGame.controllers.map", [])
         pathMarkers: [],
         layers: {
           baselayers: {
+            sm: {
+              name: 'Satellite Map',
+              url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+              type: 'xyz'
+            },
+            otm: {
+              name: 'Topographic Map',
+              url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+              type: 'xyz'
+            },
             altro: {
-              name: 'Watercolor',
+              name: 'Watercolor Map',
               url: 'http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png',
               type: 'xyz'
             },
             osm: {
-              name: 'OpenStreetMap',
+              name: 'Street Map',
               url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
               type: 'xyz'
             }

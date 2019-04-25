@@ -305,7 +305,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getSubjectOptions/123/1/EE 364D',
+              url: '/api/settings/getSubjectOptions/123/1/PROJECT SMART',
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -324,7 +324,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getTeksOptions/123/1/EE 364D',
+              url: '/api/settings/getTeksOptions/123/1/PROJECT SMART',
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -343,7 +343,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getGradeOptions/123/1/EE 364D',
+              url: '/api/settings/getGradeOptions/123/1/PROJECT SMART',
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -362,7 +362,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
           method: 'POST',
-          url: 'api/settings/selectModulesAndSaveSettings/123/1/EE 364D',
+          url: 'api/settings/selectModulesAndSaveSettings/123/1/PROJECT SMART',
           headers: {
               'Accept': 'application/json'
               //'x-access-token': loginService.getUserToken()

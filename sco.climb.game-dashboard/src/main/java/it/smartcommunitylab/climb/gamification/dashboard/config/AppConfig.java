@@ -290,7 +290,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg7, "123", true);
 		
 		Settings settings = new Settings();
-		repositoryManager.saveSettings(settings, "123", "1", "EE 364D", true);
+		repositoryManager.saveSettings(settings, "123", "1", "PROJECT SMART", true);
 
 		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics
 		teamDTO.setGameId("1");

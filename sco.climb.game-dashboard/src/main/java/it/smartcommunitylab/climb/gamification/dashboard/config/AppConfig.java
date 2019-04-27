@@ -16,6 +16,7 @@
 
 package it.smartcommunitylab.climb.gamification.dashboard.config;
 
+import java.beans.Transient;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -288,8 +290,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg7.setActivities(leg7Activities);
 
 		repositoryManager.savePedibusItineraryLeg(leg7, "123", true);
-		
+
+		List<PedibusItineraryLeg> legs = repositoryManager.getPedibusItineraryLegs("123");
 		Settings settings = new Settings();
+		settings.setup(legs);
 		repositoryManager.saveSettings(settings, "123", "1", "PROJECT SMART", true);
 
 		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics

@@ -313,13 +313,23 @@ angular.module("climbGame.controllers.map", [])
             //create div of external url
           var externalUrl = "<div>";
 
-          //TODO: Only display active links
-
           for (var a = 0; a<data.legs[i].activities.length; a++){
-            externalUrl += "<h5 id=\"subject-header\">" + data.legs[i].activities[a].subject + "</h5><ul id=\"subject\">"
 
-            for(var b = 0; b<data.legs[i].activities[a].materials.length; b++){
-                              externalUrl = externalUrl + '<li>' + ' <a href="' + data.legs[i].activities[a].materials[b].link + '" target="_blank">' + data.legs[i].activities[a].materials[b].name + '</a></li>';
+            //only display selected activities
+            var displayedOnce = false;
+
+            if(data.legs[i].activities[a].active) {
+
+              //Display subject header if at least one subject gets selected
+
+              if(!displayedOnce) {
+                externalUrl += "<h5 id=\"subject-header\">" + data.legs[i].activities[a].subject + "</h5><ul id=\"subject\">"
+                displayedOnce = true;
+              }
+
+              for(var b = 0; b<data.legs[i].activities[a].materials.length; b++){
+                externalUrl = externalUrl + '<li>' + ' <a href="' + data.legs[i].activities[a].materials[b].link + '" target="_blank">' + data.legs[i].activities[a].materials[b].name + '</a></li>';
+              }
             }
             externalUrl += "</ul>"
           }

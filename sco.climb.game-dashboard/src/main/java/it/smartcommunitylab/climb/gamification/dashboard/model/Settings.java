@@ -1,46 +1,60 @@
 package it.smartcommunitylab.climb.gamification.dashboard.model;
 
 import it.smartcommunitylab.climb.gamification.dashboard.model.events.BaseObject;
+import it.smartcommunitylab.climb.gamification.dashboard.storage.RepositoryManager;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Settings extends BaseObject {
 
-    private List<Activity.Subject> selectedSubjects;
-    private List<Integer> selectedGradeLevels;
-    private List<String> selectedTeks;
+    private Map<String, Boolean> subjects;
+    private Map<String, Boolean> gradeLevels;
+    private Map<String, Boolean> teks;
     private String gameId;
     private String classRoom;
 
     public Settings() {
-        selectedSubjects = new ArrayList<>();
-        selectedGradeLevels = new ArrayList<>();
-        selectedTeks = new ArrayList<>();
+        subjects = new TreeMap<>();
+        gradeLevels = new TreeMap<>();
+        teks = new TreeMap<>();
     }
 
-    public void saveSubjects(List<Activity.Subject> newSelectedSubjects) {
-        selectedSubjects = newSelectedSubjects;
+    public void setup(List<PedibusItineraryLeg> legs) {
+        for (PedibusItineraryLeg leg: legs) {
+            List<Activity> activities = leg.getActivities();
+
+            for (Activity activity: activities) {
+                subjects.put(activity.getSubject().toString(), Boolean.TRUE);
+                gradeLevels.put(Integer.toString(activity.getGradeLevel()), Boolean.TRUE);
+                teks.put(activity.getTeks(), Boolean.TRUE);
+            }
+        }
     }
 
-    public List<Activity.Subject> getSubjects() {
-        return selectedSubjects;
+    public void saveSubjects(Map<String, Boolean> subjects) {
+        this.subjects = subjects;
+    }
+    public Map<String, Boolean> getSubjects() {
+        return subjects;
     }
 
-    public void saveGradeLevels(List<Integer> newSelectedGradeLevels) {
-        selectedGradeLevels = newSelectedGradeLevels;
+    public void saveGradeLevels(Map<String, Boolean> gradeLevels) {
+        this.gradeLevels = gradeLevels;
+    }
+    public Map<String, Boolean> getGradeLevels() {
+        return gradeLevels;
     }
 
-    public List<Integer> getGradeLevels() {
-        return selectedGradeLevels;
+    public void saveTeks(Map<String, Boolean> teks) {
+        this.teks = teks;
     }
-
-    public void saveTeks(List<String> newSelectedTeks) {
-        selectedTeks = newSelectedTeks;
-    }
-
-    public List<String> getTeks() {
-        return selectedTeks;
+    public Map<String, Boolean> getTeks() {
+        return teks;
     }
 
     public String getGameId() {

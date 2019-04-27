@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.google.common.collect.Maps;
+import sun.reflect.generics.tree.Tree;
 
 @Controller
 public class DashboardController {
@@ -492,43 +493,45 @@ public class DashboardController {
 
 	@RequestMapping(value = "/api/settings/selectModulesAndSaveSettings/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
 	public @ResponseBody boolean selectModulesAndSaveSettings(@PathVariable String ownerId,
-											   @PathVariable String gameId, @PathVariable String classRoom,
-											   @RequestParam List<Integer> gradeLevels, @RequestParam List<String> teks,
-											   @RequestParam List<Activity.Subject> subjects,
-												 HttpServletRequest request, HttpServletResponse response) throws Exception {
+					@PathVariable String gameId, @PathVariable String classRoom,
+					@RequestParam List<String> subjectNames, @RequestParam List<Boolean> subjectValues,
+					@RequestParam List<String> gradeLevelOptions, @RequestParam List<Boolean> gradeLevelValues,
+					@RequestParam List<String> teksOptions, @RequestParam List<Boolean> teksValues,
+					HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
+
+		TreeMap<String, Boolean> subjects = new TreeMap<>();
+		for (int i = 0; i < subjectNames.size(); i++) {
+			subjects.put(subjectNames.get(i), subjectValues.get(i));
+		}
+
+		TreeMap<String, Boolean> gradeLevels = new TreeMap<>();
+		for (int i = 0; i < gradeLevelOptions.size(); i++) {
+			gradeLevels.put(gradeLevelOptions.get(i), gradeLevelValues.get(i));
+		}
+
+		TreeMap<String, Boolean> teks = new TreeMap<>();
+		for (int i = 0; i < teksOptions.size(); i++) {
+			teks.put(teksOptions.get(i), teksValues.get(i));
+		}
 
 		for (PedibusItineraryLeg leg: legs) {
 			for (Activity activity: leg.getActivities()) {
 				//assume all modules active
 				boolean isActive = true;
 
-				if(!gradeLevels.contains(activity.getGradeLevel())) {
+				if(!gradeLevels.get(Integer.toString(activity.getGradeLevel()))) {
 					isActive = false;
 				}
-
 				else {
-					//Check activity TEKS against all selected TEKS
-					boolean foundTeks = false;
-					for (String oneTeks: teks) {
-						if(activity.getTeks().contains(oneTeks)) {
-							foundTeks = true;
-						}
-					}
-
-					if(!foundTeks) {
+					//Check activity TEKS against all TEKS
+					if(!teks.get(activity.getTeks())) {
 						isActive = false;
 					}
 					else {
-						//Check activity Subject against all selected subjects
-						boolean foundSubject = false;
-						for(Activity.Subject subject : subjects) {
-							if(activity.getSubject() == subject) {
-								foundSubject = true;
-							}
-						}
-						if(!foundSubject) {
+						//Check activity Subject against all subjects
+						if(!subjects.get(activity.getSubject().toString())) {
 							isActive = false;
 						}
 					}
@@ -546,80 +549,38 @@ public class DashboardController {
 
 		storage.saveSettings(settingsToUpdate, ownerId, gameId, classRoom, true);
 
+		//For debugging
 		Settings updatedSettings = storage.getSettings(ownerId, gameId, classRoom);
 		List<PedibusItineraryLeg> testLegs = storage.getPedibusItineraryLegs(ownerId);
 
 		return true;
 	}
 
-	@RequestMapping(value = "/api/settings/getSubjectOptions/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
-	public @ResponseBody Set<Activity.Subject> getSettingsSubjectOptions(@PathVariable String ownerId, @PathVariable String gameId,
+	@RequestMapping(value = "/api/settings/getSubjects/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Boolean> getSettingsSubjects(@PathVariable String ownerId, @PathVariable String gameId,
 																		 @PathVariable String classRoom,
 										HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		Set<Activity.Subject> result = new TreeSet<Activity.Subject>();
-
-		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
 		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
-
-		for (PedibusItineraryLeg leg: legs) {
-			for (Activity activity: leg.getActivities()) {
-				result.add(activity.getSubject());
-			}
-		}
-
-		if(settings != null) {
-			result.addAll(settings.getSubjects());
-		}
-
-		return result;
+		return settings.getSubjects();
 	}
 
-	@RequestMapping(value = "/api/settings/getTeksOptions/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
-	public @ResponseBody Set<String> getSettingsTeksOptions(@PathVariable String ownerId, @PathVariable String gameId,
+	@RequestMapping(value = "/api/settings/getTeks/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Boolean> getSettingsTeks(@PathVariable String ownerId, @PathVariable String gameId,
 															@PathVariable String classRoom,
 																		 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		Set<String> result = new TreeSet<String>();
-
-		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
 		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
-
-
-		for (PedibusItineraryLeg leg: legs) {
-			for (Activity activity: leg.getActivities()) {
-				result.add(activity.getTeks());
-			}
-		}
-
-		if(settings != null) {
-			result.addAll(settings.getTeks());
-		}
-
-		return result;
+		return settings.getTeks();
 	}
 
-	@RequestMapping(value = "/api/settings/getGradeOptions/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
-	public @ResponseBody Set<Integer> getSettingsGradeOptions(@PathVariable String ownerId, @PathVariable String gameId,
+	@RequestMapping(value = "/api/settings/getGradeLevels/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Boolean> getSettingsGradeLevels(@PathVariable String ownerId, @PathVariable String gameId,
 															  @PathVariable String classRoom,
 																		 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		Set<Integer> result = new TreeSet<Integer>();
-
-		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
 		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
-
-		for (PedibusItineraryLeg leg: legs) {
-			for (Activity activity: leg.getActivities()) {
-				result.add(activity.getGradeLevel());
-			}
-		}
-
-		if(settings != null) {
-			result.addAll(settings.getGradeLevels());
-		}
-
-		return result;
+		return settings.getGradeLevels();
 	}
 
 

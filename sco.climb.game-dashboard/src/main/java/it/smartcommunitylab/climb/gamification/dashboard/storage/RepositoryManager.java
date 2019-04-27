@@ -713,9 +713,9 @@ public class RepositoryManager {
 		} else if(canUpdate){
 			Update update = new Update();
 			update.set("lastUpdate", now);
-			update.set("selectedGradeLevels", settings.getGradeLevels());
-			update.set("selectedSubjects", settings.getSubjects());
-			update.set("selectedTeks", settings.getTeks());
+			update.set("gradeLevels", settings.getGradeLevels());
+			update.set("subjects", settings.getSubjects());
+			update.set("teks", settings.getTeks());
 //			update.set("imperial", settings.getImperial());
 //			update.set("rounding", settings.getRounding());
 			mongoTemplate.updateFirst(query, update, Settings.class);

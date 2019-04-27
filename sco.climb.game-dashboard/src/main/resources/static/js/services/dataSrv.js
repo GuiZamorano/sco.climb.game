@@ -301,11 +301,30 @@ angular.module('climbGame.services.data', [])
 
     }
 
-      dataService.getActivitySubjects = function () {
+        dataService.getSettingsSubjects = function () {
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getSubjectOptions/123/1/PROJECT SMART',
+              url: '/api/settings/getSubjects/123/1/PROJECT SMART',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+        }
+
+      dataService.getSettingsTeks = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getTeks/123/1/PROJECT SMART',
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -320,30 +339,11 @@ angular.module('climbGame.services.data', [])
           return deferred.promise
       }
 
-      dataService.getActivityTeks = function () {
+      dataService.getSettingsGradeLevels = function () {
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getTeksOptions/123/1/PROJECT SMART',
-              headers: {
-                  'Accept': 'application/json',
-                  //'x-access-token': loginService.getUserToken()
-              },
-              timeout: configService.httpTimout()
-          }).then(function (response) {
-              deferred.resolve(response.data)
-          }, function (reason) {
-              console.log(reason)
-              deferred.reject(reason)
-          })
-          return deferred.promise
-      }
-
-      dataService.getActivityGrades = function () {
-          var deferred = $q.defer()
-          $http({
-              method: 'GET',
-              url: '/api/settings/getGradeOptions/123/1/PROJECT SMART',
+              url: '/api/settings/getGradeLevels/123/1/PROJECT SMART',
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -368,9 +368,12 @@ angular.module('climbGame.services.data', [])
               //'x-access-token': loginService.getUserToken()
           },
           params: {
-              'subjects': settings.subjects,
-              'gradeLevels': settings.gradeLevels,
-              'teks': settings.teks,
+              'subjectNames': settings.subjectNames,
+              'subjectValues': settings.subjectValues,
+              'gradeLevelOptions': settings.gradeLevelOptions,
+              'gradeLevelValues': settings.gradeLevelValues,
+              'teksOptions': settings.teksOptions,
+              'teksValues': settings.teksValues,
           },
           //timeout: configService.httpTimout()
       }).then(function (response) {

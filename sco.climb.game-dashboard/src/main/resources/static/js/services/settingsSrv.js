@@ -2,9 +2,9 @@ angular.module('climbGame.services.settings', [])
     .factory('settingsService', function ($q, $filter, dataService) {
         var settingsService = {}
 
-        settingsService.getActivitySubjects = function () {
+        settingsService.getAlreadySelectedSubjects = function() {
             var deferr = $q.defer();
-            dataService.getActivitySubjects().then(function (data) {
+            dataService.getAlreadySelectedSubjects().then(function (data) {
                 deferr.resolve(data);
             }, function (err) {
                 deferr.reject();
@@ -12,9 +12,9 @@ angular.module('climbGame.services.settings', [])
             return deferr.promise;
         }
 
-        settingsService.getActivityTeks = function () {
+        settingsService.getSettingsSubjects = function () {
             var deferr = $q.defer();
-            dataService.getActivityTeks().then(function (data) {
+            dataService.getSettingsSubjects().then(function (data) {
                 deferr.resolve(data);
             }, function (err) {
                 deferr.reject();
@@ -22,9 +22,19 @@ angular.module('climbGame.services.settings', [])
             return deferr.promise;
         }
 
-        settingsService.getActivityGrades = function () {
+        settingsService.getSettingsTeks = function () {
             var deferr = $q.defer();
-            dataService.getActivityGrades().then(function (data) {
+            dataService.getSettingsTeks().then(function (data) {
+                deferr.resolve(data);
+            }, function (err) {
+                deferr.reject();
+            });
+            return deferr.promise;
+        }
+
+        settingsService.getSettingsGradeLevels = function () {
+            var deferr = $q.defer();
+            dataService.getSettingsGradeLevels().then(function (data) {
                 deferr.resolve(data);
             }, function (err) {
                 deferr.reject();
@@ -34,7 +44,7 @@ angular.module('climbGame.services.settings', [])
 
         settingsService.saveSettings = function(settings) {
             var deferr = $q.defer();
-            dataService.saveSettings(settings).then(function (data) {       //idk if this is supposed to match settings
+            dataService.saveSettings(settings).then(function (data) {
                 deferr.resolve(data);
             }, function (err) {
                 deferr.reject();

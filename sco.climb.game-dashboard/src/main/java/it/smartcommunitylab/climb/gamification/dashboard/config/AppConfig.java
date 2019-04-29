@@ -135,9 +135,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.createBabySwipes("123", "1", "PROJECT SMART");
 
-
-		double [] go = {-106.4850, 31.7619};
-		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
+		//links come from modules provided
+		//image urls stored on imgur.com
+		double [] go1 = {-106.4850, 31.7619};
+		PedibusItineraryLeg leg1 = newLeg(go1, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();
 		Link linkEP1 = new Link();
 		linkEP1.setLink("https://www.tripadvisor.com/Attraction_Review-g60768-d145533-Reviews-YDSP_Tigua_Indian_Cultural_Center_and_Museum-El_Paso_Texas.html");
@@ -170,8 +171,20 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.savePedibusItineraryLeg(leg1, "123", true);
 
-		double [] go1 = {-98.4936, 29.4241};
-		PedibusItineraryLeg leg2 = newLeg(go1, "2", "2", 2000000, "San Antonio", "1", "{nz`Efz|hSfrgMgywo@", 1);
+		//proof of concept for waypoint
+		double [] waypointCoord = {-102.5469, 30.5349};
+		PedibusItineraryLeg waypoint1 = newLeg(waypointCoord, "2", "2", 1000000, "Reading Time", "1", "{nz`Efz|hSlsnF}c`W", 1);
+		waypoint1.setWaypoint(true);
+		List<Link> wayURL1 = new ArrayList<>();
+		Link way1Link = newLink("History", "https://www.history.com/topics/us-states/texas");
+		wayURL1.add(way1Link);
+		waypoint1.setExternalUrls(wayURL1);
+		waypoint1.setTransport("foot");
+		waypoint1.setImageUrl("https://i.imgur.com/LDMvsrP.jpg");
+		repositoryManager.savePedibusItineraryLeg(waypoint1, "123", true);
+
+		double [] go2 = {-98.4936, 29.4241};
+		PedibusItineraryLeg leg2 = newLeg(go2, "3", "3", 2000000, "San Antonio", "1", "mzjyDhu{pRx}wEitvW", 2);
 		List<Link> urls2 = new ArrayList<>();
 		Link link2 = new Link();
 		link2.setLink("https://en.wikipedia.org/wiki/San_Antonio");
@@ -183,8 +196,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg2, "123", true);
 
 
-		double [] go2 = {-97.7431, 30.2672};
-		PedibusItineraryLeg leg3 = newLeg(go2, "3", "3", 4000000, "Austin", "1", "s{qrD~_dxQktcDsqqC", 2);
+		double [] go3 = {-97.7431, 30.2672};
+		PedibusItineraryLeg leg3 = newLeg(go3, "4", "4", 4000000, "Austin", "1", "s{qrD~_dxQktcDsqqC", 3);
 		List<Link> urls3 = new ArrayList<>();
 		Link link3 = new Link();
 		link3.setLink("https://en.wikipedia.org/wiki/Austin,_Texas");
@@ -195,8 +208,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg3.setTransport("foot");
 		repositoryManager.savePedibusItineraryLeg(leg3, "123", true);
 
-		double [] go3 = {-95.3698,29.7604};
-		PedibusItineraryLeg leg4 = newLeg(go3, "4", "4",5000000, "Houston", "1", "_qvwDjmqsQn~aBcpnM", 3);
+		double [] go4 = {-95.3698,29.7604};
+		PedibusItineraryLeg leg4 = newLeg(go4, "5", "5",5000000, "Houston", "1", "_qvwDjmqsQn~aBcpnM", 4);
 		List<Link> urls4 = new ArrayList<>();
 		Link link4 = new Link();
 		link4.setLink("https://en.wikipedia.org/wiki/Houston");
@@ -207,8 +220,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg4.setTransport("foot");
 		repositoryManager.savePedibusItineraryLeg(leg4, "123", true);
 
-		double [] go4 = {-96.7970,32.7767};
-		PedibusItineraryLeg leg5 = newLeg(go4, "5","5", 6000000, "Dallas", "1", "oqstDf|aeQ{blQ~vuG", 4);
+		double [] go5 = {-96.7970,32.7767};
+		PedibusItineraryLeg leg5 = newLeg(go5, "6","6", 6000000, "Dallas", "1", "oqstDf|aeQ{blQ~vuG", 5);
 		List<Link> urls5 = new ArrayList<>();
 		Link link5 = new Link();
 		link5.setLink("https://en.wikipedia.org/wiki/Dallas");
@@ -219,8 +232,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg5.setTransport("foot");
 		repositoryManager.savePedibusItineraryLeg(leg5, "123", true);
 
-		double [] go5 = {-101.8313,35.2220};
-		PedibusItineraryLeg leg6 = newLeg(go5, "6","6", 7000000, "Amarillo", "1", "ku`gEftxmQcr|Mjgv]", 5);
+		double [] go6 = {-101.8313,35.2220};
+		PedibusItineraryLeg leg6 = newLeg(go6, "7","7", 7000000, "Amarillo", "1", "ku`gEftxmQcr|Mjgv]", 6);
 		List<Link> urls6 = new ArrayList<>();
 		Link link6 = new Link();
 		link6.setLink("https://www.tourtexas.com/attractions/panhandle-plains-historical-museum-canyon");
@@ -270,8 +283,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);
 
-		double[] go6 = {-102.0779, 31.9973};
-		PedibusItineraryLeg leg7 = newLeg(go6, "7","7", 8000000, "Midland-Odessa", "1", "oh~uEr|olRjytRfdo@", 6);
+		double[] go7 = {-102.0779, 31.9973};
+		PedibusItineraryLeg leg7 = newLeg(go7, "8","8", 8000000, "Midland-Odessa", "1", "oh~uEr|olRjytRfdo@", 7);
 		List<Link> urls7 = new ArrayList<>();
 		Link linkM = newLink("Big Bend Ranch State Park", "https://tpwd.texas.gov/state-parks/big-bend-ranch");
 		urls7.add(linkM);

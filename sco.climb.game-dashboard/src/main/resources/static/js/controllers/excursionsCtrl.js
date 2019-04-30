@@ -254,7 +254,7 @@ excursionsService.getClassPlayers().then(
 
         $mdDialog.show({
           // targetEvent: $event,
-          scope: $scope, // use parent scope in template
+          scope: $scope, // use parent scope in templatepost
           preserveScope: true, // do not forget this if use parent scope
           template: '<md-dialog>' +
             '  <div class="cal-dialog-title"> Data sending  </div><md-divider></md-divider>' +

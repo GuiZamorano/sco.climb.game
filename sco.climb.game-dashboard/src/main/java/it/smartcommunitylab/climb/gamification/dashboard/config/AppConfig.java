@@ -16,6 +16,7 @@
 
 package it.smartcommunitylab.climb.gamification.dashboard.config;
 
+import java.beans.Transient;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -135,7 +137,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.createBabySwipes("123", "1", "PROJECT SMART");
 
-
 		double [] go = {-106.4850, 31.7619};
 		PedibusItineraryLeg leg1 = newLeg(go, "1", "1", 0, "El Paso", "1", "", 0);
 		List<Link> urls1 = new ArrayList<>();
@@ -154,7 +155,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg1.setImageUrl("https://i.imgur.com/lsU13Qm.jpg");
 		leg1.setTransport("foot");
 
-		Activity stemActEP = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		Activity stemActEP = newActivity(true, 4, "teks1", null, Activity.Subject.STEM);
 		List<Link> stemUrlsEP = stemActEP.getMaterials();
 		Link stemEP1 = newLink("Fab Lab","https://fablabelpaso.org/");
 		Link stemEP2 = newLink("Makeblock Robotics", "https://www.makeblock.com/");
@@ -238,7 +239,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		List<Activity> leg6Activities = leg6.getActivities();
 
-		Activity stemAct = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		Activity stemAct = newActivity(true, 4, "teks2", null, Activity.Subject.STEM);
 		List<Link> urlsA = stemAct.getMaterials();
 		Link linkX = newLink("Ecosystems", "http://www.teacherplanet.com/content/food-chainweb");
 		urlsA.add(linkX);
@@ -246,7 +247,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		urlsA.add(linkY);
 		stemAct.setMaterials(urlsA);
 
-		Activity csAct = newActivity(true, 4, null, "Read Sarah Plain and Tall", Activity.Subject.CS);
+		Activity csAct = newActivity(true, 4, "teks1", "Read Sarah Plain and Tall", Activity.Subject.CS);
 		List<Link> urls = csAct.getMaterials();
 		Link linkA = newLink("Quizlet", "https://quizlet.com/2646281/sarah-plain-and-tall-flash-cards/");
 		urls.add(linkA);
@@ -256,7 +257,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		urls.add(linkC);
 		csAct.setMaterials(urls);
 
-		Activity selAct = newActivity(true, 4, null, "Managing Worry", Activity.Subject.SEL);
+		Activity selAct = newActivity(true, 4, "teks3", "Managing Worry", Activity.Subject.SEL);
 		List<Link> selUrls = selAct.getMaterials();
 		Link linkS = newLink("Managing Worry", "https://www.flocabulary.com/unit/managing-worry/");
 		selUrls.add(linkS);
@@ -278,7 +279,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		leg7.setExternalUrls(urls7);
 		leg7.setImageUrl("https://i.imgur.com/V7k6COY.jpg");
 
-		Activity stemActMid = newActivity(true, 4, null, null, Activity.Subject.STEM);
+		Activity stemActMid = newActivity(true, 4, "teks4", null, Activity.Subject.STEM);
 		List<Link> stemUrlsMid = stemActMid.getMaterials();
 		Link stemMid1 = newLink("Inspire Aspiring Toolkit", "https://www.scholastic.com/teachers/blog-posts/scholasticcom-editors/2018-2019/inspire-budding-scientists-with-this-interactive-teaching-tool/");
 		stemUrlsMid.add(stemMid1);
@@ -290,12 +291,10 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 		repositoryManager.savePedibusItineraryLeg(leg7, "123", true);
 
-
-
-
-
-
-
+		List<PedibusItineraryLeg> legs = repositoryManager.getPedibusItineraryLegs("123");
+		Settings settings = new Settings();
+		settings.setup(legs);
+		repositoryManager.saveSettings(settings, "123", "1", "PROJECT SMART", true);
 
 		PlayerStateDTO teamDTO = new PlayerStateDTO();// Set up class to hold statistics
 		teamDTO.setGameId("1");

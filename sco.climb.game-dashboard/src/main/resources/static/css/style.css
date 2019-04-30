@@ -813,6 +813,19 @@ figure {
     height: 20%
 }
 
+.column {
+  float: left;
+  width: 33.33%;
+  text-align: center;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 @media all and (-ms-high-contrast: none),
 (-ms-high-contrast: active) {
   .days-row {

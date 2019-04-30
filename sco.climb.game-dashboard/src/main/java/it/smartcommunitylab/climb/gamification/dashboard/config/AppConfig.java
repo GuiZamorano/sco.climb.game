@@ -171,7 +171,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg1, "123", true);
 
 		double [] go1 = {-98.4936, 29.4241};
-		PedibusItineraryLeg leg2 = newLeg(go1, "2", "2", 2000000, "San Antonio", "1", "{nz`Efz|hSfrgMgywo@", 1);
+		PedibusItineraryLeg leg2 = newLeg(go1, "2", "2", 2000000, "San Antonio", "1", "c}|`E~p_iSl_Ay{@@ySwnAu~BmBunCuWgmD~PsgCd|@_cCn`E{oHhcI{{IxvF{hFntCcsBxnIccGjkKcvHvzDsrInyFczGhzCetG`jDunHd`Is{GvaHi|L~nA}xAbhFqdA`{GesJrgAmdBrPq{BjSeyCiVo|Bcz@sdDa{@emBmM_dD|H_dDQ}bCuhC{pFrh@mwBzmAojBjf@yzB`{@seGfx@ilEbiC{yNvgH{i_@xyAikJjaDodLlMeqBfe@yfA|aBsmIfJcvLeo@e_J`A_pIsoAqz]w}Ay|Xd^ipOz\\wxH}QwjHnFgsH|VufFsiA}aEyhA{sD|Ce_Eqb@oaCxu@onCxlAuqD|oBogC`\\ghFjxCm|IzxA_eFub@k}HvPieG|tAytN~_BcoOru@q`NbbBmwKd~Aq}Vt_Ds`b@f}@kzIfh@m`OjTwpKeX_aDut@ylCjZgcD`}@cyBdJomI~Fi`J|aBadV|z@ufDdSstDoQujGsiAy}H_l@mkBuh@upGm_@{qKvk@yyCvN_eEcj@{}BwD{kE`KgfGcCexC~ZwjBtjAggFpxF{{N|y@sbCbn@uf@`iBydDpoBolBvz@sn@~v@kdBlhAaoDbv@}pEri@gwE|sBk~Cv]ycC}b@qxC{gAs|DomAisC{UqbBlTg|Ab{@cgIvVcyHj[{nFbjB_aCpb@{qAv|@yzIp]_yLzcAc~Hac@mjDchC{|Pi\\aoFbSiuDxcDuxTvjCa{PdjEuwPv`@gmBeHesErXyvGvcBshF|~@{gCtGakB`cAonDx[qlGfy@qmMd`Ce~Kj~C_kIfiH}}SjgB}cFlr@acEpOudD}`@q~CuwB}uKg_AelEuYywD}wAewG~KabCms@s}ErNifDktByeEyr@ajGlSibCtoAsbIznAyyBp{@woB|oAye@vfFuoClsA{dEhzBcmC~l@efElfAamAjaHizDtrC_fBfbH}hMhmDcdJlrCs}DjcBybEjaCuzNxcA{pE`h@snBzaA{k@t}CakAlkAyuCpo@q`BlMwh@nt@uk@hs@eqBv}A_mBpZ{|HrIyzBtCkw@`l@oj@lf@o_BjBuxBxgAulCbu@m{AvhA{p@zvBqyC|~A_tC`q@uyB`j@qe@jcBqj@lo@yr@xeCegCf~Ac_EjxCqgBh_CgvBdeAmVzfEssDvfE{g@vfKiuMxcEk~ChaFqhCjuDu`Bf}Cm~@zcJinBdzAcvBbl@am@|~A{_@|iA{W|vAqn@nWm|Axp@ex@dw@yCbaBwC~j@{IhNkm@ec@gMeFaY", 1);
 		List<Link> urls2 = new ArrayList<>();
 		Link link2 = new Link();
 		link2.setLink("https://en.wikipedia.org/wiki/San_Antonio");
@@ -184,7 +184,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
 
 		double [] go2 = {-97.7431, 30.2672};
-		PedibusItineraryLeg leg3 = newLeg(go2, "3", "3", 4000000, "Austin", "1", "s{qrD~_dxQktcDsqqC", 2);
+		PedibusItineraryLeg leg3 = newLeg(go2, "3", "3", 4000000, "Austin", "1", "k|rrDtcdxQBdA[Di@HcBN}Cn@eM`MKTcBkDkDcHeAeCGoCm@i@WBcAXwAu@iHuO{L_WaAuD[eFB{B^cDzB}IvBeOxAgOVgINqZC{k@IqUWoGsAqSa@qJCuL?q@?}PUyI_AkKuCuO{AeFkD{IiFqKcTyc@iRwb@yKs\\mFsOeEwH}D_FeCaCgFkD{DqBsi@kTch@wS{MiFcFiAsE]eQGaFSsJcAsPqBcC]mw@wJugBsTca@_FyGwAwDoAmIcCqE}@}GoAaGkA_UsEeGyAoFmBeGwCcLaIaGeG}DiFeHyMoQ}_@ed@_aAu[ar@{EsOyEqV}BuJuCoI_G{MqBmDqKiNoRuUyDqE_c@sh@wl@ct@_HwJuByDwEmLqD{MiNuj@wCmIaDwGsGqK_RsZwC{FcDcIg[{v@eb@odAaEoHsCgEkFiGgLuLyPiQyLgMaZo^uHaKuGkM}CwHc`@c`Ao}@iyBkx@ioBsbAqlB_IgOsHqMyJePmBwE{Jg[gL{^yDeLmB_EkNkTwd@cr@cb@up@_Yed@_DgHoBmHmCiTqIs{@sAcMsAkIaEwOmUaw@oZmcAcGaQ_H_McFmGkCoCiHyFiK{FeIwCuHgBoc@cFaGo@eQaC}KwCiGeCcKuFgIiGmJ{JoRcVwQ_UifAcsA{G{HiGgGqWiQke@kZag@o[ue@qYon@oa@uh@q]yWkQiPiPqHyH{MyLmRoN__AueAooCk_DqfCouCsgAypAqn@iu@q[oe@cQ}WeMwQyG_IyQ{P{RaQ_j@ef@{VwUmO}MoKqH_QiJoi@yTm}Ba`AajAse@gOcGsOoEcFeAgNsBoc@uFgm@qHmOwAmYoAcb@iBkMw@eWsCsOeBkZeEgPcEuKyDak@iXoh@aW{NmHc[yRcn@y`@m`@mVeHmDyKoE_E{AoeAya@sbEi_BiFuB}QoHgPcIaVuLuLqFaNaG_TeJqPgGi[iLaWgJ{R}Gei@oPwj@oP_wAsa@i|@iUgc@aJaXgFwHcBaP_FcJwDwJcFqI{E}f@gYu[}Q{|@sg@gf@s^gm@wd@_TyOoNsIoXsNaO{H}\\qPmf@gUgVwLqi@eXae@sUuDiAkEe@aC?_KbAwC\\qMfBsTnCeMlAgEHeIk@wKaCed@qLk[oI}PyDo@MyD}@qJcD_FoBaEoByPeJaWiNit@sa@qJmF}K}F{D_CaCiC}A{Bs@y@UUIPi@t@MNg@d@eDvBwDbABbCYvBsRth@]xBApA{Rhh@iFfMyKpUq@bBYx@`@VB@", 2);
 		List<Link> urls3 = new ArrayList<>();
 		Link link3 = new Link();
 		link3.setLink("https://en.wikipedia.org/wiki/Austin,_Texas");
@@ -196,7 +196,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg3, "123", true);
 
 		double [] go3 = {-95.3698,29.7604};
-		PedibusItineraryLeg leg4 = newLeg(go3, "4", "4",5000000, "Houston", "1", "_qvwDjmqsQn~aBcpnM", 3);
+		PedibusItineraryLeg leg4 = newLeg(go3, "4", "4",5000000, "Houston", "1", "as_xDbppsQjDoL|JoSnRsg@bQ}i@rFsS~As@nJh@zD`@vJ|E|_@dS`p@t^~VfOnWrK`e@fLjn@nPz_@pJjl@}Ebh@uErOrFtd@jU~qAfq@p\\dPpDKdEmD|@oJEu]tFiaAtNsfCkFk\\ya@udBaP{f@_CaNDoPvBeN|HqSxVcm@dJqRt[kv@~p@_~AtWqq@rTs^vc@oh@|HwJfDmKa@}h@_NaeCgD{z@nDcg@hPulBtFof@dLe]f_AwwBrWal@xd@ix@tf@c{@vt@opAdQm\\nQ}f@n`@{hAlp@kfB|vA}yCdSki@bBuh@mA}xE_@mlCpAoOnMgi@fSmz@z@_f@Ue{@c@ydB`Feg@nQ_bApMad@lHgRjF{GdNoQdG_U~Nwv@fUwc@bPmXzM_J~e@oWpIgLpGeXfRwcAhIcUxNqQ~y@ocAzPia@xk@gzBhSi\\zj@kt@na@ic@lkBajBri@_i@za@e_@lUeLtk@}XrQw[l[ic@p`@kc@hcBkjBvp@yc@rLcQf^ibAbO_n@zGcy@Us{@kCw_AeCo~@p@uq@|IuaAhSuaBbHa^nb@yp@dGcSxAyXLy\\`JmXhj@woAx[}dApRyn@l\\koAvCkZo@sJmFsQkZen@wWyq@}Z}j@}Nq]oCmVv@up@`Kcf@r`@g~@~Ruc@dZym@|_@uhAhQiq@fDq^Qsx@kCmzBxBiUrD_Mtd@wz@lWqc@tReNr[uJxRsObKaPjU}Rft@qn@~KgUfJkLn_AmbAhlBwzB~r@kx@zY}g@bTqd@x`@gd@v_@c`@~Xa_@fw@wcAtm@ix@vpBohCziAabBx_AmsAlg@ot@xRkRpReKjUwFzl@aDvn@kC~XoE`w@}Q~d@eM|CuEx@_HeC_OqAwMr@qv@~G{hAG}QgBaL{Jk_@m[ag@kVw}@yGu\\oHePoVme@mO}~@{TusCaNkwB}Cep@aFif@i`@ecDsY_bCamBc~O{UesB}JoaBiYk}Egd@acFaEcg@h@_P`S_dAhBySEmUaPa`As[m}AkGkTkHkLqP{UyFePoGkj@iAoo@cBe{AdBwt@nOurBpJ}nB~H_wAgFqf@ci@ukDeWeiBH_v@bKqq@nCee@OigA[u`CpFyy@lBs|@Wu|ECwwGs@}vB}DsQcG_KwXm[cFcOo@{S@c|BZmiG`BkyQTidGlAqvERoP~CwF~r@wBtd@mAfRyIdFkEtL}G~O}@nbCaApeA[pn@a@nEmBpA_EyEupAkFekBc@s\\IuBlCUfB?hJEhMAhHjArKlDhOLxTGbD[AyJGuI~EkAlFD", 3);
 		List<Link> urls4 = new ArrayList<>();
 		Link link4 = new Link();
 		link4.setLink("https://en.wikipedia.org/wiki/Houston");
@@ -208,7 +208,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg4, "123", true);
 
 		double [] go4 = {-96.7970,32.7767};
-		PedibusItineraryLeg leg5 = newLeg(go4, "5","5", 6000000, "Dallas", "1", "oqstDf|aeQ{blQ~vuG", 4);
+		PedibusItineraryLeg leg5 = newLeg(go4, "5","5", 6000000, "Dallas", "1", "sihtD|u~eQiMaBvAiNlAyEaOqTah@}l@qQkRin@{t@_IiUSai@sFkaBoKaXerBgYs`@mEck@LmbAxAsr@iDmLoIcM{Gi_@B_t@sHs^aHkZqU_Umj@ePaq@e@gdCeEi~Aq@waBB_N_DwBw[pOi_AhV_nDxzByxAtn@ac@lNex@fBieAh@kjB`AaiBkCiv@bMg{@fTg|ApHqcHjv@yjAfFsoA`@qzAjNwtBlUkdA`Imj@kHsq@Toy@Ngl@~Kgm@hZi}@hKu}Cp_@anArIucBtH{zBtTc|ChMwdA?wk@qGm_Dc@ea@~CiT~I{y@l]qjD|w@wiBdf@{~@pVy\\jCesAxD{iAjCweD`G}wBfc@mq@`Moc@xA_~DpE_pFq]igAsBef@pFcjGr~@oqPfq@}]nHmrAzn@sYdc@mUdj@ki@zuAg]|l@}uDn~BqdAlsAkqBhlD{zFz~JwbEh~DidAzbAycAz{AcoAdgBc`DlaC_mCptB{i@reAwcEtuI_jAv`CsnB|mB}bApz@_lAvw@s{DriCgo@pb@ym@n[idFjmAosB~f@kp@vUks@f_@u|@lYu{C|h@eyFzw@qeBjVcZhAw~@mG{tAaNy`AkVgvB}Kca@@sm@tRyhAzd@cp@~Pe~Bva@__GxdAcrBd_@scA`j@o{Dr{BieFzmEk_@|Uc]bI_pA`Y_lBdb@a}@j[ug@|YiiBheAqhB``AkjEz`Cup@tS}aBd_@ycB`FahD~LciG~k@efA~^gkAzYysB|f@}sBtkBqv@zs@mkAlsAkr@j{@ap@zgAahBdvBoj@lo@eu@xq@odBfy@}eCn_C{Tb]w_@nyAiV`w@exBfxBu~BbgFooAh~Buz@xfAiN~AqZsD{lBoUim@PyrBpSqrAz]koGplBcjC~c@_XkDgi@m_@qc@w\\oZyKoc@cA}v@bKmxBb[}cBl`AkiAtn@et@|Xaj@bFuwDlVwu@rF}_@hNgtB|x@ogCxcAcoA`m@}z@|^uSvQkv@rpB_v@`uBqsArvDgp@xhBiYl^w`BliA}zBvnAyq@x_@idAtz@ik@bd@}ZpKuzAf_@ciBff@q[|B}h@eHkm@tBypAb^}[|Bu|BuTka@]q[bIy_@xGwt@c@mrBmCw`@m@m\\aI_s@eM_uAeAagBfa@afB`n@ytE|iBcfF|nBeSdJwNzReg@vjAycCnyBiTrPk_B|d@spAxWegAxb@esCjl@u`@bIim@nTw\\zIix@jNcUnN}@fK~NpS~DvWzJxl@tSl^R`S_JhU{TnEvAoEj@eCcDW{@P", 4);
 		List<Link> urls5 = new ArrayList<>();
 		Link link5 = new Link();
 		link5.setLink("https://en.wikipedia.org/wiki/Dallas");
@@ -220,7 +220,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg5, "123", true);
 
 		double [] go5 = {-101.8313,35.2220};
-		PedibusItineraryLeg leg6 = newLeg(go5, "6","6", 7000000, "Amarillo", "1", "ku`gEftxmQcr|Mjgv]", 5);
+		PedibusItineraryLeg leg6 = newLeg(go5, "6","6", 7000000, "Amarillo", "1", "in`gEf}zmQoAfH|CnFgNcCzCr@gg@zCylAxS}d@diAyr@x}BwTtoBcoAxtB{aA`aCCn{Ca@nwFn@dkGsGbzFrFbiBeHjeA`E|oBpCtlG_S~jAlAdoBxE~pBp]ty@xDnaAy]x_BgNhdBjC|hCe@ppGiJ`Xi}@nBsoCzYuy@Ks`@hRa|EzkFqsEtbHcm@dfAo{@pk@{~Ex}Ac_AdXexAr`Ago@`v@qVhqAua@zWiqCud@qiCmJmk@vNwxBpaBcrBv_Akl@by@yuAnbCkcA`sAwaEjfDejAjpBquB|{@yh@`h@auAnc@efE|fDu`FlzDosBbyAk[`nAiXfr@ig@~O}fAzFkcAfo@ys@paAuqAvaAklBnmAkkBp_BkvBvcBwaCznAiiFt_D{eB~eAss@hsAc_BleD{aBdiCgeAvqA}sBvqFk}DdkKsbBvjEiqCrgDsuCdbColBdy@ypEz}B_cBp|@ipBnnDwuAxvDai@pvBkh@`sA}SzGin@zUodBr}HqgDbnJka@nzA_JtnAmcAfmHrD~y@e^prB}@d{EmTdsA{z@`s@o|AnnAiZl`@_w@bQkmAbb@yZ~Yy^`hDsdAhpNca@v~EMvhE_FbgDcYp|AQt|Dma@rjCorAv`E{bAzjAmeEdpIudAtlBiC~dDuA`{AiSf|@gnBj{FmkCztHueF`{N{n@tq@sApx@lRrmAwXjx@a}B~sOq_@xfD{DloA}EziBqcB`eAyi@zh@}iAv`DotCpjGo|@rmEgy@zhBuv@thCqa@lpDoLjkBfJhlBpUr_B{RheB}iAzyHyNrdEwq@|cEuk@lfC{Cry@oQfmCua@r|FkjBv_Hk`@z^og@l}Ag|@nvDoNz_CstAfkHas@tyDyx@pmDyl@hzDm_AfbH{uBjlKe|E|tRwaA`aEqr@drBq`CtsF}]tsAooBnuC_Of{AaaA~uBkg@fe@sqAnmC}m@tnA_aAvEev@tL_o@_K{aAkXweBrsCwXt`@inAd\\sjEvu@gxDhg@gnBrnAklB~bBeO~o@a_Dj`DwrBfkBqhDlgBqhBzKgsAfx@qbE|hHqbAtt@aq@vp@}\\`fAaBjmAoKvcCov@`qEwlBn`E}d@vcAil@l{B{NvdCy`@b}Bg~B|fIwbBjnDqn@zpBke@niCmZ|uBc[j}@coChuGitDtuJk^lhScw@jlDebBjnB}z@fbAiaDlzK_dBjtGq_BtlFg}Ch`PwtBluKm~@l~GiiBtmWiy@jvLH`{AwKb\\wKjAeZxTib@{AsW?cW@@b\\Fnh@B~LBrD", 5);
 		List<Link> urls6 = new ArrayList<>();
 		Link link6 = new Link();
 		link6.setLink("https://www.tourtexas.com/attractions/panhandle-plains-historical-museum-canyon");
@@ -271,7 +271,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		repositoryManager.savePedibusItineraryLeg(leg6, "123", true);
 
 		double[] go6 = {-102.0779, 31.9973};
-		PedibusItineraryLeg leg7 = newLeg(go6, "7","7", 8000000, "Midland-Odessa", "1", "oh~uEr|olRjytRfdo@", 6);
+		PedibusItineraryLeg leg7 = newLeg(go6, "7","7", 8000000, "Midland-Odessa", "1", "_v_vEraplRB~CtKBnHFvUIlr@vHns@tIf\\xBtGkCx^|C`o@jGjPFvUtJzPtOdBvHNzf@^fLjM~`@bQpd@rMfRz_Avw@dkDnsCrc@tZfk@dZn[vHtqElk@vo@lHzq@LraCF|{AD|^yBbO}GrVoUxjBmfBzfEggDdrBonBvScMtSeF`b@y@~qHH`pE`AlbAs@dlGDb`ECh_@iCzv@eA|iC@n_AGt_@wF|vBm`@hpGckA`o@yOrqB_s@rqEm~Ade@qQfSgOlSqN|K_DfR_@bS|Bdj@|BvsABd}@H`r@dBbbADfj@qAdvAkm@|{Awq@hb@eM`kBe@hjFFdiGGvZsFt^eUpfBirArhB}sAng@gSjwKomDfZuJ`i@yPxKqAzpBqAv[fB|S`LfcArmAvqBp_ChXbZpLtEvaARz~@rC~k@sDlyAuEh|Bs@jWjIfMzLbn@||@|c@vs@d}@zpAz_@nz@fbCbvFpc@jr@vPzLnOxAtl@P~NzF`Yh\\xU|QbS|DhgI\\j{IWpyMD|p@GfQcDpNiIvMgOla@mg@hNyF|`BEf\\kEhYeJz_@qAbaDOzxEKf_AtXrSl@bs@gAz^kMdP]bi@zB`m@`@pc@sIjc@eJ~~@u@xyA?z]dBlt@Mzl@uCllBu@dPhCfZtRxU`SjXbRpJr@xt@{H~ZcHvUaNzSoFzi@EtW|@t]nMli@zQjb@ZtbBDhaAkBffBcBz{@vCbhBDhkBOhaAkAfh@B|_@iEz|@{P`]mHhUkKjoAgn@`nCyrAvu@{^bRmDrtBgUjdGG|cLc@~mDVbj@Kxw@eR`vB_h@nLkCriAQ~U{@~LuDxOmErVMn\\z@fl@FpS~Dx~@rj@`e@hXxKlBntCTpsDNb|MR|V~Ept@`l@v}CfnChj@lh@bUzI~q@fFjTdCzUjKbeCloAdw@ha@te@nOphBzb@naDvv@h}BddAn}KvbFvm@bYfTnTrOlM|d@zS|w@p\\~l@~ErZcD`YuFjRwDvKwB`Ew@p@nFr@zFt@tF|K{BnMe@`m@|InYlDv{@oQzJWlM~Kv`@da@fZnMpyBtx@laFnfBnrB`n@l|E|xBlvA~[ng@rJzPx@pa@|EfnAdk@jeAff@pq@lc@zhCdeBjhAju@`z@np@~pDdyBfwN~vId_DjoB~k@p^pJpDnM|@rOmBrl@mM|qEqaAvrI{iBjd@eL|VyOnYgOvn@_NxmBaa@||Bch@ppGqyAtnIslBjzAs\\xRwBx[dBvi@rL`P|BjOo@lbBm^vc@gKzS_BpZrB~ZqDfc@c@", 6);
 		List<Link> urls7 = new ArrayList<>();
 		Link linkM = newLink("Big Bend Ranch State Park", "https://tpwd.texas.gov/state-parks/big-bend-ranch");
 		urls7.add(linkM);

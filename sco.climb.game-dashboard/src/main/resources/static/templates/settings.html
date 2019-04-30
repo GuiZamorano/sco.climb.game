@@ -1,39 +1,39 @@
 <div class="settings" layout="column" layout-padding>
     <div layout="column" flex="33" class="settings-column">
-        <h1 class="md-title">{{'settings' | translate}}</h1>
+        <h1 class="md-title">{{'Settings' | translate}}</h1>
 
         <!-- TODO: make sure nothing is left empty and add select all buttons -->
 
         <form novalidate name="settingsForm">
             <!-- Subjects -->
-            <label ng-repeat="subject in selectedSubjects">
+            <p>Subjects</p>
+            <label required="true" ng-repeat="subject in selectedSubjects">
                 <input type="checkbox" ng-model="subject.val"/>
-                {{subject.name}}}
+                {{subject.name}}
                 <br/>
             </label>
-            <p>Subjects</p>
-            {{selectedSubjects}}
+            <!-- {{selectedSubjects}} -->
 
             <!-- Grade Levels -->
+            <p>Grade Levels</p>
             <label ng-repeat="grade in selectedGradeLevels">
                 <input type="checkbox" ng-model="grade.val"/>
-                {{grade.name}}}
+                {{grade.name}}
                 <br/>
             </label>
-            <p>Grade Levels</p>
-            {{selectedGradeLevels}}
+            <!-- {{selectedGradeLevels}} -->
 
             <!-- Teks -->
+            <p>TEKS</p>
             <label ng-repeat="oneTeks in selectedTeks">
                 <input type="checkbox" ng-model="oneTeks.val"/>
-                {{oneTeks.name}}}
+                {{oneTeks.name}}
                 <br/>
             </label>
-            <p>TEKS</p>
-            {{selectedTeks}}
+            <!-- {{selectedTeks}} -->
         </form>
         <md-button class="md-raised" ng-click="saveSettings()">
-            {{'settings_form_send' | translate}}
+            {{Save Settings' | translate}}
         </md-button>
     </div>
 </div>

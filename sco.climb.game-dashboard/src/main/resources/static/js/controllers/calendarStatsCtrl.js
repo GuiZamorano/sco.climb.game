@@ -12,6 +12,7 @@ angular.module('climbGame.controllers.calendarStats', [])
           'gameScore': 0,
           'maxGameScore': 0}
     $scope.imperial = false
+    $scope.height = {calendar: (window.innerHeight-300) + "px"}
 
 
  var data2stats = function (data) {
@@ -206,7 +207,7 @@ $scope.eventSources = [$scope.events];
     //configure calendar
     $scope.uiConfig = {
         calendar: {
-            height: 450,
+            height: (window.innerHeight-250),
             editable: true,
             displayEventTime: false,
             header: {

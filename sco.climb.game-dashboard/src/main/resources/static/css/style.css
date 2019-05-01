@@ -714,10 +714,6 @@ md-dialog {
 
 /* Excursions */
 
-.excursions {
-  height: 695px;
-}
-
 .excursions .form-column {
   border-right: 1px solid #bdbdbd;
 }
@@ -810,7 +806,7 @@ figure {
 }
 
 .card-list-header {
-    height: 20%
+    height: 10%
 }
 
 .column {

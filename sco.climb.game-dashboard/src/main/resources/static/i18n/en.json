@@ -7,6 +7,7 @@
   "menu_notifications": "Notifications",
   "menu_change_class": "Change Class",
   "menu_logout": "Logout",
+  "menu_settings": "Settings",
   "stats_gamescore": "Reached {{done}} km on {{total}}!",
   "stats_update": "You've traveled {{miles}} miles! You have {{remaining_miles}} to go.",
   "stats_ranking_global": "Global Statistics:",

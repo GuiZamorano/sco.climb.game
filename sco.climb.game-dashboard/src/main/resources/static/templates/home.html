@@ -30,6 +30,10 @@
         <md-icon class="material-icons menu-colors icon-sun"></md-icon>
         <p>About</p>
       </md-list-item>
+      <md-list-item ng-click="go('home.settings')" ng-class="{'menu-selected' : isCurrentState('home.settings')}">
+        <md-icon class="material-icons menu-colors icon-edit"></md-icon>
+        <p>Settings</p>
+      </md-list-item>
       <!-- <md-list-item ng-click="go('home.notifications')" ng-class="{'menu-selected' : isCurrentState('home.notifications')}">
         <md-icon class="material-icons menu-colors icon-notifications"></md-icon>
 

@@ -440,6 +440,7 @@ angular.module('climbGame.controllers.calendar', [])
       }
 
       $scope.switchView = function () {
+        document.getElementById("canvas").style.height = (window.innerHeight-300) + "px"
         chartService.loadChart('canvas');
       }
 

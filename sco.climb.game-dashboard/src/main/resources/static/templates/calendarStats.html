@@ -15,7 +15,7 @@
     <md-button class="md-raised md-primary" aria-label="Calendar Button" ng-click="switchCalendar()"> Switch Calendar View </md-button>
     <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
 </div>
-<div class="row">
+<div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-8">
             <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
         </div>
@@ -27,7 +27,7 @@
                     <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
                 </div>-->
                 {{setJsonOriginalView(SelectedEvent)}}
-                <div zingchart id="chart-2" zc-json="myJson" zc-width="100%" zc-height="450px">
+                <div zingchart id="chart-2" zc-json="myJson" zc-width="100%" zc-height="{{height.calendar}}">
 
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
 
 
-            <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="450px">
+            <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="{{height.calendar}}">
 
             </div>
             </div>

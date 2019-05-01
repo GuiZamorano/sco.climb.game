@@ -360,7 +360,10 @@ angular.module("climbGame.controllers.map", [])
             //marker with message
           } else {
             //marker without message
-            $scope.pathMarkers.push(getMarker(data.legs[i], null, icon, i));
+            if(data.legs[i].waypoint)
+                continue;
+            else
+                $scope.pathMarkers.push(getMarker(data.legs[i], null, icon, i));
           }
 
         }

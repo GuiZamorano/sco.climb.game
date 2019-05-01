@@ -28,7 +28,7 @@ angular.module('climbGame.controllers.calendar', [])
       document.getElementById("canvas").style.height = (window.innerHeight-300) + "px"
 
       chartService.init(['#F2F2F2', '#EF5350', '#FFEE58', '#66BB6A'],
-            ['Inactive', 'Fairly Active', 'Very Active', 'Extremely Active'])
+            ['Inactive', 'Less Active', 'Active', 'More Active'])
       chartService.setY(5)
 
       calendarService.getIndex().then(

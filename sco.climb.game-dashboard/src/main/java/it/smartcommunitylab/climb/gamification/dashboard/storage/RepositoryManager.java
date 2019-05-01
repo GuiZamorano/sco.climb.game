@@ -547,7 +547,7 @@ public class RepositoryManager {
 			update.set("transport", leg.getTransport());
 			update.set("activities", leg.getActivities());
 			update.set("lastUpdate", now);
-			mongoTemplate.updateFirst(query, update, PedibusGame.class);
+			mongoTemplate.updateFirst(query, update, PedibusItineraryLeg.class);
 		} else {
 			logger.warn("Cannot update existing PedibusItineraryLeg with gameId " + leg.getGameId() + " and legId " + leg.getLegId());
 		}
@@ -686,5 +686,46 @@ public class RepositoryManager {
 		}
 	}
 
+	public Settings getSettings(String ownerId, String gameId, String classRoom) {
+		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom);
+		Query query = new Query(criteria);
+		Settings settings = mongoTemplate.findOne(query, Settings.class);
+
+		return settings;
+	}
+
+	public boolean saveSettings(Settings settings, String ownerId, String gameId, String classRoom, boolean canUpdate) {
+		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom);
+		Query query = new Query(criteria);
+		Settings settingsTry = mongoTemplate.findOne(query, Settings.class);
+
+		Date now = new Date();
+
+		if(settingsTry == null) {
+			settings.setCreationDate(now);
+			settings.setLastUpdate(now);
+			settings.setObjectId(generateObjectId());
+			settings.setOwnerId(ownerId);
+			settings.setClassRoom(classRoom);
+			settings.setGameId(gameId);
+			mongoTemplate.save(settings);
+		} else if(canUpdate){
+			Update update = new Update();
+			update.set("lastUpdate", now);
+			update.set("gradeLevels", settings.getGradeLevels());
+			update.set("subjects", settings.getSubjects());
+			update.set("teks", settings.getTeks());
+//			update.set("imperial", settings.getImperial());
+//			update.set("rounding", settings.getRounding());
+			mongoTemplate.updateFirst(query, update, Settings.class);
+		}
+		else {
+			logger.warn("Cannot update these settings");
+			return false;
+		}
+		return true;
+	}
 
 }

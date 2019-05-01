@@ -5,12 +5,7 @@ import it.smartcommunitylab.climb.gamification.dashboard.common.GEngineUtils;
 import it.smartcommunitylab.climb.gamification.dashboard.common.Utils;
 import it.smartcommunitylab.climb.gamification.dashboard.exception.EntityNotFoundException;
 import it.smartcommunitylab.climb.gamification.dashboard.exception.UnauthorizedException;
-import it.smartcommunitylab.climb.gamification.dashboard.model.CalendarDay;
-import it.smartcommunitylab.climb.gamification.dashboard.model.Excursion;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusGame;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusPlayer;
-import it.smartcommunitylab.climb.gamification.dashboard.model.PedibusTeam;
-import it.smartcommunitylab.climb.gamification.dashboard.model.Stats;
+import it.smartcommunitylab.climb.gamification.dashboard.model.*;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.Challenge;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.ExecutionDataDTO;
 import it.smartcommunitylab.climb.gamification.dashboard.model.gamification.Notification;
@@ -41,6 +36,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.google.common.collect.Maps;
+import sun.reflect.generics.tree.Tree;
 
 @Controller
 public class DashboardController {
@@ -476,7 +472,118 @@ public class DashboardController {
 		}
 		return result;
 	}
-	
+
+//	@RequestMapping(value =  "/api/settings/saveSettings/{ownerID}/{gameID}/{classRoom}", method = RequestMethod.POST)
+//	public @ResponseBody Boolean saveSettings(@PathVariable String ownerId,
+//											  @PathVariable String gameId, @PathVariable String classRoom,
+//											  @RequestParam List<Integer> gradeLevels, @RequestParam List<String> teks,
+//											  @RequestParam List<Activity.Subject> subjects,
+//											  HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//		Settings settingsToUpdate = storage.getSettings(ownerId, gameId, classRoom);
+//
+//		settingsToUpdate.saveGradeLevels(gradeLevels);
+//		settingsToUpdate.saveSubjects(subjects);
+//		settingsToUpdate.saveTeks(teks);
+//
+//		storage.saveSettings(settingsToUpdate, ownerId, gameId, classRoom, true);
+//
+//		return true;
+//	}
+
+	@RequestMapping(value = "/api/settings/selectModulesAndSaveSettings/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.POST)
+	public @ResponseBody boolean selectModulesAndSaveSettings(@PathVariable String ownerId,
+					@PathVariable String gameId, @PathVariable String classRoom,
+					@RequestParam List<String> subjectNames, @RequestParam List<Boolean> subjectValues,
+					@RequestParam List<String> gradeLevelOptions, @RequestParam List<Boolean> gradeLevelValues,
+					@RequestParam List<String> teksOptions, @RequestParam List<Boolean> teksValues,
+					HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		List<PedibusItineraryLeg> legs = storage.getPedibusItineraryLegs(ownerId);
+
+		TreeMap<String, Boolean> subjects = new TreeMap<>();
+		for (int i = 0; i < subjectNames.size(); i++) {
+			subjects.put(subjectNames.get(i), subjectValues.get(i));
+		}
+
+		TreeMap<String, Boolean> gradeLevels = new TreeMap<>();
+		for (int i = 0; i < gradeLevelOptions.size(); i++) {
+			gradeLevels.put(gradeLevelOptions.get(i), gradeLevelValues.get(i));
+		}
+
+		TreeMap<String, Boolean> teks = new TreeMap<>();
+		for (int i = 0; i < teksOptions.size(); i++) {
+			teks.put(teksOptions.get(i), teksValues.get(i));
+		}
+
+		for (PedibusItineraryLeg leg: legs) {
+			for (Activity activity: leg.getActivities()) {
+				//assume all modules active
+				boolean isActive = true;
+
+				if(!gradeLevels.get(Integer.toString(activity.getGradeLevel()))) {
+					isActive = false;
+				}
+				else {
+					//Check activity TEKS against all TEKS
+					if(!teks.get(activity.getTeks())) {
+						isActive = false;
+					}
+					else {
+						//Check activity Subject against all subjects
+						if(!subjects.get(activity.getSubject().toString())) {
+							isActive = false;
+						}
+					}
+				}
+				activity.setActive(isActive);
+			}
+			storage.savePedibusItineraryLeg(leg, ownerId, true);
+		}
+
+		Settings settingsToUpdate = storage.getSettings(ownerId, gameId, classRoom);
+
+		settingsToUpdate.saveGradeLevels(gradeLevels);
+		settingsToUpdate.saveSubjects(subjects);
+		settingsToUpdate.saveTeks(teks);
+
+		storage.saveSettings(settingsToUpdate, ownerId, gameId, classRoom, true);
+
+		//For debugging
+		Settings updatedSettings = storage.getSettings(ownerId, gameId, classRoom);
+		List<PedibusItineraryLeg> testLegs = storage.getPedibusItineraryLegs(ownerId);
+
+		return true;
+	}
+
+	@RequestMapping(value = "/api/settings/getSubjects/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Boolean> getSettingsSubjects(@PathVariable String ownerId, @PathVariable String gameId,
+																		 @PathVariable String classRoom,
+										HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
+		return settings.getSubjects();
+	}
+
+	@RequestMapping(value = "/api/settings/getTeks/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Boolean> getSettingsTeks(@PathVariable String ownerId, @PathVariable String gameId,
+															@PathVariable String classRoom,
+																		 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
+		return settings.getTeks();
+	}
+
+	@RequestMapping(value = "/api/settings/getGradeLevels/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Boolean> getSettingsGradeLevels(@PathVariable String ownerId, @PathVariable String gameId,
+															  @PathVariable String classRoom,
+																		 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		Settings settings = storage.getSettings(ownerId, gameId, classRoom);
+		return settings.getGradeLevels();
+	}
+
+
 	@ExceptionHandler(EntityNotFoundException.class)
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
 	@ResponseBody

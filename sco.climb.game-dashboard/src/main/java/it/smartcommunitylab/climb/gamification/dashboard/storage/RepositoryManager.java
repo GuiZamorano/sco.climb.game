@@ -179,7 +179,7 @@ public class RepositoryManager {
 			CalendarDay calendarDay) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
 		if(index == null){
-			index = getIndex("123");
+			index = getIndex(ownerId);
 		}
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
 				.and("classRoom").is(classRoom).and("index").is(calendarDay.getIndex()));
@@ -250,7 +250,7 @@ public class RepositoryManager {
 		updateIndex++;
 		Index indexClass = new Index();
 		indexClass.index = updateIndex;
-		indexClass.ownerId = "123";
+		indexClass.ownerId = ownerId;
 		saveIndex(indexClass);
 		result.put(Const.MERGED, merged);
 		result.put(Const.CLOSED, closed);

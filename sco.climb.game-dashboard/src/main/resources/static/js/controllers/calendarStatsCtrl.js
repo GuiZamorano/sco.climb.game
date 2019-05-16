@@ -219,7 +219,7 @@ $scope.myJson.series[0].values.splice(0, $scope.myJson.series[0].values.length);
     $scope.myJson = {
          type : "bar",
                title:{
-                 backgroundColor : "transparent",
+                 backgroundColor : "white",
                  fontColor :"black",
                  text : ""
                },

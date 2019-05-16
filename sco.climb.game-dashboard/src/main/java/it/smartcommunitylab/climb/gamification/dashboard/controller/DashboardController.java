@@ -106,8 +106,8 @@ public class DashboardController {
 		}
 		return players; 
 	}
-	@RequestMapping(value = "/api/Babies", method = RequestMethod.GET)
-	public @ResponseBody List<PedibusPlayer> getPlayersByClassRoom(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/api/Babies/{ownerId}/{gameId}/{classRoom}", method = RequestMethod.GET)
+	public @ResponseBody List<PedibusPlayer> getPlayersByClassRoom(@PathVariable String ownerId, @PathVariable String gameId, @PathVariable String classRoom, HttpServletRequest request, HttpServletResponse response) throws Exception {
 //		List<PedibusPlayer> players = new ArrayList<PedibusPlayer>();
 //		for(int i =0; i<10; i++){
 //			PedibusPlayer pedibusPlayer = new PedibusPlayer();
@@ -119,7 +119,7 @@ public class DashboardController {
 //			pedibusPlayer.setSurname("Zamo");
 //			players.add(pedibusPlayer);
 //		}
-		List<PedibusPlayer> players = storage.getPedibusPlayersByClassRoom("123", "1", "EE 364D");
+		List<PedibusPlayer> players = storage.getPedibusPlayersByClassRoom(ownerId, gameId, classRoom);
 		if(logger.isInfoEnabled()) {
 			logger.info(String.format("getPlayersByClassRoom[%s]: %s - %s", "123", "1", players.size()));
 		}
@@ -139,10 +139,10 @@ public class DashboardController {
 		return teams; 
 	}
 
-	@RequestMapping(value = "/api/calendar/index", method = RequestMethod.GET)
-	public @ResponseBody Integer getIndex(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/api/calendar/index/{ownerId}", method = RequestMethod.GET)
+	public @ResponseBody Integer getIndex(@PathVariable String ownerId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		Integer index = storage.getIndex("123");
+		Integer index = storage.getIndex(ownerId);
 
 		return index;
 	}

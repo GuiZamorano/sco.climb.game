@@ -237,8 +237,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		teamDTO.setPlayerId("Class");
 		repositoryManager.updateTeamDTO(teamDTO, "1", "Class");
 		PlayerStateDTO teamDTO1 = new PlayerStateDTO();// Set up class to hold statistics
-		teamDTO.setGameId("2");
-		teamDTO.setPlayerId("Class");
+		teamDTO1.setGameId("2");
+		teamDTO1.setPlayerId("Class");
 		repositoryManager.updateTeamDTO(teamDTO1, "2", "Class");
 		return repositoryManager;
 	}

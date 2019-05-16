@@ -16,7 +16,7 @@ angular.module('climbGame.controllers.classSelection', [])
         $scope.formClasses.push({
           id: $scope.classes[i],
           value: $scope.classes[i],
-          label: $scope.labelClasses[i]
+          label: $scope.classes[i]
         })
       }
 

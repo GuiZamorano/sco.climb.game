@@ -28,7 +28,9 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
         method: 'GET',
+
         url: 'api/calendar/' + loginService.getOwnerId()+ '/' + loginService.getGameId() + '/' + loginService.getClassRoom(), //123/1/EE 364D',
+
         params: {
           from: from,
           to: to
@@ -51,7 +53,9 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
+
               url: 'api/weather/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(), //123/1/EE 364D',
+
               params: {
                   weather: weather
               },
@@ -114,6 +118,7 @@ angular.module('climbGame.services.data', [])
       $http({
         method: 'POST',
         url: 'api/calendar/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(), //123/1/EE 364D',
+
         headers: {
           'Accept': 'application/json'
           //'x-access-token': loginService.getUserToken()
@@ -204,7 +209,9 @@ angular.module('climbGame.services.data', [])
 
       $http({
         method: 'POST',
+
         url: 'api/calendar/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(), //123/1/EE 364D',
+
         headers: {
           'Accept': 'application/json',
 
@@ -277,11 +284,11 @@ angular.module('climbGame.services.data', [])
       return deferred.promise
     }
 
-    dataService.getMathStats = function(from, to){
+    dataService.getMathStats = function(from, to) {
         var deferred = $q.defer()
         $http({
             method: 'GET',
-            url:'api/calendar/123/1/EE 364D',
+            url:'api/calendar/123/1/PROJECT SMART',
             params: {
                 from: from,
                 to: to
@@ -301,12 +308,95 @@ angular.module('climbGame.services.data', [])
 
     }
 
+        dataService.getSettingsSubjects = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getSubjects/123/1/PROJECT SMART',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+        }
+
+      dataService.getSettingsTeks = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getTeks/123/1/PROJECT SMART',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+      }
+
+      dataService.getSettingsGradeLevels = function () {
+          var deferred = $q.defer()
+          $http({
+              method: 'GET',
+              url: '/api/settings/getGradeLevels/123/1/PROJECT SMART',
+              headers: {
+                  'Accept': 'application/json',
+                  //'x-access-token': loginService.getUserToken()
+              },
+              timeout: configService.httpTimout()
+          }).then(function (response) {
+              deferred.resolve(response.data)
+          }, function (reason) {
+              console.log(reason)
+              deferred.reject(reason)
+          })
+          return deferred.promise
+      }
+
+      dataService.saveSettings = function(settings) {
+      var deferred = $q.defer()
+      $http({
+          method: 'POST',
+          url: 'api/settings/selectModulesAndSaveSettings/123/1/PROJECT SMART',
+          headers: {
+              'Accept': 'application/json'
+              //'x-access-token': loginService.getUserToken()
+          },
+          params: {
+              'subjectNames': settings.subjectNames,
+              'subjectValues': settings.subjectValues,
+              'gradeLevelOptions': settings.gradeLevelOptions,
+              'gradeLevelValues': settings.gradeLevelValues,
+              'teksOptions': settings.teksOptions,
+              'teksValues': settings.teksValues,
+          },
+          //timeout: configService.httpTimout()
+      }).then(function (response) {
+          deferred.resolve(response.data)
+      }, function (reason) {
+          console.log(reason)
+          deferred.reject(reason)
+      })
+      return deferred.promise
+  }
 
     dataService.clearSwipes = function () {
       var deferred = $q.defer()
         $http({
           method: 'GET',
-          url: 'api/calendar/swipes/clear/123/1/EE 364D',
+          url: 'api/calendar/swipes/clear/123/1/PROJECT SMART',
           timeout: configService.httpTimout()
         }).then(function (response) {
           deferred.resolve(response.data)

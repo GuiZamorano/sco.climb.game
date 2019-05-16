@@ -6,6 +6,7 @@ import java.util.List;
 import it.smartcommunitylab.climb.contextstore.model.BaseObject;
 
 public class PedibusItineraryLeg extends BaseObject implements Comparable<PedibusItineraryLeg> {
+	private boolean waypoint;
 	private String gameId;
 	private String legId;
 	private String badgeId;
@@ -18,7 +19,8 @@ public class PedibusItineraryLeg extends BaseObject implements Comparable<Pedibu
 	private String polyline;
 	private int score;
 	private String transport;
-	
+	private List<Activity> activities = new ArrayList<Activity>();
+
 	public String getGameId() {
 		return gameId;
 	}
@@ -73,7 +75,14 @@ public class PedibusItineraryLeg extends BaseObject implements Comparable<Pedibu
 	public void setBadgeId(String badgeId) {
 		this.badgeId = badgeId;
 	}
-	
+	public boolean isWaypoint() { return waypoint; }
+	public void setWaypoint(boolean waypoint) { this.waypoint = waypoint; }
+
+
+	public List<Activity> getActivities() { return activities; }
+
+	public void setActivities(List<Activity> activities) { this.activities = activities; }
+
 	@Override
 	public int compareTo(PedibusItineraryLeg o) {
 		return position - o.position;

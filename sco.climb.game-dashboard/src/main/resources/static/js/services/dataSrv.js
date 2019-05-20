@@ -288,7 +288,7 @@ angular.module('climbGame.services.data', [])
         var deferred = $q.defer()
         $http({
             method: 'GET',
-            url:'api/calendar/123/1/PROJECT SMART',
+            url:'api/calendar/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(),
             params: {
                 from: from,
                 to: to
@@ -312,7 +312,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getSubjects/123/1/PROJECT SMART',
+              url: '/api/settings/getSubjects/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(),
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -331,7 +331,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getTeks/123/1/PROJECT SMART',
+              url: '/api/settings/getTeks/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(),
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -350,7 +350,7 @@ angular.module('climbGame.services.data', [])
           var deferred = $q.defer()
           $http({
               method: 'GET',
-              url: '/api/settings/getGradeLevels/123/1/PROJECT SMART',
+              url: '/api/settings/getGradeLevels/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(),
               headers: {
                   'Accept': 'application/json',
                   //'x-access-token': loginService.getUserToken()
@@ -369,7 +369,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
       $http({
           method: 'POST',
-          url: 'api/settings/selectModulesAndSaveSettings/123/1/PROJECT SMART',
+          url: 'api/settings/selectModulesAndSaveSettings/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(),
           headers: {
               'Accept': 'application/json'
               //'x-access-token': loginService.getUserToken()
@@ -396,7 +396,7 @@ angular.module('climbGame.services.data', [])
       var deferred = $q.defer()
         $http({
           method: 'GET',
-          url: 'api/calendar/swipes/clear/123/1/PROJECT SMART',
+          url: 'api/calendar/swipes/clear/' + loginService.getOwnerId()+ '/' + loginService.getGameId() +'/' + loginService.getClassRoom(),
           timeout: configService.httpTimout()
         }).then(function (response) {
           deferred.resolve(response.data)

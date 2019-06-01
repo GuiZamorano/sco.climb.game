@@ -337,34 +337,37 @@ public class RepositoryManager {
 		}
 	}
 
-	// TODO what do I do with activityType?
-	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId,
-			String activityLevel, String activityType){
+	public void createBabySwipes(String ownerId, String gameId, String classRoom) {
+
+		Date now = new Date();
+		CalendarDay calendarDay = new CalendarDay();
+		calendarDay.setCreationDate(now);
+		calendarDay.setLastUpdate(now);
+
+		Calendar day = Calendar.getInstance();
+		day.set(Calendar.HOUR, 0);
+		day.set(Calendar.MINUTE, 0);
+		day.set(Calendar.SECOND, 0);
+		calendarDay.setDay(day.getTime());
+
+		calendarDay.setOwnerId(ownerId);
+		calendarDay.setObjectId(generateObjectId());
+		calendarDay.setGameId(gameId);
+		calendarDay.setClassRoom(classRoom);
+		Map<String, String> modeMap = new HashMap<String, String>();
+		calendarDay.setModeMap(modeMap);
+		calendarDay.setIndex(Integer.MIN_VALUE);
+		mongoTemplate.save(calendarDay);
+	}
+
+	// The activity type isn't used and left blank because the front-end changes blank fields to mph
+	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId, String activityLevel, String activityType){
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
 				.and("classRoom").is(classRoom).and("index").is(Integer.MIN_VALUE));
 		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
 		Date now = new Date();
 		if(calendarDayDB == null) {
-			CalendarDay calendarDay = new CalendarDay();
-
-			calendarDay.setCreationDate(now);
-			calendarDay.setLastUpdate(now);
-
-			Calendar day = Calendar.getInstance();
-			day.set(Calendar.HOUR, 0);
-			day.set(Calendar.MINUTE, 0);
-			day.set(Calendar.SECOND, 0);
-			calendarDay.setDay(day.getTime());
-
-			calendarDay.setOwnerId(ownerId);
-			calendarDay.setObjectId(generateObjectId());
-			calendarDay.setGameId(gameId);
-			calendarDay.setClassRoom(classRoom);
-			Map<String, String> modeMap = new HashMap<String, String>();
-			modeMap.put(studentId, activityLevel);
-			calendarDay.setModeMap(modeMap);
-			calendarDay.setIndex(Integer.MIN_VALUE);
-			mongoTemplate.save(calendarDay);
+			logger.error("Baby Swipe CalendarDay should already be initialized in repository");
 		} else {
 			Map<String, String> modeMap = calendarDayDB.getModeMap();
 			modeMap.put(studentId, activityLevel);
@@ -532,6 +535,7 @@ public class RepositoryManager {
 			mongoTemplate.save(leg);
 		} else if (canUpdate) {
 			Update update = new Update();
+			update.set("waypoint", leg.isWaypoint());
 			update.set("badgeId", leg.getBadgeId());
 			update.set("name", leg.getName());
 			update.set("description", leg.getDescription());
@@ -542,8 +546,9 @@ public class RepositoryManager {
 			update.set("polyline", leg.getPolyline());
 			update.set("score", leg.getScore());
 			update.set("transport", leg.getTransport());
+			update.set("activities", leg.getActivities());
 			update.set("lastUpdate", now);
-			mongoTemplate.updateFirst(query, update, PedibusGame.class);
+			mongoTemplate.updateFirst(query, update, PedibusItineraryLeg.class);
 		} else {
 			logger.warn("Cannot update existing PedibusItineraryLeg with gameId " + leg.getGameId() + " and legId " + leg.getLegId());
 		}
@@ -658,6 +663,70 @@ public class RepositoryManager {
 		return UUID.randomUUID().toString();
 	}
 
+	public void saveActivity(Activity activity, String ownerId, boolean canUpdate) throws StorageException {
+		Query query = new Query(new Criteria("gameId").is(activity.getGameId()).and("activityId").is(activity.getActivityId()).and("ownerId").is(ownerId));
+		Activity activityDB = mongoTemplate.findOne(query, Activity.class);
+		Date now = new Date();
+		if (activityDB == null) {
+			activity.setCreationDate(now);
+			activity.setLastUpdate(now);
+			activity.setObjectId(generateObjectId());
+			activity.setOwnerId(ownerId);
+			mongoTemplate.save(activity);
+		} else if (canUpdate) {
+			Update update = new Update();
+			update.set("active", activity.isActive());
+			update.set("gradeLevel", activity.getGradeLevel());
+			update.set("teks", activity.getTeks());
+			update.set("materials", activity.getMaterials());
+			update.set("description", activity.getDescription());
+			update.set("lastUpdate", now);
+			mongoTemplate.updateFirst(query, update, PedibusGame.class);
+		} else {
+			logger.warn("Cannot update existing Activity with gameId " + activity.getGameId() + " and legId " + activity.getActivityId());
+		}
+	}
 
+	public Settings getSettings(String ownerId, String gameId, String classRoom) {
+		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom);
+		Query query = new Query(criteria);
+		Settings settings = mongoTemplate.findOne(query, Settings.class);
+
+		return settings;
+	}
+
+	public boolean saveSettings(Settings settings, String ownerId, String gameId, String classRoom, boolean canUpdate) {
+		Criteria criteria = new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
+				.and("classRoom").is(classRoom);
+		Query query = new Query(criteria);
+		Settings settingsTry = mongoTemplate.findOne(query, Settings.class);
+
+		Date now = new Date();
+
+		if(settingsTry == null) {
+			settings.setCreationDate(now);
+			settings.setLastUpdate(now);
+			settings.setObjectId(generateObjectId());
+			settings.setOwnerId(ownerId);
+			settings.setClassRoom(classRoom);
+			settings.setGameId(gameId);
+			mongoTemplate.save(settings);
+		} else if(canUpdate){
+			Update update = new Update();
+			update.set("lastUpdate", now);
+			update.set("gradeLevels", settings.getGradeLevels());
+			update.set("subjects", settings.getSubjects());
+			update.set("teks", settings.getTeks());
+//			update.set("imperial", settings.getImperial());
+//			update.set("rounding", settings.getRounding());
+			mongoTemplate.updateFirst(query, update, Settings.class);
+		}
+		else {
+			logger.warn("Cannot update these settings");
+			return false;
+		}
+		return true;
+	}
 
 }

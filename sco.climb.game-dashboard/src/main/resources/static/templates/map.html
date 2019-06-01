@@ -1,7 +1,32 @@
+<link href="css/leaflet-sidebar.css" rel="stylesheet">
+
 <md-content flex="">
   <div id="map-container">
     <leaflet style="width: 100%; height: 700px;" center="center" markers="pathMarkers" paths="pathLine" layers="layers" id="map" defaults="defaults"></leaflet>
   </div>
+
+  <div id="sidebar" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+      <ul role="tablist">
+        <li><a href="#sidebar-open" role="tab"><i class="fa fa-bars"></i></a></li>
+      </ul>
+    </div>
+
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content">
+      <div class="leaflet-sidebar-pane" id="sidebar-open">
+        <h1 class="leaflet-sidebar-header">
+          Selected Waypoint
+          <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+        </h1>
+        <div id="waypoint">
+          <h4 class="map-balloon text-pop-up">Click an unlocked waypoint to view learning modules!</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="gallery-bar" id="gallery">
     <div class="pic-container" id="pic-container">
       <div>

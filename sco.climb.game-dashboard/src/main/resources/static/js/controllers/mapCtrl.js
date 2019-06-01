@@ -14,17 +14,26 @@ angular.module("climbGame.controllers.map", [])
         pathMarkers: [],
         layers: {
           baselayers: {
+            sm: {
+              name: 'Satellite Map',
+              url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+              type: 'xyz'
+            },
+            otm: {
+              name: 'Topographic Map',
+              url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+              type: 'xyz'
+            },
             altro: {
-              name: 'Watercolor',
+              name: 'Watercolor Map',
               url: 'http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png',
               type: 'xyz'
             },
             osm: {
-              name: 'OpenStreetMap',
+              name: 'Street Map',
               url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
               type: 'xyz'
             }
-
           }
         }
       });
@@ -257,6 +266,12 @@ angular.module("climbGame.controllers.map", [])
               return container;
             }
           });
+
+          $scope.sidebar = L.control.sidebar({ container: 'sidebar', position: 'right' })
+                  .addTo(map)
+          document.getElementById("sidebar").style.height =
+                (window.innerHeight-250) + "px"
+
           map.addControl(new leftarrow());
           map.addControl(new rightarrow());
           map.addControl(new uparrow());
@@ -271,6 +286,7 @@ angular.module("climbGame.controllers.map", [])
         });
 
     }
+    $scope.sidebar = {}
     init();
     setMapSize();
 
@@ -306,17 +322,48 @@ angular.module("climbGame.controllers.map", [])
             }
             //create div of external url
           var externalUrl = "<div>";
-          for (var k = 0; k < data.legs[i].externalUrls.length; k++) {
-            externalUrl = externalUrl + '<div class="row"> ' + ' <a href="' + data.legs[i].externalUrls[k].link + '" target="_blank">' + data.legs[i].externalUrls[k].name + '</a></div>';
+
+          for (var a = 0; a<data.legs[i].activities.length; a++){
+
+            //only display selected activities
+            var displayedOnce = false;
+
+            if(data.legs[i].activities[a].active) {
+
+              //Display subject header if at least one subject gets selected
+
+              if(!displayedOnce) {
+                externalUrl += "<h5 id=\"subject-header\">" + data.legs[i].activities[a].subject + "</h5><ul id=\"subject\">"
+                displayedOnce = true;
+              }
+
+              for(var b = 0; b<data.legs[i].activities[a].materials.length; b++){
+                externalUrl = externalUrl + '<li>' + ' <a href="' + data.legs[i].activities[a].materials[b].link + '" target="_blank">' + data.legs[i].activities[a].materials[b].name + '</a></li>';
+              }
+            }
+            externalUrl += "</ul>"
           }
+
+          if(data.legs[i].externalUrls.length > 0)
+            externalUrl += "<h5 id=\"subject-header\">OTHER</h5><ul id=\"subject\">"
+          for (var k = 0; k < data.legs[i].externalUrls.length; k++) {
+             externalUrl = externalUrl + '<li> ' + ' <a href="' + data.legs[i].externalUrls[k].link + '" target="_blank">' + data.legs[i].externalUrls[k].name + '</a></li>';
+          }
+          externalUrl += "</ul>"
+
           externalUrl = externalUrl + '</div>';
+
+
           var icon = getMarkerIcon(data.legs[i]);
           if ((data.legs[i].position < $scope.currentLeg.position) || $scope.endReached) {
             $scope.pathMarkers.push(getMarker(data.legs[i], externalUrl, icon, i));
             //marker with message
           } else {
             //marker without message
-            $scope.pathMarkers.push(getMarker(data.legs[i], null, icon, i));
+            if(data.legs[i].waypoint)
+                continue;
+            else
+                $scope.pathMarkers.push(getMarker(data.legs[i], null, icon, i));
           }
 
         }
@@ -392,7 +439,7 @@ angular.module("climbGame.controllers.map", [])
         lat: actualMarkerPosition[0],
         lng: actualMarkerPosition[1],
         message: '<div class="map-balloon">' +
-          '<h4 class="text-pop-up"> Voi siete qui</h4>' +
+          '<h4 class="text-pop-up"> You are here</h4>' +
           '</div>',
         icon: {
           iconUrl: './img/POI_here.png',
@@ -449,8 +496,8 @@ angular.module("climbGame.controllers.map", [])
           },
           lat: data.geocoding[1],
           lng: data.geocoding[0],
-          message: '<div class="map-balloon">' +
-            '<h4 class="text-pop-up">' + (i + 1) + '. ' + data.name + '</h4>' +
+          sidenavMessage: '<div class="map-balloon">' +
+            '<h4 class="text-pop-up" id="subject-header">' + (i + 1) + '. ' + data.name + '</h4>' +
             '<div class="row">' +
             '<div class="col">' + url + '</div>' +
             '</div>' +
@@ -640,5 +687,16 @@ angular.module("climbGame.controllers.map", [])
         $scope.scrollToPoint(Number(args.modelName) + 1)
           //      console.log(markerName);
       }
+
+      if(args.model.message)
+        return null;
+      if(args.model.sidenavMessage)
+          document.getElementById("waypoint").innerHTML =
+                args.model.sidenavMessage
+      else
+        document.getElementById("waypoint").innerHTML =
+                "<h4 class=\"map-balloon\" \"text-pop-up\">Waypoint not unlocked yet!</h4>"
+        $scope.sidebar.open('sidebar-open')
+
     });
   }]);

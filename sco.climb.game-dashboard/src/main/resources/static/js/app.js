@@ -7,16 +7,19 @@ angular.module('climbGame', [
   'ngAria',
   'ngMessages',
   'leaflet-directive',
+  'ui.calendar',
   'pascalprecht.translate',
   'climbGame.controllers.home',
   'climbGame.controllers.map',
   'climbGame.controllers.calendar',
+  'climbGame.controllers.calendarStats',
   'climbGame.controllers.stats',
   'climbGame.controllers.newStats',
   'climbGame.controllers.excursions',
   'climbGame.controllers.notifications',
   'climbGame.controllers.login',
   'climbGame.controllers.classSelection',
+  'climbGame.controllers.settings',
   'climbGame.services.cache',
   'climbGame.services.data',
   'climbGame.services.excursions',
@@ -25,9 +28,12 @@ angular.module('climbGame', [
   'climbGame.services.login',
   'climbGame.services.map',
   'climbGame.services.calendar',
+  'climbGame.services.chart',
   'climbGame.services.classSelection',
   'climbGame.services.stats',
-  'climbGame.services.home'
+  'climbGame.services.settings',
+  'climbGame.services.home',
+  'zingchart-angularjs'
 ])
 
 .config(function ($mdThemingProvider) {
@@ -124,6 +130,15 @@ angular.module('climbGame', [
           }
         }
       })
+      .state('home.calendarStats', {
+        url: 'calendarStats',
+        views: {
+          'content@home': {
+            templateUrl: 'templates/calendarStats.html',
+            controller: 'calendarStatsCtrl'
+          }
+        }
+       })
       .state('home.excursions', {
         url: 'excursions',
         views: {
@@ -151,6 +166,15 @@ angular.module('climbGame', [
                 }
               }
             })
+        .state('home.settings', {
+          url: 'settings',
+          views: {
+            'content@home': {
+              templateUrl: 'templates/settings.html',
+              controller: 'settingsCtrl'
+            }
+          }
+        })
       .state('home.stats', {
         url: 'stats',
         views: {
@@ -159,6 +183,14 @@ angular.module('climbGame', [
             controller: 'statsCtrl'
           }
         }
+      })
+      .state('home.about', {
+          url: 'about',
+          views: {
+            'content@home': {
+              templateUrl: 'templates/about.html',
+            }
+          }
       })
     }
   ])

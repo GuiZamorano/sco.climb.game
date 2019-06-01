@@ -1,0 +1,60 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
+<div layout="row">
+    <div layout="column" flex="80" flex-offset="10">
+        <!--<h1 class="md-title title-progress">{{'stats_gamescore' | translate:'{done: ' + stats.gameScore + ', total: ' + stats.maxGameScore + '}'}}</h1>-->
+        <div layout="row" layout-align="start" layout-margin>
+            <h1 class="md-display-1">{{stats.gameScore}}</h1>
+            <md-progress-linear md-mode="determinate" ng-value="getGameScorePercentage()"></md-progress-linear>
+            <h1 class="md-display-1">{{stats.maxGameScore}}</h1>
+        </div>
+    </div>
+</div>
+
+<div layout="row">
+    <md-button class="md-raised md-primary" aria-label="Calendar Button" ng-click="switchCalendar()"> Switch Calendar View </md-button>
+    <md-switch class="switch" ng-click="switchUnit()">Metric</md-switch>
+</div>
+<div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-md-8">
+            <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+        </div>
+    <div ng-if="calendarView == 0">
+        <div class="col-md-4">
+            <div style="background-color:#B2D9FF;color:black;" ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
+                <h2 style="margin-top:0px"> Selected Event:</h2>
+                <!--<div class="md-media-sm card-media">
+                    <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
+                </div>-->
+                {{setJsonOriginalView(SelectedEvent)}}
+                <div zingchart id="chart-2" zc-json="myJson" zc-width="100%" zc-height="{{height.calendar}}">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="calendarView == 1">
+    <div class="col-md-4">
+        <div style="background-color:#B2D9FF;color:black;" ng-show="SelectedEvent" class="alert alert-success" style="margin-top:50px">
+            <h2 style="margin-top:0px"> Selected Event:</h2>
+           <!-- <div class="md-media-sm card-media">
+                <i style="color:white;" class="meteo" ng-class="{'icon-sun': SelectedEvent.meteo === 'sunny', 'icon-cloudy': SelectedEvent.meteo === 'cloudy', 'icon-rain': SelectedEvent.meteo === 'rain', 'icon-snow': SelectedEvent.meteo === 'snow'}"></i>
+            </div> -->
+            <div id="template1" ng-bind>{{setJson(SelectedEvent)}}</div>
+
+
+
+            <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="{{height.calendar}}">
+
+            </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+
+
+<!--<script src="~/Scripts/MyApp.js"></script> -->

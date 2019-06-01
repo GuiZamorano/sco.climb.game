@@ -1,0 +1,47 @@
+<h1 class="md-title" style="font-size: 2.3em; margin-left: 5%">{{'Settings' | translate}}</h1>
+<div class="row">
+
+    <form novalidate name="settingsForm">
+
+    <div class="column">
+        <!-- Subjects -->
+        <p style="font-size: 1.5em; background-color: #DCDCDC">Subjects</p>
+        <div style="display: inline-block; text-align: left;">
+        <label required="true" ng-repeat="subject in selectedSubjects">
+            <input type="checkbox" ng-model="subject.val"/>
+            {{subject.name}}
+            <br/>
+        </label>
+        </div>
+        <!-- {{selectedSubjects}} -->
+    </div>
+
+    <div class="column">
+        <!-- Grade Levels -->
+        <p style="font-size: 1.5em; background-color: #DCDCDC">Grade Levels</p>
+        <label ng-repeat="grade in selectedGradeLevels">
+            <input type="checkbox" ng-model="grade.val"/>
+            {{grade.name}}
+            <br/>
+        </label>
+        <!-- {{selectedGradeLevels}} -->
+    </div>
+
+    <div class="column">
+        <!-- Teks -->
+        <p style="font-size: 1.5em; background-color: #DCDCDC">TEKS</p>
+        <label ng-repeat="oneTeks in selectedTeks">
+            <input type="checkbox" ng-model="oneTeks.val"/>
+            {{oneTeks.name}}
+            <br/>
+        </label>
+        <!-- {{selectedTeks}} -->
+    </div>
+    </form>
+</div>
+
+<div style="text-align: center">
+    <md-button class="md-raised" ng-click="saveSettings()" style="font-size: 1.5em; background-color: #cc5500; color: #ffffff">
+        {{'Save Settings' | translate}}
+    </md-button>
+</div>

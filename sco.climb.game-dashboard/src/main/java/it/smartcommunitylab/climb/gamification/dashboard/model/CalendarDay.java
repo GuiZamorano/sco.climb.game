@@ -16,6 +16,9 @@ public class CalendarDay extends BaseObject {
 
 	private Integer duration;
 	private Double distance;
+	private Double eadistance;
+	private Double vadistance;
+	private Double fadistance;
 
 	private int EActive=0;
 	private int VActive=0;
@@ -134,7 +137,31 @@ public class CalendarDay extends BaseObject {
 		return aggregate;
 	}
 
-	public void setAggregate(boolean aggregate){
+	public void setAggregate(boolean aggregate) {
 		this.aggregate = aggregate;
+	}
+
+	public Double geteadistance() {
+		return eadistance;
+	}
+
+	public void seteadistance(Double eadistance) {
+		this.eadistance = eadistance;
+	}
+
+	public Double getvadistance() {
+		return vadistance;
+	}
+
+	public void setvadistance(Double vadistance) {
+		this.vadistance = vadistance;
+	}
+
+	public Double getfadistance() {
+		return fadistance;
+	}
+
+	public void setfadistance(Double fadistance) {
+		this.fadistance = fadistance;
 	}
 }

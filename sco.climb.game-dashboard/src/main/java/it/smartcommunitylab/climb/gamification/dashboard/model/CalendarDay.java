@@ -141,6 +141,7 @@ public class CalendarDay extends BaseObject {
 		this.aggregate = aggregate;
 	}
 
+
 	public Double geteadistance() {
 		return eadistance;
 	}

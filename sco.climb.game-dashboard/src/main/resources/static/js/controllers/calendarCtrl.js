@@ -50,6 +50,7 @@ angular.module('climbGame.controllers.calendar', [])
                 $scope.weekNumber.push("Event " + i);
                 $scope.week.push(i);
             }
+
             setLabelWeek($scope.weekNumber)
 
             calendarService.getCalendar($scope.week[0], $scope.week[$scope.week.length - 1]).then(
@@ -679,6 +680,7 @@ angular.module('climbGame.controllers.calendar', [])
                 calendar[k].index = $scope.Index
                 $scope.weekData[i].closed = false
                 $scope.todayData.activityTypes = calendar[k].activityTypes
+
                 var todayPopulated = false
                 for(var j=0; j<modes.length; j++)
                     if($scope.todayData.means[modes[j]]){

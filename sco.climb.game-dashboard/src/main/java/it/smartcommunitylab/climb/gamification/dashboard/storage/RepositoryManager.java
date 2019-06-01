@@ -362,6 +362,7 @@ public class RepositoryManager {
 
 	// The activity type isn't used and left blank because the front-end changes blank fields to mph
 	public void submitBabySwipe(String ownerId, String gameId, String classRoom, String studentId, String activityLevel, String activityType){
+
 		Query query = new Query(new Criteria("ownerId").is(ownerId).and("gameId").is(gameId)
 				.and("classRoom").is(classRoom).and("index").is(Integer.MIN_VALUE));
 		CalendarDay calendarDayDB = mongoTemplate.findOne(query, CalendarDay.class);
